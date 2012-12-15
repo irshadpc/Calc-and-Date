@@ -117,7 +117,7 @@
 		62A2D11B167380E8001CC9AE /* clear_key-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D100167380E8001CC9AE /* clear_key-Landscape@2x~ipad.png */; };
 		62A2D11C167380E8001CC9AE /* switch_button_off@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D101167380E8001CC9AE /* switch_button_off@2x~ipad.png */; };
 		62A2D11D167380E8001CC9AE /* switch_button_on@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D102167380E8001CC9AE /* switch_button_on@2x~ipad.png */; };
-		62A2D123167383A8001CC9AE /* CopybleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D122167383A8001CC9AE /* CopybleLabel.m */; };
+		62A2D123167383A8001CC9AE /* CCCopybleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D122167383A8001CC9AE /* CCCopybleLabel.m */; };
 		62A2D133167389F9001CC9AE /* CalendarCalcIpadViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D130167389F9001CC9AE /* CalendarCalcIpadViewTests.m */; };
 		62A2D134167389F9001CC9AE /* CalendarCalcViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D132167389F9001CC9AE /* CalendarCalcViewTests.m */; };
 		62A2D13716738A48001CC9AE /* CCCalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D13616738A48001CC9AE /* CCCalendarCalc.m */; };
@@ -259,8 +259,8 @@
 		62A2D100167380E8001CC9AE /* clear_key-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear_key-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		62A2D101167380E8001CC9AE /* switch_button_off@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_off@2x~ipad.png"; sourceTree = "<group>"; };
 		62A2D102167380E8001CC9AE /* switch_button_on@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_on@2x~ipad.png"; sourceTree = "<group>"; };
-		62A2D121167383A8001CC9AE /* CopybleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopybleLabel.h; sourceTree = "<group>"; };
-		62A2D122167383A8001CC9AE /* CopybleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopybleLabel.m; sourceTree = "<group>"; };
+		62A2D121167383A8001CC9AE /* CCCopybleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCopybleLabel.h; sourceTree = "<group>"; };
+		62A2D122167383A8001CC9AE /* CCCopybleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCopybleLabel.m; sourceTree = "<group>"; };
 		62A2D12F167389F9001CC9AE /* CalendarCalcIpadViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCalcIpadViewTests.h; sourceTree = "<group>"; };
 		62A2D130167389F9001CC9AE /* CalendarCalcIpadViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCalcIpadViewTests.m; sourceTree = "<group>"; };
 		62A2D131167389F9001CC9AE /* CalendarCalcViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCalcViewTests.h; sourceTree = "<group>"; };
@@ -596,8 +596,8 @@
 		62A2D12016738377001CC9AE /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				62A2D121167383A8001CC9AE /* CopybleLabel.h */,
-				62A2D122167383A8001CC9AE /* CopybleLabel.m */,
+				62A2D121167383A8001CC9AE /* CCCopybleLabel.h */,
+				62A2D122167383A8001CC9AE /* CCCopybleLabel.m */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -847,7 +847,7 @@
 				621355E816737DA100C93999 /* main.m in Sources */,
 				621355EC16737DA100C93999 /* CCAppDelegate.m in Sources */,
 				621355F516737DA100C93999 /* CCViewController.m in Sources */,
-				62A2D123167383A8001CC9AE /* CopybleLabel.m in Sources */,
+				62A2D123167383A8001CC9AE /* CCCopybleLabel.m in Sources */,
 				62A2D13716738A48001CC9AE /* CCCalendarCalc.m in Sources */,
 				62A2D13A16738A79001CC9AE /* CCCalendarCalcResult.m in Sources */,
 				62A2D13D16738BE6001CC9AE /* CCNumberCalculator.m in Sources */,

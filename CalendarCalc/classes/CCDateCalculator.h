@@ -8,7 +8,7 @@
 
 #import "CCDateCalculator.h"
 
-@interface CCDateCalculator {
+@interface CCDateCalculator : NSObject {
   @private
     NSDecimalNumber *_numberResult;
     NSDate *_dateResult;

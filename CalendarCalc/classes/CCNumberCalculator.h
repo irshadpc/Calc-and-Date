@@ -8,7 +8,7 @@
 
 #import "CCNumberCalculator.h"
 
-@interface CCNumberCalculator {
+@interface CCNumberCalculator : NSObject {
   @private
     NSDecimalNumber *_result;
 }

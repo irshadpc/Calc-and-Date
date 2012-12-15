@@ -22,9 +22,16 @@ typedef enum {
     FUNCTION_END,
 } CCFunction;
 
-@class CCCalendarCalcResult;
 
-@interface CCCalendarCalc : NSObject
+@class CCCalendarCalcResult;
+@class CCNumberCalculator;
+@class CCDateCalculator;
+
+@interface CCCalendarCalc : NSObject {
+  @private
+    CCNumberCalculator *_numberCalculator;
+    CCDateCalculator *_dateCalculator;
+}
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function;
