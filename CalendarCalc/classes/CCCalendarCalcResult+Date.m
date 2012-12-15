@@ -22,6 +22,10 @@
 
 - (void)setDateResult:(NSDate *)date
 {
+    if (!date) {
+        _isNumberResult = YES;
+    }
+    
     [_dateResult setResult:date];
     [self updateDisplayResult];
 }

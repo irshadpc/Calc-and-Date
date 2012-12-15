@@ -132,6 +132,8 @@
 		62A2D15016739F93001CC9AE /* NSDateComponents+Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D14F16739F93001CC9AE /* NSDateComponents+Unit.m */; };
 		62A2D1531673A2E3001CC9AE /* NSDecimalNumber+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D1521673A2E2001CC9AE /* NSDecimalNumber+Convert.m */; };
 		62A2D1561673A614001CC9AE /* NSDate+Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D1551673A614001CC9AE /* NSDate+Component.m */; };
+		62A7CE10167CA1240080B362 /* CCNumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE0F167CA1240080B362 /* CCNumberCalcTests.m */; };
+		62A7CE13167CA1D70080B362 /* CCDateCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE12167CA1D70080B362 /* CCDateCalcTests.m */; };
 		62B53ED8167C592E00394427 /* NSNumberFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */; };
 		62B53EDE167C64B900394427 /* CCNumberResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EDD167C64B800394427 /* CCNumberResult.m */; };
 		62B53EE1167C64C700394427 /* CCDateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE0167C64C600394427 /* CCDateResult.m */; };
@@ -295,6 +297,10 @@
 		62A2D1521673A2E2001CC9AE /* NSDecimalNumber+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Convert.m"; sourceTree = "<group>"; };
 		62A2D1541673A613001CC9AE /* NSDate+Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Component.h"; sourceTree = "<group>"; };
 		62A2D1551673A614001CC9AE /* NSDate+Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Component.m"; sourceTree = "<group>"; };
+		62A7CE0E167CA1240080B362 /* CCNumberCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNumberCalcTests.h; sourceTree = "<group>"; };
+		62A7CE0F167CA1240080B362 /* CCNumberCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNumberCalcTests.m; sourceTree = "<group>"; };
+		62A7CE11167CA1D70080B362 /* CCDateCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDateCalcTests.h; sourceTree = "<group>"; };
+		62A7CE12167CA1D70080B362 /* CCDateCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDateCalcTests.m; sourceTree = "<group>"; };
 		62B53ED6167C592E00394427 /* NSNumberFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
 		62B53EDC167C64B800394427 /* CCNumberResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNumberResult.h; sourceTree = "<group>"; };
@@ -392,6 +398,10 @@
 			children = (
 				62324C5A167C34D70062EF1B /* CCCalendarCalcTests.h */,
 				62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */,
+				62A7CE0E167CA1240080B362 /* CCNumberCalcTests.h */,
+				62A7CE0F167CA1240080B362 /* CCNumberCalcTests.m */,
+				62A7CE11167CA1D70080B362 /* CCDateCalcTests.h */,
+				62A7CE12167CA1D70080B362 /* CCDateCalcTests.m */,
 				6213560916737DA100C93999 /* Supporting Files */,
 			);
 			path = CalendarCalcTests;
@@ -904,6 +914,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */,
+				62A7CE10167CA1240080B362 /* CCNumberCalcTests.m in Sources */,
+				62A7CE13167CA1D70080B362 /* CCDateCalcTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

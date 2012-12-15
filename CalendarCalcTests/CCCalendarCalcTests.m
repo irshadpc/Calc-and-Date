@@ -10,13 +10,12 @@
 #import "CCCalendarCalc.h"
 #import "CCCalendarCalcResult.h"
 #import "NSDate+Component.h"
+#import "NSDecimalNumber+Convert.h"
 
 @interface CCCalendarCalcTests () {
   @private
     CCCalendarCalc *_calendarCalc;
 }
-
-- (CCCalendarCalcResult *)inputString:(NSString *)string;
 @end
 
 @implementation CCCalendarCalcTests
@@ -33,76 +32,15 @@
 
 - (void)testInputNumber_1
 {
-    NSString *const result = [[self inputString: @"1"] displayResult];
+    NSString *const result = [[_calendarCalc inputNumber: DecimalNumber(@"1")] displayResult];
     STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
 }
 
 - (void)testInputNumber_12
 {
-    [self inputString: @"1"];
-    NSString *const result = [[self inputString: @"2"] displayResult];
+    [_calendarCalc inputNumber: DecimalNumber(@"1")];
+    NSString *const result = [[_calendarCalc inputNumber: DecimalNumber(@"2")] displayResult];
     STAssertEqualObjects(@"12", result, @"RESULT: %@", result);
-}
-
-- (void)testInputFunction_1_Plus_2_Equal
-{
-    [self inputString: @"1"];
-    [_calendarCalc inputFunction: CCPlus];
-    [self inputString: @"2"];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
-    STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
-}
-
-- (void)testInputFunction_2_Minus_1_Equal
-{
-    [self inputString: @"2"];
-    [_calendarCalc inputFunction: CCMinus];
-    [self inputString: @"1"];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
-    STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
-}
-
-- (void)testInputFunction_2_Multiply_3_Equal
-{
-    [self inputString: @"2"];
-    [_calendarCalc inputFunction: CCMultiply];
-    [self inputString: @"3"];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
-    STAssertEqualObjects(@"6", result, @"RESULT: %@", result);
-}
-
-- (void)testInputFunction_6_Divide_2_Equal
-{
-    [self inputString: @"6"];
-    [_calendarCalc inputFunction: CCDivide];
-    [self inputString: @"2"];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
-    STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
-}
-
-- (void)testInputFunction_1_Plus_20_Equal
-{
-    [self inputString:@"1"];
-    [_calendarCalc inputFunction: CCPlus];
-    NSString *const result1 = [[self inputString:@"2"] displayResult];
-    STAssertEqualObjects(@"2", result1, @"RESULT1: %@", result1);
-    [self inputString:@"0"];
-    NSString *const result2 = [[_calendarCalc inputFunction: CCEqual] displayResult];
-    STAssertEqualObjects(@"21", result2, @"RESULT2: %@", result2);
-}
-
-- (void)testInputFunction_1_Plus_20_Minus_10_Equal
-{
-    [self inputString:@"1"];
-    [_calendarCalc inputFunction: CCPlus];
-    [self inputString:@"2"];
-    [self inputString:@"0"];
-    NSString *const result1 = [[_calendarCalc inputFunction: CCMinus] displayResult];
-    STAssertEqualObjects(@"21", result1, @"RESULT1: %@", result1);
-    [self inputString:@"1"];
-    [self inputString:@"0"];
-    NSString *const result2 = [[_calendarCalc inputFunction: CCEqual] displayResult];
-    STAssertEqualObjects(@"11", result2, @"RESULT2: %@", result2);
 }
 
 - (void)testInputDate_2012_12_15
@@ -113,11 +51,4 @@
     STAssertEqualObjects(@"2012/12/15", result, @"RESULT: %@", result);
 }
 
-
-#pragma mark - Private
-
-- (CCCalendarCalcResult *)inputString:(NSString *)string
-{ 
-    return [_calendarCalc inputNumber: [NSDecimalNumber decimalNumberWithString: string]];
-}
 @end

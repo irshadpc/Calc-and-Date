@@ -22,6 +22,11 @@
 
 - (void)setNumberResult:(NSDecimalNumber *)number
 {
+    if (!number) {
+        _isNumberResult = NO;
+        return;
+    }
+    
     [_numberResult setResult:number];
     [self updateDisplayResult];
 }

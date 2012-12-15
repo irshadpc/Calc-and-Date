@@ -15,4 +15,10 @@
     return [NSDecimalNumber multiplyingByDecimalNumber: number
                                               rOperand: [NSDecimalNumber decimalNumberWithString: @"-1"]];
 }
+
+NSDecimalNumber *DecimalNumber(NSString *const string)
+{
+    return [NSDecimalNumber decimalNumberWithString:string];
+}
 @end
+

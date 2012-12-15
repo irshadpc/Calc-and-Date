@@ -14,6 +14,7 @@
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumber+Predicate.h"
 
+#import "NSDateFormatter+CalendarCalc.h"
 
 @interface CCDateCalculator ()
 - (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
@@ -37,6 +38,8 @@
         return nil;
     }
 
+    NSLog(@"L: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:_dateResult]);
+    NSLog(@"R: %@", rOperand);
     _isDateResult = YES;
     _dateResult = [_dateResult addingByDay:rOperand.integerValue];
     return _dateResult;
@@ -49,6 +52,8 @@
         return nil;
     }
 
+    //NSLog(@"L: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:_dateResult]);
+    //NSLog(@"R: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:rOperand]);
     if(!_dateResult && !_numberResult) {
         _isDateResult = YES;
         _dateResult = [rOperand noTime];
@@ -67,13 +72,13 @@
         _numberResult = [NSDecimalNumber negate: _numberResult];
     }
 
-    _numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
+    /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
                                                        rOperand: [self weekCountWithStartDate: _dateResult
                                                                                       endDate: [rOperand noTime]]];
 
     if ([_numberResult isMinus]) {
         _numberResult = [NSDecimalNumber negate:_numberResult];
-    }
+    }*/
 
     _dateResult = nil;
     return _numberResult;
@@ -116,13 +121,13 @@
         _numberResult = [NSDecimalNumber negate: _numberResult];
     }
 
-    _numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
+    /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
                                                        rOperand: [self weekCountWithStartDate: _dateResult
                                                                                       endDate: [rOperand noTime]]];
 
     if ([_numberResult isMinus]) {
         _numberResult = [NSDecimalNumber negate:_numberResult];
-    }
+    }*/
 
     _dateResult = nil;
     return _numberResult;
@@ -145,6 +150,7 @@
     if (!result) {
         return nil;
     }
+    
     _isDateResult = NO;
     _numberResult = result;
     return _numberResult;

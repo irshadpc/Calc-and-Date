@@ -13,6 +13,8 @@
 #import "CCNumberCalculator.h"
 #import "CCDateCalculator.h"
 
+#import "NSDateFormatter+CalendarCalc.h"
+
 typedef enum {
     CCUnknown,
     CCNumber,
@@ -24,6 +26,8 @@ typedef enum {
 @interface CCCalendarCalc ()
 - (void)numberCalculate;
 - (void)dateCalculate;
+- (void)datePlus;
+- (void)dateMinus;
 - (CCCalcType)calcType;
 @end
 
@@ -103,17 +107,44 @@ typedef enum {
 
 - (void)dateCalculate
 {
+    NSLog(@"DATE_CALC");
     switch (_currentFunction) {
         case CCPlus:
+            [self datePlus];
             break;
         case CCMinus:
+            [self dateMinus];
             break;
         default:
             NSLog(@"FUNCTION: %d", _currentFunction);
             abort();
     }
-    
+
+    NSLog(@"NUMBER_RESULT: %@", [_dateCalculator numberResult]);
+    NSLog(@"DATE_RESULT: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:[_dateCalculator dateResult]]);
+
+    [_result setNumberResult: [_dateCalculator numberResult]];
     [_result setDateResult: [_dateCalculator dateResult]];
+}
+
+- (void)datePlus
+{
+    if ([_result numberResult]) {
+        [_dateCalculator plusWithNumber:[_result numberResult]];
+    } else if ([_result dateResult]) {
+        [_dateCalculator plusWithDate:[_result dateResult]];
+    }
+}
+
+- (void)dateMinus
+{
+    if ([_result numberResult]) {
+        [_dateCalculator minusWithNumber:[_result numberResult]];
+    } else if ([_result dateResult]) {
+        [_dateCalculator minusWithDate:[_result dateResult]];
+    } else {
+        abort();
+    }
 }
 
 - (CCCalcType)calcType
@@ -121,7 +152,11 @@ typedef enum {
     if ([_dateCalculator dateResult]) {
         return CCDate;
     } else if ([_dateCalculator numberResult] || [_numberCalculator result]) {
-        return CCNumber;
+        if ([_result dateResult]) {
+            return CCDate;
+        } else {
+            return CCNumber;
+        }
     } else {
         return CCUnknown;
     }
