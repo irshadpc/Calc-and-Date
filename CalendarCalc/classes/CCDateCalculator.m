@@ -14,16 +14,25 @@
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumber+Predicate.h"
 
+
+@interface CCDateCalculator ()
+- (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
+                                    endDate:(NSDate *)endDate;
+@end
+
+
 @implementation CCDateCalculator
 
 ////////////////////////////////////////////////////////////////////////////////
-- (void)clear {
+- (void)clear
+{
     _numberResult = nil;
     _dateResult = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDate *)plusWithNumber:(NSDecimalNumber *)rOperand {
+- (NSDate *)plusWithNumber:(NSDecimalNumber *)rOperand 
+{
     if (!rOperand || !_dateResult) {
         return nil;
     }
@@ -34,7 +43,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)plusWithDate:(NSDate *)rOperand {
+- (NSDecimalNumber *)plusWithDate:(NSDate *)rOperand 
+{
     if (!rOperand) {
         return nil;
     }
@@ -70,7 +80,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDate *)minusWithNumber:(NSDecimalNumber *)rOperand {
+- (NSDate *)minusWithNumber:(NSDecimalNumber *)rOperand 
+{
     if (!rOperand || !_dateResult) {
         return nil;
     }
@@ -81,7 +92,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)minusWithDate:(NSDate *)rOperand {
+- (NSDecimalNumber *)minusWithDate:(NSDate *)rOperand 
+{
     if (!rOperand) {
         return nil;
     }
@@ -117,7 +129,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDate *)equalWithDate:(NSDate *)rOperand {
+- (NSDate *)equalWithDate:(NSDate *)rOperand
+{
     if (!rOperand) {
         return nil;
     }
@@ -127,7 +140,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)equalWithNumber:(NSDecimalNumber *)rOperand {
+- (NSDecimalNumber *)equalWithNumber:(NSDecimalNumber *)rOperand
+{
     if (!rOperand) {
         return nil;
     }
@@ -137,17 +151,21 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDate *)dateResult {
+- (NSDate *)dateResult
+{
     return _isDateResult ? _dateResult : nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)numberResult {
+- (NSDecimalNumber *)numberResult
+{
     return _isDateResult ? nil : _numberResult;
 }
 
 
-- (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+- (NSDecimalNumber *)weekCountWithStartDate: (NSDate *)startDate
+                                    endDate: (NSDate *)endDate
+{
     NSDate *minDate, *maxDate;
     if ([startDate compare:endDate] <= 0) {
         minDate = [startDate addingByDay:1];
@@ -160,7 +178,7 @@
     NSMutableArray *disabledWeeks = [[NSMutableArray alloc] init];
     for (NSInteger weekStatIndex = 0; weekStatIndex < 7; weekStatIndex++) {
         if (![[self.weekStates objectAtIndex:weekStatIndex] boolValue]) {
-            [disabledWeeks addObject:[NSNumber numberWithInteger:weekStatIndex + 1]];
+            [disabledWeeks addObject: @(weekStatIndex + 1)];
         }
     }
 
@@ -176,7 +194,7 @@
         if (weekday > 7) {
             weekday = 1;
         }
-        if ([disabledWeeks indexOfObject:[NSNumber numberWithInteger:weekday]] != NSNotFound) {
+        if ([disabledWeeks indexOfObject: @(weekday)] != NSNotFound) {
             weekCount++;
         }
         weekday++;

@@ -11,15 +11,18 @@
 
 @implementation CCCalendarCalc
 
-- (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number {
+- (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
+{
 
 }
 
-- (CCCalendarCalcResult *)inputDate:(NSDate *)date {
+- (CCCalendarCalcResult *)inputDate:(NSDate *)date
+{
 
 }
 
-- (CCCalendarCalcResult *)inputFunction:(CCFunction)function {
+- (CCCalendarCalcResult *)inputFunction:(CCFunction)function
+{
     
 }
 

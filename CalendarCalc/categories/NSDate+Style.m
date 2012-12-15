@@ -10,7 +10,10 @@
 #import "NSDateComponents+Unit.h"
 
 @implementation NSDate (Style)
-- (NSDate *)noTime {
+
+////////////////////////////////////////////////////////////////////////////////
+- (NSDate *)noTime
+{
     return [[NSCalendar currentCalendar] dateFromComponents:
             [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
                                             fromDate: self]];

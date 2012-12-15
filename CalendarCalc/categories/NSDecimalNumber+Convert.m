@@ -10,7 +10,8 @@
 #import "NSDecimalNumber+Calc.h"
 
 @implementation NSDecimalNumber (Convert)
-+ (NSDecimalNumber *)negate:(NSDecimalNumber *)number {
++ (NSDecimalNumber *)negate:(NSDecimalNumber *)number
+{
     return [NSDecimalNumber multiplyingByDecimalNumber: number
                                               rOperand: [NSDecimalNumber decimalNumberWithString: @"-1"]];
 }

@@ -12,7 +12,8 @@
 @implementation NSDate (Calc)
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDate *)addingByDay:(NSInteger)day {
+- (NSDate *)addingByDay:(NSInteger)day
+{
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
                                                                        fromDate: self];
     dateComponents.day += day;
@@ -21,7 +22,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSInteger)dayIntervalWithDate:(NSDate *)date {
+- (NSInteger)dayIntervalWithDate:(NSDate *)date
+{
     return (NSInteger) ([date timeIntervalSinceDate: self] / 60 / 60 / 24);
 }
 

@@ -10,7 +10,8 @@
 
 @implementation NSDate (Component)
 
-- (NSInteger)weekday {
+- (NSInteger)weekday
+{
     return [[[NSCalendar currentCalendar] components: NSWeekdayCalendarUnit
                                             fromDate: self]
             weekday];

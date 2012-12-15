@@ -13,57 +13,53 @@ typedef NSCalculationError (^CCDecimalCalculate)(NSDecimal *, const NSDecimal *,
 @interface NSDecimalNumber (CalcPrivate)
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
-                                    method:(CCDecimalCalculate)method;
+                                       method:(CCDecimalCalculate)method;
 @end
 
 @implementation NSDecimalNumber (Calc)
 
 ////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)addingByDecimalNumber:(NSDecimalNumber *)lOperand
-                                  rOperand:(NSDecimalNumber *)rOperand {
-    
+                                  rOperand:(NSDecimalNumber *)rOperand
+{
     return [self calculateByDecimalNumber: lOperand
                                  rOperand: rOperand
                                    method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
-                                    return NSDecimalAdd(result, l, r, roundingMode);
-                                }
-            ];
+                                       return NSDecimalAdd(result, l, r, roundingMode);
+                                   }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)subtractingByDecimalNumber:(NSDecimalNumber *)lOperand
-                                       rOperand:(NSDecimalNumber *)rOperand {
-    
+                                       rOperand:(NSDecimalNumber *)rOperand
+{
     return [self calculateByDecimalNumber: lOperand
                                  rOperand: rOperand
                                    method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
-                                    return NSDecimalSubtract(result, l, r, roundingMode);
-                                }
-            ];
+                                       return NSDecimalSubtract(result, l, r, roundingMode);
+                                   }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)multiplyingByDecimalNumber:(NSDecimalNumber *)lOperand
-                                       rOperand:(NSDecimalNumber *)rOperand {
-    
+                                       rOperand:(NSDecimalNumber *)rOperand
+{
     return [self calculateByDecimalNumber: lOperand
                                  rOperand: rOperand
                                    method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
-                                    return NSDecimalMultiply(result, l, r, roundingMode);
-                                }
-            ];
+                                       return NSDecimalMultiply(result, l, r, roundingMode);
+                                   }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)dividingByDecimalNumber:(NSDecimalNumber *)lOperand
-                                    rOperand:(NSDecimalNumber *)rOperand {
-    
+                                    rOperand:(NSDecimalNumber *)rOperand
+{
     return [self calculateByDecimalNumber: lOperand
                                  rOperand: rOperand
                                    method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
-                                    return NSDecimalDivide(result, l, r, roundingMode);
-                                }
-            ];
+                                       return NSDecimalDivide(result, l, r, roundingMode);
+                                   }];
 }
 
 @end
@@ -74,8 +70,8 @@ typedef NSCalculationError (^CCDecimalCalculate)(NSDecimal *, const NSDecimal *,
 ////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
-                                       method:(CCDecimalCalculate)method {
-    
+                                       method:(CCDecimalCalculate)method
+{
     NSDecimal l = [[NSDecimalNumber zero] decimalValue];
     if (lOperand) {
         l = [lOperand decimalValue];
@@ -91,8 +87,8 @@ typedef NSCalculationError (^CCDecimalCalculate)(NSDecimal *, const NSDecimal *,
     if (NSDecimalIsNotANumber(&result)) {
         return [NSDecimalNumber zero];
     }
-    
-    return [NSDecimalNumber decimalNumberWithDecimal:result];
+
+    return [NSDecimalNumber decimalNumberWithDecimal: result];
 }
 
 @end

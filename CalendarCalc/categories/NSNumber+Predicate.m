@@ -9,11 +9,16 @@
 #import "NSNumber+Predicate.h"
 
 @implementation NSNumber (Predicate)
-- (BOOL)isNan {
+
+////////////////////////////////////////////////////////////////////////////////
+- (BOOL)isNan
+{
     return [self isEqualToNumber:[NSDecimalNumber notANumber]];
 }
 
-- (BOOL)isMinus {
+////////////////////////////////////////////////////////////////////////////////
+- (BOOL)isMinus
+{
     return [self compare:@0] == NSOrderedAscending;
 }
 @end

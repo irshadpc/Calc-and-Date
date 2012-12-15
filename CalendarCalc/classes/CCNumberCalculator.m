@@ -16,36 +16,42 @@
 @implementation CCNumberCalculator
 
 ////////////////////////////////////////////////////////////////////////////////
-- (void)clear {
+- (void)clear
+{
     _result = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)plus:(NSDecimalNumber *)rOperand {
+- (NSDecimalNumber *)plus:(NSDecimalNumber *)rOperand
+{
     return [self calculateWithOperand: rOperand 
                                method: @selector(addingByDecimalNumber:rOperand:)];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)minus:(NSDecimalNumber *)rOperand {
+- (NSDecimalNumber *)minus:(NSDecimalNumber *)rOperand
+{
     return [self calculateWithOperand: rOperand 
                                method: @selector(subtractingByDecimalNumber:rOperand:)];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)multiply:(NSDecimalNumber *)rOperand {
+- (NSDecimalNumber *)multiply:(NSDecimalNumber *)rOperand
+{
     return [self calculateWithOperand: rOperand
                                method: @selector(multiplyingByDecimalNumber:rOperand:)];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)divide:(NSDecimalNumber *)rOperand {
+- (NSDecimalNumber *)divide:(NSDecimalNumber *)rOperand
+{
     return [self calculateWithOperand: rOperand 
                                method: @selector(dividingByDecimalNumber:rOperand:)];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)equal:(NSDecimalNumber *)rOperand {
+- (NSDecimalNumber *)equal:(NSDecimalNumber *)rOperand
+{
     if (!rOperand) {
         return nil;
     }
@@ -55,7 +61,8 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)result {
+- (NSDecimalNumber *)result
+{
     return _result;
 }
 
@@ -63,7 +70,9 @@
 #pragma mark - private
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand method:(SEL)method {
+- (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand
+                                   method:(SEL)method
+{
     if (!rOperand) {
         return nil;
     }
