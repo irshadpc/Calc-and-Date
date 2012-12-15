@@ -21,7 +21,6 @@
 		6213560516737DA100C93999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DD16737DA100C93999 /* Foundation.framework */; };
 		6213560D16737DA100C93999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6213560B16737DA100C93999 /* InfoPlist.strings */; };
 		62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */; };
-		62324C62167C37360062EF1B /* CCCalendarCalcResult+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C61167C37360062EF1B /* CCCalendarCalcResult+Formatter.m */; };
 		62324C65167C42A70062EF1B /* NSString+Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C64167C42A60062EF1B /* NSString+Locale.m */; };
 		62324C6E167C4D120062EF1B /* NSDateFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */; };
 		62A2D06C16738023001CC9AE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05B16738023001CC9AE /* Icon.png */; };
@@ -171,8 +170,6 @@
 		6213560C16737DA100C93999 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62324C5A167C34D70062EF1B /* CCCalendarCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCalendarCalcTests.h; sourceTree = "<group>"; };
 		62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCalendarCalcTests.m; sourceTree = "<group>"; };
-		62324C60167C37350062EF1B /* CCCalendarCalcResult+Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCCalendarCalcResult+Formatter.h"; sourceTree = "<group>"; };
-		62324C61167C37360062EF1B /* CCCalendarCalcResult+Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalcResult+Formatter.m"; sourceTree = "<group>"; };
 		62324C63167C42A50062EF1B /* NSString+Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Locale.h"; sourceTree = "<group>"; };
 		62324C64167C42A60062EF1B /* NSString+Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Locale.m"; sourceTree = "<group>"; };
 		62324C6C167C4D100062EF1B /* NSDateFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
@@ -636,8 +633,6 @@
 				62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */,
 				62B53EE5167C685000394427 /* CCCalendarCalcResult+Date.h */,
 				62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */,
-				62324C60167C37350062EF1B /* CCCalendarCalcResult+Formatter.h */,
-				62324C61167C37360062EF1B /* CCCalendarCalcResult+Formatter.m */,
 				62B53EDC167C64B800394427 /* CCNumberResult.h */,
 				62B53EDD167C64B800394427 /* CCNumberResult.m */,
 				62B53EDF167C64C500394427 /* CCDateResult.h */,
@@ -894,7 +889,6 @@
 				62A2D15016739F93001CC9AE /* NSDateComponents+Unit.m in Sources */,
 				62A2D1531673A2E3001CC9AE /* NSDecimalNumber+Convert.m in Sources */,
 				62A2D1561673A614001CC9AE /* NSDate+Component.m in Sources */,
-				62324C62167C37360062EF1B /* CCCalendarCalcResult+Formatter.m in Sources */,
 				62324C65167C42A70062EF1B /* NSString+Locale.m in Sources */,
 				62324C6E167C4D120062EF1B /* NSDateFormatter+CalendarCalc.m in Sources */,
 				62B53ED8167C592E00394427 /* NSNumberFormatter+CalendarCalc.m in Sources */,

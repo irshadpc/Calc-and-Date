@@ -9,7 +9,6 @@
 #import "CCCalendarCalcTests.h"
 #import "CCCalendarCalc.h"
 #import "CCCalendarCalcResult.h"
-#import "CCCalendarCalcResult+Formatter.h"
 #import "NSDate+Component.h"
 
 @interface CCCalendarCalcTests () {
@@ -79,6 +78,31 @@
     [self inputString: @"2"];
     NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
     STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
+}
+
+- (void)testInputFunction_1_Plus_20_Equal
+{
+    [self inputString:@"1"];
+    [_calendarCalc inputFunction: CCPlus];
+    NSString *const result1 = [[self inputString:@"2"] displayResult];
+    STAssertEqualObjects(@"2", result1, @"RESULT1: %@", result1);
+    [self inputString:@"0"];
+    NSString *const result2 = [[_calendarCalc inputFunction: CCEqual] displayResult];
+    STAssertEqualObjects(@"21", result2, @"RESULT2: %@", result2);
+}
+
+- (void)testInputFunction_1_Plus_20_Minus_10_Equal
+{
+    [self inputString:@"1"];
+    [_calendarCalc inputFunction: CCPlus];
+    [self inputString:@"2"];
+    [self inputString:@"0"];
+    NSString *const result1 = [[_calendarCalc inputFunction: CCMinus] displayResult];
+    STAssertEqualObjects(@"21", result1, @"RESULT1: %@", result1);
+    [self inputString:@"1"];
+    [self inputString:@"0"];
+    NSString *const result2 = [[_calendarCalc inputFunction: CCEqual] displayResult];
+    STAssertEqualObjects(@"11", result2, @"RESULT2: %@", result2);
 }
 
 - (void)testInputDate_2012_12_15

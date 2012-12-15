@@ -13,10 +13,14 @@
 
 @interface CCCalendarCalcResult : NSObject {
   @private
+    NSString *_displayResult;
     CCNumberResult *_numberResult;
     CCDateResult *_dateResult;
     BOOL _isNumberResult;
+    BOOL _isEmpty;
 }
 
 - (void)clear;
+- (void)updateDisplayResult;
+- (NSString *)displayResult;
 @end

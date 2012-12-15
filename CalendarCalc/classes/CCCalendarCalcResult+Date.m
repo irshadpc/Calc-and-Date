@@ -23,12 +23,14 @@
 - (void)setDateResult:(NSDate *)date
 {
     [_dateResult setResult:date];
+    [self updateDisplayResult];
 }
 
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
     [_dateResult inputDate:date];
     _isNumberResult = NO;
+    _isEmpty = NO;
 
     return self;
 }

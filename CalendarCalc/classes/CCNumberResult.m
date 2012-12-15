@@ -91,7 +91,7 @@ enum {
 
 - (NSString *)displayResult
 {
-    return _string;
+    return [_string copy];
 }
 
 #pragma mark - Private

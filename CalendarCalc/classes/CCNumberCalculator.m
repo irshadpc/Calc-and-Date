@@ -35,6 +35,8 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)minus:(NSDecimalNumber *)rOperand
 {
+    NSLog(@"L: %@", _result);
+    NSLog(@"R: %@", rOperand);
     return [self calculateWithOperand:rOperand
                                method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
                                    return [NSDecimalNumber subtractingByDecimalNumber:l rOperand:r];

@@ -10,7 +10,6 @@
 #import "CCCalendarCalcResult.h"
 #import "CCCalendarCalcResult+Number.h"
 #import "CCCalendarCalcResult+Date.h"
-#import "CCCalendarCalcResult+Formatter.h"
 #import "CCNumberCalculator.h"
 #import "CCDateCalculator.h"
 
@@ -57,7 +56,6 @@ typedef enum {
             [_numberCalculator setResult:[_result numberResult]];
             [_dateCalculator setDateRusult:[_result dateResult]];
             [_dateCalculator setNumberResult:[_result numberResult]];
-            [_result clear];
             break;
         case CCNumber:
             [self numberCalculate];
@@ -70,6 +68,7 @@ typedef enum {
             abort();
     }
     _currentFunction = function;
+    [_result clear];
     
     return _result;
 }
@@ -81,16 +80,16 @@ typedef enum {
 {
     switch (_currentFunction) {
         case CCPlus:
-            [_numberCalculator plus:[_result numberResult]];
+            [_numberCalculator plus: [_result numberResult]];
             break;
         case CCMinus:
-            [_numberCalculator minus:[_result numberResult]];
+            [_numberCalculator minus: [_result numberResult]];
             break;
         case CCMultiply:
-            [_numberCalculator multiply:[_result numberResult]];
+            [_numberCalculator multiply: [_result numberResult]];
             break;
         case CCDivide:
-            [_numberCalculator divide:[_result numberResult]];
+            [_numberCalculator divide: [_result numberResult]];
             break;
         case CCEqual:
             return;
@@ -114,7 +113,7 @@ typedef enum {
             abort();
     }
     
-    [_result setDateResult:[_dateCalculator dateResult]];
+    [_result setDateResult: [_dateCalculator dateResult]];
 }
 
 - (CCCalcType)calcType

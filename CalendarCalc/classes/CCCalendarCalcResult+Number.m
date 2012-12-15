@@ -23,6 +23,7 @@
 - (void)setNumberResult:(NSDecimalNumber *)number
 {
     [_numberResult setResult:number];
+    [self updateDisplayResult];
 }
 
 - (void)clearEntry
@@ -34,7 +35,8 @@
 {
     [_numberResult inputNumber:number];
     _isNumberResult = YES;
-   
+    _isEmpty = NO;
+    
     return self;
 }
 

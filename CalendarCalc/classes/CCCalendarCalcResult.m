@@ -18,6 +18,7 @@
     if ((self = [super init])) {
         _numberResult = [[CCNumberResult alloc] init];
         _dateResult = [[CCDateResult alloc] init];
+        _isEmpty = YES;
     }
     return self;
 }
@@ -26,6 +27,26 @@
 {
     [_numberResult clear];
     [_dateResult clear];
+    _isEmpty = YES;
+}
+
+- (void)updateDisplayResult
+{
+    if (_isEmpty) {
+        return;
+    }
+
+    if (_isNumberResult) {
+        _displayResult = [_numberResult displayResult];
+    } else {
+        _displayResult = [_dateResult displayResult];
+    }
+}
+
+- (NSString *)displayResult
+{
+    [self updateDisplayResult];
+    return _displayResult;
 }
 
 @end
