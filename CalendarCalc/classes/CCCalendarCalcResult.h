@@ -20,6 +20,7 @@
     BOOL _isEmpty;
 }
 
+- (void)allClear;
 - (void)clear;
 - (void)updateDisplayResult;
 - (NSString *)displayResult;

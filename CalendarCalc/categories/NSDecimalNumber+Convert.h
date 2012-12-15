@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDecimalNumber (Convert)
-+ (NSDecimalNumber *)negate:(NSDecimalNumber *)number;
++ (NSDecimalNumber *)reverse:(NSDecimalNumber *)number;
 NSDecimalNumber *DecimalNumber(NSString *const string);
 @end

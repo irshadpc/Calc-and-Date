@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62021331167CBF8D00BFF836 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62021330167CBF8D00BFF836 /* AVFoundation.framework */; };
 		621355DC16737DA100C93999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DB16737DA100C93999 /* UIKit.framework */; };
 		621355DE16737DA100C93999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DD16737DA100C93999 /* Foundation.framework */; };
 		621355E016737DA100C93999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DF16737DA100C93999 /* CoreGraphics.framework */; };
@@ -152,6 +153,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62021330167CBF8D00BFF836 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		621355D716737DA100C93999 /* CalendarCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		621355DB16737DA100C93999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		621355DD16737DA100C93999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -318,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62021331167CBF8D00BFF836 /* AVFoundation.framework in Frameworks */,
 				621355DC16737DA100C93999 /* UIKit.framework in Frameworks */,
 				621355DE16737DA100C93999 /* Foundation.framework in Frameworks */,
 				621355E016737DA100C93999 /* CoreGraphics.framework in Frameworks */,
@@ -359,6 +362,7 @@
 		621355DA16737DA100C93999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62021330167CBF8D00BFF836 /* AVFoundation.framework */,
 				621355DB16737DA100C93999 /* UIKit.framework */,
 				621355DD16737DA100C93999 /* Foundation.framework */,
 				621355DF16737DA100C93999 /* CoreGraphics.framework */,

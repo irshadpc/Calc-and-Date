@@ -12,9 +12,9 @@
 
 @interface CCNumberResult : NSObject {
   @private
-    NSMutableString *_string;
-    NSInteger _number;
-    NSInteger _decimal;
+    NSMutableString *_number;
+    NSMutableString *_decimal;
+    BOOL _isPlus;
     BOOL _isDecimal;
 }
 
@@ -26,6 +26,7 @@
 - (void)clearEntry;
 - (void)inputNumber:(NSDecimalNumber *)number;
 - (void)inputDecimalPoint;
+- (void)reverse;
 
 - (NSString *)displayResult;
 @end

@@ -8,13 +8,10 @@
 
 #import "CCNumberResult.h"
 #import "NSString+Locale.h"
+#import "NSNumber+Predicate.h"
+#import "NSDecimalNumber+Convert.h"
 #import "NSNumberFormatter+CalendarCalc.h"
 
-@interface CCNumberResult ()
-- (NSInteger)numberValue;
-- (NSInteger)decimalValue;
-- (BOOL)isDecimal;
-@end
 
 @implementation CCNumberResult
 
@@ -27,27 +24,40 @@ enum {
 - (id)init 
 {
     if ((self = [super init])) {
-        _string = [[NSMutableString alloc] init];
+        _number = [[NSMutableString alloc] init];
+        _decimal = [[NSMutableString alloc] init];
+        [_number setString:@"0"];
+        _isPlus = YES;
     }
     return self;
 }
 
 - (void)clear
 {
-    _number = 0;
-    _decimal = 0;
+    [_number setString:@""];
+    [_decimal setString:@""];
     _isDecimal = NO;
-    [_string setString:@""];
 }
 
 - (NSDecimalNumber *)result
 {
-    if (![self isDecimal]) {
+    if (_number.length == 0 && _decimal.length == 0) {
+        return nil;
+    }
+    
+    NSString *sign = nil;
+    if (_isPlus) {
+       sign = @"";
+    } else {
+        sign = @"-";
+    }
+    
+    if (_isDecimal) {
         return [NSDecimalNumber decimalNumberWithString:
-                [NSString stringWithFormat: @"%d", _number]];
+                [NSString stringWithFormat: @"%@%@", sign, _number]];
     } else {
         return [NSDecimalNumber decimalNumberWithString:
-                [NSString stringWithFormat: @"%d%@%d", _number, [NSString decimalSeparator], _decimal]];
+                [NSString stringWithFormat: @"%@%@%@%@", sign, _number, [NSString decimalSeparator], _decimal]];
     }
 }
 
@@ -55,63 +65,57 @@ enum {
 {
     NSArray *const componentsString = [[[NSNumberFormatter plainNumberFormatter] stringFromNumber:number]
                                        componentsSeparatedByString:[NSString decimalSeparator]];
-    _number = [componentsString[Number] integerValue];
     if (componentsString.count == DecimalCount) {
-        _decimal = [componentsString[Decimal] integerValue];
+        _isDecimal = YES;
+        [_decimal setString:componentsString[Decimal]];
     }
+    [_number setString:componentsString[Number]];
+    
+    if ([number isMinus]) {
+        _isPlus = NO;
+        [_number deleteCharactersInRange:NSMakeRange(0, 1)];
+    } else {
+        _isPlus = YES;
+    }
+}
 
-
-    [_string setString: [[NSNumberFormatter displayNumberFormatter] stringFromNumber:number]];
+- (void)clearEntry
+{
+    if (_isDecimal) {
+        [_decimal deleteCharactersInRange:NSMakeRange(_decimal.length - 1, 1)];
+    } else if (_number.integerValue != 0) {
+        [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
+    }
+   
+    if (_decimal.length == 0) {
+        _isDecimal = NO;
+    }
 }
 
 - (void)inputNumber:(NSDecimalNumber *)number
 {
-    [_string appendString:number.stringValue];
-    if (!_isDecimal) {
-        _number = [self numberValue];
+    if (_isDecimal) {
+        [_decimal appendString:number.stringValue];
+    } else if (_number.integerValue != 0) {
+        [_number appendString:number.stringValue];
     } else {
-        _decimal = [self decimalValue];
+        [_number setString:number.stringValue];
     }
 }
 
 - (void)inputDecimalPoint
 {
-    [_string appendString:[NSString decimalSeparator]];
     _isDecimal = YES;
-}
-
-- (void)clearEntry
-{
-    NSString *const removedChar = [_string substringToIndex:_string.length - 1];
-    if ([removedChar isEqualToString:[NSString decimalSeparator]]) {
-        _isDecimal = NO;
-    }
-    [_string deleteCharactersInRange:NSMakeRange(_string.length - 2, 1)];
 }
 
 - (NSString *)displayResult
 {
-    return [_string copy];
+    return [[NSNumberFormatter displayNumberFormatter] stringFromNumber:[self result]];
 }
 
-#pragma mark - Private
-
-- (NSInteger)numberValue
+- (void)reverse 
 {
-    return [[_string componentsSeparatedByString:[NSString decimalSeparator]][Number] integerValue];
+    _isPlus = !_isPlus;
 }
 
-- (NSInteger)decimalValue
-{
-    NSArray *const componentsString = [_string componentsSeparatedByString:[NSString decimalSeparator]];
-    if (componentsString.count != DecimalCount) {
-        return 0;
-    }
-    return [componentsString[Decimal] integerValue];
-}
-
-- (BOOL)isDecimal
-{
-    return _isDecimal && _decimal > 0;
-}
 @end

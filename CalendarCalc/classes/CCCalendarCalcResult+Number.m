@@ -31,9 +31,13 @@
     [self updateDisplayResult];
 }
 
-- (void)clearEntry
+- (CCCalendarCalcResult *)clearEntry
 {
-    [_numberResult clearEntry];
+    if (_isNumberResult) {
+        [_numberResult clearEntry];
+    }
+    
+    return self;
 }
 
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
@@ -47,11 +51,18 @@
 
 - (CCCalendarCalcResult *)inputDecimalPoint
 {
-    if (!_isNumberResult) {
-        return self;
+    if (_isNumberResult) {
+        [_numberResult inputDecimalPoint];
     }
-    
-    [_numberResult inputDecimalPoint];
+
+    return self;
+}
+
+- (CCCalendarCalcResult *)reverseNumberResult
+{
+    if (_isNumberResult) {
+        [_numberResult reverse];
+    }
     return self;
 }
 

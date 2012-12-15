@@ -24,10 +24,13 @@ typedef enum {
 } CCCalcType;
 
 @interface CCCalendarCalc ()
+- (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (void)numberCalculate;
 - (void)dateCalculate;
 - (void)datePlus;
 - (void)dateMinus;
+- (CCCalendarCalcResult *)clearResult;
+- (CCCalendarCalcResult *)reverseNumber;
 - (CCCalcType)calcType;
 @end
 
@@ -43,6 +46,12 @@ typedef enum {
     return self;
 }
 
+- (CCCalendarCalcResult *)inputInteger:(NSInteger)integer
+{
+    return [_result inputNumber:
+            [NSDecimalNumber decimalNumberWithString:@(integer).stringValue]];
+}
+
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
 {
     return [_result inputNumber:number];
@@ -54,6 +63,34 @@ typedef enum {
 }
 
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function
+{
+    switch (function) {
+        case CCPlus:
+        case CCMinus:
+        case CCMultiply:
+        case CCDivide:
+        case CCEqual:
+            return [self calculateWithFunction:function];
+        case CCDecimal:
+            return [_result inputDecimalPoint];
+        case CCClear:
+            return [self clearResult];
+        case CCPlusMinus:
+            return [self reverseNumber];
+        case CCDelete:
+            [_result clearEntry];
+            return _result;
+        case CCFunctionMax:
+        default:
+            NSLog(@"FUNCTION: %d", function);
+            abort();
+    }
+}
+
+
+#pragma mark - Private
+
+- (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {
     switch ([self calcType]) {
         case CCUnknown:
@@ -71,29 +108,27 @@ typedef enum {
             NSLog(@"CALC_TYPE: %d", [self calcType]);
             abort();
     }
+
     _currentFunction = function;
     [_result clear];
-    
+
     return _result;
 }
-
-
-#pragma mark - Private
 
 - (void)numberCalculate
 {
     switch (_currentFunction) {
         case CCPlus:
-            [_numberCalculator plus: [_result numberResult]];
+            [_numberCalculator plus:[_result numberResult]];
             break;
         case CCMinus:
-            [_numberCalculator minus: [_result numberResult]];
+            [_numberCalculator minus:[_result numberResult]];
             break;
         case CCMultiply:
-            [_numberCalculator multiply: [_result numberResult]];
+            [_numberCalculator multiply:[_result numberResult]];
             break;
         case CCDivide:
-            [_numberCalculator divide: [_result numberResult]];
+            [_numberCalculator divide:[_result numberResult]];
             break;
         case CCEqual:
             return;
@@ -107,7 +142,6 @@ typedef enum {
 
 - (void)dateCalculate
 {
-    NSLog(@"DATE_CALC");
     switch (_currentFunction) {
         case CCPlus:
             [self datePlus];
@@ -120,11 +154,8 @@ typedef enum {
             abort();
     }
 
-    NSLog(@"NUMBER_RESULT: %@", [_dateCalculator numberResult]);
-    NSLog(@"DATE_RESULT: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:[_dateCalculator dateResult]]);
-
-    [_result setNumberResult: [_dateCalculator numberResult]];
-    [_result setDateResult: [_dateCalculator dateResult]];
+    [_result setNumberResult:[_dateCalculator numberResult]];
+    [_result setDateResult:[_dateCalculator dateResult]];
 }
 
 - (void)datePlus
@@ -145,6 +176,30 @@ typedef enum {
     } else {
         abort();
     }
+}
+
+- (CCCalendarCalcResult *)clearResult
+{
+    if ([_result numberResult] || [_result dateResult]) {
+        NSLog(@"NUM: %@", [_result numberResult]);
+        NSLog(@"DAT: %@", [_result dateResult]);
+        [_result clear];
+    } else {
+        NSLog(@"AC");
+        [_result allClear];
+        [_numberCalculator clear];
+        [_dateCalculator clear];
+    }
+    
+    return _result;
+}
+
+- (CCCalendarCalcResult *)reverseNumber
+{
+    if ([_result numberResult]) {
+        [_result reverseNumberResult];
+    }
+    return _result;
 }
 
 - (CCCalcType)calcType

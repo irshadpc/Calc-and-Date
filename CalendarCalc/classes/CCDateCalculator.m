@@ -69,7 +69,7 @@
                      @([_dateResult dayIntervalWithDate: [rOperand noTime]]).stringValue];
     
     if ([_numberResult isMinus]) {
-        _numberResult = [NSDecimalNumber negate: _numberResult];
+        _numberResult = [NSDecimalNumber reverse: _numberResult];
     }
 
     /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
@@ -118,7 +118,7 @@
                      @([[rOperand noTime] dayIntervalWithDate: _dateResult]).stringValue];
 
     if ([_numberResult isMinus]) {
-        _numberResult = [NSDecimalNumber negate: _numberResult];
+        _numberResult = [NSDecimalNumber reverse: _numberResult];
     }
 
     /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult

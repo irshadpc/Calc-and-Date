@@ -23,6 +23,12 @@
     return self;
 }
 
+- (void)allClear
+{
+    [self clear];
+    _displayResult = nil;
+}
+
 - (void)clear
 {
     [_numberResult clear];
@@ -46,6 +52,9 @@
 - (NSString *)displayResult
 {
     [self updateDisplayResult];
+    if (!_displayResult) {
+        return @"0";
+    }
     return _displayResult;
 }
 
