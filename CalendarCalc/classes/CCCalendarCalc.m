@@ -23,8 +23,8 @@ typedef enum {
 } CCCalcType;
 
 @interface CCCalendarCalc ()
-- (CCCalendarCalcResult *)numberCalculate;
-- (CCCalendarCalcResult *)dateCalculate;
+- (void)numberCalculate;
+- (void)dateCalculate;
 - (CCCalcType)calcType;
 @end
 
@@ -52,26 +52,32 @@ typedef enum {
 
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function
 {
-    _currentFunction = function;
     switch ([self calcType]) {
         case CCUnknown:
             [_numberCalculator setResult:[_result numberResult]];
             [_dateCalculator setDateRusult:[_result dateResult]];
             [_dateCalculator setNumberResult:[_result numberResult]];
-            return _result;
+            [_result clear];
+            break;
         case CCNumber:
-            return [self numberCalculate];
+            [self numberCalculate];
+            break;
         case CCDate:
-            return [self dateCalculate];
+            [self dateCalculate];
+            break;
         default:
+            NSLog(@"CALC_TYPE: %d", [self calcType]);
             abort();
     }
+    _currentFunction = function;
+    
+    return _result;
 }
 
 
 #pragma mark - Private
 
-- (CCCalendarCalcResult *)numberCalculate
+- (void)numberCalculate
 {
     switch (_currentFunction) {
         case CCPlus:
@@ -86,14 +92,17 @@ typedef enum {
         case CCDivide:
             [_numberCalculator divide:[_result numberResult]];
             break;
+        case CCEqual:
+            return;
         default:
+            NSLog(@"FUNCTION: %d", _currentFunction);
             abort();
     }
 
-    return [_result setNumberResult: [_numberCalculator result]];
+    [_result setNumberResult: [_numberCalculator result]];
 }
 
-- (CCCalendarCalcResult *)dateCalculate
+- (void)dateCalculate
 {
     switch (_currentFunction) {
         case CCPlus:
@@ -101,10 +110,11 @@ typedef enum {
         case CCMinus:
             break;
         default:
+            NSLog(@"FUNCTION: %d", _currentFunction);
             abort();
     }
     
-    return [_result setDateResult:[_dateCalculator dateResult]];
+    [_result setDateResult:[_dateCalculator dateResult]];
 }
 
 - (CCCalcType)calcType

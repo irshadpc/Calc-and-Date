@@ -10,9 +10,9 @@
 
 @interface CCCalendarCalcResult (Number)
 - (NSDecimalNumber *)numberResult;
-- (CCCalendarCalcResult *)setNumberResult:(NSDecimalNumber *)number;
+- (void)setNumberResult:(NSDecimalNumber *)number;
 
-- (CCCalendarCalcResult *)clearEntry;
+- (void)clearEntry;
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDecimalPoint;
 @end

@@ -7,34 +7,30 @@
 //
 
 #import "CCCalendarCalcResult+Date.h"
-#import "NSDateFormatter+CalendarCalc.h"
-
-@interface CCCalendarCalcResult (DatePrivate)
-
-@end
+#import "CCDateResult.h"
 
 @implementation CCCalendarCalcResult (Date)
 
 - (NSDate *)dateResult
 {
-    return _date;
+    if (_isNumberResult) {
+        return nil;
+    }
+    
+    return [_dateResult result];
 }
 
-- (CCCalendarCalcResult *)setDateResult:(NSDate *)date
+- (void)setDateResult:(NSDate *)date
 {
-    return [self inputDate:date];
+    [_dateResult setResult:date];
 }
 
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
-    _date = date;
-    [_string setString: [[NSDateFormatter yyyymmddFormatter] stringFromDate: date]];
+    [_dateResult inputDate:date];
+    _isNumberResult = NO;
 
     return self;
 }
-
-@end
-
-@implementation CCCalendarCalcResult (DatePrivate)
 
 @end

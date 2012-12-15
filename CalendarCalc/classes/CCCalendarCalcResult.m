@@ -7,6 +7,8 @@
 //
 
 #import "CCCalendarCalcResult.h"
+#import "CCNumberResult.h"
+#import "CCDateResult.h"
 #import "NSString+Locale.h"
 
 @implementation CCCalendarCalcResult
@@ -14,9 +16,16 @@
 - (id)init
 {
     if ((self = [super init])) {
-        _string = [[NSMutableString alloc] init];
+        _numberResult = [[CCNumberResult alloc] init];
+        _dateResult = [[CCDateResult alloc] init];
     }
     return self;
+}
+
+- (void)clear
+{
+    [_numberResult clear];
+    [_dateResult clear];
 }
 
 @end

@@ -7,12 +7,18 @@
 //
 
 #import "CCCalendarCalcResult+Formatter.h"
+#import "CCNumberResult.h"
+#import "CCDateResult.h"
 
 @implementation CCCalendarCalcResult (Formatter)
 
 - (NSString *)displayResult 
 {
-    return _string;
+    if (_isNumberResult) {
+        return [_numberResult displayResult];
+    } else {
+        return [_dateResult displayResult];
+    }
 }
 
 @end

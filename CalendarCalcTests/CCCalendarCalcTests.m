@@ -27,6 +27,11 @@
     _calendarCalc = [[CCCalendarCalc alloc] init];
 }
 
+- (void)testCalendarCalc
+{
+    STAssertNotNil(_calendarCalc, @"CalendarCalc is nil");
+}
+
 - (void)testInputNumber1
 {
     NSString *const result = [[self inputString: @"1"] displayResult];

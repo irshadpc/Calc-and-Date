@@ -7,102 +7,45 @@
 //
 
 #import "CCCalendarCalcResult+Number.h"
-#import "NSString+Locale.h"
-#import "NSNumberFormatter+CalendarCalc.h"
-
-@interface CCCalendarCalcResult (NumberPrivate)
-- (NSInteger)numberValue;
-- (NSInteger)decimalValue;
-- (BOOL)isDecimal;
-@end
-
+#import "CCNumberResult.h"
 
 @implementation CCCalendarCalcResult (Number)
 
-enum {
-    Number,
-    Decimal,
-    DecimalCount
-};
-
 - (NSDecimalNumber *)numberResult
 {
-    if (![self isDecimal]) {
-        return [NSDecimalNumber decimalNumberWithString:
-                [NSString stringWithFormat: @"%d", _number]];
-    } else {
-        return [NSDecimalNumber decimalNumberWithString:
-                [NSString stringWithFormat: @"%d%@%d", _number, [NSString decimalSeparator], _decimal]];
+    if (!_isNumberResult) {
+        return nil;
     }
+    
+    return [_numberResult result];
 }
 
-- (CCCalendarCalcResult *)setNumberResult:(NSDecimalNumber *)number 
+- (void)setNumberResult:(NSDecimalNumber *)number
 {
-    NSArray *const componentsString = [[[NSNumberFormatter plainNumberFormatter] stringFromNumber:number]
-                                       componentsSeparatedByString:[NSString decimalSeparator]];
-    _number = [componentsString[Number] integerValue];
-    if (componentsString.count == DecimalCount) {
-        _decimal = [componentsString[Decimal] integerValue];
-    }
-     
-    [_string setString:
-     [[NSNumberFormatter displayNumberFormatter] stringFromNumber:number]];
-    
-    return self;
+    [_numberResult setResult:number];
+}
+
+- (void)clearEntry
+{
+    [_numberResult clearEntry];
 }
 
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
 {
-    [_string appendString:number.stringValue];
-    if (!_isDecimal) {
-        _number = [self numberValue];
-    } else {
-        _decimal = [self decimalValue];
-    }
+    [_numberResult inputNumber:number];
+    _isNumberResult = YES;
    
     return self;
 }
 
 - (CCCalendarCalcResult *)inputDecimalPoint
 {
-    [_string appendString:[NSString decimalSeparator]];
-    _isDecimal = YES;
-
-    return self;
-}
-
-- (CCCalendarCalcResult *)clearEntry
-{
-    NSString *const removedChar = [_string substringToIndex:_string.length - 1];
-    if ([removedChar isEqualToString:[NSString decimalSeparator]]) {
-        _isDecimal = NO;
+    if (!_isNumberResult) {
+        return self;
     }
-    [_string deleteCharactersInRange:NSMakeRange(_string.length - 2, 1)];
-   
+    
+    [_numberResult inputDecimalPoint];
     return self;
-}
-@end
-
-
-@implementation CCCalendarCalcResult (NumberPrivate)
-
-- (NSInteger)numberValue
-{
-    return [[_string componentsSeparatedByString:[NSString decimalSeparator]][Number] integerValue];
-}
-
-- (NSInteger)decimalValue
-{
-    NSArray *const componentsString = [_string componentsSeparatedByString:[NSString decimalSeparator]];
-    if (componentsString.count != DecimalCount) {
-        return 0;
-    }
-    return [componentsString[Decimal] integerValue];
-}
-
-- (BOOL)isDecimal
-{
-    return _isDecimal && _decimal > 0;
 }
 
 @end

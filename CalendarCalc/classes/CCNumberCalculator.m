@@ -9,8 +9,10 @@
 #import "CCNumberCalculator.h"
 #import "NSDecimalNumber+Calc.h"
 
+typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
+
 @interface CCNumberCalculator ()
-- (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand method:(SEL)method;
+- (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand method:(CCCalcMethod)method;
 @end
 
 @implementation CCNumberCalculator
@@ -24,29 +26,37 @@
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)plus:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand: rOperand 
-                               method: @selector(addingByDecimalNumber:rOperand:)];
+    return [self calculateWithOperand:rOperand
+                               method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
+                                   return [NSDecimalNumber addingByDecimalNumber:l rOperand:r];
+                               }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)minus:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand: rOperand 
-                               method: @selector(subtractingByDecimalNumber:rOperand:)];
+    return [self calculateWithOperand:rOperand
+                               method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
+                                   return [NSDecimalNumber subtractingByDecimalNumber:l rOperand:r];
+                               }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)multiply:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand: rOperand
-                               method: @selector(multiplyingByDecimalNumber:rOperand:)];
+    return [self calculateWithOperand:rOperand
+                               method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
+                                   return [NSDecimalNumber multiplyingByDecimalNumber:l rOperand:r];
+                               }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)divide:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand: rOperand 
-                               method: @selector(dividingByDecimalNumber:rOperand:)];
+    return [self calculateWithOperand: rOperand
+                               method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
+                                   return [NSDecimalNumber dividingByDecimalNumber:l rOperand:r];
+                               }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,14 +81,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand
-                                   method:(SEL)method
+                                   method:(CCCalcMethod)method
 {
     if (!rOperand) {
         return nil;
     }
     
-    _result = [NSDecimalNumber performSelector: method
-                                    withObject: rOperand];
+    _result = method(_result, rOperand);
     return _result;
 }
 

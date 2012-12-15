@@ -10,7 +10,7 @@
 
 @interface CCCalendarCalcResult (Date)
 - (NSDate *)dateResult;
-- (CCCalendarCalcResult *)setDateResult:(NSDate *)date;
+- (void)setDateResult:(NSDate *)date;
 
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;
 @end
