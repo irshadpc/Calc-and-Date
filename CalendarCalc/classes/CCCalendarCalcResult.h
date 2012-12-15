@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CCCalendarCalcResult : NSObject
+@interface CCCalendarCalcResult : NSObject {
+  @private
+    NSMutableString *_string;
+    
+    NSInteger _number;
+    NSInteger _decimal;
+    BOOL _isDecimal;
+
+    NSDate *_date;
+}
 
 @end

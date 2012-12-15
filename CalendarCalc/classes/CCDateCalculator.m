@@ -129,24 +129,24 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDate *)equalWithDate:(NSDate *)rOperand
+- (NSDate *)setDateRusult:(NSDate *)result
 {
-    if (!rOperand) {
+    if (!result) {
         return nil;
     }
     _isDateResult = YES;
-    _dateResult = [rOperand noTime];
+    _dateResult = [result noTime];
     return _dateResult;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)equalWithNumber:(NSDecimalNumber *)rOperand
+- (NSDecimalNumber *)setNumberResult:(NSDecimalNumber *)result
 {
-    if (!rOperand) {
+    if (!result) {
         return nil;
     }
     _isDateResult = NO;
-    _numberResult = rOperand;
+    _numberResult = result;
     return _numberResult;
 }
 

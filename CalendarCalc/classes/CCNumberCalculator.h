@@ -20,6 +20,6 @@
 - (NSDecimalNumber *)multiply:(NSDecimalNumber *)rOperand;
 - (NSDecimalNumber *)divide:(NSDecimalNumber *)rOperand;
 
-- (NSDecimalNumber *)equal:(NSDecimalNumber *)rOperand;
+- (NSDecimalNumber *)setResult:(NSDecimalNumber *)result;
 - (NSDecimalNumber *)result;
 @end

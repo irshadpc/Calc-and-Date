@@ -7,7 +7,16 @@
 //
 
 #import "CCCalendarCalcResult.h"
+#import "NSString+Locale.h"
 
 @implementation CCCalendarCalcResult
+
+- (id)init
+{
+    if ((self = [super init])) {
+        _string = [[NSMutableString alloc] init];
+    }
+    return self;
+}
 
 @end

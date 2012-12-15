@@ -25,8 +25,8 @@
 - (NSDate *)minusWithNumber:(NSDecimalNumber *)rOperand;
 - (NSDecimalNumber *)minusWithDate:(NSDate *)rOperand;
 
-- (NSDate *)equalWithDate:(NSDate *)rOperand;
-- (NSDecimalNumber *)equalWithNumber:(NSDecimalNumber *)rOperand;
+- (NSDate *)setDateRusult:(NSDate *)result;
+- (NSDecimalNumber *)setNumberResult:(NSDecimalNumber *)result;
 
 - (NSDate *)dateResult;
 - (NSDecimalNumber *)numberResult;

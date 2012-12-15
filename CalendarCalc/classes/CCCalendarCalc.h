@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    Decimal = 301,
-    Equal,
-    Plus,
-    Minus,
-    Multiply,
-    Divide,
-    Clear,
-    PlusMinus,
-    Delete,
+    CCDecimal = 301,
+    CCEqual,
+    CCPlus,
+    CCMinus,
+    CCMultiply,
+    CCDivide,
+    CCClear,
+    CCPlusMinus,
+    CCDelete,
     
-    FUNCTION_END,
+    CCFunctionMax,
 } CCFunction;
 
 
@@ -31,6 +31,8 @@ typedef enum {
   @private
     CCNumberCalculator *_numberCalculator;
     CCDateCalculator *_dateCalculator;
+    CCCalendarCalcResult *_result;
+    CCFunction _currentFunction;
 }
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;

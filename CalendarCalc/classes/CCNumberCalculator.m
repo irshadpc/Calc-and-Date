@@ -50,13 +50,13 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)equal:(NSDecimalNumber *)rOperand
+- (NSDecimalNumber *)setResult:(NSDecimalNumber *)result
 {
-    if (!rOperand) {
+    if (!result) {
         return nil;
     }
 
-    _result = rOperand;
+    _result = result;
     return _result;
 }
 
