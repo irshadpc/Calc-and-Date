@@ -166,4 +166,24 @@
     STAssertEqualObjects(@"16", result, @"RESULT: %@", result);
 }
 
+- (void)testInputFunction_12_Plus_3_Equal_PlusMinus_Plus_9_Equal
+{
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCEqual];
+    [_calendarCalc inputFunction: CCPlusMinus];
+
+    NSString *const result1 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"-15", result1, @"RESULT1: %@", result1);
+
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  9];
+    [_calendarCalc inputFunction: CCEqual];
+   
+    NSString *const result2 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"-6", result2, @"RESULT: %@", result2);
+}
+
 @end

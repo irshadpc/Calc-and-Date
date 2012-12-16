@@ -56,6 +56,16 @@
     STAssertEqualObjects(@"12.3", result, @"RESULT: %@", result);
 }
 
+- (void)testInputNumber_12_PlusMinus 
+{
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCPlusMinus];
+   
+    NSString *const result = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"-12", result, @"RESULT: %@", result);
+}
+
 - (void)testInputDate_2012_12_15
 {
     NSString *const result = [[_calendarCalc inputDate:[NSDate dateWithYear: 2012

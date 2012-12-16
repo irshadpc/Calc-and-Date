@@ -13,7 +13,7 @@
 
 - (NSDecimalNumber *)numberResult
 {
-    if (!_isNumberResult) {
+    if (_calcType != CCNumber) {
         return nil;
     }
     
@@ -23,17 +23,17 @@
 - (void)setNumberResult:(NSDecimalNumber *)number
 {
     if (!number) {
-        _isNumberResult = NO;
         return;
     }
-    
+
+    _calcType = CCNumber;
     [_numberResult setResult:number];
     [self updateDisplayResult];
 }
 
 - (CCCalendarCalcResult *)clearEntry
 {
-    if (_isNumberResult) {
+    if (_calcType == CCNumber) {
         [_numberResult clearEntry];
     }
     
@@ -43,15 +43,14 @@
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
 {
     [_numberResult inputNumber:number];
-    _isNumberResult = YES;
-    _isEmpty = NO;
+    _calcType = CCNumber;
     
     return self;
 }
 
 - (CCCalendarCalcResult *)inputDecimalPoint
 {
-    if (_isNumberResult) {
+    if (_calcType == CCNumber) {
         [_numberResult inputDecimalPoint];
     }
 
@@ -60,7 +59,7 @@
 
 - (CCCalendarCalcResult *)reverseNumberResult
 {
-    if (_isNumberResult) {
+    if (_calcType == CCNumber) {
         [_numberResult reverse];
     }
     return self;

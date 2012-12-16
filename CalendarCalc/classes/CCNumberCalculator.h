@@ -19,6 +19,7 @@
 - (NSDecimalNumber *)minus:(NSDecimalNumber *)rOperand;
 - (NSDecimalNumber *)multiply:(NSDecimalNumber *)rOperand;
 - (NSDecimalNumber *)divide:(NSDecimalNumber *)rOperand;
+- (NSDecimalNumber *)reverse;
 
 - (NSDecimalNumber *)setResult:(NSDecimalNumber *)result;
 - (NSDecimalNumber *)result;

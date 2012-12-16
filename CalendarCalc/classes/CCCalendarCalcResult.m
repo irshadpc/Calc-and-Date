@@ -18,7 +18,7 @@
     if ((self = [super init])) {
         _numberResult = [[CCNumberResult alloc] init];
         _dateResult = [[CCDateResult alloc] init];
-        _isEmpty = YES;
+        _calcType = CCUnknown;
     }
     return self;
 }
@@ -33,19 +33,24 @@
 {
     [_numberResult clear];
     [_dateResult clear];
-    _isEmpty = YES;
+    _calcType = CCUnknown;
 }
 
 - (void)updateDisplayResult
 {
-    if (_isEmpty) {
-        return;
-    }
-
-    if (_isNumberResult) {
-        _displayResult = [_numberResult displayResult];
-    } else {
-        _displayResult = [_dateResult displayResult];
+    switch (_calcType) {
+        case CCUnknown:
+            break;
+        case CCNumber:
+            _displayResult = [_numberResult displayResult];
+            break;
+        case CCDate:
+            _displayResult = [_dateResult displayResult];
+            break;
+        case CCCalcMax:
+        default:
+            NSLog(@"CALC_TYPE: %d", _calcType);
+            abort();
     }
 }
 

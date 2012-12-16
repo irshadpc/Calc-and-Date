@@ -13,7 +13,7 @@
 
 - (NSDate *)dateResult
 {
-    if (_isNumberResult) {
+    if (_calcType != CCDate) {
         return nil;
     }
     
@@ -22,10 +22,9 @@
 
 - (void)setDateResult:(NSDate *)date
 {
-    if (!date) {
-        _isNumberResult = YES;
+    if (date) {
+        _calcType = CCDate;
     }
-    
     [_dateResult setResult:date];
     [self updateDisplayResult];
 }
@@ -33,8 +32,7 @@
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
     [_dateResult inputDate:date];
-    _isNumberResult = NO;
-    _isEmpty = NO;
+    _calcType = CCDate;
 
     return self;
 }

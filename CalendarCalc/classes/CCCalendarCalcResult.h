@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CCCalcType.h"
 
 @class CCNumberResult;
 @class CCDateResult;
@@ -16,8 +17,7 @@
     NSString *_displayResult;
     CCNumberResult *_numberResult;
     CCDateResult *_dateResult;
-    BOOL _isNumberResult;
-    BOOL _isEmpty;
+    CCCalcType _calcType;
 }
 
 - (void)allClear;

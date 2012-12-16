@@ -28,6 +28,8 @@
 - (NSDate *)setDateRusult:(NSDate *)result;
 - (NSDecimalNumber *)setNumberResult:(NSDecimalNumber *)result;
 
+- (NSDecimalNumber *)reverse;
+
 - (NSDate *)dateResult;
 - (NSDecimalNumber *)numberResult;
 @end

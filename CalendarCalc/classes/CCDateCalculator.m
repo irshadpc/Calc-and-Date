@@ -38,8 +38,6 @@
         return nil;
     }
 
-    NSLog(@"L: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:_dateResult]);
-    NSLog(@"R: %@", rOperand);
     _isDateResult = YES;
     _dateResult = [_dateResult addingByDay:rOperand.integerValue];
     return _dateResult;
@@ -130,6 +128,15 @@
     }*/
 
     _dateResult = nil;
+    return _numberResult;
+}
+
+- (NSDecimalNumber *)reverse
+{
+    if (!_numberResult) {
+        return nil;
+    }
+    _numberResult = [NSDecimalNumber reverse:_numberResult];
     return _numberResult;
 }
 

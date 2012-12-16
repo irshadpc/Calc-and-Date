@@ -12,16 +12,7 @@
 #import "CCCalendarCalcResult+Date.h"
 #import "CCNumberCalculator.h"
 #import "CCDateCalculator.h"
-
-#import "NSDateFormatter+CalendarCalc.h"
-
-typedef enum {
-    CCUnknown,
-    CCNumber,
-    CCDate,
-
-    CCCalcMax
-} CCCalcType;
+#import "CCCalcType.h"
 
 @interface CCCalendarCalc ()
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
@@ -97,17 +88,21 @@ typedef enum {
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {
-    if ([self calcType] == CCUnknown || _currentFunction == CCEqual) {
-        [_numberCalculator setResult:[_result numberResult]];
-        [_dateCalculator setDateRusult:[_result dateResult]];
-        [_dateCalculator setNumberResult:[_result numberResult]];
-    } else if ([self calcType] == CCNumber) {
-       [self numberCalculate];
-    } else if ([self calcType] == CCDate) {
-        [self dateCalculate];
-    } else {
-        NSLog(@"CALC_TYPE: %d", [self calcType]);
-        abort();
+    switch ([self calcType]) {
+        case CCUnknown:
+            [_numberCalculator setResult:[_result numberResult]];
+            [_dateCalculator setDateRusult:[_result dateResult]];
+            [_dateCalculator setNumberResult:[_result numberResult]];
+            break;
+        case CCNumber:
+            [self numberCalculate];
+            break;
+        case CCDate:
+            [self dateCalculate];
+            break;
+        default:
+            NSLog(@"CALC_TYPE: %d", [self calcType]);
+            abort();
     }
 
     _currentFunction = function;
@@ -197,14 +192,25 @@ typedef enum {
 
 - (CCCalendarCalcResult *)reverseNumber
 {
-    if ([_result numberResult]) {
+    if ([_numberCalculator result]) {
+        [_result setNumberResult:[_numberCalculator reverse]];
+    } else if ([_dateCalculator numberResult]) {
+        [_result setNumberResult:[_dateCalculator reverse]];
+    } else if ([_result numberResult]) {
         [_result reverseNumberResult];
+    } else {
+        // TODO:abort消す
+        abort();
     }
     return _result;
 }
 
 - (CCCalcType)calcType
 {
+    if (_currentFunction == CCEqual) {
+        return CCUnknown;
+    }
+    
     if ([_dateCalculator dateResult]) {
         return CCDate;
     } else if ([_dateCalculator numberResult] || [_numberCalculator result]) {

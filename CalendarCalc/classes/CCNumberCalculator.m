@@ -8,6 +8,7 @@
 
 #import "CCNumberCalculator.h"
 #import "NSDecimalNumber+Calc.h"
+#import "NSDecimalNumber+Convert.h"
 
 typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 
@@ -57,6 +58,16 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
                                method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
                                    return [NSDecimalNumber dividingByDecimalNumber:l rOperand:r];
                                }];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+- (NSDecimalNumber *)reverse
+{
+    if (!_result) {
+        return nil;
+    }
+    _result = [NSDecimalNumber reverse:_result];
+    return _result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
