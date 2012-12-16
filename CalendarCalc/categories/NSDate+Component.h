@@ -9,16 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDate (Component)
+- (NSInteger)year;
+- (NSInteger)month;
+- (NSInteger)day;
 - (NSInteger)weekday;
-
-+ (NSDate *)dateWithYear:(NSInteger)year
-                   month:(NSInteger)month
-                     day:(NSInteger)day;
-
-+ (NSDate *)dateWithYear:(NSInteger)year
-                   month:(NSInteger)month
-                     day:(NSInteger)day
-                    hour:(NSInteger)hour
-                  minute:(NSInteger)minute
-                  second:(NSInteger)second;
 @end

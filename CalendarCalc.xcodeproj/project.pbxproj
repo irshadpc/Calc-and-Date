@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		62021331167CBF8D00BFF836 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62021330167CBF8D00BFF836 /* AVFoundation.framework */; };
+		62021336167DB2AB00BFF836 /* ASCCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62021335167DB2AB00BFF836 /* ASCCalendarView.m */; };
+		62021339167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62021338167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m */; };
+		6202133C167DB7CB00BFF836 /* UIColor+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */; };
 		621355DC16737DA100C93999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DB16737DA100C93999 /* UIKit.framework */; };
 		621355DE16737DA100C93999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DD16737DA100C93999 /* Foundation.framework */; };
 		621355E016737DA100C93999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DF16737DA100C93999 /* CoreGraphics.framework */; };
@@ -156,6 +159,12 @@
 		62021330167CBF8D00BFF836 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		62021332167D8D8000BFF836 /* CCNumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCNumberFormat.h; path = classes/CCNumberFormat.h; sourceTree = "<group>"; };
 		62021333167DA7D300BFF836 /* CCCalcType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCCalcType.h; sourceTree = "<group>"; };
+		62021334167DB2AB00BFF836 /* ASCCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCCalendarView.h; sourceTree = "<group>"; };
+		62021335167DB2AB00BFF836 /* ASCCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCCalendarView.m; sourceTree = "<group>"; };
+		62021337167DB5EB00BFF836 /* NSDate+AdditionalConvenienceConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+AdditionalConvenienceConstructor.h"; sourceTree = "<group>"; };
+		62021338167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+AdditionalConvenienceConstructor.m"; sourceTree = "<group>"; };
+		6202133A167DB7CA00BFF836 /* UIColor+Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Calendar.h"; sourceTree = "<group>"; };
+		6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Calendar.m"; sourceTree = "<group>"; };
 		621355D716737DA100C93999 /* CalendarCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		621355DB16737DA100C93999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		621355DD16737DA100C93999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -629,6 +638,8 @@
 		62A2D12016738377001CC9AE /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				62021334167DB2AB00BFF836 /* ASCCalendarView.h */,
+				62021335167DB2AB00BFF836 /* ASCCalendarView.m */,
 				62A2D121167383A8001CC9AE /* CCCopybleLabel.h */,
 				62A2D122167383A8001CC9AE /* CCCopybleLabel.m */,
 			);
@@ -682,6 +693,10 @@
 				62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */,
 				62324C63167C42A50062EF1B /* NSString+Locale.h */,
 				62324C64167C42A60062EF1B /* NSString+Locale.m */,
+				62021337167DB5EB00BFF836 /* NSDate+AdditionalConvenienceConstructor.h */,
+				62021338167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m */,
+				6202133A167DB7CA00BFF836 /* UIColor+Calendar.h */,
+				6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -914,6 +929,9 @@
 				62B53EE1167C64C700394427 /* CCDateResult.m in Sources */,
 				62B53EE4167C67A200394427 /* CCCalendarCalcResult+Number.m in Sources */,
 				62B53EE7167C685100394427 /* CCCalendarCalcResult+Date.m in Sources */,
+				62021336167DB2AB00BFF836 /* ASCCalendarView.m in Sources */,
+				62021339167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m in Sources */,
+				6202133C167DB7CB00BFF836 /* UIColor+Calendar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
