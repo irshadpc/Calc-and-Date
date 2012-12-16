@@ -14,6 +14,7 @@
 @property (weak, nonatomic) id <CCContainerViewDelegate> delegate;
 
 - (void)addBarButtonWithTitle:(NSString *)title buttonIndex:(NSInteger)buttonIndex;
+- (void)addContentView:(UIView *)view;
 - (void)showInView:(UIView *)view animated:(BOOL)animated;
 - (void)dismissContainerViewWithAnimated:(BOOL)animated;
 @end

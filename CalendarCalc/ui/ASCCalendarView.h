@@ -18,6 +18,7 @@
 }
 
 @property (weak, nonatomic) id <ASCCalendarViewDelegate> delegate;
+@property (nonatomic) CGSize calendarButtonSize;
 
 - (void)prevMonth;
 - (void)nextMonth;

@@ -11,6 +11,7 @@
 @interface CCContainerView ()
 @property (strong, nonatomic) UIToolbar *toolbar;
 @property (strong, nonatomic) NSMutableArray *barButonItems;
+@property (strong, nonatomic) NSMutableArray *contentViews;
 
 - (UIBarButtonItem *)cancelButton;
 - (void)onCancel:(UIBarButtonItem *)sender;
@@ -28,6 +29,9 @@
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44.0)];
         [_toolbar setItems:_barButonItems];
         [self addSubview:_toolbar];
+       
+        _contentViews = [[NSMutableArray alloc] init];
+        [self setBackgroundColor:[UIColor blackColor]];
     }
     return self;
 }
@@ -41,6 +45,15 @@
                                                                      action: @selector(onOptionalButton:)];
     [barButtonItem setTag:buttonIndex];
     [self.barButonItems addObject:barButtonItem];
+}
+
+- (void)addContentView:(UIView *)view
+{
+    CGRect newFrame = view.frame;
+    newFrame.origin.y += self.toolbar.frame.size.height;
+    view.frame = newFrame;
+    [self addSubview:view];
+    [self bringSubviewToFront:view];
 }
 
 - (void)showInView:(UIView *)view animated:(BOOL)animated

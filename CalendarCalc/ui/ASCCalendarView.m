@@ -13,17 +13,26 @@
 
 @interface ASCCalendarView ()
 - (void)reloadCalendarView;
+- (NSInteger)firstDay;
+- (NSInteger)lastDay;
+
 - (void)onPressCalendarButton:(UIButton *)sender;
 @end
+
 
 @implementation ASCCalendarView
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    static const CGFloat DefaultSize = 44.0;
+    if ((self = [super initWithFrame:CGRectMake(frame.origin.x,
+                                                frame.origin.y,
+                                                frame.size.width,
+                                                DefaultSize * 7)])) {
         NSDate *date = [NSDate date];
         _year = [date year];
         _month = [date month];
+        _calendarButtonSize = CGSizeMake(DefaultSize, DefaultSize);
     }
     return self;
 }
@@ -31,6 +40,20 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self reloadCalendarView];
+}
+
+- (void)setCalendarButtonSize:(CGSize)calendarButtonSize
+{
+    if (CGSizeEqualToSize(_calendarButtonSize, calendarButtonSize)) {
+        return;
+    }
+    _calendarButtonSize = calendarButtonSize;
+
+    CGRect newFrame = self.frame;
+    newFrame.size.height = _calendarButtonSize.height * 7;
+    self.frame = newFrame;
+
     [self reloadCalendarView];
 }
 
@@ -76,27 +99,23 @@
 
 - (void)reloadCalendarView
 {
-    NSInteger firstDay = 1 - [[NSDate dateWithYear: _year
-                                             month: _month
-                                               day: 1] weekday];
-
-    NSDate *endOfMonth = [NSDate endOfMonthWithYear: _year
-                                              month: _month];
-
-    NSInteger lastDay = [endOfMonth day] + (7 - [endOfMonth weekday]);
-
-
     NSInteger subBaseY = 0;
-    for (NSInteger targetDay = firstDay; targetDay < lastDay; targetDay++) {
+    for (NSInteger targetDay = [self firstDay]; targetDay < [self lastDay]; targetDay++) {
         NSDate *targetDate = [NSDate dateWithYear: _year
                                             month: _month
                                               day: targetDay + 1];
         NSInteger weekday = [targetDate weekday];
 
         UIButton *calendarButton = [[UIButton alloc] init];
+        
         [calendarButton setBackgroundImage: _normalImage
                                   forState: UIControlStateNormal];
-
+        
+        [calendarButton setTitle: [NSString stringWithFormat:@"%d", [targetDate day]]
+                        forState: UIControlStateNormal];
+        
+        [calendarButton setTag:targetDay + 1];
+        
         // color
         if ([targetDate month] != _month){
             [calendarButton setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
@@ -119,9 +138,6 @@
                                    forState: UIControlStateHighlighted];
         
         [calendarButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
-        
-        [calendarButton setTitle: [NSString stringWithFormat:@"%d", [targetDate day]]
-                        forState: UIControlStateNormal];
 
         // position
         if (weekday == 1) {
@@ -129,14 +145,10 @@
         }
 
         static const CGFloat MARGIN = 6.0;
-        static const CGFloat CALENDAR_WIDTH = 44.0;
-        static const CGFloat CALENDAR_HEIGHT = 44.0;
-        [calendarButton setFrame:CGRectMake(MARGIN + (CALENDAR_WIDTH * (weekday - 1)),
-                                            CALENDAR_HEIGHT * (subBaseY - 1),
-                                            CALENDAR_WIDTH,
-                                            CALENDAR_HEIGHT)];
-
-        [calendarButton setTag:targetDay + 1];
+        [calendarButton setFrame:CGRectMake(MARGIN + (self.calendarButtonSize.width * (weekday - 1)),
+                                            self.calendarButtonSize.height * (subBaseY - 1),
+                                            self.calendarButtonSize.width,
+                                            self.calendarButtonSize.height)];
 
         [calendarButton addTarget: self
                            action: @selector(onPressCalendarButton:)
@@ -144,6 +156,21 @@
         
         [self addSubview:calendarButton];
     }
+}
+
+- (NSInteger)firstDay
+{
+   return 1 - [[NSDate dateWithYear: _year
+                              month: _month
+                                day: 1] weekday];
+}
+
+- (NSInteger)lastDay
+{
+    NSDate *endOfMonth = [NSDate endOfMonthWithYear: _year
+                                              month: _month];
+
+    return [endOfMonth day] + (7 - [endOfMonth weekday]);
 }
 
 - (void)onPressCalendarButton:(UIButton *)sender
