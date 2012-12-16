@@ -97,6 +97,7 @@ enum {
         _isDecimal = _decimal.length > 0;
     } else if (_number.integerValue != 0) {
         [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
+        _isMinus = _number.length > 0 ? _isMinus : NO;
     }
 }
 
