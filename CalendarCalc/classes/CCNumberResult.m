@@ -45,20 +45,27 @@ enum {
         return nil;
     }
     
-    NSString *sign = nil;
-    if (_isPlus) {
-       sign = @"";
-    } else {
-        sign = @"-";
+    return [NSDecimalNumber decimalNumberWithString:
+            [[NSNumberFormatter displayNumberFormatter] numberFromString:[self displayResult]].stringValue];
+}
+
+- (NSString *)displayResult
+{
+    NSMutableString *displayResult = [[NSMutableString alloc] init];
+
+    if (!_isPlus) {
+        [displayResult appendString:@"-"];
+    }
+
+    [displayResult appendString:
+     [[NSNumberFormatter displayNumberFormatter] stringFromNumber:[NSDecimalNumber decimalNumberWithString:_number]]];
+
+    if (_isDecimal) {
+        [displayResult appendString:[NSString decimalSeparator]];
+        [displayResult appendString:_decimal];
     }
     
-    if (_isDecimal) {
-        return [NSDecimalNumber decimalNumberWithString:
-                [NSString stringWithFormat: @"%@%@", sign, _number]];
-    } else {
-        return [NSDecimalNumber decimalNumberWithString:
-                [NSString stringWithFormat: @"%@%@%@%@", sign, _number, [NSString decimalSeparator], _decimal]];
-    }
+    return displayResult;
 }
 
 - (void)setResult:(NSDecimalNumber *)number
@@ -106,11 +113,6 @@ enum {
 - (void)inputDecimalPoint
 {
     _isDecimal = YES;
-}
-
-- (NSString *)displayResult
-{
-    return [[NSNumberFormatter displayNumberFormatter] stringFromNumber:[self result]];
 }
 
 - (void)reverse 

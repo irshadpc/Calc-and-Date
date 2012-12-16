@@ -10,5 +10,4 @@
 
 @interface NSDecimalNumber (Convert)
 + (NSDecimalNumber *)reverse:(NSDecimalNumber *)number;
-NSDecimalNumber *DecimalNumber(NSString *const string);
 @end

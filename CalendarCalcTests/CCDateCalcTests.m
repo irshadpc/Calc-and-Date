@@ -16,8 +16,6 @@
   @private
     CCCalendarCalc *_calendarCalc;
 }
-
-- (NSDecimalNumber *)decimal:(NSString *)string;
 @end
 
 @implementation CCDateCalcTests
@@ -29,58 +27,52 @@
 
 - (void)testInputFunction_2012_1_1_Plus_2012_2_1_Equal
 {
-    [_calendarCalc inputDate: [NSDate dateWithYear: 2012
-                                             month: 1
-                                               day: 1]];
-    [_calendarCalc inputFunction: CCPlus];
-    [_calendarCalc inputDate: [NSDate dateWithYear: 2012
-                                             month: 2
-                                               day: 1]];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 1
+                                              day: 1]];
+    [_calendarCalc inputFunction:CCPlus];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 2
+                                              day: 1]];
+    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
     STAssertEqualObjects(@"31", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_2012_2_1_Plus_2012_1_1_Equal
 {
-    [_calendarCalc inputDate: [NSDate dateWithYear: 2012
-                                             month: 2
-                                               day: 1]];
-    [_calendarCalc inputFunction: CCPlus];
-    [_calendarCalc inputDate: [NSDate dateWithYear: 2012
-                                             month: 1
-                                               day: 1]];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 2
+                                              day: 1]];
+    [_calendarCalc inputFunction:CCPlus];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 1
+                                              day: 1]];
+    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
     STAssertEqualObjects(@"31", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_2012_1_1_Plus_31_Equal
 {
-    [_calendarCalc inputDate: [NSDate dateWithYear: 2012
-                                             month: 1
-                                               day: 1]];
-    [_calendarCalc inputFunction: CCPlus];
-    [_calendarCalc inputNumber:DecimalNumber(@"31")];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 1
+                                              day: 1]];
+    [_calendarCalc inputFunction:CCPlus];
+    [_calendarCalc inputInteger:3];
+    [_calendarCalc inputInteger:1];
+    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
     STAssertEqualObjects(@"2012/02/01", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_31_Plus_2012_1_1_Equal
 {
-    [_calendarCalc inputNumber:DecimalNumber(@"31")];
-    [_calendarCalc inputFunction: CCPlus];
-    [_calendarCalc inputDate: [NSDate dateWithYear: 2012
-                                             month: 1
-                                               day: 1]];
-    NSString *const result = [[_calendarCalc inputFunction: CCEqual] displayResult];
+    [_calendarCalc inputInteger:3];
+    [_calendarCalc inputInteger:1];
+    [_calendarCalc inputFunction:CCPlus];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 1
+                                              day: 1]];
+    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
     STAssertEqualObjects(@"2012/02/01", result, @"RESULT: %@", result);
 }
 
-
-
-#pragma mark - Private
-
-- (NSDecimalNumber *)decimal:(NSString *)string
-{
-    return [NSDecimalNumber decimalNumberWithString: string];
-}
 @end

@@ -181,11 +181,8 @@ typedef enum {
 - (CCCalendarCalcResult *)clearResult
 {
     if ([_result numberResult] || [_result dateResult]) {
-        NSLog(@"NUM: %@", [_result numberResult]);
-        NSLog(@"DAT: %@", [_result dateResult]);
-        [_result clear];
+        [_result allClear];
     } else {
-        NSLog(@"AC");
         [_result allClear];
         [_numberCalculator clear];
         [_dateCalculator clear];
