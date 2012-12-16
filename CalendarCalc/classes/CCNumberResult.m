@@ -68,7 +68,7 @@ enum {
         [displayResult appendString:[NSString decimalSeparator]];
         [displayResult appendString:_decimal];
     }
-    
+
     return displayResult;
 }
 

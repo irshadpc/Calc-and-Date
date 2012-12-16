@@ -196,12 +196,9 @@
         [_result setNumberResult:[_numberCalculator reverse]];
     } else if ([_dateCalculator numberResult]) {
         [_result setNumberResult:[_dateCalculator reverse]];
-    } else if ([_result numberResult]) {
-        [_result reverseNumberResult];
     } else {
-        // TODO:abort消す
-        abort();
-    }
+        [_result reverseNumberResult];
+    } 
     return _result;
 }
 

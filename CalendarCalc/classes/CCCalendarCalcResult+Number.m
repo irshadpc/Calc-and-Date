@@ -59,8 +59,9 @@
 
 - (CCCalendarCalcResult *)reverseNumberResult
 {
-    if (_calcType == CCNumber) {
+    if (_calcType != CCDate) {
         [_numberResult reverse];
+        _calcType = CCNumber;
     }
     return self;
 }
