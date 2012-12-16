@@ -28,6 +28,12 @@
     return self;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self reloadCalendarView];
+}
+
 - (void)prevMonth
 {
     _month--;
@@ -52,6 +58,19 @@
     [self reloadCalendarView];
 }
 
+- (void)setImage:(UIImage *)image 
+        forState:(UIControlState)state
+{
+    switch (state) {
+        case UIControlStateNormal:
+            _normalImage = image;
+            break;
+        default:
+            NSLog(@"STATE: %d", state);
+            abort();
+    }
+}
+
 
 #pragma mark - Private
 
@@ -72,9 +91,11 @@
         NSDate *targetDate = [NSDate dateWithYear: _year
                                             month: _month
                                               day: targetDay + 1];
+        NSInteger weekday = [targetDate weekday];
 
         UIButton *calendarButton = [[UIButton alloc] init];
-        NSInteger weekday = [targetDate weekday];
+        [calendarButton setBackgroundImage: _normalImage
+                                  forState: UIControlStateNormal];
 
         // color
         if ([targetDate month] != _month){
@@ -98,7 +119,9 @@
                                    forState: UIControlStateHighlighted];
         
         [calendarButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
-        [calendarButton setSelected:NO];
+        
+        [calendarButton setTitle: [NSString stringWithFormat:@"%d", [targetDate day]]
+                        forState: UIControlStateNormal];
 
         // position
         if (weekday == 1) {
@@ -114,9 +137,6 @@
                                             CALENDAR_HEIGHT)];
 
         [calendarButton setTag:targetDay + 1];
-
-        [calendarButton setTitle: [NSString stringWithFormat:@"%d", [targetDate day]]
-                        forState: UIControlStateNormal];
 
         [calendarButton addTarget: self
                            action: @selector(onPressCalendarButton:)
