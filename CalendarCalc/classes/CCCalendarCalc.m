@@ -97,21 +97,17 @@ typedef enum {
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {
-    switch ([self calcType]) {
-        case CCUnknown:
-            [_numberCalculator setResult:[_result numberResult]];
-            [_dateCalculator setDateRusult:[_result dateResult]];
-            [_dateCalculator setNumberResult:[_result numberResult]];
-            break;
-        case CCNumber:
-            [self numberCalculate];
-            break;
-        case CCDate:
-            [self dateCalculate];
-            break;
-        default:
-            NSLog(@"CALC_TYPE: %d", [self calcType]);
-            abort();
+    if ([self calcType] == CCUnknown || _currentFunction == CCEqual) {
+        [_numberCalculator setResult:[_result numberResult]];
+        [_dateCalculator setDateRusult:[_result dateResult]];
+        [_dateCalculator setNumberResult:[_result numberResult]];
+    } else if ([self calcType] == CCNumber) {
+       [self numberCalculate];
+    } else if ([self calcType] == CCDate) {
+        [self dateCalculate];
+    } else {
+        NSLog(@"CALC_TYPE: %d", [self calcType]);
+        abort();
     }
 
     _currentFunction = function;
@@ -136,6 +132,9 @@ typedef enum {
             [_numberCalculator divide:[_result numberResult]];
             break;
         case CCEqual:
+            [_result clear];
+            [_numberCalculator clear];
+            [_dateCalculator clear];
             return;
         default:
             NSLog(@"FUNCTION: %d", _currentFunction);
