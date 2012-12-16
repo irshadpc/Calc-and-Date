@@ -22,13 +22,15 @@
 
 @implementation ASCCalendarView
 
+static const CGFloat MARGIN = 6.0;
+
 - (id)initWithFrame:(CGRect)frame
 {
     static const CGFloat DefaultSize = 44.0;
     if ((self = [super initWithFrame:CGRectMake(frame.origin.x,
                                                 frame.origin.y,
-                                                frame.size.width,
-                                                DefaultSize * 7)])) {
+                                                (DefaultSize * 7) + MARGIN,
+                                                (DefaultSize * 6) + MARGIN)])) {
         NSDate *date = [NSDate date];
         _year = [date year];
         _month = [date month];
@@ -51,7 +53,8 @@
     _calendarButtonSize = calendarButtonSize;
 
     CGRect newFrame = self.frame;
-    newFrame.size.height = _calendarButtonSize.height * 7;
+    newFrame.size.width = _calendarButtonSize.width * 7;
+    newFrame.size.height = _calendarButtonSize.height * 6;
     self.frame = newFrame;
 
     [self reloadCalendarView];
@@ -144,7 +147,6 @@
             subBaseY++;
         }
 
-        static const CGFloat MARGIN = 6.0;
         [calendarButton setFrame:CGRectMake(MARGIN + (self.calendarButtonSize.width * (weekday - 1)),
                                             self.calendarButtonSize.height * (subBaseY - 1),
                                             self.calendarButtonSize.width,
