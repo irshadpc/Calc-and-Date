@@ -39,4 +39,5 @@ typedef enum {
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function;
+- (CCCalendarCalcResult *)result;
 @end

@@ -38,17 +38,21 @@
 
 - (void)testInputNumber_12
 {
-    [_calendarCalc inputInteger:1];
-    NSString *const result = [[_calendarCalc inputInteger:2] displayResult];
+    [_calendarCalc inputInteger: 1];
+    [_calendarCalc inputInteger: 2];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"12", result, @"RESULT: %@", result);
 }
 
 - (void)testInputNumber_12_Point_3
 {
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputInteger:2];
-    [_calendarCalc inputFunction:CCDecimal];
-    NSString *const result = [[_calendarCalc inputInteger:3] displayResult];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCDecimal];
+    [_calendarCalc inputInteger:  3];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"12.3", result, @"RESULT: %@", result);
 }
 

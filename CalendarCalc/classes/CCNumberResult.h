@@ -14,7 +14,7 @@
   @private
     NSMutableString *_number;
     NSMutableString *_decimal;
-    BOOL _isPlus;
+    BOOL _isMinus;
     BOOL _isDecimal;
 }
 

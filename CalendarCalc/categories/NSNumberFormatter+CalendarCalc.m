@@ -7,6 +7,7 @@
 //
 
 #import "NSNumberFormatter+CalendarCalc.h"
+#import "CCNumberFormat.h"
 
 @implementation NSNumberFormatter (CalendarCalc)
 
@@ -14,6 +15,7 @@
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:MaxDigits];
     return numberFormatter;
 }
 
@@ -21,6 +23,7 @@
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterNoStyle];
+    [numberFormatter setMaximumFractionDigits:MaxDigits];
     return numberFormatter;
 }
 @end

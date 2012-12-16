@@ -34,7 +34,10 @@
     [_calendarCalc inputDate:[NSDate dateWithYear: 2012
                                             month: 2
                                               day: 1]];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputFunction:CCEqual];
+
+    
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"31", result, @"RESULT: %@", result);
 }
 
@@ -47,7 +50,10 @@
     [_calendarCalc inputDate:[NSDate dateWithYear: 2012
                                             month: 1
                                               day: 1]];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputFunction:CCEqual];
+
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"31", result, @"RESULT: %@", result);
 }
 
@@ -56,22 +62,28 @@
     [_calendarCalc inputDate:[NSDate dateWithYear: 2012
                                             month: 1
                                               day: 1]];
-    [_calendarCalc inputFunction:CCPlus];
-    [_calendarCalc inputInteger:3];
-    [_calendarCalc inputInteger:1];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCEqual];
+
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"2012/02/01", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_31_Plus_2012_1_1_Equal
 {
-    [_calendarCalc inputInteger:3];
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputFunction:CCPlus];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCPlus];
     [_calendarCalc inputDate:[NSDate dateWithYear: 2012
                                             month: 1
                                               day: 1]];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputFunction: CCEqual];
+
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"2012/02/01", result, @"RESULT: %@", result);
 }
 

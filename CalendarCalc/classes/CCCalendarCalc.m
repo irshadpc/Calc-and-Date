@@ -87,6 +87,11 @@ typedef enum {
     }
 }
 
+- (CCCalendarCalcResult *)result
+{
+    return _result;
+}
+
 
 #pragma mark - Private
 

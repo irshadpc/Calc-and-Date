@@ -27,7 +27,6 @@ enum {
         _number = [[NSMutableString alloc] init];
         _decimal = [[NSMutableString alloc] init];
         [_number setString:@"0"];
-        _isPlus = YES;
     }
     return self;
 }
@@ -37,6 +36,7 @@ enum {
     [_number setString:@""];
     [_decimal setString:@""];
     _isDecimal = NO;
+    _isMinus = NO;
 }
 
 - (NSDecimalNumber *)result
@@ -53,12 +53,16 @@ enum {
 {
     NSMutableString *displayResult = [[NSMutableString alloc] init];
 
-    if (!_isPlus) {
+    if (_isMinus) {
         [displayResult appendString:@"-"];
     }
 
-    [displayResult appendString:
-     [[NSNumberFormatter displayNumberFormatter] stringFromNumber:[NSDecimalNumber decimalNumberWithString:_number]]];
+    if (_number.length > 0) {
+        [displayResult appendString:
+         [[NSNumberFormatter displayNumberFormatter] stringFromNumber:[NSDecimalNumber decimalNumberWithString:_number]]];
+    } else {
+        [displayResult appendString:[[NSNumberFormatter displayNumberFormatter] stringFromNumber:@0]];
+    }
 
     if (_isDecimal) {
         [displayResult appendString:[NSString decimalSeparator]];
@@ -72,17 +76,17 @@ enum {
 {
     NSArray *const componentsString = [[[NSNumberFormatter plainNumberFormatter] stringFromNumber:number]
                                        componentsSeparatedByString:[NSString decimalSeparator]];
-    if (componentsString.count == DecimalCount) {
-        _isDecimal = YES;
-        [_decimal setString:componentsString[Decimal]];
-    }
+
     [_number setString:componentsString[Number]];
     
-    if ([number isMinus]) {
-        _isPlus = NO;
+    _isMinus = [number isMinus];
+    if (_isMinus) {
         [_number deleteCharactersInRange:NSMakeRange(0, 1)];
-    } else {
-        _isPlus = YES;
+    }
+
+    _isDecimal = componentsString.count == DecimalCount;
+    if (_isDecimal) {
+        [_decimal setString:componentsString[Decimal]];
     }
 }
 
@@ -90,12 +94,9 @@ enum {
 {
     if (_isDecimal) {
         [_decimal deleteCharactersInRange:NSMakeRange(_decimal.length - 1, 1)];
+        _isDecimal = _decimal.length > 0;
     } else if (_number.integerValue != 0) {
         [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
-    }
-   
-    if (_decimal.length == 0) {
-        _isDecimal = NO;
     }
 }
 
@@ -117,7 +118,7 @@ enum {
 
 - (void)reverse 
 {
-    _isPlus = !_isPlus;
+    _isMinus = !_isMinus;
 }
 
 @end

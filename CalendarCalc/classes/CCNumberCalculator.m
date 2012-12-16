@@ -26,7 +26,7 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)plus:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand:rOperand
+    return [self calculateWithOperand: rOperand
                                method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
                                    return [NSDecimalNumber addingByDecimalNumber:l rOperand:r];
                                }];
@@ -35,7 +35,7 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)minus:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand:rOperand
+    return [self calculateWithOperand: rOperand
                                method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
                                    return [NSDecimalNumber subtractingByDecimalNumber:l rOperand:r];
                                }];
@@ -44,7 +44,7 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)multiply:(NSDecimalNumber *)rOperand
 {
-    return [self calculateWithOperand:rOperand
+    return [self calculateWithOperand: rOperand
                                method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
                                    return [NSDecimalNumber multiplyingByDecimalNumber:l rOperand:r];
                                }];

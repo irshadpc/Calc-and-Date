@@ -26,87 +26,126 @@
 
 - (void)testInputFunction_1_Plus_2_Equal
 {
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputFunction:CCPlus];
-    [_calendarCalc inputInteger:2];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_2_Minus_1_Equal
 {
-    [_calendarCalc inputInteger:2];
-    [_calendarCalc inputFunction:CCMinus];
-    [_calendarCalc inputInteger:1];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCMinus];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_2_Multiply_3_Equal
 {
-    [_calendarCalc inputInteger:2];
-    [_calendarCalc inputFunction:CCMultiply];
-    [_calendarCalc inputInteger:3];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCMultiply];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"6", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_6_Divide_2_Equal
 {
-    [_calendarCalc inputInteger:6];
-    [_calendarCalc inputFunction:CCDivide];
-    [_calendarCalc inputInteger:2];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  6];
+    [_calendarCalc inputFunction: CCDivide];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_1_Plus_20_Equal
 {
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputFunction:CCPlus];
-    NSString *const result1 = [[_calendarCalc inputInteger:2] displayResult];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  2];
+
+    NSString *const result1 = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"2", result1, @"RESULT1: %@", result1);
     
-    [_calendarCalc inputInteger:0];
-    NSString *const result2 = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result2 = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"21", result2, @"RESULT2: %@", result2);
 }
 
 - (void)testInputFunction_1_Plus_20_Minus_10_Equal
 {
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputFunction:CCPlus];
-    [_calendarCalc inputInteger:2];
-    [_calendarCalc inputInteger:0];
-    NSString *const result1 = [[_calendarCalc inputFunction:CCMinus] displayResult];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputFunction: CCMinus];
+
+    NSString *const result1 = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"21", result1, @"RESULT1: %@", result1);
     
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputInteger:0];
-    NSString *const result2 = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result2 = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"11", result2, @"RESULT2: %@", result2);
 }
 
 - (void)testInputFunction_3_Plus_Minus_2_Equal
 {
-    [_calendarCalc inputInteger:3];
-    [_calendarCalc inputFunction:CCPlus];
-    [_calendarCalc inputFunction:CCMinus];
-    [_calendarCalc inputInteger:2];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputFunction: CCMinus];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
 }
 
 - (void)testInputFunction_3_Plus_1_Plus_Multiply_4_Equal
 {
-    [_calendarCalc inputInteger:3];
-    [_calendarCalc inputFunction:CCPlus];
-    [_calendarCalc inputInteger:1];
-    [_calendarCalc inputFunction:CCPlus];
-    [_calendarCalc inputFunction:CCMultiply];
-    [_calendarCalc inputInteger:4];
-    NSString *const result = [[_calendarCalc inputFunction:CCEqual] displayResult];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputFunction: CCMultiply];
+    [_calendarCalc inputInteger:  4];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
     STAssertEqualObjects(@"16", result, @"RESULT: %@", result);
+}
+
+- (void)testInputFunction_12_Decimal_01_Plus_4_Equal
+{
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCDecimal];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputInteger:  1];
+
+    NSString *const result1 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"12.01", result1, @"RESULT1: %@", result1);
+
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  4];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result2 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"16.01", result2, @"RESULT: %@", result2);
 }
 
 @end

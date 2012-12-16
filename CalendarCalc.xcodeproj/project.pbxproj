@@ -154,6 +154,7 @@
 
 /* Begin PBXFileReference section */
 		62021330167CBF8D00BFF836 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		62021332167D8D8000BFF836 /* CCNumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCNumberFormat.h; path = classes/CCNumberFormat.h; sourceTree = "<group>"; };
 		621355D716737DA100C93999 /* CalendarCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		621355DB16737DA100C93999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		621355DD16737DA100C93999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -381,6 +382,7 @@
 				62A2D125167384D2001CC9AE /* classes */,
 				621355EA16737DA100C93999 /* CCAppDelegate.h */,
 				621355EB16737DA100C93999 /* CCAppDelegate.m */,
+				62021332167D8D8000BFF836 /* CCNumberFormat.h */,
 				621355E216737DA100C93999 /* Supporting Files */,
 			);
 			path = CalendarCalc;
