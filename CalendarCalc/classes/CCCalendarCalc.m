@@ -148,6 +148,10 @@
         case CCMinus:
             [self dateMinus];
             break;
+        case CCMultiply:
+            break;
+        case CCDivide:
+            break;
         default:
             NSLog(@"FUNCTION: %d", _currentFunction);
             abort();

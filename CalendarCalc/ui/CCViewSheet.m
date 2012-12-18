@@ -11,7 +11,6 @@
 @interface CCViewSheet ()
 @property (strong, nonatomic) UIToolbar *toolbar;
 @property (strong, nonatomic) NSMutableArray *barButonItems;
-@property (strong, nonatomic) NSMutableArray *contentViews;
 
 - (UIBarButtonItem *)cancelButton;
 - (void)onCancel:(UIBarButtonItem *)sender;
@@ -20,8 +19,11 @@
 
 @implementation CCViewSheet
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithContentView:(UIView *)contentView
 {
+    CGRect frame = contentView.frame;
+    frame.origin.y = 0;
+    frame.size.height = contentView.frame.size.height + 44.0;
     if ((self = [super initWithFrame:frame])) {
         _barButonItems = [[NSMutableArray alloc] init];
         [_barButonItems addObject:[self cancelButton]];
@@ -38,9 +40,7 @@
                                                                   frame.size.width,
                                                                   frame.size.height - 44.0)];
         [self addSubview:_containerView];
-       
-        _contentViews = [[NSMutableArray alloc] init];
-        [self setBackgroundColor:[UIColor blackColor]];
+        [_containerView addSubview:contentView];
     }
     return self;
 }
@@ -58,7 +58,6 @@
 
 - (void)showInView:(UIView *)view animated:(BOOL)animated
 {
-
     CGRect hideFrame = self.frame;
     hideFrame.origin.y = view.frame.size.height;
     self.frame = hideFrame;

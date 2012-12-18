@@ -13,8 +13,9 @@
 @interface CCViewSheet : UIView
 
 @property (weak, nonatomic) id <CCViewSheetDelegate> delegate;
-@property (strong, nonatomic) UIView *containerView;
+@property (strong, nonatomic, readonly) UIView *containerView;
 
+- (id)initWithContentView:(UIView *)contentView;
 - (void)addBarButtonWithTitle:(NSString *)title buttonIndex:(NSInteger)buttonIndex;
 - (void)showInView:(UIView *)view animated:(BOOL)animated;
 - (void)dismissContainerViewWithAnimated:(BOOL)animated;

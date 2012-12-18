@@ -144,6 +144,7 @@
 		62B53EE1167C64C700394427 /* CCDateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE0167C64C600394427 /* CCDateResult.m */; };
 		62B53EE4167C67A200394427 /* CCCalendarCalcResult+Number.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */; };
 		62B53EE7167C685100394427 /* CCCalendarCalcResult+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */; };
+		62DAF6161680AF6F00A14D3C /* ASCPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DAF6151680AF6F00A14D3C /* ASCPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,6 +328,8 @@
 		62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalcResult+Number.m"; sourceTree = "<group>"; };
 		62B53EE5167C685000394427 /* CCCalendarCalcResult+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCCalendarCalcResult+Date.h"; sourceTree = "<group>"; };
 		62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalcResult+Date.m"; sourceTree = "<group>"; };
+		62DAF6141680AF6F00A14D3C /* ASCPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCPageView.h; sourceTree = "<group>"; };
+		62DAF6151680AF6F00A14D3C /* ASCPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -641,6 +644,8 @@
 		62A2D12016738377001CC9AE /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				62DAF6141680AF6F00A14D3C /* ASCPageView.h */,
+				62DAF6151680AF6F00A14D3C /* ASCPageView.m */,
 				62021345167DC7DD00BFF836 /* CCViewSheet.h */,
 				62021346167DC7DD00BFF836 /* CCViewSheet.m */,
 				62021334167DB2AB00BFF836 /* ASCCalendarView.h */,
@@ -938,6 +943,7 @@
 				62021339167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m in Sources */,
 				6202133C167DB7CB00BFF836 /* UIColor+Calendar.m in Sources */,
 				62021347167DC7DE00BFF836 /* CCViewSheet.m in Sources */,
+				62DAF6161680AF6F00A14D3C /* ASCPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
