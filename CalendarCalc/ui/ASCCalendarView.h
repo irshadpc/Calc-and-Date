@@ -12,12 +12,12 @@
 
 @interface ASCCalendarView : UIView {
   @private
-    NSInteger _year;
-    NSInteger _month;
     UIImage *_normalImage;
 }
 
 @property (weak, nonatomic) id <ASCCalendarViewDelegate> delegate;
+@property (nonatomic, readonly) NSInteger year;
+@property (nonatomic, readonly) NSInteger month;
 @property (nonatomic) CGSize calendarButtonSize;
 
 - (void)prevMonth;

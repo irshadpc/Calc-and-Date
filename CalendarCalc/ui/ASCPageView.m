@@ -55,23 +55,17 @@ NSUInteger PageSize = 3;
     }
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
-                     withVelocity:(CGPoint)velocity
-              targetContentOffset:(inout CGPoint *)targetContentOffset
+- (void)setPage:(NSUInteger)page animated:(BOOL)animated
 {
-    if (velocity.x <= -1) {
-        targetContentOffset->x = [self prevPointX];
-    } else if (velocity.x >= 1) {
-        targetContentOffset->x = [self nextPointX];
-    } else {
-        NSUInteger page = (scrollView.contentOffset.x + scrollView.frame.size.width / 2) / scrollView.frame.size.width;
-        if (page >= PageSize) {
-            page = PageSize - 1;
-        }
-        targetContentOffset->x = [self offsetWithPage:page];
+    if (page >= PageSize) {
+        page = PageSize - 1;
     }
-    [self.scrollView setContentOffset:CGPointMake(targetContentOffset->x, 0) animated:NO];
+    [self.scrollView setContentOffset: CGPointMake([self offsetWithPage:page], 0)
+                             animated: animated];
 }
+
+
+#pragma mark - Private
 
 - (void)configureView
 {
@@ -82,7 +76,6 @@ NSUInteger PageSize = 3;
     NSUInteger page = 0;
     for (UIView *contentView in self.contentViews) {
         [self.containerViews[page] addSubview:contentView];
-       
         [self.scrollView addSubview:self.containerViews[page]];
         page++;
     }
@@ -123,6 +116,40 @@ NSUInteger PageSize = 3;
                                                     self.frame.origin.y,
                                                     self.frame.size.width,
                                                     self.frame.size.height)];
+}
+
+
+#pragma mark - UIScrollView
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    CGFloat offsetX = 0;
+    if (velocity.x <= -1) {
+        offsetX = [self prevPointX];
+    } else if (velocity.x >= 1) {
+        offsetX = [self nextPointX];
+    } else {
+        NSUInteger page = (scrollView.contentOffset.x + scrollView.frame.size.width / 2) / scrollView.frame.size.width;
+        if (page >= PageSize) {
+            page = PageSize - 1;
+        }
+        offsetX = [self offsetWithPage:page];
+    }
+
+    NSUInteger page = offsetX / self.scrollView.frame.size.width;
+    if (page == 0) {
+        [self.delegate pageViewDidFirstPage:self];
+    } else if (page >= PageSize - 1) {
+        [self.delegate pageViewDidLastPage:self];
+    }
+
+    targetContentOffset->x = offsetX;
+    [self.scrollView setContentOffset:CGPointMake(targetContentOffset->x, 0) animated:NO];
+    if (self.isInfinitePage) {
+        targetContentOffset->x = [self offsetWithPage:PageSize / 2];
+    }
 }
 
 @end

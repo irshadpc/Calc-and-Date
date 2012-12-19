@@ -8,9 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ASCPageViewDelegate;
+
 @interface ASCPageView : UIView <UIScrollViewDelegate>
+
+@property (weak, nonatomic) id <ASCPageViewDelegate> delegate;
 @property (strong, nonatomic) UIView *headerView;
+@property (nonatomic, getter = isInfinitePage) BOOL infinitePage;
 
 - (id)initWithContentView:(UIView *)contentView;
 - (void)addContentView:(UIView *)contentView;
+- (void)setPage:(NSUInteger)page animated:(BOOL)animated;
+@end
+
+@protocol ASCPageViewDelegate <NSObject>
+@optional
+- (void)pageViewDidFirstPage:(ASCPageView *)pageView;
+- (void)pageViewDidLastPage:(ASCPageView *)pageView;
+
 @end

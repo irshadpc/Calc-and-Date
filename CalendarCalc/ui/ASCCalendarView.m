@@ -12,6 +12,9 @@
 #import "NSDate+Component.h"
 
 @interface ASCCalendarView ()
+@property (nonatomic, readwrite) NSInteger year;
+@property (nonatomic, readwrite) NSInteger month;
+
 - (void)reloadCalendarView;
 - (NSInteger)firstDay;
 - (NSInteger)lastDay;
@@ -62,25 +65,33 @@ static const CGFloat MARGIN = 6.0;
 
 - (void)prevMonth
 {
-    _month--;
+    NSDate *date = [NSDate dateWithYear: self.year
+                                  month: self.month - 1
+                                    day: 1];
+    self.year = [date year];
+    self.month = [date month];
     [self reloadCalendarView];
 }
 
 - (void)nextMonth
 {
-    _month++;
+    NSDate *date = [NSDate dateWithYear: self.year
+                                  month: self.month + 1
+                                    day: 1];
+    self.year = [date year];
+    self.month = [date month];
     [self reloadCalendarView];
 }
 
 - (void)reloadCalendarViewWithYear:(NSInteger)year
                              month:(NSInteger)month
 {
-    if (_year == year && _month == month) {
+    if (self.year == year && self.month == month) {
         return;
     }
 
-    _year = year;
-    _month = month;
+    self.year = year;
+    self.month = month;
     [self reloadCalendarView];
 }
 
@@ -104,8 +115,8 @@ static const CGFloat MARGIN = 6.0;
 {
     NSInteger subBaseY = 0;
     for (NSInteger targetDay = [self firstDay]; targetDay < [self lastDay]; targetDay++) {
-        NSDate *targetDate = [NSDate dateWithYear: _year
-                                            month: _month
+        NSDate *targetDate = [NSDate dateWithYear: self.year
+                                            month: self.month
                                               day: targetDay + 1];
         NSInteger weekday = [targetDate weekday];
 
@@ -120,7 +131,7 @@ static const CGFloat MARGIN = 6.0;
         [calendarButton setTag:targetDay + 1];
         
         // color
-        if ([targetDate month] != _month){
+        if ([targetDate month] != self.month){
             [calendarButton setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
         } else if (weekday == 1) {
             [calendarButton setTitleColor:[UIColor sundayColor] forState:UIControlStateNormal];
@@ -162,23 +173,23 @@ static const CGFloat MARGIN = 6.0;
 
 - (NSInteger)firstDay
 {
-   return 1 - [[NSDate dateWithYear: _year
-                              month: _month
+   return 1 - [[NSDate dateWithYear: self.year
+                              month: self.month
                                 day: 1] weekday];
 }
 
 - (NSInteger)lastDay
 {
-    NSDate *endOfMonth = [NSDate endOfMonthWithYear: _year
-                                              month: _month];
+    NSDate *endOfMonth = [NSDate endOfMonthWithYear: self.year
+                                              month: self.month];
 
     return [endOfMonth day] + (7 - [endOfMonth weekday]);
 }
 
 - (void)onPressCalendarButton:(UIButton *)sender
 {
-    [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear: _year
-                                                                    month: _month
+    [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear: self.year
+                                                                    month: self.month
                                                                       day: sender.tag]];
 }
 
