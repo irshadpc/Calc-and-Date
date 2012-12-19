@@ -12,6 +12,7 @@
 
 @interface ASCCalendarControllView : UIView
 @property (weak, nonatomic) id <ASCCalendarControllViewDelegate> delegate;
+@property (strong, nonatomic) NSDate *currentDate;
 @end
 
 @protocol ASCCalendarControllViewDelegate <NSObject>

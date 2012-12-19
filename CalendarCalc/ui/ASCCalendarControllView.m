@@ -31,8 +31,10 @@
         [self addSubview:prevButton];
 
         _dateSelectButton = [[UIButton alloc] initWithFrame:CGRectMake(6 + 44.0 * 2, 0, 44.0 * 3, 44.0)];
-        [_dateSelectButton setImage:[UIImage imageNamed:@"date_select_button"] forState:UIControlStateNormal];
+        [_dateSelectButton setBackgroundImage:[UIImage imageNamed:@"date_select_button"] forState:UIControlStateNormal];
         [_dateSelectButton addTarget:self action:@selector(onDateSelect:) forControlEvents:UIControlEventTouchUpInside];
+        [_dateSelectButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+        [_dateSelectButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
         [self addSubview:_dateSelectButton];
 
         UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(6 + 44.0 * 5, 0, 44.0 * 2, 44.0)];
@@ -41,6 +43,15 @@
         [self addSubview:nextButton];
     }
     return self;
+}
+
+- (void)setCurrentDate:(NSDate *)currentDate
+{
+    if (_currentDate == currentDate) {
+        return;
+    }
+    _currentDate = currentDate;
+    [self setDateSelectButtonTitle:_currentDate];
 }
 
 
@@ -66,6 +77,7 @@
     [self.dateSelectButton setTitle: [NSString stringWithYear: [date year]
                                                        month: [date month]]
                            forState: UIControlStateNormal];
+    self.currentDate = date;
 }
 
 @end

@@ -8,7 +8,14 @@
 
 #import "ASCPageView.h"
 
+typedef enum {
+    Prev,
+    Next,
+    Same,
+} MoveMode;
+
 @interface ASCPageView ()
+@property (nonatomic) MoveMode currentMoveMode;
 @property (strong, nonatomic) NSMutableArray *contentViews;
 @property (strong, nonatomic) NSMutableArray *containerViews;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -60,6 +67,7 @@ NSUInteger PageSize = 3;
     if (page >= PageSize) {
         page = PageSize - 1;
     }
+
     [self.scrollView setContentOffset: CGPointMake([self offsetWithPage:page], 0)
                              animated: animated];
 }
@@ -107,7 +115,10 @@ NSUInteger PageSize = 3;
 
 - (CGFloat)offsetWithPage:(NSUInteger)page
 {
-    return page * self.scrollView.frame.size.width;
+    if (self.containerViews.count < page) {
+        return 0;
+    }
+    return [self.containerViews[page] frame].origin.x;
 }
 
 - (UIView *)containerViewWithPage:(NSUInteger)page
@@ -139,17 +150,30 @@ NSUInteger PageSize = 3;
     }
 
     NSUInteger page = offsetX / self.scrollView.frame.size.width;
-    if (page == 0) {
-        [self.delegate pageViewDidFirstPage:self];
-    } else if (page >= PageSize - 1) {
-        [self.delegate pageViewDidLastPage:self];
-    }
 
-    targetContentOffset->x = offsetX;
-    [self.scrollView setContentOffset:CGPointMake(targetContentOffset->x, 0) animated:NO];
-    if (self.isInfinitePage) {
-        targetContentOffset->x = [self offsetWithPage:PageSize / 2];
+    [UIView animateWithDuration:0.1 animations:^{
+        targetContentOffset->x = offsetX;
+        [self.scrollView setContentOffset:CGPointMake(targetContentOffset->x, 0) animated:NO];
+    }];
+    
+    if (page == 0) {
+        self.currentMoveMode = Prev;
+    } else if (page >= PageSize - 1) {
+        self.currentMoveMode = Next;
+    } else {
+        self.currentMoveMode = Same;
     }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    dispatch_async(dispatch_get_current_queue(), ^{
+        if (self.currentMoveMode == Prev) {
+            [self.delegate pageViewDidFirstPage:self];
+        } else if (self.currentMoveMode == Next) {
+            [self.delegate pageViewDidLastPage:self];
+        }
+    });
 }
 
 @end
