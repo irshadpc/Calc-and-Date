@@ -10,10 +10,7 @@
 
 @protocol ASCCalendarViewDelegate;
 
-@interface ASCCalendarView : UIView {
-  @private
-    UIImage *_normalImage;
-}
+@interface ASCCalendarView : UIView
 
 @property (weak, nonatomic) id <ASCCalendarViewDelegate> delegate;
 @property (nonatomic, readonly) NSInteger year;
@@ -24,7 +21,6 @@
 - (void)nextMonth;
 - (void)reloadCalendarViewWithYear:(NSInteger)year month:(NSInteger)month;
 
-- (void)setImage:(UIImage *)image forState:(UIControlState)state;
 @end
 
 @protocol ASCCalendarViewDelegate <NSObject>

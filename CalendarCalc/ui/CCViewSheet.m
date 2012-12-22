@@ -30,7 +30,7 @@
 
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0,
                                                                0,
-                                                               frame.size.width,
+                                                               [UIScreen mainScreen].bounds.size.width,
                                                                44.0)];
         [_toolbar setItems:_barButonItems];
         [self addSubview:_toolbar];

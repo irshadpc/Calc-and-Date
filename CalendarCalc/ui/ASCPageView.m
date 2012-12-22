@@ -45,6 +45,7 @@ NSUInteger PageSize = 3;
 
         _scrollView = [[UIScrollView alloc] initWithFrame:frame];
         _scrollView.delegate = self;
+        _scrollView.showsHorizontalScrollIndicator = NO;
         [self addSubview:_scrollView];
     }
     return self;
@@ -167,11 +168,13 @@ NSUInteger PageSize = 3;
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (self.currentMoveMode == Prev) {
-            [self.delegate pageViewDidFirstPage:self];
-        } else if (self.currentMoveMode == Next) {
-            [self.delegate pageViewDidLastPage:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @autoreleasepool {
+            if (self.currentMoveMode == Prev) {
+                [self.delegate pageViewDidPrevPage:self];
+            } else if (self.currentMoveMode == Next) {
+                [self.delegate pageViewDidNextPage:self];
+            }
         }
     });
 }

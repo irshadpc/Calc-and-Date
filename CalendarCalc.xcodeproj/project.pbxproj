@@ -28,6 +28,9 @@
 		62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */; };
 		62324C65167C42A70062EF1B /* NSString+Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C64167C42A60062EF1B /* NSString+Locale.m */; };
 		62324C6E167C4D120062EF1B /* NSDateFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */; };
+		62A144CA16859BE3001E2843 /* key_click.aif in Resources */ = {isa = PBXBuildFile; fileRef = 62A144C916859BE3001E2843 /* key_click.aif */; };
+		62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144CD1685F4BD001E2843 /* NSArray+safe.m */; };
+		62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D01685F559001E2843 /* ASCCalendarButton.m */; };
 		62A2D06C16738023001CC9AE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05B16738023001CC9AE /* Icon.png */; };
 		62A2D06D16738023001CC9AE /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05C16738023001CC9AE /* Default~iphone.png */; };
 		62A2D06E16738023001CC9AE /* display~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05D16738023001CC9AE /* display~iphone.png */; };
@@ -196,6 +199,11 @@
 		62324C64167C42A60062EF1B /* NSString+Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Locale.m"; sourceTree = "<group>"; };
 		62324C6C167C4D100062EF1B /* NSDateFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
+		62A144C916859BE3001E2843 /* key_click.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = key_click.aif; sourceTree = "<group>"; };
+		62A144CC1685F4BD001E2843 /* NSArray+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+safe.h"; sourceTree = "<group>"; };
+		62A144CD1685F4BD001E2843 /* NSArray+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+safe.m"; sourceTree = "<group>"; };
+		62A144CF1685F559001E2843 /* ASCCalendarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCCalendarButton.h; sourceTree = "<group>"; };
+		62A144D01685F559001E2843 /* ASCCalendarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCCalendarButton.m; sourceTree = "<group>"; };
 		62A2D05B16738023001CC9AE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		62A2D05C16738023001CC9AE /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		62A2D05D16738023001CC9AE /* display~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "display~iphone.png"; sourceTree = "<group>"; };
@@ -479,6 +487,7 @@
 		62A2D05316737FBC001CC9AE /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				62A144C916859BE3001E2843 /* key_click.aif */,
 				62A2D05416737FC4001CC9AE /* images */,
 			);
 			name = resources;
@@ -655,6 +664,8 @@
 			children = (
 				62021334167DB2AB00BFF836 /* ASCCalendarView.h */,
 				62021335167DB2AB00BFF836 /* ASCCalendarView.m */,
+				62A144CF1685F559001E2843 /* ASCCalendarButton.h */,
+				62A144D01685F559001E2843 /* ASCCalendarButton.m */,
 				62F4D92C1681F381001FF7FA /* ASCCalendarControllView.h */,
 				62F4D92D1681F381001FF7FA /* ASCCalendarControllView.m */,
 				62DAF6141680AF6F00A14D3C /* ASCPageView.h */,
@@ -694,6 +705,8 @@
 		62A2D14116738CF5001CC9AE /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				62A144CC1685F4BD001E2843 /* NSArray+safe.h */,
+				62A144CD1685F4BD001E2843 /* NSArray+safe.m */,
 				62A2D14216738D31001CC9AE /* NSDecimalNumber+Calc.h */,
 				62A2D14316738D31001CC9AE /* NSDecimalNumber+Calc.m */,
 				62A2D1511673A2E2001CC9AE /* NSDecimalNumber+Convert.h */,
@@ -897,6 +910,7 @@
 				62A2D11C167380E8001CC9AE /* switch_button_off@2x~ipad.png in Resources */,
 				62A2D11D167380E8001CC9AE /* switch_button_on@2x~ipad.png in Resources */,
 				62F4D9271681E9C9001FF7FA /* Localizable.strings in Resources */,
+				62A144CA16859BE3001E2843 /* key_click.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +974,8 @@
 				62DAF6161680AF6F00A14D3C /* ASCPageView.m in Sources */,
 				62F4D92B1681EA6F001FF7FA /* NSString+Date.m in Sources */,
 				62F4D92E1681F382001FF7FA /* ASCCalendarControllView.m in Sources */,
+				62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */,
+				62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

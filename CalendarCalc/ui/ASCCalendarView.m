@@ -7,7 +7,8 @@
 //
 
 #import "ASCCalendarView.h"
-#import "UIColor+Calendar.h"
+#import "ASCCalendarButton.h"
+#import "NSArray+safe.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 
@@ -16,7 +17,8 @@
 @property (nonatomic, readwrite) NSInteger month;
 
 - (void)reloadCalendarView;
-- (void)onPressCalendarButton:(UIButton *)sender;
+- (void)onPressCalendarButton:(ASCCalendarButton *)sender;
+- (UIImage *)calendarImage;
 @end
 
 
@@ -77,6 +79,7 @@ static const CGFloat MARGIN = 6.0;
                                     day: 1];
     self.year = [date year];
     self.month = [date month];
+
     [self reloadCalendarView];
 }
 
@@ -92,27 +95,11 @@ static const CGFloat MARGIN = 6.0;
     [self reloadCalendarView];
 }
 
-- (void)setImage:(UIImage *)image 
-        forState:(UIControlState)state
-{
-    switch (state) {
-        case UIControlStateNormal:
-            _normalImage = image;
-            break;
-        default:
-            NSLog(@"STATE: %d", state);
-            abort();
-    }
-}
-
 
 #pragma mark - Private
 
 - (void)reloadCalendarView
 {
-    for (UIView *view in self.subviews) {
-        [view removeFromSuperview];
-    }
     NSInteger subBaseY = 0;
     NSDate *startOfMonth = [NSDate dateWithYear: self.year
                                           month: self.month
@@ -128,45 +115,34 @@ static const CGFloat MARGIN = 6.0;
                                            month: self.month
                                              day: firstDay] day];
     NSInteger endOfMonthDay = [endOfMonth day];
+    NSInteger calendarIndex = 1;
     for (NSInteger targetDay = firstDay; targetDay < lastDay; targetDay++) {
         if (targetDay == 0 || targetDay == endOfMonthDay) {
             dayOfMonth = 1;
         }
         
-        UIButton *calendarButton = [[UIButton alloc] init];
-        
-        [calendarButton setBackgroundImage: _normalImage
-                                  forState: UIControlStateNormal];
-        
-        [calendarButton setTitle: [NSString stringWithFormat:@"%d", dayOfMonth]
-                        forState: UIControlStateNormal];
-        
-        [calendarButton setTag:targetDay + 1];
-        
-        // color
-        if (targetDay < 0 || targetDay >= endOfMonthDay) {
-            [calendarButton setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
-        } else if (weekday == 1) {
-            [calendarButton setTitleColor:[UIColor sundayColor] forState:UIControlStateNormal];
-        } else if (weekday == 7) {
-            [calendarButton setTitleColor:[UIColor saturdayColor] forState:UIControlStateNormal];
-        } else {
-            [calendarButton setTitleColor:[UIColor usualdayColor] forState:UIControlStateNormal];
+        ASCCalendarButton *calendarButton = (id)[self viewWithTag:calendarIndex];
+        if (!calendarButton) {
+            calendarButton = [[ASCCalendarButton alloc] init];
+            [calendarButton setImage:[self calendarImage] forState:UIControlStateNormal];
+
+            [self addSubview:calendarButton];
+
+            [calendarButton addTarget: self
+                               action: @selector(onPressCalendarButton:)
+                     forControlEvents: UIControlEventTouchUpInside];
         }
-        [calendarButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 
-        // font
-        [calendarButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.]];
+        [calendarButton setDayOfCalendar:targetDay + 1];
+        [calendarButton setYear:self.year];
+        [calendarButton setMonth:self.month];
+        [calendarButton setDayOfMonth:dayOfMonth];
+        if (targetDay < 0 || targetDay >= endOfMonthDay) {
+            [calendarButton setWeekday:0];
+        } else {
+            [calendarButton setWeekday:weekday];
+        }
 
-        [calendarButton setTitleShadowColor: [UIColor whiteColor]
-                                   forState: UIControlStateNormal];
-
-        [calendarButton setTitleShadowColor: [UIColor blackColor]
-                                   forState: UIControlStateHighlighted];
-        
-        [calendarButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
-
-        // position
         if (weekday == 1) {
             subBaseY++;
         }
@@ -175,27 +151,39 @@ static const CGFloat MARGIN = 6.0;
                                             self.calendarButtonSize.height * (subBaseY - 1),
                                             self.calendarButtonSize.width,
                                             self.calendarButtonSize.height)];
-
-        [calendarButton addTarget: self
-                           action: @selector(onPressCalendarButton:)
-                 forControlEvents: UIControlEventTouchUpInside];
         
-        [self addSubview:calendarButton];
-
+        [calendarButton setTag:calendarIndex];
+        
         weekday++;
         if (weekday > 7) {
             weekday = 1;
         }
         
         dayOfMonth++;
+        calendarIndex++;
+    }
+    
+    ASCCalendarButton *restButton = (id)[self viewWithTag:calendarIndex];
+    while (restButton) {
+        calendarIndex++;
+        [restButton removeFromSuperview];
+        restButton = (id)[self viewWithTag:calendarIndex];
     }
 }
 
-- (void)onPressCalendarButton:(UIButton *)sender
+- (void)onPressCalendarButton:(ASCCalendarButton *)sender
 {
-    [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear: self.year
-                                                                    month: self.month
-                                                                      day: sender.tag]];
+    [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear: sender.year
+                                                                    month: sender.month
+                                                                      day: sender.dayOfCalendar]];
 }
 
+- (UIImage *)calendarImage
+{
+    static UIImage *image = nil;
+    if (!image) {
+        image = [UIImage imageNamed:@"calendar_day"];
+    }
+    return image;
+}
 @end

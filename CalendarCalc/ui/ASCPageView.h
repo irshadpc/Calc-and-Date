@@ -23,7 +23,7 @@
 
 @protocol ASCPageViewDelegate <NSObject>
 @optional
-- (void)pageViewDidFirstPage:(ASCPageView *)pageView;
-- (void)pageViewDidLastPage:(ASCPageView *)pageView;
+- (void)pageViewDidPrevPage:(ASCPageView *)pageView;
+- (void)pageViewDidNextPage:(ASCPageView *)pageView;
 
 @end

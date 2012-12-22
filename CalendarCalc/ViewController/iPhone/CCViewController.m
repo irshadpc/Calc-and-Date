@@ -41,7 +41,6 @@
 - (void)nextMonth;
 
 - (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
-- (UIImage *)calendarImage;
 @end
 
 @implementation CCViewController
@@ -58,16 +57,18 @@
         [_player setVolume: 0.5];
         [_player prepareToPlay];
 
-        NSInteger currentYear = [[NSDate date] year];
-        NSInteger currentMonth = [[NSDate date] month];
+        NSDate *date = [NSDate date];
+        NSInteger currentYear = [date year];
+        NSInteger currentMonth = [date month];
         _calendarViews = [[NSMutableArray alloc] init];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [_calendarViews addObject:[self calendarViewWithYear:currentYear month:currentMonth - 1]];
             [_calendarViews addObject:[self calendarViewWithYear:currentYear month:currentMonth]];
             [_calendarViews addObject:[self calendarViewWithYear:currentYear month:currentMonth + 1]];
         });
        
         _calendarControllView = [[ASCCalendarControllView alloc] initWithFrame:CGRectZero];
+        [_calendarControllView setCurrentDate:date];
         [_calendarControllView setDelegate:self];
     }
     return self;
@@ -153,20 +154,11 @@
 - (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month
 {
     ASCCalendarView *calendarView = [[ASCCalendarView alloc] initWithFrame:CGRectZero];
-    [calendarView setImage:[self calendarImage] forState:UIControlStateNormal];
+
     [calendarView setDelegate:self];
     [calendarView reloadCalendarViewWithYear:year month:month];
    
     return calendarView;
-}
-
-- (UIImage *)calendarImage
-{
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"calendar_day"];
-    }
-    return image;
 }
 
 
@@ -209,28 +201,27 @@
 
 #pragma mark - ASCPageView
 
-- (void)pageViewDidFirstPage:(ASCPageView *)pageView
+- (void)pageViewDidPrevPage:(ASCPageView *)pageView
 {
     [self.calendarViews[1] prevMonth];
-    [self.calendarViews[2] prevMonth];
+    [self.calendarControllView setCurrentDate:[NSDate dateWithYear: [self.calendarViews[1] year]
+                                                             month: [self.calendarViews[1] month]
+                                                               day: 1]];
     [pageView setPage:1 animated:NO];
     [self.calendarViews[0] prevMonth];
-
-    [self.calendarControllView setCurrentDate:[NSDate dateWithYear: [self.calendarViews[1] year]
-                                                             month: [self.calendarViews[1] month]
-                                                               day: 1]];
+    [self.calendarViews[2] prevMonth];
 }
 
-- (void)pageViewDidLastPage:(ASCPageView *)pageView
+- (void)pageViewDidNextPage:(ASCPageView *)pageView
 {
     [self.calendarViews[1] nextMonth];
-    [self.calendarViews[0] nextMonth];
-    [pageView setPage:1 animated:NO];
-    [self.calendarViews[2] nextMonth];
-
     [self.calendarControllView setCurrentDate:[NSDate dateWithYear: [self.calendarViews[1] year]
                                                              month: [self.calendarViews[1] month]
                                                                day: 1]];
+    [pageView setPage:1 animated:NO];
+    
+    [self.calendarViews[2] nextMonth];
+    [self.calendarViews[0] nextMonth];
 }
 
 
