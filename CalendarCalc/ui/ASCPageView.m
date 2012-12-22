@@ -23,13 +23,13 @@ typedef enum {
 - (void)configureView;
 - (CGFloat)prevPointX;
 - (CGFloat)nextPointX;
-- (CGFloat)offsetWithPage:(NSUInteger)page;
-- (UIView *)containerViewWithPage:(NSUInteger)page;
+- (CGFloat)offsetWithPage:(NSInteger)page;
+- (UIView *)containerViewWithPage:(NSInteger)page;
 @end
 
 @implementation ASCPageView
 
-NSUInteger PageSize = 3;
+static const NSUInteger PageSize = 3;
 
 - (id)initWithContentView:(UIView *)contentView
 {
@@ -66,10 +66,12 @@ NSUInteger PageSize = 3;
 - (void)setPage:(NSUInteger)page animated:(BOOL)animated
 {
     if (page >= PageSize) {
-        page = PageSize - 1;
+        _currentPage = PageSize - 1;
+    } else {
+        _currentPage = page;
     }
 
-    [self.scrollView setContentOffset: CGPointMake([self offsetWithPage:page], 0)
+    [self.scrollView setContentOffset: CGPointMake([self offsetWithPage:_currentPage], 0)
                              animated: animated];
 }
 
@@ -98,23 +100,23 @@ NSUInteger PageSize = 3;
 
 - (CGFloat)prevPointX
 {
-    NSInteger page = (self.scrollView.contentOffset.x / self.scrollView.frame.size.width);
-    if (page < 0) {
-        page = 0;
+    _currentPage--;
+    if (_currentPage < 0) {
+        _currentPage = 0;
     }
-    return [self offsetWithPage:page];
+    return [self offsetWithPage:_currentPage];
 }
 
 - (CGFloat)nextPointX
 {
-    NSUInteger page = (self.scrollView.contentOffset.x / self.scrollView.frame.size.width) + 1;
-    if (page >= PageSize) {
-        page = PageSize - 1;
+    _currentPage++;
+    if (_currentPage >= PageSize) {
+        _currentPage = PageSize - 1;
     }
-    return [self offsetWithPage:page];
+    return [self offsetWithPage:_currentPage];
 }
 
-- (CGFloat)offsetWithPage:(NSUInteger)page
+- (CGFloat)offsetWithPage:(NSInteger)page
 {
     if (self.containerViews.count < page) {
         return 0;
@@ -122,7 +124,7 @@ NSUInteger PageSize = 3;
     return [self.containerViews[page] frame].origin.x;
 }
 
-- (UIView *)containerViewWithPage:(NSUInteger)page
+- (UIView *)containerViewWithPage:(NSInteger)page
 {
     return [[UIView alloc] initWithFrame:CGRectMake(self.frame.origin.x + (self.frame.size.width * page),
                                                     self.frame.origin.y,
@@ -138,12 +140,12 @@ NSUInteger PageSize = 3;
               targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     CGFloat offsetX = 0;
-    if (velocity.x <= -1) {
+    if (velocity.x < 0) {
         offsetX = [self prevPointX];
-    } else if (velocity.x >= 1) {
+    } else if (velocity.x > 0) {
         offsetX = [self nextPointX];
     } else {
-        NSUInteger page = (scrollView.contentOffset.x + scrollView.frame.size.width / 2) / scrollView.frame.size.width;
+        NSInteger page = (scrollView.contentOffset.x + scrollView.frame.size.width / 2) / scrollView.frame.size.width;
         if (page >= PageSize) {
             page = PageSize - 1;
         }

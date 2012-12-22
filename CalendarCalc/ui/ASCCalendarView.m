@@ -113,7 +113,7 @@ static const CGFloat MARGIN = 6.0;
     NSInteger weekday = 1;
     NSInteger dayOfMonth = [[NSDate dateWithYear: self.year
                                            month: self.month
-                                             day: firstDay] day];
+                                             day: firstDay + 1] day];
     NSInteger endOfMonthDay = [endOfMonth day];
     NSInteger calendarIndex = 1;
     for (NSInteger targetDay = firstDay; targetDay < lastDay; targetDay++) {

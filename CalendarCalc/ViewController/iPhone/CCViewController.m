@@ -105,7 +105,6 @@
     ASCPageView *pageView = [[ASCPageView alloc] initWithContentView:self.calendarViews[0]];
     [pageView addContentView:self.calendarViews[1]];
     [pageView addContentView:self.calendarViews[2]];
-    [pageView setInfinitePage:YES];
     [pageView setDelegate:self];
     [pageView setPage:1 animated:NO];
     CGRect pageViewFrame = pageView.frame;
