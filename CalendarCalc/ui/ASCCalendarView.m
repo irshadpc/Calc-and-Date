@@ -7,6 +7,7 @@
 //
 
 #import "ASCCalendarView.h"
+#import "ASCCalendarConstant.h"
 #import "ASCCalendarButton.h"
 #import "NSArray+safe.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
@@ -24,15 +25,13 @@
 
 @implementation ASCCalendarView
 
-static const CGFloat MARGIN = 6.0;
-
 - (id)initWithFrame:(CGRect)frame
 {
     static const CGFloat DefaultSize = 44.0;
     if ((self = [super initWithFrame:CGRectMake(frame.origin.x,
                                                 frame.origin.y,
-                                                (DefaultSize * 7) + MARGIN,
-                                                (DefaultSize * 6) + MARGIN)])) {
+                                                (DefaultSize * 7) + ASCCalendarMargin,
+                                                (DefaultSize * 6) + ASCCalendarMargin)])) {
         NSDate *date = [NSDate date];
         _year = [date year];
         _month = [date month];
@@ -147,7 +146,7 @@ static const CGFloat MARGIN = 6.0;
             subBaseY++;
         }
 
-        [calendarButton setFrame:CGRectMake(MARGIN + (self.calendarButtonSize.width * (weekday - 1)),
+        [calendarButton setFrame:CGRectMake(ASCCalendarMargin + (self.calendarButtonSize.width * (weekday - 1)),
                                             self.calendarButtonSize.height * (subBaseY - 1),
                                             self.calendarButtonSize.width,
                                             self.calendarButtonSize.height)];
@@ -173,9 +172,9 @@ static const CGFloat MARGIN = 6.0;
 
 - (void)onPressCalendarButton:(ASCCalendarButton *)sender
 {
-    [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear: sender.year
-                                                                    month: sender.month
-                                                                      day: sender.dayOfCalendar]];
+    [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear:sender.year
+                                                                    month:sender.month
+                                                                      day:sender.dayOfCalendar]];
 }
 
 - (UIImage *)calendarImage

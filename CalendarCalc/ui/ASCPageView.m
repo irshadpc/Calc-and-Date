@@ -16,8 +16,8 @@ typedef enum {
 
 @interface ASCPageView ()
 @property (nonatomic) MoveMode currentMoveMode;
-@property (strong, nonatomic) NSMutableArray *contentViews;
-@property (strong, nonatomic) NSMutableArray *containerViews;
+@property (strong, nonatomic) NSArray *contentViews;
+@property (strong, nonatomic) NSArray *containerViews;
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 - (void)configureView;
@@ -32,16 +32,16 @@ typedef enum {
 static const NSUInteger PageSize = 3;
 
 - (id)initWithContentView:(UIView *)contentView
+                 prevPage:(UIView *)prevView
+                 nextPage:(UIView *)nextView
 {
     CGRect frame = contentView.frame;
     if ((self = [super initWithFrame:frame])) {
-        _containerViews = [[NSMutableArray alloc] initWithCapacity:PageSize];
-        for (NSUInteger page = 0; page < PageSize; page++) {
-            [_containerViews addObject:[self containerViewWithPage:page]];
-        }
-
-        _contentViews = [[NSMutableArray alloc] init];
-        [_contentViews addObject:contentView];
+        _containerViews = @[[self containerViewWithPage:0],
+                            [self containerViewWithPage:1],
+                            [self containerViewWithPage:2]];
+       
+        _contentViews = @[prevView, contentView, nextView];
 
         _scrollView = [[UIScrollView alloc] initWithFrame:frame];
         _scrollView.delegate = self;
@@ -49,18 +49,6 @@ static const NSUInteger PageSize = 3;
         [self addSubview:_scrollView];
     }
     return self;
-}
-
-- (void)addContentView:(UIView *)contentView 
-{
-    if ([self.contentViews containsObject:contentView]) {
-        return;
-    }
-
-    [self.contentViews addObject:contentView];
-    if (self.contentViews.count <= PageSize) {
-        [self configureView];
-    }
 }
 
 - (void)setPage:(NSUInteger)page animated:(BOOL)animated
@@ -71,8 +59,8 @@ static const NSUInteger PageSize = 3;
         _currentPage = page;
     }
 
-    [self.scrollView setContentOffset: CGPointMake([self offsetWithPage:_currentPage], 0)
-                             animated: animated];
+    [self.scrollView setContentOffset:CGPointMake([self offsetWithPage:_currentPage], 0)
+                             animated:animated];
 }
 
 

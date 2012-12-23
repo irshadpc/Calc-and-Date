@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @protocol ASCCalendarControllViewDelegate;
+@class ASCCalendarView;
 
 @interface ASCCalendarControllView : UIView
 @property (weak, nonatomic) id <ASCCalendarControllViewDelegate> delegate;
 @property (strong, nonatomic) NSDate *currentDate;
+
+- (id)initWithCalendarView:(ASCCalendarView *)calendarView;
 @end
 
 @protocol ASCCalendarControllViewDelegate <NSObject>

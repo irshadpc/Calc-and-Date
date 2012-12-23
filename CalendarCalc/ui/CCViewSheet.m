@@ -19,6 +19,14 @@
 
 @implementation CCViewSheet
 
+- (id)initWithContentViewController:(UIViewController *)contentViewController
+{
+    if ((self = [self initWithContentView:contentViewController.view])) {
+        _contentController = contentViewController;
+    }
+    return self;
+}
+
 - (id)initWithContentView:(UIView *)contentView
 {
     CGRect frame = contentView.frame;

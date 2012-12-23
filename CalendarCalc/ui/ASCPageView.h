@@ -17,8 +17,7 @@
 
 @property (weak, nonatomic) id <ASCPageViewDelegate> delegate;
 
-- (id)initWithContentView:(UIView *)contentView;
-- (void)addContentView:(UIView *)contentView;
+- (id)initWithContentView:(UIView *)contentView prevPage:(UIView *)prevView nextPage:(UIView *)nextView;
 - (void)setPage:(NSUInteger)page animated:(BOOL)animated;
 @end
 
