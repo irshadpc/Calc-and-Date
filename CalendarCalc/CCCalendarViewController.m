@@ -22,10 +22,9 @@
 
 @implementation CCCalendarViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if ((self = [super init])) {
         NSDate *date = [NSDate date];
         NSInteger year = [date year];
         NSInteger month = [date month];
@@ -40,6 +39,18 @@
                                                     nextPage:_calendarViews[2]];
         [_pageView setDelegate:self];
         [_pageView setPage:1 animated:NO];
+
+        self.view.frame = CGRectMake(0,
+                                     0,
+                                     _pageView.frame.size.width,
+                                     _pageView.frame.size.height + _calendarControllView.frame.size.height);
+        _pageView.frame = CGRectMake(0,
+                                     _calendarControllView.frame.size.height,
+                                     _pageView.frame.size.width,
+                                     _pageView.frame.size.height);
+
+        [self.view addSubview:_calendarControllView];
+        [self.view addSubview:_pageView];
     }
     return self;
 }

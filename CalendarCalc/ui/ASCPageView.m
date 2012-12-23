@@ -47,6 +47,8 @@ static const NSUInteger PageSize = 3;
         _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
         [self addSubview:_scrollView];
+
+        [self configureView];
     }
     return self;
 }
@@ -62,7 +64,6 @@ static const NSUInteger PageSize = 3;
     [self.scrollView setContentOffset:CGPointMake([self offsetWithPage:_currentPage], 0)
                              animated:animated];
 }
-
 
 #pragma mark - Private
 

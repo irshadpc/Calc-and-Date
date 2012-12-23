@@ -53,6 +53,27 @@
     return self;
 }
 
+- (void)setContentController:(UIViewController *)contentController
+{
+    if (_contentController == contentController) {
+        return;
+    }
+    _contentController = contentController;
+    for (UIView *view in self.containerView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.containerView addSubview:contentController.view];
+    self.containerView.frame = CGRectMake(0,
+                                          44.0, 
+                                          contentController.view.frame.size.width,
+                                          contentController.view.frame.size.height - 44.0);
+   self.frame = CGRectMake(0,
+                           0,
+                           self.containerView.frame.size.width,
+                           self.containerView.frame.size.height + 44.0);
+    NSLog(@"SHEET: %@", contentController.view);
+}
+
 - (void)addBarButtonWithTitle:(NSString *)title
                   buttonIndex:(NSInteger)buttonIndex
 {

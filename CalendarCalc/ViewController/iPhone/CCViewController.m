@@ -53,7 +53,8 @@
         _calendarCalc = [[CCCalendarCalc alloc] init];
         dispatch_async(dispatch_get_main_queue(), ^{
             _calendarViewController = [[CCCalendarViewController alloc] init];
-            _viewSheet = [[CCViewSheet alloc] init];
+            _viewSheet = [[CCViewSheet alloc] initWithContentViewController:_calendarViewController];
+            [_viewSheet setDelegate:self];
         });
     }
     return self;
@@ -89,9 +90,9 @@
 {
     if (!self.calendarViewController) {
         self.calendarViewController = [[CCCalendarViewController alloc] init];
+        [self.viewSheet setContentController:self.calendarViewController];
     }
 
-    [self.viewSheet setContentController:self.calendarViewController];
     [self.viewSheet showInView:self.view animated:YES];
 }
 
