@@ -11,11 +11,12 @@
 #import "CCCalendarCalc.h"
 #import "CCCalendarCalcResult.h"
 #import "CCViewSheet.h"
-#import "NSDate+AdditionalConvenienceConstructor.h"
+#import "CCDateSelect.h"
 #import "NSDate+Component.h"
 #import "NSString+Date.h"
+#import "NSString+Locale.h"
 
-@interface CCViewController () <CCViewSheetDelegate>
+@interface CCViewController () <CCDateSelect, CCViewSheetDelegate>
 
 // properties
 @property (strong, nonatomic) CCCalendarViewController *calendarViewController;
@@ -51,11 +52,6 @@
         [_player prepareToPlay];
 
         _calendarCalc = [[CCCalendarCalc alloc] init];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _calendarViewController = [[CCCalendarViewController alloc] init];
-            _viewSheet = [[CCViewSheet alloc] initWithContentViewController:_calendarViewController];
-            [_viewSheet setDelegate:self];
-        });
     }
     return self;
 }
@@ -65,9 +61,11 @@
     [super viewDidLoad];
 
     NSDate *date = [NSDate date];
-    [self.dateButton setTitle:[NSString stringWithYear:[date year]
-                                                 month:[date month]]
+    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];
+    
+    [self.decimalButton setTitle:[NSString decimalSeparator]
+                        forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,9 +88,10 @@
 {
     if (!self.calendarViewController) {
         self.calendarViewController = [[CCCalendarViewController alloc] init];
-        [self.viewSheet setContentController:self.calendarViewController];
+        self.calendarViewController.delegate = self;
+        self.viewSheet = [[CCViewSheet alloc] initWithContentViewController:self.calendarViewController];
+        self.viewSheet.delegate = self;
     }
-
     [self.viewSheet showInView:self.view animated:YES];
 }
 
@@ -103,7 +102,18 @@
 }
 
 
-#pragma mark - CCContainerView
+#pragma mark - CCDateSelect
+
+- (void)didSelectDate:(NSDate *)date
+{
+    self.display.text = [[self.calendarCalc inputDate:date] displayResult];
+    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]] 
+                     forState:UIControlStateNormal];
+    [self.viewSheet dismissContainerViewWithAnimated:YES];
+}
+
+
+#pragma mark - CCViewSheet
 
 - (void)viewSheetClickedCancelButton:(CCViewSheet *)viewSheet
 {

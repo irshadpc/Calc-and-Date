@@ -30,7 +30,7 @@
     static const CGFloat DefaultSize = 44.0;
     if ((self = [super initWithFrame:CGRectMake(frame.origin.x,
                                                 frame.origin.y,
-                                                (DefaultSize * 7) + ASCCalendarMargin,
+                                                (DefaultSize * 7) + (ASCCalendarMargin * 2),
                                                 (DefaultSize * 6) + ASCCalendarMargin)])) {
         NSDate *date = [NSDate date];
         _year = [date year];

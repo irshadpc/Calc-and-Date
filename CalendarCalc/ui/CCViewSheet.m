@@ -11,7 +11,10 @@
 @interface CCViewSheet ()
 @property (strong, nonatomic) UIToolbar *toolbar;
 @property (strong, nonatomic) NSMutableArray *barButonItems;
+@property (strong, nonatomic) UIViewController *contentViewController;
+@property (strong, nonatomic) UIView *protectView;
 
+- (CGRect)containerFrameWithContentView:(UIView *)view;
 - (UIBarButtonItem *)cancelButton;
 - (void)onCancel:(UIBarButtonItem *)sender;
 - (void)onOptionalButton:(UIBarButtonItem *)sender;
@@ -21,17 +24,15 @@
 
 - (id)initWithContentViewController:(UIViewController *)contentViewController
 {
-    if ((self = [self initWithContentView:contentViewController.view])) {
-        _contentController = contentViewController;
-    }
-    return self;
+    _contentViewController = contentViewController;
+    return [self initWithContentView:_contentViewController.view];
 }
 
 - (id)initWithContentView:(UIView *)contentView
 {
-    CGRect frame = contentView.frame;
+    CGRect frame = [self containerFrameWithContentView:contentView];
     frame.origin.y = 0;
-    frame.size.height = contentView.frame.size.height + 44.0;
+    frame.size.height += 44.0;
     if ((self = [super initWithFrame:frame])) {
         _barButonItems = [[NSMutableArray alloc] init];
         [_barButonItems addObject:[self cancelButton]];
@@ -40,38 +41,15 @@
                                                                0,
                                                                [UIScreen mainScreen].bounds.size.width,
                                                                44.0)];
+        _toolbar.barStyle = UIBarStyleBlackOpaque;
         [_toolbar setItems:_barButonItems];
         [self addSubview:_toolbar];
        
-        _containerView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                  44.0,
-                                                                  frame.size.width,
-                                                                  frame.size.height - 44.0)];
+        _containerView = [[UIView alloc] initWithFrame:[self containerFrameWithContentView:contentView]];
         [self addSubview:_containerView];
         [_containerView addSubview:contentView];
     }
     return self;
-}
-
-- (void)setContentController:(UIViewController *)contentController
-{
-    if (_contentController == contentController) {
-        return;
-    }
-    _contentController = contentController;
-    for (UIView *view in self.containerView.subviews) {
-        [view removeFromSuperview];
-    }
-    [self.containerView addSubview:contentController.view];
-    self.containerView.frame = CGRectMake(0,
-                                          44.0, 
-                                          contentController.view.frame.size.width,
-                                          contentController.view.frame.size.height - 44.0);
-   self.frame = CGRectMake(0,
-                           0,
-                           self.containerView.frame.size.width,
-                           self.containerView.frame.size.height + 44.0);
-    NSLog(@"SHEET: %@", contentController.view);
 }
 
 - (void)addBarButtonWithTitle:(NSString *)title
@@ -87,10 +65,17 @@
 
 - (void)showInView:(UIView *)view animated:(BOOL)animated
 {
+    UIView *rootView = [[[UIApplication sharedApplication] delegate] window].rootViewController.view;
+    self.protectView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.protectView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    [rootView addSubview:self.protectView];
+    [rootView bringSubviewToFront:self.protectView];
+    
     CGRect hideFrame = self.frame;
-    hideFrame.origin.y = view.frame.size.height;
+    hideFrame.origin.y = rootView.frame.size.height;
     self.frame = hideFrame;
-    [view addSubview:self];
+    [rootView addSubview:self];
+    [rootView bringSubviewToFront:self];
     
     [UIView animateWithDuration: animated ? 0.25 : 0
                      animations: ^{
@@ -110,12 +95,23 @@
                      }
                      completion: ^(BOOL finished) {
                          if (finished) {
+                             [self.protectView removeFromSuperview];
                              [self removeFromSuperview];
                          }
                      }];
 }
 
 #pragma mark - Private
+
+- (CGRect)containerFrameWithContentView:(UIView *)view
+{
+    return CGRectMake(0,
+                      44.0,
+                      view.frame.size.width, 
+                      view.frame.size.height);
+}
+
+
 
 - (UIBarButtonItem *)cancelButton
 {

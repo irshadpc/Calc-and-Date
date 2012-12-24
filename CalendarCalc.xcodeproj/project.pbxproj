@@ -32,6 +32,7 @@
 		62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144CD1685F4BD001E2843 /* NSArray+safe.m */; };
 		62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D01685F559001E2843 /* ASCCalendarButton.m */; };
 		62A144D71686CA32001E2843 /* CCCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D61686CA32001E2843 /* CCCalendarViewController.m */; };
+		62A144DC1687357A001E2843 /* CCYearMonthPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144DB1687357A001E2843 /* CCYearMonthPickerController.m */; };
 		62A2D06C16738023001CC9AE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05B16738023001CC9AE /* Icon.png */; };
 		62A2D06D16738023001CC9AE /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05C16738023001CC9AE /* Default~iphone.png */; };
 		62A2D06E16738023001CC9AE /* display~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D05D16738023001CC9AE /* display~iphone.png */; };
@@ -209,6 +210,8 @@
 		62A144D61686CA32001E2843 /* CCCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCalendarViewController.m; sourceTree = "<group>"; };
 		62A144D81686CA5A001E2843 /* CCDateSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDateSelect.h; sourceTree = "<group>"; };
 		62A144D91686D3E9001E2843 /* ASCCalendarConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCCalendarConstant.h; sourceTree = "<group>"; };
+		62A144DA16873579001E2843 /* CCYearMonthPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCYearMonthPickerController.h; sourceTree = "<group>"; };
+		62A144DB1687357A001E2843 /* CCYearMonthPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCYearMonthPickerController.m; sourceTree = "<group>"; };
 		62A2D05B16738023001CC9AE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		62A2D05C16738023001CC9AE /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		62A2D05D16738023001CC9AE /* display~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "display~iphone.png"; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 				6213561B16737E1100C93999 /* iPad */,
 				62A144D51686CA31001E2843 /* CCCalendarViewController.h */,
 				62A144D61686CA32001E2843 /* CCCalendarViewController.m */,
+				62A144DA16873579001E2843 /* CCYearMonthPickerController.h */,
+				62A144DB1687357A001E2843 /* CCYearMonthPickerController.m */,
 				62A144D81686CA5A001E2843 /* CCDateSelect.h */,
 			);
 			name = ViewController;
@@ -986,6 +991,7 @@
 				62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */,
 				62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */,
 				62A144D71686CA32001E2843 /* CCCalendarViewController.m in Sources */,
+				62A144DC1687357A001E2843 /* CCYearMonthPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

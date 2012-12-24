@@ -10,11 +10,14 @@
 #import "ASCCalendarView.h"
 #import "ASCCalendarControllView.h"
 #import "ASCPageView.h"
+#import "CCViewSheet.h"
+#import "CCYearMonthPickerController.h"
 #import "CCDateSelect.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 
-@interface CCCalendarViewController () <ASCCalendarViewDelegate, ASCCalendarControllViewDelegate, ASCPageViewDelegate>
+@interface CCCalendarViewController ()
+  <ASCCalendarViewDelegate, ASCCalendarControllViewDelegate, ASCPageViewDelegate, CCViewSheetDelegate>
 - (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
 - (void)prevMonth;
 - (void)nextMonth;
@@ -28,7 +31,6 @@
         NSDate *date = [NSDate date];
         NSInteger year = [date year];
         NSInteger month = [date month];
-        
         _calendarViews = @[[self calendarViewWithYear:year month:month - 1],
                            [self calendarViewWithYear:year month:month],
                            [self calendarViewWithYear:year month:month + 1]];
@@ -37,20 +39,18 @@
         _pageView = [[ASCPageView alloc] initWithContentView:_calendarViews[1]
                                                     prevPage:_calendarViews[0]
                                                     nextPage:_calendarViews[2]];
-        [_pageView setDelegate:self];
-        [_pageView setPage:1 animated:NO];
-
-        self.view.frame = CGRectMake(0,
-                                     0,
-                                     _pageView.frame.size.width,
-                                     _pageView.frame.size.height + _calendarControllView.frame.size.height);
         _pageView.frame = CGRectMake(0,
                                      _calendarControllView.frame.size.height,
                                      _pageView.frame.size.width,
                                      _pageView.frame.size.height);
-
+        
+        self.view.frame = CGRectMake(0,
+                                     0,
+                                     _pageView.frame.size.width,
+                                     _pageView.frame.size.height + _calendarControllView.frame.size.height);
         [self.view addSubview:_calendarControllView];
         [self.view addSubview:_pageView];
+        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
     }
     return self;
 }
@@ -58,6 +58,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_calendarControllView setDelegate:self];
+    [_pageView setDelegate:self];
+    [_pageView setPage:1 animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,6 +128,15 @@
 - (NSDate *)calendarControllView:(ASCCalendarControllView *)calendarControllView
            pressDateSelectButton:(UIButton *)dateSelectButton
 {
+
+    CCYearMonthPickerController *pickerController = [[CCYearMonthPickerController alloc] init];
+    pickerController.year = [_calendarControllView.currentDate year];
+    pickerController.month = [_calendarControllView.currentDate month];
+
+    CCViewSheet *viewSheet = [[CCViewSheet alloc] initWithContentViewController:pickerController];
+    viewSheet.delegate = self;
+
+    [viewSheet showInView:self.view animated:YES];
     return [NSDate date];
 }
 
@@ -152,6 +164,14 @@
 
     [_calendarViews[2] nextMonth];
     [_calendarViews[0] nextMonth];
+}
+
+
+#pragma mark - CCViewSheet
+
+- (void)viewSheetClickedCancelButton:(CCViewSheet *)viewSheet
+{
+    [viewSheet dismissContainerViewWithAnimated:YES];
 }
 
 @end
