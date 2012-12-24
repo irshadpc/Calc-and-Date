@@ -64,7 +64,8 @@
 {
     UIView *rootView = [[[UIApplication sharedApplication] delegate] window].rootViewController.view;
     self.protectView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.protectView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    self.protectView.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
+    self.protectView.alpha = 0;
     [rootView addSubview:self.protectView];
     [rootView bringSubviewToFront:self.protectView];
     
@@ -76,6 +77,7 @@
     
     [UIView animateWithDuration: animated ? 0.25 : 0
                      animations: ^{
+                         self.protectView.alpha = 0.5;
                          CGRect showFrame = self.frame;
                          showFrame.origin.y -= self.frame.size.height;
                          self.frame = showFrame;
@@ -89,6 +91,7 @@
                          CGRect hideFrame = self.frame;
                          hideFrame.origin.y += self.frame.size.height;
                          self.frame = hideFrame;
+                         self.protectView.alpha = 0;
                      }
                      completion: ^(BOOL finished) {
                          if (finished) {
