@@ -11,11 +11,12 @@
 @interface CCViewSheet ()
 @property (strong, nonatomic) UIToolbar *toolbar;
 @property (strong, nonatomic) NSMutableArray *barButonItems;
-@property (strong, nonatomic) UIViewController *contentViewController;
+@property (strong, nonatomic, readwrite) UIViewController *contentViewController;
 @property (strong, nonatomic) UIView *protectView;
 
 - (CGRect)containerFrameWithContentView:(UIView *)view;
 - (UIBarButtonItem *)cancelButton;
+- (UIBarButtonItem *)flexibleSpace;
 - (void)onCancel:(UIBarButtonItem *)sender;
 - (void)onOptionalButton:(UIBarButtonItem *)sender;
 @end
@@ -42,7 +43,7 @@
                                                                [UIScreen mainScreen].bounds.size.width,
                                                                44.0)];
         _toolbar.barStyle = UIBarStyleBlackOpaque;
-        [_toolbar setItems:_barButonItems];
+        _toolbar.items = _barButonItems;
         [self addSubview:_toolbar];
        
         _containerView = [[UIView alloc] initWithFrame:[self containerFrameWithContentView:contentView]];
@@ -52,15 +53,11 @@
     return self;
 }
 
-- (void)addBarButtonWithTitle:(NSString *)title
-                  buttonIndex:(NSInteger)buttonIndex
+- (void)setRightButton:(UIBarButtonItem *)rightButton
 {
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle: title
-                                                                      style: UIBarButtonItemStyleBordered
-                                                                     target: self 
-                                                                     action: @selector(onOptionalButton:)];
-    [barButtonItem setTag:buttonIndex];
-    [self.barButonItems addObject:barButtonItem];
+    self.toolbar.items = @[[self cancelButton],
+                           [self flexibleSpace],
+                           rightButton];
 }
 
 - (void)showInView:(UIView *)view animated:(BOOL)animated
@@ -118,6 +115,13 @@
    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                         target: self
                                                         action: @selector(onCancel:)];
+}
+
+- (UIBarButtonItem *)flexibleSpace
+{
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                         target:nil
+                                                         action:nil];
 }
 
 - (void)onCancel:(UIBarButtonItem *)sender

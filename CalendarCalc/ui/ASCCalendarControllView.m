@@ -91,7 +91,7 @@ static const CGFloat HEIGHT = 44.0;
 
 - (void)onDateSelect:(UIButton *)sender
 {
-    [self setDateSelectButtonTitle:[self.delegate calendarControllView:self pressDateSelectButton:sender]];
+    [self.delegate calendarControllView:self pressDateSelectButton:sender];
 }
 
 - (void)setDateSelectButtonTitle:(NSDate *)date

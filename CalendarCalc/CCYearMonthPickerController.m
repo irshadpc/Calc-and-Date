@@ -7,6 +7,7 @@
 //
 
 #import "CCYearMonthPickerController.h"
+#import "NSArray+safe.h"
 
 @interface CCYearMonthPickerController ()
 @property (strong, nonatomic) UIPickerView *pickerView;
@@ -16,6 +17,8 @@
 @end
 
 @implementation CCYearMonthPickerController
+@synthesize year = _year;
+@synthesize month = _month;
 
 static const NSInteger MIN_YEAR = 1900;
 static const NSInteger MAX_YEAR = 2200;
@@ -25,6 +28,7 @@ static const NSInteger MAX_YEAR = 2200;
     if ((self = [super init])) {
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
         _pickerView.showsSelectionIndicator = YES;
+
         [self.view addSubview:_pickerView];
     }
     return self;
@@ -44,10 +48,19 @@ static const NSInteger MAX_YEAR = 2200;
     [super didReceiveMemoryWarning];
 }
 
+- (NSInteger)year
+{
+    NSString *year = [[self years] safeObjectAtIndex:[self.pickerView selectedRowInComponent:0]];
+    if (year) {
+        _year = year.integerValue;
+    }
+    return _year;
+}
+
 - (void)setYear:(NSInteger)year
 {
     _year = year;
-    NSInteger yearIndex = [[self years] indexOfObject:[NSString stringWithFormat:@"%d", self.year]];
+    NSInteger yearIndex = [[self years] indexOfObject:[NSString stringWithFormat:@"%d", _year]];
     if (yearIndex != NSNotFound) {
         [self.pickerView selectRow:yearIndex
                        inComponent:0
@@ -55,10 +68,19 @@ static const NSInteger MAX_YEAR = 2200;
     }
 }
 
+- (NSInteger)month
+{
+    NSString *month = [[self months] safeObjectAtIndex:[self.pickerView selectedRowInComponent:1]];
+    if (month) {
+        _month = month.integerValue;
+    }
+    return _month;
+}
+
 - (void)setMonth:(NSInteger)month
 {
     _month = month;
-    NSInteger monthIndex = [[self months] indexOfObject:[NSString stringWithFormat:@"%02d", self.month]];
+    NSInteger monthIndex = [[self months] indexOfObject:[NSString stringWithFormat:@"%02d", _month]];
     if (monthIndex != NSNotFound) {
         [self.pickerView selectRow:monthIndex
                        inComponent:1

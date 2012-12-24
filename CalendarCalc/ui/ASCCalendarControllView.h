@@ -21,5 +21,5 @@
 @protocol ASCCalendarControllViewDelegate <NSObject>
 - (NSDate *)calendarControllView:(ASCCalendarControllView *)calendarControllView pressPrevMonthButton:(UIButton *)prevMonthButton;
 - (NSDate *)calendarControllView:(ASCCalendarControllView *)calendarControllView pressNextMonthButton:(UIButton *)nextMonthBUtton;
-- (NSDate *)calendarControllView:(ASCCalendarControllView *)calendarControllView pressDateSelectButton:(UIButton *)dateSelectButton;
+- (void)calendarControllView:(ASCCalendarControllView *)calendarControllView pressDateSelectButton:(UIButton *)dateSelectButton;
 @end

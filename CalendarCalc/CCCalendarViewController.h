@@ -11,12 +11,14 @@
 @protocol CCDateSelect;
 @class ASCCalendarControllView;
 @class ASCPageView;
+@class CCViewSheet;
 
 @interface CCCalendarViewController : UIViewController {
   @private
     NSArray *_calendarViews;
     ASCCalendarControllView *_calendarControllView;
     ASCPageView *_pageView;
+    CCViewSheet *_viewSheet;
 }
 @property (weak, nonatomic) id <CCDateSelect> delegate;
 @end

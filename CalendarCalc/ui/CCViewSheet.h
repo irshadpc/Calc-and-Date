@@ -13,13 +13,14 @@
 @interface CCViewSheet : UIView
 
 @property (weak, nonatomic) id <CCViewSheetDelegate> delegate;
+@property (strong, nonatomic, readonly) UIViewController *contentViewController;
 @property (strong, nonatomic, readonly) UIView *containerView;
 
 - (id)initWithContentViewController:(UIViewController *)contentViewController;
 - (id)initWithContentView:(UIView *)contentView;
-- (void)addBarButtonWithTitle:(NSString *)title buttonIndex:(NSInteger)buttonIndex;
 - (void)showInView:(UIView *)view animated:(BOOL)animated;
 - (void)dismissContainerViewWithAnimated:(BOOL)animated;
+- (void)setRightButton:(UIBarButtonItem *)rightButton;
 @end
 
 @protocol CCViewSheetDelegate <NSObject>

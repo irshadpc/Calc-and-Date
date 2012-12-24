@@ -18,9 +18,12 @@
 
 @interface CCCalendarViewController ()
   <ASCCalendarViewDelegate, ASCCalendarControllViewDelegate, ASCPageViewDelegate, CCViewSheetDelegate>
+
 - (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
+- (void)setCurrentYear:(NSInteger)year month:(NSInteger)month;
 - (void)prevMonth;
 - (void)nextMonth;
+- (void)onPickerToolbarDone:(UIBarButtonItem *)sender;
 @end
 
 @implementation CCCalendarViewController
@@ -70,6 +73,20 @@
 
 
 #pragma mark - Private
+
+- (void)setCurrentYear:(NSInteger)year 
+                 month:(NSInteger)month
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_calendarViews[0] reloadCalendarViewWithYear:year month:month - 1];
+        [_calendarViews[1] reloadCalendarViewWithYear:year month:month];
+        [_calendarViews[2] reloadCalendarViewWithYear:year month:month + 1];
+    });
+
+    [_calendarControllView setCurrentDate:[NSDate dateWithYear:year
+                                                         month:month
+                                                           day:1]];
+}
 
 - (void)prevMonth
 {
@@ -125,19 +142,28 @@
                             day:1];
 }
 
-- (NSDate *)calendarControllView:(ASCCalendarControllView *)calendarControllView
-           pressDateSelectButton:(UIButton *)dateSelectButton
+- (void)calendarControllView:(ASCCalendarControllView *)calendarControllView
+       pressDateSelectButton:(UIButton *)dateSelectButton
 {
+    CCYearMonthPickerController *pickerViewController = [[CCYearMonthPickerController alloc] init];
+    pickerViewController.year = [_calendarControllView.currentDate year];
+    pickerViewController.month = [_calendarControllView.currentDate month];
 
-    CCYearMonthPickerController *pickerController = [[CCYearMonthPickerController alloc] init];
-    pickerController.year = [_calendarControllView.currentDate year];
-    pickerController.month = [_calendarControllView.currentDate month];
+    _viewSheet = [[CCViewSheet alloc] initWithContentViewController:pickerViewController];
+    [_viewSheet setRightButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                            target:self 
+                                                                            action:@selector(onPickerToolbarDone:)]];
+    _viewSheet.delegate = self;
 
-    CCViewSheet *viewSheet = [[CCViewSheet alloc] initWithContentViewController:pickerController];
-    viewSheet.delegate = self;
+    [_viewSheet showInView:self.view animated:YES];
+}
 
-    [viewSheet showInView:self.view animated:YES];
-    return [NSDate date];
+- (void)onPickerToolbarDone:(UIBarButtonItem *)sender
+{
+    [_viewSheet dismissContainerViewWithAnimated:YES];
+    
+    [self setCurrentYear:[(CCYearMonthPickerController *)_viewSheet.contentViewController year]
+                   month:[(CCYearMonthPickerController *)_viewSheet.contentViewController month]];
 }
 
 
@@ -173,5 +199,11 @@
 {
     [viewSheet dismissContainerViewWithAnimated:YES];
 }
+
+- (void)viewSheet:(CCViewSheet *)viewSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"INDEX: %d", buttonIndex);
+}
+
 
 @end
