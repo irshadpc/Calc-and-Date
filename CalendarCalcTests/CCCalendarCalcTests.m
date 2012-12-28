@@ -9,6 +9,7 @@
 #import "CCCalendarCalcTests.h"
 #import "CCCalendarCalc.h"
 #import "CCCalendarCalcResult.h"
+#import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 #import "NSDecimalNumber+Convert.h"
 

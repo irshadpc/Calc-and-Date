@@ -149,6 +149,8 @@
 		62B53EE1167C64C700394427 /* CCDateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE0167C64C600394427 /* CCDateResult.m */; };
 		62B53EE4167C67A200394427 /* CCCalendarCalcResult+Number.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */; };
 		62B53EE7167C685100394427 /* CCCalendarCalcResult+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */; };
+		62B65D901689F0B300C0055E /* CCViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B65D8F1689F0B300C0055E /* CCViewControllerTests.m */; };
+		62B65D981689F20A00C0055E /* CCViewController+UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B65D971689F20A00C0055E /* CCViewController+UnitTest.m */; };
 		62DAF6161680AF6F00A14D3C /* ASCPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DAF6151680AF6F00A14D3C /* ASCPageView.m */; };
 		62F4D9271681E9C9001FF7FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62F4D9261681E9C9001FF7FA /* Localizable.strings */; };
 		62F4D92B1681EA6F001FF7FA /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F4D92A1681EA6F001FF7FA /* NSString+Date.m */; };
@@ -347,6 +349,10 @@
 		62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalcResult+Number.m"; sourceTree = "<group>"; };
 		62B53EE5167C685000394427 /* CCCalendarCalcResult+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCCalendarCalcResult+Date.h"; sourceTree = "<group>"; };
 		62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalcResult+Date.m"; sourceTree = "<group>"; };
+		62B65D8E1689F0B300C0055E /* CCViewControllerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCViewControllerTests.h; sourceTree = "<group>"; };
+		62B65D8F1689F0B300C0055E /* CCViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCViewControllerTests.m; sourceTree = "<group>"; };
+		62B65D961689F20A00C0055E /* CCViewController+UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCViewController+UnitTest.h"; sourceTree = "<group>"; };
+		62B65D971689F20A00C0055E /* CCViewController+UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCViewController+UnitTest.m"; sourceTree = "<group>"; };
 		62DAF6141680AF6F00A14D3C /* ASCPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCPageView.h; sourceTree = "<group>"; };
 		62DAF6151680AF6F00A14D3C /* ASCPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCPageView.m; sourceTree = "<group>"; };
 		62F4D9261681E9C9001FF7FA /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -443,6 +449,10 @@
 		6213560816737DA100C93999 /* CalendarCalcTests */ = {
 			isa = PBXGroup;
 			children = (
+				62B65D961689F20A00C0055E /* CCViewController+UnitTest.h */,
+				62B65D971689F20A00C0055E /* CCViewController+UnitTest.m */,
+				62B65D8E1689F0B300C0055E /* CCViewControllerTests.h */,
+				62B65D8F1689F0B300C0055E /* CCViewControllerTests.m */,
 				62324C5A167C34D70062EF1B /* CCCalendarCalcTests.h */,
 				62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */,
 				62A7CE0E167CA1240080B362 /* CCNumberCalcTests.h */,
@@ -1002,6 +1012,8 @@
 				62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */,
 				62A7CE10167CA1240080B362 /* CCNumberCalcTests.m in Sources */,
 				62A7CE13167CA1D70080B362 /* CCDateCalcTests.m in Sources */,
+				62B65D901689F0B300C0055E /* CCViewControllerTests.m in Sources */,
+				62B65D981689F20A00C0055E /* CCViewController+UnitTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
