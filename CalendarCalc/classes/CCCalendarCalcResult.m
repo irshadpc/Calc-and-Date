@@ -38,11 +38,13 @@
 
 - (CCCalendarCalcResult *)clearEntry
 {
-    if (_calcType == CCNumber) {
+    if (_calcType != CCDate) {
+        _calcType = CCNumber;
         [_numberResult clearEntry];
-    } else if (_calcType == CCDate) {
+    } else {
         [_dateResult clear];
     }
+
     return self;
 }
 

@@ -22,9 +22,11 @@
 
 - (void)setDateResult:(NSDate *)date
 {
-    if (date) {
-        _calcType = CCDate;
+    if (!date) {
+        return;
     }
+
+    _calcType = CCDate;
     [_dateResult setResult:date];
     [self updateDisplayResult];
 }

@@ -15,7 +15,6 @@
 #import "CCCalcType.h"
 
 @interface CCCalendarCalc ()
-
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (void)numberCalculate;
 - (void)dateCalculate;
@@ -23,8 +22,10 @@
 - (void)dateMinus;
 - (CCCalendarCalcResult *)clearResult;
 - (CCCalendarCalcResult *)reverseNumber;
+- (CCCalendarCalcResult *)deleteNumber;
 - (CCCalcType)calcType;
 @end
+
 
 @implementation CCCalendarCalc
 
@@ -71,8 +72,7 @@
         case CCPlusMinus:
             return [self reverseNumber];
         case CCDelete:
-            [_result clearEntry];
-            return _result;
+            return [self deleteNumber];
         case CCFunctionMax:
         default:
             NSLog(@"FUNCTION: %d", function);
@@ -91,11 +91,6 @@
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {
     switch ([self calcType]) {
-        case CCUnknown:
-            [_numberCalculator setResult:[_result numberResult]];
-            [_dateCalculator setDateRusult:[_result dateResult]];
-            [_dateCalculator setNumberResult:[_result numberResult]];
-            break;
         case CCNumber:
             [self numberCalculate];
             break;
@@ -109,7 +104,6 @@
 
     _currentFunction = function;
     [_result clear];
-
     return _result;
 }
 
@@ -129,10 +123,9 @@
             [_numberCalculator divide:[_result numberResult]];
             break;
         default:
-            NSLog(@"FUNCTION: %d", _currentFunction);
-            abort();
+            [_numberCalculator setResult:[_result numberResult]];
+            [_dateCalculator setNumberResult:[_result numberResult]];
     }
-
     [_result setNumberResult:[_numberCalculator result]];
 }
 
@@ -150,10 +143,8 @@
         case CCDivide:
             break;
         default:
-            NSLog(@"FUNCTION: %d", _currentFunction);
-            abort();
+            [_dateCalculator setDateRusult:[_result dateResult]];
     }
-
     [_result setNumberResult:[_dateCalculator numberResult]];
     [_result setDateResult:[_dateCalculator dateResult]];
 }
@@ -203,18 +194,25 @@
     return _result;
 }
 
+- (CCCalendarCalcResult *)deleteNumber
+{
+    [_result clearEntry];
+    
+    if ([_numberCalculator result]) {
+        [_numberCalculator setResult:[_result numberResult]];
+    } else if ([_dateCalculator numberResult]) {
+        [_dateCalculator setNumberResult:[_result numberResult]];
+    }
+
+    return _result;
+}
+
 - (CCCalcType)calcType
-{    
-    if ([_dateCalculator dateResult]) {
+{
+    if ([_dateCalculator dateResult] || [_result dateResult]) {
         return CCDate;
-    } else if ([_dateCalculator numberResult] || [_numberCalculator result]) {
-        if ([_result dateResult]) {
-            return CCDate;
-        } else {
-            return CCNumber;
-        }
     } else {
-        return CCUnknown;
+        return CCNumber;
     }
 }
 
