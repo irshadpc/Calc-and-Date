@@ -12,6 +12,9 @@
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumberFormatter+CalendarCalc.h"
 
+@interface CCNumberResult ()
+- (void)innerClear;
+@end
 
 @implementation CCNumberResult
 
@@ -100,14 +103,7 @@ enum {
 
 - (void)inputNumber:(NSDecimalNumber *)number
 {
-    if (_isClear) {
-        [_number setString:@""];
-        [_decimal setString:@""];
-        _isDecimal = NO;
-        _isMinus = NO;
-        _isClear = NO;
-    }
-
+    [self innerClear];
     if (_isDecimal) {
         NSLog(@"DECIMAL: %@", _decimal);
         [_decimal appendString:number.stringValue];
@@ -120,12 +116,27 @@ enum {
 
 - (void)inputDecimalPoint
 {
+    [self innerClear];
     _isDecimal = YES;
 }
 
 - (void)reverse 
 {
     _isMinus = !_isMinus;
+}
+
+
+#pragma mark - Private
+
+- (void)innerClear
+{
+    if (_isClear) {
+        [_number setString:@""];
+        [_decimal setString:@""];
+        _isDecimal = NO;
+        _isMinus = NO;
+        _isClear = NO;
+    }
 }
 
 @end

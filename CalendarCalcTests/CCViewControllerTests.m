@@ -474,13 +474,13 @@ enum {
 
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:DELETE]];
 
-    STAssertEqualObjects(@"0", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    STAssertEqualObjects(@"3", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS]];
     [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
 
-    STAssertEqualObjects(@"31", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    STAssertEqualObjects(@"4", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_0_Decimal_0000012_Delete_Plus_0_Decimal_000002_Equal
