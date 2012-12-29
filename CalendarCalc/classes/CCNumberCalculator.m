@@ -94,8 +94,6 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 - (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand
                                    method:(CCCalcMethod)method
 {
-    NSLog(@"RET: %@", _result);
-    NSLog(@"ROP: %@", rOperand);
     if (!rOperand) {
         return nil;
     }

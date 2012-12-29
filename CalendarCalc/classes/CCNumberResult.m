@@ -99,6 +99,7 @@ enum {
         [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
         _isMinus = _number.length > 0 ? _isMinus : NO;
     }
+    _isClear = NO;
 }
 
 - (void)inputNumber:(NSDecimalNumber *)number

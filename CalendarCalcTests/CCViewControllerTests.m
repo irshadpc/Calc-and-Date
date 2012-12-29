@@ -462,7 +462,7 @@ enum {
 
 - (void)test_10_Plus_20_Equal_Delete_Plus_1_Equal
 {
-    // 10 + 20 = [DEL] + 1 = 31
+    // 10 + 20 = [DEL] + 1 = 4
     [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
     [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS]];
@@ -481,6 +481,27 @@ enum {
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
 
     STAssertEqualObjects(@"4", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+}
+
+- (void)test_10_Plus_20_Equal_Delete_1_Plus_1_Equal
+{
+    // 10 + 20 = [DEL]1 + 1 = 32
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:0]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:2]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:0]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
+
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:DELETE]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
+    STAssertEqualObjects(@"31", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
+
+    STAssertEqualObjects(@"32", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_0_Decimal_0000012_Delete_Plus_0_Decimal_000002_Equal

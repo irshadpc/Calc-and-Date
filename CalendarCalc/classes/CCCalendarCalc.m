@@ -14,7 +14,10 @@
 #import "CCDateCalculator.h"
 #import "CCCalcType.h"
 
-@interface CCCalendarCalc ()
+@interface CCCalendarCalc () {
+  @private
+    BOOL _isEqual;
+}
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (void)numberCalculate;
 - (void)dateCalculate;
@@ -62,8 +65,14 @@
         case CCMinus:
         case CCMultiply:
         case CCDivide:
+            if (_isEqual) {
+                [_numberCalculator clear];
+                [_dateCalculator clear];
+                _isEqual = NO;
+            }
             return [self calculateWithFunction:function];
         case CCEqual:
+            _isEqual = YES;
             return [self calculateWithFunction:_currentFunction];
         case CCDecimal:
             return [_result inputDecimalPoint];
