@@ -16,6 +16,7 @@
     NSMutableString *_decimal;
     BOOL _isMinus;
     BOOL _isDecimal;
+    BOOL _isClear;
 }
 
 - (void)clear;

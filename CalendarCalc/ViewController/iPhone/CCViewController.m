@@ -40,6 +40,10 @@
 @implementation CCViewController
 @synthesize dateButton = _dateButton;
 
+enum {
+    CCDoubleZero = 10,
+};
+
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,7 +85,15 @@
 
 - (IBAction)onNumber:(UIButton *)sender
 {
-    self.display.text = [[_calendarCalc inputInteger:sender.tag] displayResult];
+    if (sender.tag < CCDoubleZero) {
+        self.display.text = [[_calendarCalc inputInteger:sender.tag] displayResult];
+    } else if (sender.tag == CCDoubleZero) {
+        [_calendarCalc inputInteger:0];
+        self.display.text = [[_calendarCalc inputInteger:0] displayResult];
+    } else {
+        NSLog(@"TAG: %d", sender.tag);
+        abort();
+    }
 }
 
 - (IBAction)onDate:(UIButton *)sender

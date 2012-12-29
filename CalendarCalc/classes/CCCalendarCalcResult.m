@@ -36,6 +36,16 @@
     _calcType = CCUnknown;
 }
 
+- (CCCalendarCalcResult *)clearEntry
+{
+    if (_calcType == CCNumber) {
+        [_numberResult clearEntry];
+    } else if (_calcType == CCDate) {
+        [_dateResult clear];
+    }
+    return self;
+}
+
 - (void)updateDisplayResult
 {
     switch (_calcType) {

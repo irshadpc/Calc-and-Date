@@ -12,7 +12,6 @@
 - (NSDecimalNumber *)numberResult;
 - (void)setNumberResult:(NSDecimalNumber *)number;
 
-- (CCCalendarCalcResult *)clearEntry;
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDecimalPoint;
 - (CCCalendarCalcResult *)reverseNumberResult;

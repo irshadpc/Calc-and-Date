@@ -15,6 +15,7 @@
 #import "CCCalcType.h"
 
 @interface CCCalendarCalc ()
+
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (void)numberCalculate;
 - (void)dateCalculate;
@@ -39,7 +40,7 @@
 
 - (CCCalendarCalcResult *)inputInteger:(NSInteger)integer
 {
-    return [_result inputNumber:
+    return [self inputNumber:
             [NSDecimalNumber decimalNumberWithString:@(integer).stringValue]];
 }
 
@@ -60,8 +61,9 @@
         case CCMinus:
         case CCMultiply:
         case CCDivide:
-        case CCEqual:
             return [self calculateWithFunction:function];
+        case CCEqual:
+            return [self calculateWithFunction:_currentFunction];
         case CCDecimal:
             return [_result inputDecimalPoint];
         case CCClear:
@@ -126,17 +128,12 @@
         case CCDivide:
             [_numberCalculator divide:[_result numberResult]];
             break;
-        case CCEqual:
-            [_result clear];
-            [_numberCalculator clear];
-            [_dateCalculator clear];
-            return;
         default:
             NSLog(@"FUNCTION: %d", _currentFunction);
             abort();
     }
 
-    [_result setNumberResult: [_numberCalculator result]];
+    [_result setNumberResult:[_numberCalculator result]];
 }
 
 - (void)dateCalculate
@@ -207,11 +204,7 @@
 }
 
 - (CCCalcType)calcType
-{
-    if (_currentFunction == CCEqual) {
-        return CCUnknown;
-    }
-    
+{    
     if ([_dateCalculator dateResult]) {
         return CCDate;
     } else if ([_dateCalculator numberResult] || [_numberCalculator result]) {

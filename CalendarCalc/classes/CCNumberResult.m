@@ -33,10 +33,7 @@ enum {
 
 - (void)clear
 {
-    [_number setString:@""];
-    [_decimal setString:@""];
-    _isDecimal = NO;
-    _isMinus = NO;
+    _isClear = YES;
 }
 
 - (NSDecimalNumber *)result
@@ -103,7 +100,16 @@ enum {
 
 - (void)inputNumber:(NSDecimalNumber *)number
 {
+    if (_isClear) {
+        [_number setString:@""];
+        [_decimal setString:@""];
+        _isDecimal = NO;
+        _isMinus = NO;
+        _isClear = NO;
+    }
+
     if (_isDecimal) {
+        NSLog(@"DECIMAL: %@", _decimal);
         [_decimal appendString:number.stringValue];
     } else if (_number.integerValue != 0) {
         [_number appendString:number.stringValue];

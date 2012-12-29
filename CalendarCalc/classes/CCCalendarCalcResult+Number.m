@@ -31,15 +31,6 @@
     [self updateDisplayResult];
 }
 
-- (CCCalendarCalcResult *)clearEntry
-{
-    if (_calcType == CCNumber) {
-        [_numberResult clearEntry];
-    }
-    
-    return self;
-}
-
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
 {
     [_numberResult inputNumber:number];
@@ -50,7 +41,7 @@
 
 - (CCCalendarCalcResult *)inputDecimalPoint
 {
-    if (_calcType == CCNumber) {
+    if (_calcType != CCDate) {
         [_numberResult inputDecimalPoint];
     }
 
