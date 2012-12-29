@@ -41,9 +41,7 @@
 
 - (CCCalendarCalcResult *)inputDecimalPoint
 {
-    NSLog(@"DECIMAL");
     if (_calcType != CCDate) {
-        NSLog(@"IN");
         [_numberResult inputDecimalPoint];
     }
 

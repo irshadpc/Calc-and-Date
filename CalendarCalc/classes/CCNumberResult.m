@@ -105,7 +105,6 @@ enum {
 {
     [self innerClear];
     if (_isDecimal) {
-        NSLog(@"DECIMAL: %@", _decimal);
         [_decimal appendString:number.stringValue];
     } else if (_number.integerValue != 0) {
         [_number appendString:number.stringValue];
