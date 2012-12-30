@@ -88,4 +88,19 @@
     STAssertEqualObjects(@"2012/02/01", result, @"RESULT: %@", result);
 }
 
+- (void)testInputFunction_1_Plus_2_Plus_2012_12_01_Equal
+{
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 12
+                                              day: 1]];
+    [_calendarCalc inputFunction: CCEqual];
+
+    NSString *const result = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"2012/12/04", result, @"RESULT: %@", result);
+}
+
 @end
