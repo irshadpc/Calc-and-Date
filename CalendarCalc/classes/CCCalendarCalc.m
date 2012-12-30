@@ -136,6 +136,9 @@
 
 - (void)numberCalculate
 {
+    if (_isEqual && ![_result numberResult]) {
+        [_result setNumberResult:[_numberCalculator result]];
+    }
     switch (_currentFunction) {
         case CCPlus:
             [_numberCalculator plus:[_result numberResult]];
@@ -177,6 +180,9 @@
     }
     [_result setNumberResultForDisplay:[_dateCalculator numberResult]];
     [_result setDateResultForDisplay:[_dateCalculator dateResult]];
+    if ([_result dateResult]) {
+        [_result endInput];
+    }
 }
 
 - (void)datePlus
