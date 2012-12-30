@@ -134,7 +134,6 @@
             [_numberCalculator divide:[_result numberResult]];
             break;
         default:
-            NSLog(@"NM: %@", [_result numberResult]);
             [_numberCalculator setResult:[_result numberResult]];
             [_dateCalculator setNumberResult:[_result numberResult]];
     }

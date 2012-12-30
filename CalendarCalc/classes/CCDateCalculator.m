@@ -57,8 +57,6 @@ typedef enum {
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)plusWithDate:(NSDate *)rOperand 
 {
-    NSLog(@"L: %@", _dateResult);
-    NSLog(@"R: %@", rOperand);
     if (!rOperand) {
         return nil;
     }
@@ -85,7 +83,6 @@ typedef enum {
         _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_tmpOperand rOperand:_numberResult];
         _function = CCNone;
         _tmpOperand = nil;
-        NSLog(@"MULTI: %@", _numberResult);
     } else if (_function == CCDivide && _tmpOperand) {
         _numberResult = [NSDecimalNumber dividingByDecimalNumber:_tmpOperand rOperand:_numberResult];
         _function = CCNone;
@@ -176,8 +173,11 @@ typedef enum {
 
 - (NSDecimalNumber *)multiplyWithDate:(NSDate *)rOperand
 {
-    if (!rOperand || !_numberResult) {
+    if (!rOperand) {
         return nil;
+    }
+    if (!_numberResult || [_numberResult isEqualToNumber:[NSDecimalNumber zero]]) {
+        return [self setNumberResult:[NSDecimalNumber zero]];
     }
 
     _tmpOperand = _numberResult;
@@ -199,8 +199,11 @@ typedef enum {
 
 - (NSDecimalNumber *)divideWithDate:(NSDate *)rOperand
 {
-    if (!rOperand || !_numberResult) {
+    if (!rOperand) {
         return nil;
+    }
+    if (!_numberResult || [_numberResult isEqualToNumber:[NSDecimalNumber zero]]) {
+        return [self setNumberResult:[NSDecimalNumber zero]];
     }
 
     _tmpOperand = _numberResult;
