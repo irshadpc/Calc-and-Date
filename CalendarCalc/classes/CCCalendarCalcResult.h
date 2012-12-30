@@ -22,6 +22,7 @@
 
 - (void)allClear;
 - (void)clear;
+- (void)setCalcType:(CCCalcType)calcType;
 - (CCCalendarCalcResult *)clearEntry;
 - (void)updateDisplayResult;
 - (NSString *)displayResult;

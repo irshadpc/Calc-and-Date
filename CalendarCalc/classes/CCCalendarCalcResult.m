@@ -36,6 +36,11 @@
     _calcType = CCUnknown;
 }
 
+- (void)setCalcType:(CCCalcType)calcType
+{
+    _calcType = calcType;
+}
+
 - (CCCalendarCalcResult *)clearEntry
 {
     if (_calcType != CCDate) {

@@ -23,6 +23,8 @@
 - (void)dateCalculate;
 - (void)datePlus;
 - (void)dateMinus;
+- (void)dateMultiply;
+- (void)dateDivide;
 - (CCCalendarCalcResult *)clearResult;
 - (CCCalendarCalcResult *)reverseNumber;
 - (CCCalendarCalcResult *)deleteNumber;
@@ -132,9 +134,11 @@
             [_numberCalculator divide:[_result numberResult]];
             break;
         default:
+            NSLog(@"NM: %@", [_result numberResult]);
             [_numberCalculator setResult:[_result numberResult]];
             [_dateCalculator setNumberResult:[_result numberResult]];
     }
+
     [_result setNumberResult:[_numberCalculator result]];
 }
 
@@ -148,8 +152,10 @@
             [self dateMinus];
             break;
         case CCMultiply:
+            [self dateMultiply];
             break;
         case CCDivide:
+            [self dateDivide];
             break;
         default:
             [_dateCalculator setDateRusult:[_result dateResult]];
@@ -160,22 +166,26 @@
 
 - (void)datePlus
 {
-    if ([_result numberResult]) {
-        [_dateCalculator plusWithNumber:[_result numberResult]];
-    } else if ([_result dateResult]) {
-        [_dateCalculator plusWithDate:[_result dateResult]];
-    }
+    [_dateCalculator plusWithNumber:[_result numberResult]];
+    [_dateCalculator plusWithDate:[_result dateResult]];
 }
 
 - (void)dateMinus
 {
-    if ([_result numberResult]) {
-        [_dateCalculator minusWithNumber:[_result numberResult]];
-    } else if ([_result dateResult]) {
-        [_dateCalculator minusWithDate:[_result dateResult]];
-    } else {
-        abort();
-    }
+    [_dateCalculator minusWithNumber:[_result numberResult]];
+    [_dateCalculator minusWithDate:[_result dateResult]];
+}
+
+- (void)dateMultiply
+{
+    [_dateCalculator multiplyWithNumber:[_result numberResult]];
+    [_dateCalculator multiplyWithDate:[_result dateResult]];
+}
+
+- (void)dateDivide
+{
+    [_dateCalculator divideWithNumber:[_result numberResult]];
+    [_dateCalculator divideWithDate:[_result dateResult]];
 }
 
 - (CCCalendarCalcResult *)clearResult
@@ -199,14 +209,14 @@
         [_result setNumberResult:[_dateCalculator reverse]];
     } else {
         [_result reverseNumberResult];
-    } 
+    }
     return _result;
 }
 
 - (CCCalendarCalcResult *)deleteNumber
 {
     [_result clearEntry];
-    
+
     if ([_numberCalculator result]) {
         [_numberCalculator setResult:[_result numberResult]];
     } else if ([_dateCalculator numberResult]) {

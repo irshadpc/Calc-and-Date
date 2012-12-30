@@ -16,7 +16,18 @@
 
 #import "NSDateFormatter+CalendarCalc.h"
 
-@interface CCDateCalculator ()
+typedef enum {
+    CCNone,
+    CCMultiply,
+    CCDivide,
+} CCDateFunction;
+
+@interface CCDateCalculator () {
+  @private
+    CCDateFunction _function;
+    NSDecimalNumber *_tmpOperand;
+}
+
 - (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
                                     endDate:(NSDate *)endDate;
 @end
@@ -46,12 +57,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)plusWithDate:(NSDate *)rOperand 
 {
+    NSLog(@"L: %@", _dateResult);
+    NSLog(@"R: %@", rOperand);
     if (!rOperand) {
         return nil;
     }
 
-    //NSLog(@"L: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:_dateResult]);
-    //NSLog(@"R: %@", [[NSDateFormatter yyyymmddFormatter] stringFromDate:rOperand]);
     if(!_dateResult && !_numberResult) {
         _isDateResult = YES;
         _dateResult = [rOperand noTime];
@@ -69,7 +80,18 @@
     if ([_numberResult isMinus]) {
         _numberResult = [NSDecimalNumber reverse: _numberResult];
     }
-
+   
+    if (_function == CCMultiply && _tmpOperand) {
+        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_numberResult rOperand:_tmpOperand];
+        _function = CCNone;
+        _tmpOperand = nil;
+        NSLog(@"MULTI: %@", _numberResult);
+    } else if (_function == CCDivide && _tmpOperand) {
+        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_numberResult rOperand:_tmpOperand];
+        _function = CCNone;
+        _tmpOperand = nil;
+    }
+    
     /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
                                                        rOperand: [self weekCountWithStartDate: _dateResult
                                                                                       endDate: [rOperand noTime]]];
@@ -115,10 +137,20 @@
     _numberResult = [NSDecimalNumber decimalNumberWithString:
                      @([[rOperand noTime] dayIntervalWithDate: _dateResult]).stringValue];
 
-    if ([_numberResult isMinus]) {
+    if (![_numberResult isMinus]) {
         _numberResult = [NSDecimalNumber reverse: _numberResult];
     }
-
+    
+    if (_function == CCMultiply && _tmpOperand) {
+        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_numberResult rOperand:_tmpOperand];
+        _function = CCNone;
+        _tmpOperand = nil;
+    } else if (_function == CCDivide && _tmpOperand) {
+        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_numberResult rOperand:_tmpOperand];
+        _function = CCNone;
+        _tmpOperand = nil;
+    }
+    
     /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
                                                        rOperand: [self weekCountWithStartDate: _dateResult
                                                                                       endDate: [rOperand noTime]]];
@@ -129,6 +161,52 @@
 
     _dateResult = nil;
     return _numberResult;
+}
+
+- (NSDate *)multiplyWithNumber:(NSDecimalNumber *)rOperand
+{
+    if (!rOperand) {
+        return nil;
+    }
+    
+    _isDateResult = NO;
+    _numberResult = [NSDecimalNumber zero];
+    return nil;
+}
+
+- (NSDecimalNumber *)multiplyWithDate:(NSDate *)rOperand
+{
+    if (!rOperand || !_numberResult) {
+        return nil;
+    }
+
+    _tmpOperand = _numberResult;
+    _function = CCMultiply;
+    [self setDateRusult:rOperand];
+    return nil;
+}
+
+- (NSDate *)divideWithNumber:(NSDecimalNumber *)rOperand
+{
+    if (!rOperand) {
+        return nil;
+    }
+
+    _isDateResult = NO;
+    _numberResult = [NSDecimalNumber zero];
+    return nil;
+}
+
+- (NSDecimalNumber *)divideWithDate:(NSDate *)rOperand
+{
+    if (!rOperand || !_numberResult) {
+        return nil;
+    }
+
+    _tmpOperand = _numberResult;
+    _function = CCDivide;
+    [self setDateRusult:rOperand];
+    return nil;
 }
 
 - (NSDecimalNumber *)reverse

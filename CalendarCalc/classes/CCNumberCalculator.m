@@ -27,6 +27,8 @@ typedef NSDecimalNumber * (^CCCalcMethod)(NSDecimalNumber *, NSDecimalNumber *);
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)plus:(NSDecimalNumber *)rOperand
 {
+    NSLog(@"L: %@", _result);
+    NSLog(@"R: %@", rOperand);
     return [self calculateWithOperand: rOperand
                                method: ^(NSDecimalNumber *l, NSDecimalNumber *r) {
                                    return [NSDecimalNumber addingByDecimalNumber:l rOperand:r];
