@@ -82,12 +82,12 @@ typedef enum {
     }
    
     if (_function == CCMultiply && _tmpOperand) {
-        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_numberResult rOperand:_tmpOperand];
+        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_tmpOperand rOperand:_numberResult];
         _function = CCNone;
         _tmpOperand = nil;
         NSLog(@"MULTI: %@", _numberResult);
     } else if (_function == CCDivide && _tmpOperand) {
-        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_numberResult rOperand:_tmpOperand];
+        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_tmpOperand rOperand:_numberResult];
         _function = CCNone;
         _tmpOperand = nil;
     }
