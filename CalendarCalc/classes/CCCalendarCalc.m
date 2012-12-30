@@ -109,7 +109,11 @@
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {
-    [self calculate];
+    if (!_isEqual) {        
+        [self calculate];
+    } else {
+        _isEqual = NO;
+    }
 
     _currentFunction = function;
     [_result endInput];
@@ -156,7 +160,7 @@
             [_numberCalculator setResult:[_result numberResult]];
             [_dateCalculator setNumberResult:[_result numberResult]];
     }
-
+    [_dateCalculator setNumberResult:[_numberCalculator result]];
     [_result setNumberResultForDisplay:[_numberCalculator result]];
 }
 
