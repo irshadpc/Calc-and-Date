@@ -11,6 +11,7 @@
 @interface CCCalendarCalcResult (Date)
 - (NSDate *)dateResult;
 - (void)setDateResult:(NSDate *)date;
+- (void)setDateResultForDisplay:(NSDate *)date;
 
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;
 @end

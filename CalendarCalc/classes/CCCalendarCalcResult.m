@@ -23,22 +23,17 @@
     return self;
 }
 
-- (void)allClear
-{
-    [self clear];
-    _displayResult = nil;
-}
-
-- (void)clear
+- (void)endInput
 {
     [_numberResult clear];
     [_dateResult clear];
     _calcType = CCUnknown;
 }
 
-- (void)setCalcType:(CCCalcType)calcType
+- (void)clear
 {
-    _calcType = calcType;
+    [self endInput];
+    _displayResult = nil;
 }
 
 - (CCCalendarCalcResult *)clearEntry
@@ -49,7 +44,8 @@
     } else {
         [_dateResult clear];
     }
-
+    [self updateDisplayResult];
+    
     return self;
 }
 
@@ -73,7 +69,6 @@
 
 - (NSString *)displayResult
 {
-    [self updateDisplayResult];
     if (!_displayResult) {
         return @"0";
     }

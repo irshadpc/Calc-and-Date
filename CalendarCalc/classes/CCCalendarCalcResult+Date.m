@@ -8,6 +8,7 @@
 
 #import "CCCalendarCalcResult+Date.h"
 #import "CCDateResult.h"
+#import "NSDateFormatter+CalendarCalc.h"
 
 @implementation CCCalendarCalcResult (Date)
 
@@ -31,11 +32,20 @@
     [self updateDisplayResult];
 }
 
+- (void)setDateResultForDisplay:(NSDate *)date
+{
+    if (!date) {
+        return;
+    }
+    _displayResult = [[NSDateFormatter yyyymmddFormatter] stringFromDate:date];
+}
+
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
     [_dateResult inputDate:date];
     _calcType = CCDate;
-
+    [self updateDisplayResult];
+    
     return self;
 }
 

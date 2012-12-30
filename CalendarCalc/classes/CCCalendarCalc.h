@@ -7,21 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef enum {
-    CCDecimal = 301,
-    CCEqual,
-    CCPlus,
-    CCMinus,
-    CCMultiply,
-    CCDivide,
-    CCClear,
-    CCPlusMinus,
-    CCDelete,
-    
-    CCFunctionMax,
-} CCFunction;
-
+#import "CCFunction.h"
 
 @class CCCalendarCalcResult;
 @class CCNumberCalculator;

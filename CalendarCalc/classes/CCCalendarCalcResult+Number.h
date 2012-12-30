@@ -11,6 +11,7 @@
 @interface CCCalendarCalcResult (Number)
 - (NSDecimalNumber *)numberResult;
 - (void)setNumberResult:(NSDecimalNumber *)number;
+- (void)setNumberResultForDisplay:(NSDecimalNumber *)number;
 
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDecimalPoint;

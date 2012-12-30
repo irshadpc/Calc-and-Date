@@ -19,6 +19,7 @@
     BOOL _isEqual;
 }
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
+- (CCCalendarCalcResult *)calculate;
 - (void)numberCalculate;
 - (void)dateCalculate;
 - (void)datePlus;
@@ -52,11 +53,23 @@
 
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
 {
+    if (_isEqual) {
+        [_result endInput];
+        [_numberCalculator clear];
+        [_dateCalculator clear];
+        _isEqual = NO;
+    }
     return [_result inputNumber:number];
 }
 
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
+    if (_isEqual) {
+        [_result endInput];
+        [_numberCalculator clear];
+        [_dateCalculator clear];
+        _isEqual = NO;
+    }
     return [_result inputDate:date];
 }
 
@@ -67,15 +80,10 @@
         case CCMinus:
         case CCMultiply:
         case CCDivide:
-            if (_isEqual) {
-                [_numberCalculator clear];
-                [_dateCalculator clear];
-                _isEqual = NO;
-            }
             return [self calculateWithFunction:function];
         case CCEqual:
             _isEqual = YES;
-            return [self calculateWithFunction:_currentFunction];
+            return [self calculate];
         case CCDecimal:
             return [_result inputDecimalPoint];
         case CCClear:
@@ -101,6 +109,15 @@
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {
+    [self calculate];
+
+    _currentFunction = function;
+    [_result endInput];
+    return _result;
+}
+
+- (CCCalendarCalcResult *)calculate
+{
     switch ([self calcType]) {
         case CCNumber:
             [self numberCalculate];
@@ -113,10 +130,9 @@
             abort();
     }
 
-    _currentFunction = function;
-    [_result clear];
     return _result;
 }
+
 
 - (void)numberCalculate
 {
@@ -138,7 +154,7 @@
             [_dateCalculator setNumberResult:[_result numberResult]];
     }
 
-    [_result setNumberResult:[_numberCalculator result]];
+    [_result setNumberResultForDisplay:[_numberCalculator result]];
 }
 
 - (void)dateCalculate
@@ -159,8 +175,8 @@
         default:
             [_dateCalculator setDateRusult:[_result dateResult]];
     }
-    [_result setNumberResult:[_dateCalculator numberResult]];
-    [_result setDateResult:[_dateCalculator dateResult]];
+    [_result setNumberResultForDisplay:[_dateCalculator numberResult]];
+    [_result setDateResultForDisplay:[_dateCalculator dateResult]];
 }
 
 - (void)datePlus
@@ -190,9 +206,9 @@
 - (CCCalendarCalcResult *)clearResult
 {
     if ([_result numberResult] || [_result dateResult]) {
-        [_result allClear];
+        [_result clear];
     } else {
-        [_result allClear];
+        [_result clear];
         [_numberCalculator clear];
         [_dateCalculator clear];
     }
@@ -202,26 +218,39 @@
 
 - (CCCalendarCalcResult *)reverseNumber
 {
-    if ([_numberCalculator result]) {
+    if (!_isEqual && [_result numberResult]) {
+        [_result reverseNumberResult];
+    } else if ([_numberCalculator result]) {
         [_result setNumberResult:[_numberCalculator reverse]];
     } else if ([_dateCalculator numberResult]) {
         [_result setNumberResult:[_dateCalculator reverse]];
-    } else {
-        [_result reverseNumberResult];
+    }
+     
+    if (_isEqual) {
+        [_numberCalculator clear];
+        [_dateCalculator clear];
+        _isEqual = NO;
     }
     return _result;
 }
 
 - (CCCalendarCalcResult *)deleteNumber
 {
-    [_result clearEntry];
-
-    if ([_numberCalculator result]) {
-        [_numberCalculator setResult:[_result numberResult]];
+    if (!_isEqual && ([_result numberResult] || [_result dateResult])) {
+        [_result clearEntry];
+    } else if ([_numberCalculator result]) {
+        [_result setNumberResult:[_numberCalculator result]];
+        [_result clearEntry];
     } else if ([_dateCalculator numberResult]) {
-        [_dateCalculator setNumberResult:[_result numberResult]];
+        [_result setNumberResult:[_dateCalculator numberResult]];
+        [_result clearEntry];
+    } 
+    if (_isEqual) {
+        [_numberCalculator clear];
+        [_dateCalculator clear];
+        _isEqual = NO;
     }
-
+    
     return _result;
 }
 

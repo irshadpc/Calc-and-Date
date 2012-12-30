@@ -20,9 +20,8 @@
     CCCalcType _calcType;
 }
 
-- (void)allClear;
+- (void)endInput;
 - (void)clear;
-- (void)setCalcType:(CCCalcType)calcType;
 - (CCCalendarCalcResult *)clearEntry;
 - (void)updateDisplayResult;
 - (NSString *)displayResult;
