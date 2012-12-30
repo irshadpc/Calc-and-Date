@@ -1322,7 +1322,23 @@ enum {
     STAssertEqualObjects(@"100", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_1_Plus_Equal_PlusMinus_Plus_3_Equal
+- (void)test_10_Plus_2_PlusMinus_Equal
+{
+    // 10 + 2 [+/-] + = 8
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:0]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:2]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS_MINUS]];
+    
+    STAssertEqualObjects(@"-2", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
+
+    STAssertEqualObjects(@"8", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+}
+
+- (void)test_1_Plus_2_Equal_PlusMinus_Plus_3_Equal
 {
 
     // 1 + 2 = [+/-] + 3 = 0
@@ -1551,6 +1567,22 @@ enum {
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
 
     STAssertEqualObjects(@"0.000003", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+}
+
+- (void)test_10_Plus_32_Delete_Equal
+{
+    // 10 + 32 [DEL] = 13
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:1]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:0]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:3]];
+    [_viewController pressNumberButton:(UIButton *)[_view viewWithTag:2]];
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:DELETE]];
+    STAssertEqualObjects(@"3", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
+
+    STAssertEqualObjects(@"13", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_0_Decimal_0000012_PlusMinus_Plus_0_Decimal_000002_Equal
