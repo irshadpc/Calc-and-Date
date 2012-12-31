@@ -8,6 +8,8 @@
 
 #import "ASCCalendarButton.h"
 #import "UIColor+Calendar.h"
+#import "UIFont+Calendar.h"
+#import "ASCWeek.h"
 
 @interface ASCCalendarButton ()
 @property (strong, nonatomic) UIImage *imageForNormal;
@@ -24,14 +26,14 @@
     if ((self = [super initWithFrame:frame])) {
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:18.]];
+        [self.titleLabel setFont:[UIFont calendarFont]];
         [self.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
 
-        [self setTitleShadowColor: [UIColor whiteColor]
-                                   forState: UIControlStateNormal];
+        [self setTitleShadowColor:[UIColor whiteColor]
+                                  forState: UIControlStateNormal];
 
-        [self setTitleShadowColor: [UIColor blackColor]
-                                   forState: UIControlStateHighlighted];
+        [self setTitleShadowColor:[UIColor blackColor]
+                                  forState: UIControlStateHighlighted];
 
     }
     return self;
@@ -73,9 +75,9 @@
 {
     if (self.weekday == 0) {
         [self setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
-    } else if (self.weekday == 1) {
+    } else if (self.weekday == ASCSunday) {
         [self setTitleColor:[UIColor sundayColor] forState:UIControlStateNormal];
-    } else if (self.weekday == 7) {
+    } else if (self.weekday == ASCSaturday) {
         [self setTitleColor:[UIColor saturdayColor] forState:UIControlStateNormal];
     } else {
         [self setTitleColor:[UIColor usualdayColor] forState:UIControlStateNormal];

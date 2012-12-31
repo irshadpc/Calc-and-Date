@@ -9,6 +9,7 @@
 #import "CCCalendarViewController.h"
 #import "ASCCalendarView.h"
 #import "ASCCalendarControllView.h"
+#import "CCWeekControllView.h"
 #import "ASCPageView.h"
 #import "CCViewSheet.h"
 #import "CCYearMonthPickerController.h"
@@ -38,20 +39,29 @@
                            [self calendarViewWithYear:year month:month],
                            [self calendarViewWithYear:year month:month + 1]];
         _calendarControllView = [[ASCCalendarControllView alloc] initWithCalendarView:_calendarViews[1]];
+        _weekControllView = [[CCWeekControllView alloc] initWithCalendarView:_calendarViews[1]];
+        _weekControllView.frame = CGRectMake(_weekControllView.frame.origin.x,
+                                             _calendarControllView.frame.size.height,
+                                             _weekControllView.frame.size.width,
+                                             _weekControllView.frame.size.height);
 
         _pageView = [[ASCPageView alloc] initWithContentView:_calendarViews[1]
                                                     prevPage:_calendarViews[0]
                                                     nextPage:_calendarViews[2]];
         _pageView.frame = CGRectMake(0,
-                                     _calendarControllView.frame.size.height,
+                                     _weekControllView.frame.origin.y + _weekControllView.frame.size.height,
                                      _pageView.frame.size.width,
                                      _pageView.frame.size.height);
         
         self.view.frame = CGRectMake(0,
                                      0,
                                      _pageView.frame.size.width,
-                                     _pageView.frame.size.height + _calendarControllView.frame.size.height);
+                                     _pageView.frame.size.height
+                                     + _weekControllView.frame.size.height
+                                     + _calendarControllView.frame.size.height);
+        
         [self.view addSubview:_calendarControllView];
+        [self.view addSubview:_weekControllView];
         [self.view addSubview:_pageView];
         self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
     }

@@ -10,6 +10,7 @@
 
 @protocol CCDateSelect;
 @class ASCCalendarControllView;
+@class CCWeekControllView;
 @class ASCPageView;
 @class CCViewSheet;
 
@@ -17,6 +18,7 @@
   @private
     NSArray *_calendarViews;
     ASCCalendarControllView *_calendarControllView;
+    CCWeekControllView *_weekControllView;
     ASCPageView *_pageView;
     CCViewSheet *_viewSheet;
 }

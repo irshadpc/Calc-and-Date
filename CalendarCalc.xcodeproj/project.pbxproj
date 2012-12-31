@@ -28,6 +28,13 @@
 		62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */; };
 		62324C65167C42A70062EF1B /* NSString+Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C64167C42A60062EF1B /* NSString+Locale.m */; };
 		62324C6E167C4D120062EF1B /* NSDateFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */; };
+		626BB0AA169158D9004E9E63 /* CCWeekControllView.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0A9169158D9004E9E63 /* CCWeekControllView.m */; };
+		626BB0B316915D97004E9E63 /* ASCSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B216915D96004E9E63 /* ASCSwitchButton.m */; };
+		626BB0B6169163DB004E9E63 /* UIColor+SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B5169163DB004E9E63 /* UIColor+SwitchButton.m */; };
+		626BB0B91691642A004E9E63 /* UIImage+SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B81691642A004E9E63 /* UIImage+SwitchButton.m */; };
+		626BB0BC16916471004E9E63 /* NSString+Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0BB16916471004E9E63 /* NSString+Week.m */; };
+		626BB0C01691698C004E9E63 /* UIFont+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0BF1691698C004E9E63 /* UIFont+Calendar.m */; };
+		626BB0C316916A3E004E9E63 /* UIImage+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0C216916A3E004E9E63 /* UIImage+Calendar.m */; };
 		62A144CA16859BE3001E2843 /* key_click.aif in Resources */ = {isa = PBXBuildFile; fileRef = 62A144C916859BE3001E2843 /* key_click.aif */; };
 		62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144CD1685F4BD001E2843 /* NSArray+safe.m */; };
 		62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D01685F559001E2843 /* ASCCalendarButton.m */; };
@@ -204,6 +211,21 @@
 		62324C64167C42A60062EF1B /* NSString+Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Locale.m"; sourceTree = "<group>"; };
 		62324C6C167C4D100062EF1B /* NSDateFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
+		626BB0A8169158D9004E9E63 /* CCWeekControllView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWeekControllView.h; sourceTree = "<group>"; };
+		626BB0A9169158D9004E9E63 /* CCWeekControllView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCWeekControllView.m; sourceTree = "<group>"; };
+		626BB0AC169159BE004E9E63 /* ASCWeek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCWeek.h; sourceTree = "<group>"; };
+		626BB0B116915D96004E9E63 /* ASCSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCSwitchButton.h; sourceTree = "<group>"; };
+		626BB0B216915D96004E9E63 /* ASCSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCSwitchButton.m; sourceTree = "<group>"; };
+		626BB0B4169163DB004E9E63 /* UIColor+SwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SwitchButton.h"; sourceTree = "<group>"; };
+		626BB0B5169163DB004E9E63 /* UIColor+SwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SwitchButton.m"; sourceTree = "<group>"; };
+		626BB0B71691642A004E9E63 /* UIImage+SwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SwitchButton.h"; sourceTree = "<group>"; };
+		626BB0B81691642A004E9E63 /* UIImage+SwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SwitchButton.m"; sourceTree = "<group>"; };
+		626BB0BA16916471004E9E63 /* NSString+Week.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Week.h"; sourceTree = "<group>"; };
+		626BB0BB16916471004E9E63 /* NSString+Week.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Week.m"; sourceTree = "<group>"; };
+		626BB0BE1691698C004E9E63 /* UIFont+Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Calendar.h"; sourceTree = "<group>"; };
+		626BB0BF1691698C004E9E63 /* UIFont+Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Calendar.m"; sourceTree = "<group>"; };
+		626BB0C116916A3D004E9E63 /* UIImage+Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Calendar.h"; sourceTree = "<group>"; };
+		626BB0C216916A3E004E9E63 /* UIImage+Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Calendar.m"; sourceTree = "<group>"; };
 		62A144C916859BE3001E2843 /* key_click.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = key_click.aif; sourceTree = "<group>"; };
 		62A144CC1685F4BD001E2843 /* NSArray+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+safe.h"; sourceTree = "<group>"; };
 		62A144CD1685F4BD001E2843 /* NSArray+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+safe.m"; sourceTree = "<group>"; };
@@ -694,11 +716,16 @@
 				62F4D92D1681F381001FF7FA /* ASCCalendarControllView.m */,
 				62DAF6141680AF6F00A14D3C /* ASCPageView.h */,
 				62DAF6151680AF6F00A14D3C /* ASCPageView.m */,
+				626BB0B116915D96004E9E63 /* ASCSwitchButton.h */,
+				626BB0B216915D96004E9E63 /* ASCSwitchButton.m */,
+				626BB0A8169158D9004E9E63 /* CCWeekControllView.h */,
+				626BB0A9169158D9004E9E63 /* CCWeekControllView.m */,
 				62021345167DC7DD00BFF836 /* CCViewSheet.h */,
 				62021346167DC7DD00BFF836 /* CCViewSheet.m */,
 				62A2D121167383A8001CC9AE /* CCCopybleLabel.h */,
 				62A2D122167383A8001CC9AE /* CCCopybleLabel.m */,
 				62A144D91686D3E9001E2843 /* ASCCalendarConstant.h */,
+				626BB0AC169159BE004E9E63 /* ASCWeek.h */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -755,10 +782,20 @@
 				62F4D92A1681EA6F001FF7FA /* NSString+Date.m */,
 				62324C63167C42A50062EF1B /* NSString+Locale.h */,
 				62324C64167C42A60062EF1B /* NSString+Locale.m */,
+				626BB0BA16916471004E9E63 /* NSString+Week.h */,
+				626BB0BB16916471004E9E63 /* NSString+Week.m */,
 				62021337167DB5EB00BFF836 /* NSDate+AdditionalConvenienceConstructor.h */,
 				62021338167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m */,
 				6202133A167DB7CA00BFF836 /* UIColor+Calendar.h */,
 				6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */,
+				626BB0B4169163DB004E9E63 /* UIColor+SwitchButton.h */,
+				626BB0B5169163DB004E9E63 /* UIColor+SwitchButton.m */,
+				626BB0C116916A3D004E9E63 /* UIImage+Calendar.h */,
+				626BB0C216916A3E004E9E63 /* UIImage+Calendar.m */,
+				626BB0B71691642A004E9E63 /* UIImage+SwitchButton.h */,
+				626BB0B81691642A004E9E63 /* UIImage+SwitchButton.m */,
+				626BB0BE1691698C004E9E63 /* UIFont+Calendar.h */,
+				626BB0BF1691698C004E9E63 /* UIFont+Calendar.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -1004,6 +1041,13 @@
 				62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */,
 				62A144D71686CA32001E2843 /* CCCalendarViewController.m in Sources */,
 				62A144DC1687357A001E2843 /* CCYearMonthPickerController.m in Sources */,
+				626BB0AA169158D9004E9E63 /* CCWeekControllView.m in Sources */,
+				626BB0B316915D97004E9E63 /* ASCSwitchButton.m in Sources */,
+				626BB0B6169163DB004E9E63 /* UIColor+SwitchButton.m in Sources */,
+				626BB0B91691642A004E9E63 /* UIImage+SwitchButton.m in Sources */,
+				626BB0BC16916471004E9E63 /* NSString+Week.m in Sources */,
+				626BB0C01691698C004E9E63 /* UIFont+Calendar.m in Sources */,
+				626BB0C316916A3E004E9E63 /* UIImage+Calendar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

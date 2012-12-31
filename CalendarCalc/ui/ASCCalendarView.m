@@ -12,6 +12,8 @@
 #import "NSArray+safe.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
+#import "UIImage+Calendar.h"
+#import "ASCWeek.h"
 
 @interface ASCCalendarView ()
 @property (nonatomic, readwrite) NSInteger year;
@@ -19,7 +21,6 @@
 
 - (void)reloadCalendarView;
 - (void)onPressCalendarButton:(ASCCalendarButton *)sender;
-- (UIImage *)calendarImage;
 @end
 
 
@@ -31,7 +32,7 @@
     if ((self = [super initWithFrame:CGRectMake(frame.origin.x,
                                                 frame.origin.y,
                                                 (DefaultSize * 7) + (ASCCalendarMargin * 2),
-                                                (DefaultSize * 6) + ASCCalendarMargin)])) {
+                                                (DefaultSize * ASCWeekCount) + ASCCalendarMargin)])) {
         NSDate *date = [NSDate date];
         _year = [date year];
         _month = [date month];
@@ -55,7 +56,7 @@
 
     CGRect newFrame = self.frame;
     newFrame.size.width = _calendarButtonSize.width * 7;
-    newFrame.size.height = _calendarButtonSize.height * 6;
+    newFrame.size.height = _calendarButtonSize.height * ASCWeekCount;
     self.frame = newFrame;
 
     [self reloadCalendarView];
@@ -107,9 +108,9 @@
                                               month: self.month];
     
     NSInteger firstDay = 1 - [startOfMonth weekday];
-    NSInteger lastDay = [endOfMonth day] + (7 - [endOfMonth weekday]);
+    NSInteger lastDay = [endOfMonth day] + (ASCSaturday - [endOfMonth weekday]);
    
-    NSInteger weekday = 1;
+    NSInteger weekday = ASCSunday;
     NSInteger dayOfMonth = [[NSDate dateWithYear: self.year
                                            month: self.month
                                              day: firstDay + 1] day];
@@ -123,7 +124,7 @@
         ASCCalendarButton *calendarButton = (id)[self viewWithTag:calendarIndex];
         if (!calendarButton) {
             calendarButton = [[ASCCalendarButton alloc] init];
-            [calendarButton setImage:[self calendarImage] forState:UIControlStateNormal];
+            [calendarButton setImage:[UIImage calendarImage] forState:UIControlStateNormal];
 
             [self addSubview:calendarButton];
 
@@ -142,7 +143,7 @@
             [calendarButton setWeekday:weekday];
         }
 
-        if (weekday == 1) {
+        if (weekday == ASCSunday) {
             subBaseY++;
         }
 
@@ -154,8 +155,8 @@
         [calendarButton setTag:calendarIndex];
         
         weekday++;
-        if (weekday > 7) {
-            weekday = 1;
+        if (weekday > ASCSaturday) {
+            weekday = ASCSunday;
         }
         
         dayOfMonth++;
@@ -175,14 +176,5 @@
     [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear:sender.year
                                                                     month:sender.month
                                                                       day:sender.dayOfCalendar]];
-}
-
-- (UIImage *)calendarImage
-{
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"calendar_day"];
-    }
-    return image;
 }
 @end

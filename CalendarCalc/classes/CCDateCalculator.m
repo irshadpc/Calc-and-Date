@@ -72,30 +72,35 @@ typedef enum {
     return [self calcWithDate:rOperand function:CCMinus];
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)multiplyWithNumber:(NSDecimalNumber *)rOperand
 {
     [self cacheWithNumber:rOperand];
     return nil;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)multiplyWithDate:(NSDate *)rOperand
 {
     [self cacheWithDate:rOperand function:CCMultiply];
     return nil;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)divideWithNumber:(NSDecimalNumber *)rOperand
 {
     [self cacheWithNumber:rOperand];
     return nil;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)divideWithDate:(NSDate *)rOperand
 {
     [self cacheWithDate:rOperand function:CCDivide];
     return nil;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)reverse
 {
     if (!_numberResult) {
@@ -143,7 +148,7 @@ typedef enum {
 
 
 #pragma mark - Private
-
+////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)calcWithNumber:(NSDecimalNumber *)rOperand 
                   function:(CCDateFunction)function
 {
@@ -169,6 +174,7 @@ typedef enum {
     return [self setDateRusult:[_dateResult addingByDay:addingDay]];
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)calcWithDate:(NSDate *)rOperand 
                          function:(CCDateFunction)function
 {
@@ -210,6 +216,7 @@ typedef enum {
     return _numberResult;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (void)cacheWithNumber:(NSDecimalNumber *)rOperand
 {
     if (!rOperand) {
@@ -218,6 +225,7 @@ typedef enum {
     [self setNumberResult:[NSDecimalNumber zero]];
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (void)cacheWithDate:(NSDate *)rOperand
              function:(CCDateFunction)function
 {
@@ -235,6 +243,7 @@ typedef enum {
     [self setDateRusult:rOperand];
 }
 
+////////////////////////////////////////////////////////////////////////////////
 - (void)updateDateResult:(NSDate *)result
                 function:(CCDateFunction)function
 {
@@ -252,11 +261,12 @@ typedef enum {
     }
 }
 
-- (NSDecimalNumber *)weekCountWithStartDate: (NSDate *)startDate
-                                    endDate: (NSDate *)endDate
+////////////////////////////////////////////////////////////////////////////////
+- (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
+                                    endDate:(NSDate *)endDate
 {
     NSDate *minDate, *maxDate;
-    if ([startDate compare:endDate] <= 0) {
+    if ([startDate compare:endDate] == NSOrderedAscending) {
         minDate = [startDate addingByDay:1];
         maxDate = endDate;
     } else {
@@ -283,14 +293,14 @@ typedef enum {
         if (weekday > 7) {
             weekday = 1;
         }
-        if ([disabledWeeks indexOfObject: @(weekday)] != NSNotFound) {
+        if ([disabledWeeks indexOfObject:@(weekday)] != NSNotFound) {
             weekCount++;
         }
         weekday++;
     }
     disabledWeeks = nil;
     
-    return [NSDecimalNumber decimalNumberWithString: @(weekCount).stringValue];
+    return [NSDecimalNumber decimalNumberWithString:@(weekCount).stringValue];
 }
 
 @end
