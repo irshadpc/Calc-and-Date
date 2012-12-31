@@ -17,39 +17,34 @@
 @property (nonatomic, readwrite) BOOL eventLoaded;
 
 - (void)reloadEvents;
+- (void)setupNotification;
 @end
 
 static const NSInteger EventIntervalYear = 2;
 
 @implementation ASCEventManager
-- (id)init {
+- (id)initWithDelegate:(id<ASCEventManagerDelegate>)delegate {
     if ((self = [super init])) {
+        _delegate = delegate;
         _eventStore = [[EKEventStore alloc] init];
+        if ([_eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
+            [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+                _granted = granted;
+                [self reloadEvents];
+                [self setupNotification];
+            }];
+        } else {
+            _granted = YES;
+            [self reloadEvents];
+            [self setupNotification];
+        }
     }
     return self;
 }
 
-- (void)eventLoadWithCompletion:(void (^)(BOOL))completion
+- (void)dealloc
 {
-    if ([_eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
-        [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {             
-            _granted = granted;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self reloadEvents];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion(granted);
-                });
-            });
-        }];
-    } else {
-        _granted = YES;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self reloadEvents];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(YES);
-            });
-        });
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -57,27 +52,43 @@ static const NSInteger EventIntervalYear = 2;
 
 - (void)reloadEvents
 {
-    if (!_granted) {
-        return;
-    }
+    self.events = nil;
+    [self.delegate startEventLoad:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.eventLoaded = NO;
+        if (_granted) {
+            self.todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
+            NSMutableArray *distinctEvents = [NSMutableArray arrayWithObject:self.todayEvent];
+            NSDate *date = [NSDate date];
+            NSArray *events = [_eventStore eventsMatchingPredicate:
+                               [_eventStore predicateForEventsWithStartDate:[[date addingByYear:-EventIntervalYear] noTime]
+                                                                    endDate:[[date addingByYear:EventIntervalYear] noTime]
+                                                                  calendars:nil]];
+            for (EKEvent *event in events) {
+                NSPredicate *containPredicate = [NSPredicate predicateWithFormat:@"eventIdentifier = %@", event.eventIdentifier];
 
-    self.todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
-    NSMutableArray *distinctEvents = [NSMutableArray arrayWithObject:self.todayEvent];
-    NSDate *date = [NSDate date];
-    NSArray *events = [_eventStore eventsMatchingPredicate:
-                       [_eventStore predicateForEventsWithStartDate:[[date addingByYear:-EventIntervalYear] noTime]
-                                                            endDate:[[date addingByYear:EventIntervalYear] noTime]
-                                                          calendars:nil]];
-    for (EKEvent *event in events) {
-        NSPredicate *containPredicate = [NSPredicate predicateWithFormat:@"eventIdentifier = %@", event.eventIdentifier];
+                if ([[distinctEvents filteredArrayUsingPredicate:containPredicate] count] == 0) {
+                    [distinctEvents addObject:event];
+                }
+            }
 
-        if ([[distinctEvents filteredArrayUsingPredicate:containPredicate] count] == 0) {
-            [distinctEvents addObject:event];
+            self.events = [distinctEvents sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
+            self.eventLoaded = YES;
         }
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate completeEventLoad:self granted:_granted];
+        });
+    });
+}
 
-    self.eventLoaded = YES;
-    self.events = [distinctEvents sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
+- (void)setupNotification
+{
+    if (_granted) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadEvents)
+                                                     name:EKEventStoreChangedNotification
+                                                   object:_eventStore];
+    }
 }
 
 @end

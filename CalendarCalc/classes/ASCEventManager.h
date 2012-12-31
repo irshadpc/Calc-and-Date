@@ -9,14 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <EventKit/EventKit.h>
 
+@protocol ASCEventManagerDelegate;
+
 @interface ASCEventManager : NSObject {
   @private
     EKEventStore *_eventStore;
     BOOL _granted;
 }
+@property (weak, nonatomic) id <ASCEventManagerDelegate> delegate;
 @property (strong, nonatomic, readonly) NSArray *events;
 @property (strong, nonatomic, readonly) EKEvent *todayEvent;
 @property (nonatomic, readonly, getter = isEventLoaded) BOOL eventLoaded;
 
-- (void)eventLoadWithCompletion:(void(^)(BOOL))completion;
+- (id)initWithDelegate:(id <ASCEventManagerDelegate>)delegate;
+@end
+
+@protocol ASCEventManagerDelegate <NSObject>
+- (void)startEventLoad:(ASCEventManager *)eventManager;
+- (void)completeEventLoad:(ASCEventManager *)eventManager granted:(BOOL)granted;
 @end

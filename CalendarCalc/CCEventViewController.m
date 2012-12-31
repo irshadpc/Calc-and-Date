@@ -12,12 +12,10 @@
 #import "NSDate+Component.h"
 #import "NSDate+Style.h"
 
-@interface CCEventViewController ()
+@interface CCEventViewController () <ASCEventManagerDelegate>
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property (strong, nonatomic) ASCEventManager *eventManager;
-
-- (void)eventLoadCompletion;
 @end
 
 @implementation CCEventViewController
@@ -38,10 +36,7 @@
         _indicatorView.hidden = NO;
         [self.view addSubview:_indicatorView];
         
-        _eventManager = [[ASCEventManager alloc] init];
-        [_eventManager eventLoadWithCompletion:^(BOOL granted) {
-            [self eventLoadCompletion];            
-        }];
+        _eventManager = [[ASCEventManager alloc] initWithDelegate:self];
     }
     return self;
 }
@@ -53,7 +48,6 @@
     
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +65,8 @@
     return _selectedDate;
 }
 
-#pragma UIPickerView
+
+#pragma mark - UIPickerView
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -100,19 +95,29 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 
-#pragma mark - Private
+#pragma mark - ASCEventManager
 
-- (void)eventLoadCompletion
+- (void)startEventLoad:(ASCEventManager *)eventManager
+{
+    [self.pickerView reloadAllComponents];
+    [self.pickerView setUserInteractionEnabled:NO];
+    [self.indicatorView startAnimating];
+    [self.indicatorView setHidden:NO];
+}
+
+- (void)completeEventLoad:(ASCEventManager *)eventManager
+                  granted:(BOOL)granted
 {
     NSInteger index = [self.eventManager.events indexOfObject:self.eventManager.todayEvent];
-    [self.pickerView reloadAllComponents];
+    [self.pickerView reloadComponent:0];
     if (index != NSNotFound) {
         [self.pickerView selectRow:index inComponent:0 animated:NO];
     }
-    self.indicatorView.hidden = YES;
+    
+    [self.indicatorView setHidden:YES];
     [self.indicatorView stopAnimating];
-
-    self.pickerView.userInteractionEnabled = YES;
+    [self.pickerView setUserInteractionEnabled:YES];
 }
+
 
 @end
