@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+@class CCViewSheet;
+
 @interface CCViewController : UIViewController {
   @private
     AVAudioPlayer *_player;
+    CCViewSheet *_currentViewSheet;
 }
 
 @end

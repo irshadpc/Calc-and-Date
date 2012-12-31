@@ -12,6 +12,17 @@
 @implementation NSDate (Calc)
 
 ////////////////////////////////////////////////////////////////////////////////
+- (NSDate *)addingByYear:(NSInteger)year
+{
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
+                                                                       fromDate: self];
+    dateComponents.year += year;
+
+    return [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)addingByDay:(NSInteger)day
 {
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]

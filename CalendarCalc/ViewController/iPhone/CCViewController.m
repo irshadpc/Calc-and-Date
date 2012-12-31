@@ -8,6 +8,7 @@
 
 #import "CCViewController.h"
 #import "CCCalendarViewController.h"
+#import "CCEventViewController.h"
 #import "CCCalendarCalc.h"
 #import "CCCalendarCalcResult.h"
 #import "CCViewSheet.h"
@@ -20,8 +21,8 @@
 
 // properties
 @property (strong, nonatomic) CCCalendarViewController *calendarViewController;
+@property (strong, nonatomic) CCEventViewController *eventViewController;
 @property (strong, nonatomic) CCCalendarCalc *calendarCalc;
-@property (strong, nonatomic) CCViewSheet *viewSheet;
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *indicatorText;
@@ -34,7 +35,8 @@
 - (IBAction)onNumber:(UIButton *)sender;
 - (IBAction)onDate:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
-
+- (void)onEventButton:(UIBarButtonItem *)sender;
+- (UIBarButtonItem *)eventButton;
 @end
 
 @implementation CCViewController
@@ -56,6 +58,8 @@ enum {
         [_player prepareToPlay];
 
         _calendarCalc = [[CCCalendarCalc alloc] init];
+        _calendarViewController = [[CCCalendarViewController alloc] init];
+        _eventViewController = [[CCEventViewController alloc] init];
     }
     return self;
 }
@@ -67,9 +71,10 @@ enum {
     NSDate *date = [NSDate date];
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];
-    
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
+    
+    self.calendarViewController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,19 +103,39 @@ enum {
 
 - (IBAction)onDate:(UIButton *)sender
 {
-    if (!self.calendarViewController) {
-        self.calendarViewController = [[CCCalendarViewController alloc] init];
-        self.calendarViewController.delegate = self;
-        self.viewSheet = [[CCViewSheet alloc] initWithContentViewController:self.calendarViewController];
-        self.viewSheet.delegate = self;
+    if ([_currentViewSheet isVisible]) {
+        [_currentViewSheet dismissContainerViewWithAnimated:YES];
     }
-    [self.viewSheet showInView:self.view animated:YES];
+    
+    _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.calendarViewController];
+    _currentViewSheet.delegate = self;
+    [_currentViewSheet setRightButton:[self eventButton]];
+    [_currentViewSheet showInView:self.view animated:YES];
 }
 
 - (IBAction)onClick:(UIButton *)sender
 {
     [_player setCurrentTime:0];
     [_player play];
+}
+
+- (void)onEventButton:(UIBarButtonItem *)sender
+{
+    if ([_currentViewSheet isVisible]) {
+        [_currentViewSheet dismissContainerViewWithAnimated:YES];
+    }
+   
+    _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.eventViewController];
+    _currentViewSheet.delegate = self;
+    [_currentViewSheet showInView:self.view animated:YES];
+}
+
+- (UIBarButtonItem *)eventButton
+{
+    return [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"EVENT", nil)
+                                            style:UIBarButtonItemStyleBordered
+                                           target:self 
+                                           action:@selector(onEventButton:)];
 }
 
 
@@ -121,7 +146,9 @@ enum {
     self.display.text = [[self.calendarCalc inputDate:date] displayResult];
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]] 
                      forState:UIControlStateNormal];
-    [self.viewSheet dismissContainerViewWithAnimated:YES];
+    if ([_currentViewSheet isVisible]) {
+        [_currentViewSheet dismissContainerViewWithAnimated:YES];
+    }
 }
 
 - (void)didSelectWeek:(ASCWeek)week
@@ -134,13 +161,8 @@ enum {
 
 - (void)viewSheetClickedCancelButton:(CCViewSheet *)viewSheet
 {
-    [viewSheet dismissContainerViewWithAnimated:YES];
-}
-
-- (void)viewSheet:(CCViewSheet *)viewSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        NSLog(@"EVENT");
+    if ([viewSheet isVisible]) {
+        [viewSheet dismissContainerViewWithAnimated:YES];
     }
 }
 

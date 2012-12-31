@@ -15,6 +15,7 @@
 @property (weak, nonatomic) id <CCViewSheetDelegate> delegate;
 @property (strong, nonatomic, readonly) UIViewController *contentViewController;
 @property (strong, nonatomic, readonly) UIView *containerView;
+@property (nonatomic, readonly, getter = isVisible) BOOL visible;
 
 - (id)initWithContentViewController:(UIViewController *)contentViewController;
 - (id)initWithContentView:(UIView *)contentView;
@@ -22,6 +23,7 @@
 - (void)dismissContainerViewWithAnimated:(BOOL)animated;
 - (void)setRightButton:(UIBarButtonItem *)rightButton;
 @end
+
 
 @protocol CCViewSheetDelegate <NSObject>
 @required

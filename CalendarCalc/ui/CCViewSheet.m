@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSMutableArray *barButonItems;
 @property (strong, nonatomic, readwrite) UIViewController *contentViewController;
 @property (strong, nonatomic) UIView *protectView;
+@property (nonatomic, readwrite) BOOL visible;
 
 - (CGRect)containerFrameWithContentView:(UIView *)view;
 - (UIBarButtonItem *)cancelButton;
@@ -81,6 +82,7 @@
                          CGRect showFrame = self.frame;
                          showFrame.origin.y -= self.frame.size.height;
                          self.frame = showFrame;
+                         self.visible = YES;
                      }];
 }
 
@@ -97,6 +99,7 @@
                          if (finished) {
                              [self.protectView removeFromSuperview];
                              [self removeFromSuperview];
+                             self.visible = NO;
                          }
                      }];
 }

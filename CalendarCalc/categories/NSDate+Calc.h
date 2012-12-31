@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDate (Calc)
+- (NSDate *)addingByYear:(NSInteger)year;
 - (NSDate *)addingByDay:(NSInteger)day;
 - (NSInteger)dayIntervalWithDate:(NSDate *)date;
 @end

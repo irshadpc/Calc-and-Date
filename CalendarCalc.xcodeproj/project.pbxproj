@@ -35,6 +35,14 @@
 		626BB0BC16916471004E9E63 /* NSString+Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0BB16916471004E9E63 /* NSString+Week.m */; };
 		626BB0C01691698C004E9E63 /* UIFont+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0BF1691698C004E9E63 /* UIFont+Calendar.m */; };
 		626BB0C316916A3E004E9E63 /* UIImage+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0C216916A3E004E9E63 /* UIImage+Calendar.m */; };
+		626BB0CC16917D81004E9E63 /* calendar_day@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 626BB0C816917D81004E9E63 /* calendar_day@2x~iphone.png */; };
+		626BB0CD16917D81004E9E63 /* date_select_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 626BB0C916917D81004E9E63 /* date_select_button@2x~iphone.png */; };
+		626BB0CE16917D81004E9E63 /* next_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 626BB0CA16917D81004E9E63 /* next_button@2x~iphone.png */; };
+		626BB0CF16917D81004E9E63 /* prev_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 626BB0CB16917D81004E9E63 /* prev_button@2x~iphone.png */; };
+		626BB0D216917E54004E9E63 /* ASCEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0D116917E54004E9E63 /* ASCEventManager.m */; };
+		626BB0D416917ECA004E9E63 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626BB0D316917EC9004E9E63 /* EventKit.framework */; };
+		626BB0E116918541004E9E63 /* EKEvent+Today.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0E01691853C004E9E63 /* EKEvent+Today.m */; };
+		626BB0E416918723004E9E63 /* CCEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0E316918723004E9E63 /* CCEventViewController.m */; };
 		62A144CA16859BE3001E2843 /* key_click.aif in Resources */ = {isa = PBXBuildFile; fileRef = 62A144C916859BE3001E2843 /* key_click.aif */; };
 		62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144CD1685F4BD001E2843 /* NSArray+safe.m */; };
 		62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D01685F559001E2843 /* ASCCalendarButton.m */; };
@@ -68,10 +76,6 @@
 		62A2D097167380BC001CC9AE /* plus_key@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D086167380BC001CC9AE /* plus_key@2x~iphone.png */; };
 		62A2D098167380BC001CC9AE /* operator_key@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D087167380BC001CC9AE /* operator_key@2x~iphone.png */; };
 		62A2D099167380BC001CC9AE /* number_key@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D088167380BC001CC9AE /* number_key@2x~iphone.png */; };
-		62A2D09A167380BC001CC9AE /* date_select_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D089167380BC001CC9AE /* date_select_button@2x~iphone.png */; };
-		62A2D09B167380BC001CC9AE /* prev_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D08A167380BC001CC9AE /* prev_button@2x~iphone.png */; };
-		62A2D09C167380BC001CC9AE /* next_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D08B167380BC001CC9AE /* next_button@2x~iphone.png */; };
-		62A2D09D167380BC001CC9AE /* calendar_day@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D08C167380BC001CC9AE /* calendar_day@2x~iphone.png */; };
 		62A2D09E167380BC001CC9AE /* switch_button_on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D08D167380BC001CC9AE /* switch_button_on@2x~iphone.png */; };
 		62A2D09F167380BC001CC9AE /* switch_button_off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D08E167380BC001CC9AE /* switch_button_off@2x~iphone.png */; };
 		62A2D0A9167380C7001CC9AE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0A0167380C7001CC9AE /* Default-568h@2x.png */; };
@@ -226,6 +230,17 @@
 		626BB0BF1691698C004E9E63 /* UIFont+Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Calendar.m"; sourceTree = "<group>"; };
 		626BB0C116916A3D004E9E63 /* UIImage+Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Calendar.h"; sourceTree = "<group>"; };
 		626BB0C216916A3E004E9E63 /* UIImage+Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Calendar.m"; sourceTree = "<group>"; };
+		626BB0C816917D81004E9E63 /* calendar_day@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day@2x~iphone.png"; sourceTree = "<group>"; };
+		626BB0C916917D81004E9E63 /* date_select_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_select_button@2x~iphone.png"; sourceTree = "<group>"; };
+		626BB0CA16917D81004E9E63 /* next_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x~iphone.png"; sourceTree = "<group>"; };
+		626BB0CB16917D81004E9E63 /* prev_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev_button@2x~iphone.png"; sourceTree = "<group>"; };
+		626BB0D016917E54004E9E63 /* ASCEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCEventManager.h; sourceTree = "<group>"; };
+		626BB0D116917E54004E9E63 /* ASCEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCEventManager.m; sourceTree = "<group>"; };
+		626BB0D316917EC9004E9E63 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		626BB0DF1691853A004E9E63 /* EKEvent+Today.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EKEvent+Today.h"; sourceTree = "<group>"; };
+		626BB0E01691853C004E9E63 /* EKEvent+Today.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EKEvent+Today.m"; sourceTree = "<group>"; };
+		626BB0E216918723004E9E63 /* CCEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEventViewController.h; sourceTree = "<group>"; };
+		626BB0E316918723004E9E63 /* CCEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCEventViewController.m; sourceTree = "<group>"; };
 		62A144C916859BE3001E2843 /* key_click.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = key_click.aif; sourceTree = "<group>"; };
 		62A144CC1685F4BD001E2843 /* NSArray+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+safe.h"; sourceTree = "<group>"; };
 		62A144CD1685F4BD001E2843 /* NSArray+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+safe.m"; sourceTree = "<group>"; };
@@ -265,10 +280,6 @@
 		62A2D086167380BC001CC9AE /* plus_key@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_key@2x~iphone.png"; sourceTree = "<group>"; };
 		62A2D087167380BC001CC9AE /* operator_key@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator_key@2x~iphone.png"; sourceTree = "<group>"; };
 		62A2D088167380BC001CC9AE /* number_key@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number_key@2x~iphone.png"; sourceTree = "<group>"; };
-		62A2D089167380BC001CC9AE /* date_select_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_select_button@2x~iphone.png"; sourceTree = "<group>"; };
-		62A2D08A167380BC001CC9AE /* prev_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev_button@2x~iphone.png"; sourceTree = "<group>"; };
-		62A2D08B167380BC001CC9AE /* next_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x~iphone.png"; sourceTree = "<group>"; };
-		62A2D08C167380BC001CC9AE /* calendar_day@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day@2x~iphone.png"; sourceTree = "<group>"; };
 		62A2D08D167380BC001CC9AE /* switch_button_on@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_on@2x~iphone.png"; sourceTree = "<group>"; };
 		62A2D08E167380BC001CC9AE /* switch_button_off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_off@2x~iphone.png"; sourceTree = "<group>"; };
 		62A2D0A0167380C7001CC9AE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -390,6 +401,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				626BB0D416917ECA004E9E63 /* EventKit.framework in Frameworks */,
 				62021331167CBF8D00BFF836 /* AVFoundation.framework in Frameworks */,
 				621355DC16737DA100C93999 /* UIKit.framework in Frameworks */,
 				621355DE16737DA100C93999 /* Foundation.framework in Frameworks */,
@@ -432,6 +444,7 @@
 		621355DA16737DA100C93999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				626BB0D316917EC9004E9E63 /* EventKit.framework */,
 				62021330167CBF8D00BFF836 /* AVFoundation.framework */,
 				621355DB16737DA100C93999 /* UIKit.framework */,
 				621355DD16737DA100C93999 /* Foundation.framework */,
@@ -505,6 +518,8 @@
 				62A144D61686CA32001E2843 /* CCCalendarViewController.m */,
 				62A144DA16873579001E2843 /* CCYearMonthPickerController.h */,
 				62A144DB1687357A001E2843 /* CCYearMonthPickerController.m */,
+				626BB0E216918723004E9E63 /* CCEventViewController.h */,
+				626BB0E316918723004E9E63 /* CCEventViewController.m */,
 				62A144D81686CA5A001E2843 /* CCDateSelect.h */,
 			);
 			name = ViewController;
@@ -607,10 +622,10 @@
 				62A2D086167380BC001CC9AE /* plus_key@2x~iphone.png */,
 				62A2D087167380BC001CC9AE /* operator_key@2x~iphone.png */,
 				62A2D088167380BC001CC9AE /* number_key@2x~iphone.png */,
-				62A2D089167380BC001CC9AE /* date_select_button@2x~iphone.png */,
-				62A2D08A167380BC001CC9AE /* prev_button@2x~iphone.png */,
-				62A2D08B167380BC001CC9AE /* next_button@2x~iphone.png */,
-				62A2D08C167380BC001CC9AE /* calendar_day@2x~iphone.png */,
+				626BB0C816917D81004E9E63 /* calendar_day@2x~iphone.png */,
+				626BB0C916917D81004E9E63 /* date_select_button@2x~iphone.png */,
+				626BB0CA16917D81004E9E63 /* next_button@2x~iphone.png */,
+				626BB0CB16917D81004E9E63 /* prev_button@2x~iphone.png */,
 				62A2D08D167380BC001CC9AE /* switch_button_on@2x~iphone.png */,
 				62A2D08E167380BC001CC9AE /* switch_button_off@2x~iphone.png */,
 			);
@@ -751,6 +766,8 @@
 				62B53EE0167C64C600394427 /* CCDateResult.m */,
 				62021333167DA7D300BFF836 /* CCCalcType.h */,
 				621B0D2B168FE33D00DE2150 /* CCFunction.h */,
+				626BB0D016917E54004E9E63 /* ASCEventManager.h */,
+				626BB0D116917E54004E9E63 /* ASCEventManager.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -796,6 +813,8 @@
 				626BB0B81691642A004E9E63 /* UIImage+SwitchButton.m */,
 				626BB0BE1691698C004E9E63 /* UIFont+Calendar.h */,
 				626BB0BF1691698C004E9E63 /* UIFont+Calendar.m */,
+				626BB0DF1691853A004E9E63 /* EKEvent+Today.h */,
+				626BB0E01691853C004E9E63 /* EKEvent+Today.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -903,10 +922,6 @@
 				62A2D097167380BC001CC9AE /* plus_key@2x~iphone.png in Resources */,
 				62A2D098167380BC001CC9AE /* operator_key@2x~iphone.png in Resources */,
 				62A2D099167380BC001CC9AE /* number_key@2x~iphone.png in Resources */,
-				62A2D09A167380BC001CC9AE /* date_select_button@2x~iphone.png in Resources */,
-				62A2D09B167380BC001CC9AE /* prev_button@2x~iphone.png in Resources */,
-				62A2D09C167380BC001CC9AE /* next_button@2x~iphone.png in Resources */,
-				62A2D09D167380BC001CC9AE /* calendar_day@2x~iphone.png in Resources */,
 				62A2D09E167380BC001CC9AE /* switch_button_on@2x~iphone.png in Resources */,
 				62A2D09F167380BC001CC9AE /* switch_button_off@2x~iphone.png in Resources */,
 				62A2D0A9167380C7001CC9AE /* Default-568h@2x.png in Resources */,
@@ -974,6 +989,10 @@
 				62A2D11D167380E8001CC9AE /* switch_button_on@2x~ipad.png in Resources */,
 				62F4D9271681E9C9001FF7FA /* Localizable.strings in Resources */,
 				62A144CA16859BE3001E2843 /* key_click.aif in Resources */,
+				626BB0CC16917D81004E9E63 /* calendar_day@2x~iphone.png in Resources */,
+				626BB0CD16917D81004E9E63 /* date_select_button@2x~iphone.png in Resources */,
+				626BB0CE16917D81004E9E63 /* next_button@2x~iphone.png in Resources */,
+				626BB0CF16917D81004E9E63 /* prev_button@2x~iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1067,9 @@
 				626BB0BC16916471004E9E63 /* NSString+Week.m in Sources */,
 				626BB0C01691698C004E9E63 /* UIFont+Calendar.m in Sources */,
 				626BB0C316916A3E004E9E63 /* UIImage+Calendar.m in Sources */,
+				626BB0D216917E54004E9E63 /* ASCEventManager.m in Sources */,
+				626BB0E116918541004E9E63 /* EKEvent+Today.m in Sources */,
+				626BB0E416918723004E9E63 /* CCEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
