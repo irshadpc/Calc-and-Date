@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CCFunction.h"
+#import "ASCWeek.h"
 
 @class CCCalendarCalcResult;
 @class CCNumberCalculator;
@@ -26,4 +27,5 @@
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function;
 - (CCCalendarCalcResult *)result;
+- (void)setWeek:(ASCWeek)week exclude:(BOOL)exclude;
 @end

@@ -124,6 +124,11 @@ enum {
     [self.viewSheet dismissContainerViewWithAnimated:YES];
 }
 
+- (void)didSelectWeek:(ASCWeek)week
+              exclude:(BOOL)exclude
+{
+    [_calendarCalc setWeek:week exclude:exclude];
+}
 
 #pragma mark - CCViewSheet
 

@@ -18,7 +18,13 @@
 #import "NSDate+Component.h"
 
 @interface CCCalendarViewController ()
-  <ASCCalendarViewDelegate, ASCCalendarControllViewDelegate, ASCPageViewDelegate, CCViewSheetDelegate>
+  < 
+    ASCCalendarViewDelegate,
+    ASCCalendarControllViewDelegate,
+    CCWeekControllViewDelegate,
+    ASCPageViewDelegate,
+    CCViewSheetDelegate
+  >
 
 - (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
 - (void)setCurrentYear:(NSInteger)year month:(NSInteger)month;
@@ -72,6 +78,7 @@
 {
     [super viewDidLoad];
     [_calendarControllView setDelegate:self];
+    [_weekControllView setDelegate:self];
     [_pageView setDelegate:self];
     [_pageView setPage:1 animated:NO];
 }
@@ -176,6 +183,15 @@
                    month:[(CCYearMonthPickerController *)_viewSheet.contentViewController month]];
 }
 
+
+#pragma mark - CCWeekControllerView
+
+- (void)weekControllView:(CCWeekControllView *)view
+                    week:(ASCWeek)week
+                      on:(BOOL)on
+{
+    [self.delegate didSelectWeek:week exclude:!on];
+}
 
 #pragma mark - ASCPageView
 

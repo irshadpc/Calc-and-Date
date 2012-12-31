@@ -15,7 +15,7 @@
     BOOL _isDateResult;
 }
 
-@property (weak, nonatomic) NSArray *weekStates;
+@property (strong, nonatomic) NSArray *excludeWeeks;
 
 - (void)clear;
 

@@ -13,8 +13,7 @@
 #import "NSDecimalNumber+Calc.h"
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumber+Predicate.h"
-
-#import "NSDateFormatter+CalendarCalc.h"
+#import "ASCWeek.h"
 
 typedef enum {
     CCNone,
@@ -34,8 +33,8 @@ typedef enum {
 - (void)cacheWithNumber:(NSDecimalNumber *)rOperand;
 - (void)cacheWithDate:(NSDate *)rOperand function:(CCDateFunction)function;
 - (void)updateDateResult:(NSDate *)result function:(CCDateFunction)function;
-- (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
-                                    endDate:(NSDate *)endDate;
+- (NSDecimalNumber *)excludeDayCountWithStartDate:(NSDate *)startDate
+                                          endDate:(NSDate *)endDate;
 @end
 
 
@@ -191,6 +190,14 @@ typedef enum {
     _numberResult = [NSDecimalNumber decimalNumberWithString:
                                  @([_dateResult dayIntervalWithDate:[rOperand noTime]]).stringValue];
 
+    if ([_numberResult isMinus]) {
+        _numberResult = [NSDecimalNumber reverse:_numberResult];
+    }
+
+    _numberResult = [NSDecimalNumber subtractingByDecimalNumber:_numberResult
+                                                       rOperand:[self excludeDayCountWithStartDate:_dateResult
+                                                                                           endDate:[rOperand noTime]]];
+
     if ((function == CCPlus && [_numberResult isMinus]) || (function == CCMinus && ![_numberResult isMinus])) {
         _numberResult = [NSDecimalNumber reverse:_numberResult];
     }
@@ -204,14 +211,6 @@ typedef enum {
         _function = CCNone;
         _tmpOperand = nil;
     }
-
-    /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
-     rOperand: [self weekCountWithStartDate: _dateResult
-     endDate: [rOperand noTime]]];
-
-     if ([_numberResult isMinus]) {
-     _numberResult = [NSDecimalNumber negate:_numberResult];
-     }*/
 
     return _numberResult;
 }
@@ -262,9 +261,13 @@ typedef enum {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-- (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
-                                    endDate:(NSDate *)endDate
+- (NSDecimalNumber *)excludeDayCountWithStartDate:(NSDate *)startDate
+                                          endDate:(NSDate *)endDate
 {
+    if ([self.excludeWeeks count] == 0) {
+        return [NSDecimalNumber zero];
+    }
+    
     NSDate *minDate, *maxDate;
     if ([startDate compare:endDate] == NSOrderedAscending) {
         minDate = [startDate addingByDay:1];
@@ -274,33 +277,20 @@ typedef enum {
         maxDate = startDate;
     }
 
-    NSMutableArray *disabledWeeks = [[NSMutableArray alloc] init];
-    for (NSInteger weekStatIndex = 0; weekStatIndex < 7; weekStatIndex++) {
-        if (![[self.weekStates objectAtIndex:weekStatIndex] boolValue]) {
-            [disabledWeeks addObject: @(weekStatIndex + 1)];
-        }
-    }
-
-    if ([disabledWeeks count] == 0) {
-        disabledWeeks = nil;
-        return [NSDecimalNumber zero];
-    }
-
-    NSInteger weekCount = 0;
+    NSInteger excludeDayCount = 0;
     NSInteger weekday = [minDate weekday];
     NSInteger interval = [minDate dayIntervalWithDate:maxDate];
     for (NSInteger day = 0; day <= interval; day++) {
-        if (weekday > 7) {
-            weekday = 1;
+        if (weekday > ASCSaturday) {
+            weekday = ASCSunday;
         }
-        if ([disabledWeeks indexOfObject:@(weekday)] != NSNotFound) {
-            weekCount++;
+        if ([self.excludeWeeks containsObject:@(weekday)]) {
+            excludeDayCount++;
         }
         weekday++;
     }
-    disabledWeeks = nil;
     
-    return [NSDecimalNumber decimalNumberWithString:@(weekCount).stringValue];
+    return [NSDecimalNumber decimalNumberWithString:@(excludeDayCount).stringValue];
 }
 
 @end

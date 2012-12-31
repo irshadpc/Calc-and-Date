@@ -104,6 +104,16 @@
     return _result;
 }
 
+- (void)setWeek:(ASCWeek)week
+        exclude:(BOOL)exclude
+{
+    NSMutableArray *excludeWeeks = [NSMutableArray arrayWithArray:[_dateCalculator excludeWeeks]];
+    [excludeWeeks removeObject:@(week)];
+    if (exclude) {
+        [excludeWeeks addObject:@(week)];
+    }
+    [_dateCalculator setExcludeWeeks:excludeWeeks];
+}
 
 #pragma mark - Private
 

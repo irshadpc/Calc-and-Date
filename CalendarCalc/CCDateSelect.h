@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ASCWeek.h"
 
 @protocol CCDateSelect <NSObject>
 - (void)didSelectDate:(NSDate *)date;
+- (void)didSelectWeek:(ASCWeek)week exclude:(BOOL)exclude;
 @end
