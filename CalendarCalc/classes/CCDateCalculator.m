@@ -18,6 +18,8 @@
 
 typedef enum {
     CCNone,
+    CCPlus,
+    CCMinus,
     CCMultiply,
     CCDivide,
 } CCDateFunction;
@@ -27,7 +29,11 @@ typedef enum {
     CCDateFunction _function;
     NSDecimalNumber *_tmpOperand;
 }
-
+- (NSDate *)calcWithNumber:(NSDecimalNumber *)rOperand function:(CCDateFunction)function;
+- (NSDecimalNumber *)calcWithDate:(NSDate *)rOperand function:(CCDateFunction)function;
+- (void)cacheWithNumber:(NSDecimalNumber *)rOperand;
+- (void)cacheWithDate:(NSDate *)rOperand function:(CCDateFunction)function;
+- (void)updateDateResult:(NSDate *)result function:(CCDateFunction)function;
 - (NSDecimalNumber *)weekCountWithStartDate:(NSDate *)startDate
                                     endDate:(NSDate *)endDate;
 @end
@@ -45,170 +51,48 @@ typedef enum {
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)plusWithNumber:(NSDecimalNumber *)rOperand 
 {
-    if (!rOperand || !_dateResult) {
-        return nil;
-    }
-
-    _isDateResult = YES;
-    _dateResult = [_dateResult addingByDay:rOperand.integerValue];
-    return _dateResult;
+    return [self calcWithNumber:rOperand function:CCPlus];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)plusWithDate:(NSDate *)rOperand 
 {
-    if (!rOperand) {
-        return nil;
-    }
-
-    if(!_dateResult && !_numberResult) {
-        _isDateResult = YES;
-        _dateResult = [rOperand noTime];
-        return nil;
-    } else if (!_dateResult) {
-        _dateResult = [rOperand noTime];
-        [self plusWithNumber:_numberResult];
-        return nil;
-    }
-
-    _isDateResult = NO;
-    _numberResult = [NSDecimalNumber decimalNumberWithString:
-                     @([_dateResult dayIntervalWithDate: [rOperand noTime]]).stringValue];
-    
-    if ([_numberResult isMinus]) {
-        _numberResult = [NSDecimalNumber reverse: _numberResult];
-    }
-   
-    if (_function == CCMultiply && _tmpOperand) {
-        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_tmpOperand rOperand:_numberResult];
-        _function = CCNone;
-        _tmpOperand = nil;
-    } else if (_function == CCDivide && _tmpOperand) {
-        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_tmpOperand rOperand:_numberResult];
-        _function = CCNone;
-        _tmpOperand = nil;
-    }
-    
-    /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
-                                                       rOperand: [self weekCountWithStartDate: _dateResult
-                                                                                      endDate: [rOperand noTime]]];
-
-    if ([_numberResult isMinus]) {
-        _numberResult = [NSDecimalNumber negate:_numberResult];
-    }*/
-
-    _dateResult = nil;
-    return _numberResult;
+    return [self calcWithDate:rOperand function:CCPlus];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)minusWithNumber:(NSDecimalNumber *)rOperand 
 {
-    if (!rOperand || !_dateResult) {
-        return nil;
-    }
-
-    _isDateResult = YES;
-    _dateResult = [_dateResult addingByDay:-rOperand.integerValue];
-    return _dateResult;
+    return [self calcWithNumber:rOperand function:CCMinus];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDecimalNumber *)minusWithDate:(NSDate *)rOperand 
 {
-    if (!rOperand) {
-        return nil;
-    }
-
-    if (!_dateResult && !_numberResult) {
-        _isDateResult = YES;
-        _dateResult = [rOperand noTime];
-        return nil;
-    } else if (!_dateResult) {
-        _dateResult = [rOperand noTime];
-        [self minusWithNumber:_numberResult];
-        return nil;
-    }
-
-    _isDateResult = NO;
-    _numberResult = [NSDecimalNumber decimalNumberWithString:
-                     @([[rOperand noTime] dayIntervalWithDate: _dateResult]).stringValue];
-
-    if (![_numberResult isMinus]) {
-        _numberResult = [NSDecimalNumber reverse: _numberResult];
-    }
-    
-    if (_function == CCMultiply && _tmpOperand) {
-        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_numberResult rOperand:_tmpOperand];
-        _function = CCNone;
-        _tmpOperand = nil;
-    } else if (_function == CCDivide && _tmpOperand) {
-        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_numberResult rOperand:_tmpOperand];
-        _function = CCNone;
-        _tmpOperand = nil;
-    }
-    
-    /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
-                                                       rOperand: [self weekCountWithStartDate: _dateResult
-                                                                                      endDate: [rOperand noTime]]];
-
-    if ([_numberResult isMinus]) {
-        _numberResult = [NSDecimalNumber negate:_numberResult];
-    }*/
-
-    _dateResult = nil;
-    return _numberResult;
+    return [self calcWithDate:rOperand function:CCMinus];
 }
 
 - (NSDate *)multiplyWithNumber:(NSDecimalNumber *)rOperand
 {
-    if (!rOperand) {
-        return nil;
-    }
-    
-    _isDateResult = NO;
-    _numberResult = [NSDecimalNumber zero];
+    [self cacheWithNumber:rOperand];
     return nil;
 }
 
 - (NSDecimalNumber *)multiplyWithDate:(NSDate *)rOperand
 {
-    if (!rOperand) {
-        return nil;
-    }
-    if (!_numberResult || [_numberResult isEqualToNumber:[NSDecimalNumber zero]]) {
-        return [self setNumberResult:[NSDecimalNumber zero]];
-    }
-
-    _tmpOperand = _numberResult;
-    _function = CCMultiply;
-    [self setDateRusult:rOperand];
+    [self cacheWithDate:rOperand function:CCMultiply];
     return nil;
 }
 
 - (NSDate *)divideWithNumber:(NSDecimalNumber *)rOperand
 {
-    if (!rOperand) {
-        return nil;
-    }
-
-    _isDateResult = NO;
-    _numberResult = [NSDecimalNumber zero];
+    [self cacheWithNumber:rOperand];
     return nil;
 }
 
 - (NSDecimalNumber *)divideWithDate:(NSDate *)rOperand
 {
-    if (!rOperand) {
-        return nil;
-    }
-    if (!_numberResult || [_numberResult isEqualToNumber:[NSDecimalNumber zero]]) {
-        return [self setNumberResult:[NSDecimalNumber zero]];
-    }
-
-    _tmpOperand = _numberResult;
-    _function = CCDivide;
-    [self setDateRusult:rOperand];
+    [self cacheWithDate:rOperand function:CCDivide];
     return nil;
 }
 
@@ -256,6 +140,117 @@ typedef enum {
     return _isDateResult ? nil : _numberResult;
 }
 
+
+
+#pragma mark - Private
+
+- (NSDate *)calcWithNumber:(NSDecimalNumber *)rOperand 
+                  function:(CCDateFunction)function
+{
+    if (!rOperand || !_dateResult) {
+        return nil;
+    }
+
+    NSInteger addingDay = 0;
+    switch (function) {
+        case CCPlus:
+            addingDay = rOperand.integerValue;
+            break;
+        case CCMinus:
+            addingDay = -rOperand.integerValue;
+            break;
+        case CCMultiply:
+        case CCDivide:
+        default:
+            NSLog(@"FUNCTION: %d", function);
+            abort();
+    }
+
+    return [self setDateRusult:[_dateResult addingByDay:addingDay]];
+}
+
+- (NSDecimalNumber *)calcWithDate:(NSDate *)rOperand 
+                         function:(CCDateFunction)function
+{
+    if (!rOperand) {
+        return nil;
+    }
+
+    if (!_dateResult) {
+        [self updateDateResult:rOperand function:function];
+        return nil;
+    }
+
+    _isDateResult = NO;
+    _numberResult = [NSDecimalNumber decimalNumberWithString:
+                                 @([_dateResult dayIntervalWithDate:[rOperand noTime]]).stringValue];
+
+    if ((function == CCPlus && [_numberResult isMinus]) || (function == CCMinus && ![_numberResult isMinus])) {
+        _numberResult = [NSDecimalNumber reverse:_numberResult];
+    }
+
+    if (_function == CCMultiply && _tmpOperand) {
+        _numberResult = [NSDecimalNumber multiplyingByDecimalNumber:_tmpOperand rOperand:_numberResult];
+        _function = CCNone;
+        _tmpOperand = nil;
+    } else if (_function == CCDivide && _tmpOperand) {
+        _numberResult = [NSDecimalNumber dividingByDecimalNumber:_tmpOperand rOperand:_numberResult];
+        _function = CCNone;
+        _tmpOperand = nil;
+    }
+
+    /*_numberResult = [NSDecimalNumber subtractingByDecimalNumber: _numberResult
+     rOperand: [self weekCountWithStartDate: _dateResult
+     endDate: [rOperand noTime]]];
+
+     if ([_numberResult isMinus]) {
+     _numberResult = [NSDecimalNumber negate:_numberResult];
+     }*/
+
+    return _numberResult;
+}
+
+- (void)cacheWithNumber:(NSDecimalNumber *)rOperand
+{
+    if (!rOperand) {
+        return;
+    }
+    [self setNumberResult:[NSDecimalNumber zero]];
+}
+
+- (void)cacheWithDate:(NSDate *)rOperand
+             function:(CCDateFunction)function
+{
+    if (!rOperand) {
+        return;
+    }
+
+    if (!_numberResult || [_numberResult isEqualToNumber:[NSDecimalNumber zero]]) {
+        [self setNumberResult:[NSDecimalNumber zero]];
+        return;
+    }
+
+    _tmpOperand = _numberResult;
+    _function = function;
+    [self setDateRusult:rOperand];
+}
+
+- (void)updateDateResult:(NSDate *)result
+                function:(CCDateFunction)function
+{
+    [self setDateRusult:result];
+    
+    if (_numberResult) {
+        if (function == CCPlus) {
+            [self plusWithNumber:_numberResult];
+        } else if (function == CCMinus) {
+            [self minusWithNumber:_numberResult];
+        } else {
+            NSLog(@"FUNCTION: %d", function);
+            abort();
+        }
+    }
+}
 
 - (NSDecimalNumber *)weekCountWithStartDate: (NSDate *)startDate
                                     endDate: (NSDate *)endDate
