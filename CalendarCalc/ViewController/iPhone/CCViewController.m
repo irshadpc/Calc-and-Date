@@ -184,10 +184,6 @@ enum {
     if ([viewSheet isVisible]) {
         [viewSheet dismissContainerViewWithAnimated:YES];
     }
-
-    if (viewSheet.contentViewController == self.eventViewController) {
-        [self onDate:nil];
-    }
 }
 
 @end

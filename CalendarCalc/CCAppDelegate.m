@@ -7,13 +7,18 @@
 //
 
 #import "CCAppDelegate.h"
-
 #import "CCViewController.h"
+#import "CCUserDefaultsKeys.h"
 
 @implementation CCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSMutableDictionary *userDefaults = [[NSMutableDictionary alloc] init];
+    [userDefaults setValue:@"NO" forKey:kIncludeStartDay];
+    [userDefaults setValue:@"YES" forKey:kDynamicCalendar];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaults];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

@@ -7,6 +7,7 @@
 //
 
 #import "ASCPageView.h"
+#import "CCAppDelegate+Setting.h"
 
 typedef enum {
     Prev,
@@ -46,6 +47,7 @@ static const NSUInteger PageSize = 3;
         _scrollView = [[UIScrollView alloc] initWithFrame:frame];
         _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.scrollEnabled = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption];
         [self addSubview:_scrollView];
 
         [self configureView];

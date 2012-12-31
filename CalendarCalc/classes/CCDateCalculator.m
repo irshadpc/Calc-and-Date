@@ -7,6 +7,7 @@
 //
 
 #import "CCDateCalculator.h"
+#import "CCAppDelegate+Setting.h"
 #import "NSDate+Calc.h"
 #import "NSDate+Component.h"
 #import "NSDate+Style.h"
@@ -192,6 +193,10 @@ typedef enum {
 
     if ([_numberResult isMinus]) {
         _numberResult = [NSDecimalNumber reverse:_numberResult];
+    }
+
+    if ([(CCAppDelegate *)[[UIApplication sharedApplication] delegate] includeStartDayOption]) {
+        _numberResult = [NSDecimalNumber addingByDecimalNumber:_numberResult rOperand:[NSDecimalNumber one]];
     }
 
     _numberResult = [NSDecimalNumber subtractingByDecimalNumber:_numberResult
