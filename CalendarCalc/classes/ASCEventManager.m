@@ -16,6 +16,9 @@
 @property (strong, nonatomic, readwrite) EKEvent *todayEvent;
 
 - (void)reloadEvents;
+- (NSArray *)pastEvents;
+- (NSArray *)futureEvents;
+- (NSArray *)distinctEvents:(NSArray *)events;
 - (void)setupNotification;
 @end
 
@@ -27,7 +30,6 @@ static const NSInteger EventIntervalYear = 2;
         _delegate = delegate;
         
         _eventStore = [[EKEventStore alloc] init];
-        _todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
         if ([_eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
             [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
                 _granted = granted;
@@ -56,22 +58,12 @@ static const NSInteger EventIntervalYear = 2;
     self.events = nil;
     [self.delegate startEventLoad:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
         if (_granted) {
-            NSMutableArray *distinctEvents = [NSMutableArray arrayWithObject:self.todayEvent];
-            NSDate *date = [NSDate date];
-            NSArray *events = [_eventStore eventsMatchingPredicate:
-                               [_eventStore predicateForEventsWithStartDate:[[date addingByYear:-EventIntervalYear] noTime]
-                                                                    endDate:[[date addingByYear:EventIntervalYear] noTime]
-                                                                  calendars:nil]];
-            for (EKEvent *event in events) {
-                NSPredicate *containPredicate = [NSPredicate predicateWithFormat:@"eventIdentifier = %@", event.eventIdentifier];
-
-                if ([[distinctEvents filteredArrayUsingPredicate:containPredicate] count] == 0) {
-                    [distinctEvents addObject:event];
-                }
-            }
-
-            self.events = [distinctEvents sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
+            NSMutableArray *events = [[NSMutableArray alloc] initWithArray:[self pastEvents]];
+            [events addObject:self.todayEvent];
+            [events addObjectsFromArray:[self futureEvents]];
+            self.events = events;
         } else {
             self.events = @[self.todayEvent];
         }
@@ -79,6 +71,52 @@ static const NSInteger EventIntervalYear = 2;
             [self.delegate completeEventLoad:self granted:_granted];
         });
     });
+}
+
+- (NSArray *)pastEvents
+{
+    NSDate *date = [[NSDate date] noTime];
+    NSArray *events = [[_eventStore eventsMatchingPredicate:
+                        [_eventStore predicateForEventsWithStartDate:[date addingByYear:-EventIntervalYear]
+                                                             endDate:date
+                                                           calendars:nil]]
+                       sortedArrayUsingComparator:^NSComparisonResult(EKEvent *l, EKEvent *r) {
+                           NSComparisonResult result = [l.startDate compare:r.startDate];
+                           if (result == NSOrderedAscending) {
+                               return NSOrderedDescending;
+                           } else if (result == NSOrderedDescending) {
+                               return NSOrderedAscending;
+                           } else {
+                               return NSOrderedSame;
+                           }
+                       }];
+    
+    return [[self distinctEvents:events] sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
+}
+
+- (NSArray *)futureEvents
+{
+    NSDate *date = [[NSDate date] noTime];
+    NSArray *events = [[_eventStore eventsMatchingPredicate:
+                        [_eventStore predicateForEventsWithStartDate:date
+                                                             endDate:[date addingByYear:EventIntervalYear]
+                                                           calendars:nil]]
+                       sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
+
+    return [self distinctEvents:events];
+}
+
+- (NSArray *)distinctEvents:(NSArray *)events
+{
+    NSMutableArray *distinctIdentifier = [[NSMutableArray alloc] init];
+    NSMutableArray *distinctEvents = [[NSMutableArray alloc] init];
+    for (EKEvent *event in events) {
+        if (event.eventIdentifier && ![distinctIdentifier containsObject:event.eventIdentifier]) {
+            [distinctEvents addObject:event];
+            [distinctIdentifier addObject:event.eventIdentifier];
+        }
+    }
+    return distinctEvents;
 }
 
 - (void)setupNotification
