@@ -14,7 +14,6 @@
 @interface ASCEventManager ()
 @property (strong, nonatomic, readwrite) NSArray *events;
 @property (strong, nonatomic, readwrite) EKEvent *todayEvent;
-@property (nonatomic, readwrite) BOOL eventLoaded;
 
 - (void)reloadEvents;
 - (void)setupNotification;
@@ -26,7 +25,9 @@ static const NSInteger EventIntervalYear = 2;
 - (id)initWithDelegate:(id<ASCEventManagerDelegate>)delegate {
     if ((self = [super init])) {
         _delegate = delegate;
+        
         _eventStore = [[EKEventStore alloc] init];
+        _todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
         if ([_eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
             [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
                 _granted = granted;
@@ -55,9 +56,7 @@ static const NSInteger EventIntervalYear = 2;
     self.events = nil;
     [self.delegate startEventLoad:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.eventLoaded = NO;
         if (_granted) {
-            self.todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
             NSMutableArray *distinctEvents = [NSMutableArray arrayWithObject:self.todayEvent];
             NSDate *date = [NSDate date];
             NSArray *events = [_eventStore eventsMatchingPredicate:
@@ -73,7 +72,8 @@ static const NSInteger EventIntervalYear = 2;
             }
 
             self.events = [distinctEvents sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
-            self.eventLoaded = YES;
+        } else {
+            self.events = @[self.todayEvent];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delegate completeEventLoad:self granted:_granted];

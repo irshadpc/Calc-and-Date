@@ -13,13 +13,13 @@
 
 @interface ASCEventManager : NSObject {
   @private
-    EKEventStore *_eventStore;
     BOOL _granted;
+    EKEventStore *_eventStore;
 }
 @property (weak, nonatomic) id <ASCEventManagerDelegate> delegate;
 @property (strong, nonatomic, readonly) NSArray *events;
 @property (strong, nonatomic, readonly) EKEvent *todayEvent;
-@property (nonatomic, readonly, getter = isEventLoaded) BOOL eventLoaded;
+//@property (nonatomic, readonly, getter = isEventLoaded) BOOL eventLoaded;
 
 - (id)initWithDelegate:(id <ASCEventManagerDelegate>)delegate;
 @end
