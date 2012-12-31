@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) id <CCViewSheetDelegate> delegate;
 @property (strong, nonatomic, readonly) UIViewController *contentViewController;
-@property (strong, nonatomic, readonly) UIView *containerView;
 @property (nonatomic, readonly, getter = isVisible) BOOL visible;
 
 - (id)initWithContentViewController:(UIViewController *)contentViewController;

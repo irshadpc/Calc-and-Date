@@ -36,8 +36,11 @@
 - (IBAction)onDate:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
 - (void)onEventButton:(UIBarButtonItem *)sender;
+- (void)onEventDone:(UIBarButtonItem *)sender;
 - (UIBarButtonItem *)eventButton;
+- (UIBarButtonItem *)eventDoneButton;
 @end
+
 
 @implementation CCViewController
 @synthesize dateButton = _dateButton;
@@ -127,7 +130,17 @@ enum {
    
     _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.eventViewController];
     _currentViewSheet.delegate = self;
+    [_currentViewSheet setRightButton:[self eventDoneButton]];
     [_currentViewSheet showInView:self.view animated:YES];
+}
+
+- (void)onEventDone:(UIBarButtonItem *)sender
+{
+    self.display.text = [[self.calendarCalc inputDate:self.eventViewController.selectedDate] displayResult];
+    if ([_currentViewSheet isVisible]) {
+        [_currentViewSheet dismissContainerViewWithAnimated:YES];
+    }
+    
 }
 
 - (UIBarButtonItem *)eventButton
@@ -136,6 +149,13 @@ enum {
                                             style:UIBarButtonItemStyleBordered
                                            target:self 
                                            action:@selector(onEventButton:)];
+}
+
+- (UIBarButtonItem *)eventDoneButton
+{
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                         target:self
+                                                         action:@selector(onEventDone:)];
 }
 
 
@@ -163,6 +183,10 @@ enum {
 {
     if ([viewSheet isVisible]) {
         [viewSheet dismissContainerViewWithAnimated:YES];
+    }
+
+    if (viewSheet.contentViewController == self.eventViewController) {
+        [self onDate:nil];
     }
 }
 

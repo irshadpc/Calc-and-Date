@@ -47,9 +47,9 @@
         _toolbar.items = _barButonItems;
         [self addSubview:_toolbar];
        
-        _containerView = [[UIView alloc] initWithFrame:[self containerFrameWithContentView:contentView]];
-        [self addSubview:_containerView];
-        [_containerView addSubview:contentView];
+        UIView *containerView = [[UIView alloc] initWithFrame:[self containerFrameWithContentView:contentView]];
+        [self addSubview:containerView];
+        [containerView addSubview:contentView];
     }
     return self;
 }
