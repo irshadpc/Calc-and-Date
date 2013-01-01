@@ -185,7 +185,7 @@
 
 /* Begin PBXFileReference section */
 		62021330167CBF8D00BFF836 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		62021332167D8D8000BFF836 /* CCNumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCNumberFormat.h; path = classes/CCNumberFormat.h; sourceTree = "<group>"; };
+		62021332167D8D8000BFF836 /* CCNumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNumberFormat.h; sourceTree = "<group>"; };
 		62021333167DA7D300BFF836 /* CCCalcType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCCalcType.h; sourceTree = "<group>"; };
 		62021334167DB2AB00BFF836 /* ASCCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCCalendarView.h; sourceTree = "<group>"; };
 		62021335167DB2AB00BFF836 /* ASCCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCCalendarView.m; sourceTree = "<group>"; };
@@ -481,7 +481,6 @@
 				621355EB16737DA100C93999 /* CCAppDelegate.m */,
 				626BB0EE1691E08D004E9E63 /* CCAppDelegate+Setting.h */,
 				626BB0EF1691E091004E9E63 /* CCAppDelegate+Setting.m */,
-				62021332167D8D8000BFF836 /* CCNumberFormat.h */,
 				621355E216737DA100C93999 /* Supporting Files */,
 				626BB0F11691E77F004E9E63 /* CCUserDefaultsKeys.h */,
 			);
@@ -801,10 +800,11 @@
 				62A2D13C16738BE6001CC9AE /* CCNumberCalculator.m */,
 				62A2D13E16738BF4001CC9AE /* CCDateCalculator.h */,
 				62A2D13F16738BF4001CC9AE /* CCDateCalculator.m */,
-				62021333167DA7D300BFF836 /* CCCalcType.h */,
-				621B0D2B168FE33D00DE2150 /* CCFunction.h */,
 				626BB0D016917E54004E9E63 /* ASCEventManager.h */,
 				626BB0D116917E54004E9E63 /* ASCEventManager.m */,
+				62021333167DA7D300BFF836 /* CCCalcType.h */,
+				621B0D2B168FE33D00DE2150 /* CCFunction.h */,
+				62021332167D8D8000BFF836 /* CCNumberFormat.h */,
 			);
 			path = classes;
 			sourceTree = "<group>";

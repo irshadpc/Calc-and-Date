@@ -15,5 +15,13 @@
     return [NSDecimalNumber multiplyingByDecimalNumber: number
                                               rOperand: [NSDecimalNumber decimalNumberWithString: @"-1"]];
 }
+
++ (NSDecimalNumber *)abs:(NSDecimalNumber *)number
+{
+    if ([number compare:[NSDecimalNumber zero]] != NSOrderedAscending) {
+        return number;
+    }
+    return [NSDecimalNumber reverse:number];
+}
 @end
 

@@ -13,6 +13,7 @@
 #import "CCCalendarCalcResult+Date.h"
 #import "CCNumberCalculator.h"
 #import "CCDateCalculator.h"
+#import "NSDecimalNumber+Convert.h"
 #import "CCCalcType.h"
 
 @interface CCCalendarCalc ()
@@ -110,6 +111,7 @@
     [_dateCalculator setExcludeWeeks:excludeWeeks];
 }
 
+
 #pragma mark - Private
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
@@ -186,6 +188,7 @@
         default:
             [_dateCalculator setDateRusult:[_result dateResult]];
     }
+    [_numberCalculator setResult:[_dateCalculator numberResult]];
     [_result setNumberResultForDisplay:[_dateCalculator numberResult]];
     [_result setDateResultForDisplay:[_dateCalculator dateResult]];
     if ([_result dateResult]) {
@@ -203,6 +206,9 @@
 {
     [_dateCalculator minusWithNumber:[_result numberResult]];
     [_dateCalculator minusWithDate:[_result dateResult]];
+    if ([_dateCalculator numberResult]) {
+        _currentFunction = CCPlus;
+    }
 }
 
 - (void)dateMultiply

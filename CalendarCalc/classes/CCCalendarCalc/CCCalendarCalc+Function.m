@@ -19,6 +19,7 @@
     if ([_result numberResult] || [_result dateResult]) {
         [_result clear];
     } else {
+        _currentFunction = CCFunctionMax;
         [_result clear];
         [_numberCalculator clear];
         [_dateCalculator clear];

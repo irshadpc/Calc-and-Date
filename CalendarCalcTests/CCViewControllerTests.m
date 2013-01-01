@@ -868,7 +868,7 @@ enum {
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
     STAssertEqualObjects(@"1", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
-    STAssertEqualObjects(@"1", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    STAssertEqualObjects(@"2", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_2012_07_28_Plus_2_Equal_Equal
@@ -968,7 +968,7 @@ enum {
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
     STAssertEqualObjects(@"-1", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:EQUAL]];
-    STAssertEqualObjects(@"-1", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    STAssertEqualObjects(@"-2", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_2012_07_28_Minus_2_Equal_Equal

@@ -85,6 +85,7 @@ enum {
 {
     [super didReceiveMemoryWarning];
     self.calendarViewController = nil;
+    self.eventViewController = nil;
 }
 
 - (IBAction)onFunction:(UIButton *)sender
@@ -107,7 +108,11 @@ enum {
 
 - (IBAction)onDate:(UIButton *)sender
 {
-     if ([_currentViewSheet isVisible]) {
+    if (!self.calendarViewController) {
+        self.calendarViewController = [[CCCalendarViewController alloc] init];
+    }
+    
+    if ([_currentViewSheet isVisible]) {
         [_currentViewSheet dismissContainerViewWithAnimated:YES];
     }
     
@@ -125,6 +130,10 @@ enum {
 
 - (void)onEventButton:(UIBarButtonItem *)sender
 {
+    if (!self.eventViewController) {
+        self.eventViewController = [[CCEventViewController alloc] init];
+    }
+    
     if ([_currentViewSheet isVisible]) {
         [_currentViewSheet dismissContainerViewWithAnimated:YES];
     }

@@ -15,7 +15,6 @@
   @private
     AVAudioPlayer *_player;
     CCViewSheet *_currentViewSheet;
-    BOOL _isInitial;
 }
 
 @end

@@ -10,4 +10,5 @@
 
 @interface NSDecimalNumber (Convert)
 + (NSDecimalNumber *)reverse:(NSDecimalNumber *)number;
++ (NSDecimalNumber *)abs:(NSDecimalNumber *)number;
 @end
