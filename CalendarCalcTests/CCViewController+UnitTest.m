@@ -8,7 +8,7 @@
 
 #import "CCViewController+UnitTest.h"
 
-@implementation CCViewController (UnitTest)
+@implementation CCCalendarCalcViewController (UnitTest)
 - (void)pressNumberButton:(UIButton *)sender
 {
     [self performSelector:@selector(onNumber:) withObject:sender];

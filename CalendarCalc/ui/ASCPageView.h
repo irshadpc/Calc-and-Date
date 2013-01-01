@@ -16,7 +16,7 @@
 }
 
 @property (weak, nonatomic) id <ASCPageViewDelegate> delegate;
-
+@property (nonatomic, getter = isPagingEnabled) BOOL pagingEnabled;
 - (id)initWithContentView:(UIView *)contentView prevPage:(UIView *)prevView nextPage:(UIView *)nextView;
 - (void)setPage:(NSUInteger)page animated:(BOOL)animated;
 @end

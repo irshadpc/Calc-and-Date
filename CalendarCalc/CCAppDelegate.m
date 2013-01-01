@@ -7,7 +7,9 @@
 //
 
 #import "CCAppDelegate.h"
-#import "CCViewController.h"
+#import "CCViewController_iPhone.h"
+#import "CCCalendarCalcViewController.h"
+#import "CCSettingViewController.h"
 #import "CCUserDefaultsKeys.h"
 
 @implementation CCAppDelegate
@@ -22,9 +24,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[CCViewController alloc] initWithNibName:@"CCViewController_iPhone" bundle:nil];
+        self.viewController = [[CCViewController_iPhone alloc] initWithNibName:@"CCViewController_iPhone" bundle:nil];
+        self.viewController.frontViewController = [[CCCalendarCalcViewController alloc] initWithNibName:@"CCCalendarCalcViewController_iPhone" bundle:nil];
+        self.viewController.backViewController = [[CCSettingViewController alloc] initWithNibName:@"CCSettingViewController" bundle:nil];
     } else {
-        self.viewController = [[CCViewController alloc] initWithNibName:@"CCViewController_iPad" bundle:nil];
+        //self.viewController = [[CCCalendarCalcViewController alloc] initWithNibName:@"CCViewController_iPad" bundle:nil];
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

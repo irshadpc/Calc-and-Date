@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class CCViewController;
+@class CCViewController_iPhone;
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) CCViewController *viewController;
+@property (strong, nonatomic) CCViewController_iPhone *viewController;
 @end

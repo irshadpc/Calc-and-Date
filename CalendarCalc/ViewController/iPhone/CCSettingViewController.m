@@ -10,6 +10,8 @@
 #import "CCAppDelegate+Setting.h"
 
 @interface CCSettingViewController ()
+@property (weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
+@property (weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
 - (IBAction)onIncludeStartDayOptionChanged:(UISwitch *)sender;
 - (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender;
 @end
@@ -28,7 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.includeStartDayOption.on = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] includeStartDayOption];
+    self.dynamicCalendarOption.on = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,5 +46,10 @@
 
 - (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender {
     [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] setDynamicCalendarOption:sender.isOn];
+}
+- (void)viewDidUnload {
+    [self setIncludeStartDayOption:nil];
+    [self setDynamicCalendarOption:nil];
+    [super viewDidUnload];
 }
 @end

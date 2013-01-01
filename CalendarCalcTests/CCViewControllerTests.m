@@ -7,13 +7,13 @@
 //
 
 #import "CCViewControllerTests.h"
-#import "CCViewController.h"
+#import "CCCalendarCalcViewController.h"
 #import "CCViewController+UnitTest.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 
 @interface CCViewControllerTests () {
   @private
-    CCViewController *_viewController;
+    CCCalendarCalcViewController *_viewController;
     UIView *_view;
 }
 
@@ -41,7 +41,7 @@ enum {
 
 - (void)setUp
 {
-    _viewController = [[CCViewController alloc] initWithNibName:@"CCViewController_iPhone" bundle:nil];
+    _viewController = [[CCCalendarCalcViewController alloc] initWithNibName:@"CCViewController_iPhone" bundle:nil];
     _view = _viewController.view;
 }
 

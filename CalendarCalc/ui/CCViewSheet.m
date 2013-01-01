@@ -19,7 +19,6 @@
 - (UIBarButtonItem *)cancelButton;
 - (UIBarButtonItem *)flexibleSpace;
 - (void)onCancel:(UIBarButtonItem *)sender;
-- (void)onOptionalButton:(UIBarButtonItem *)sender;
 @end
 
 @implementation CCViewSheet
@@ -61,7 +60,8 @@
                            rightButton];
 }
 
-- (void)showInView:(UIView *)view animated:(BOOL)animated
+- (void)showInView:(UIView *)view
+          animated:(BOOL)animated
 {
     UIView *rootView = [[[UIApplication sharedApplication] delegate] window].rootViewController.view;
     self.protectView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -82,8 +82,11 @@
                          CGRect showFrame = self.frame;
                          showFrame.origin.y -= self.frame.size.height;
                          self.frame = showFrame;
+                     }
+                     completion:^(BOOL finished) {
                          self.visible = YES;
-                     }];
+                     }
+     ];
 }
 
 - (void)dismissContainerViewWithAnimated:(BOOL)animated
@@ -133,11 +136,6 @@
 - (void)onCancel:(UIBarButtonItem *)sender
 {
     [self.delegate viewSheetClickedCancelButton:self];
-}
-        
-- (void)onOptionalButton:(UIBarButtonItem *)sender
-{
-    [self.delegate viewSheet:self clickedButtonAtIndex:sender.tag];
 }
 
 @end

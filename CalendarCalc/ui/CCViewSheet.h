@@ -27,8 +27,4 @@
 @protocol CCViewSheetDelegate <NSObject>
 @required
 - (void)viewSheetClickedCancelButton:(CCViewSheet *)viewSheet;
-
-@optional
-- (void)viewSheet:(CCViewSheet *)viewSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
-
 @end

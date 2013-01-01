@@ -6,9 +6,9 @@
 //  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
 //
 
-#import "CCViewController.h"
+#import "CCCalendarCalcViewController.h"
 
-@interface CCViewController (UnitTest)
+@interface CCCalendarCalcViewController (UnitTest)
 - (void)pressNumberButton:(UIButton *)sender;
 - (void)pressFunctionButton:(UIButton *)sender;
 - (void)inputOutDate:(NSDate *)date;

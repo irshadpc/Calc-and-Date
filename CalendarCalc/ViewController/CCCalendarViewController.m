@@ -88,6 +88,14 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)setDynamicCalendar:(BOOL)dynamicCalendar
+{
+    if (_dynamicCalendar != dynamicCalendar) {
+        _dynamicCalendar = dynamicCalendar;
+    }
+    [_pageView setPagingEnabled:_dynamicCalendar];
+}
+
 
 #pragma mark - Private
 
@@ -225,11 +233,5 @@
 {
     [viewSheet dismissContainerViewWithAnimated:YES];
 }
-
-- (void)viewSheet:(CCViewSheet *)viewSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"INDEX: %d", buttonIndex);
-}
-
 
 @end

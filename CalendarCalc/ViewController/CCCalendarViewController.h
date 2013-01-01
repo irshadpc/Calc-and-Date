@@ -23,4 +23,5 @@
     CCViewSheet *_viewSheet;
 }
 @property (weak, nonatomic) id <CCDateSelect> delegate;
+@property (nonatomic, getter = isDynamicCalendar) BOOL dynamicCalendar;
 @end
