@@ -14,6 +14,7 @@
 #import "CCViewSheet.h"
 #import "CCDateSelect.h"
 #import "NSDate+Component.h"
+#import "NSString+Calculator.h"
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
@@ -25,7 +26,7 @@
 @property (strong, nonatomic) CCCalendarCalc *calendarCalc;
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
-@property (weak, nonatomic) IBOutlet UILabel *indicatorText;
+@property (weak, nonatomic) IBOutlet UILabel *indicator;
 @property (weak, nonatomic) IBOutlet UIButton *dateButton;
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 @property (weak, nonatomic) IBOutlet UIButton *decimalButton;
@@ -106,7 +107,7 @@ enum {
 
 - (IBAction)onDate:(UIButton *)sender
 {
-    if ([_currentViewSheet isVisible]) {
+     if ([_currentViewSheet isVisible]) {
         [_currentViewSheet dismissContainerViewWithAnimated:YES];
     }
     
@@ -176,6 +177,7 @@ enum {
 {
     [_calendarCalc setWeek:week exclude:exclude];
 }
+
 
 #pragma mark - CCViewSheet
 

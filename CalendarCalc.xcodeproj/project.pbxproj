@@ -28,6 +28,7 @@
 		62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */; };
 		62324C65167C42A70062EF1B /* NSString+Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C64167C42A60062EF1B /* NSString+Locale.m */; };
 		62324C6E167C4D120062EF1B /* NSDateFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */; };
+		626769481692BC53002857A7 /* CCCalendarCalc+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 626769471692BC53002857A7 /* CCCalendarCalc+Function.m */; };
 		626BB0AA169158D9004E9E63 /* CCWeekControllView.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0A9169158D9004E9E63 /* CCWeekControllView.m */; };
 		626BB0B316915D97004E9E63 /* ASCSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B216915D96004E9E63 /* ASCSwitchButton.m */; };
 		626BB0B6169163DB004E9E63 /* UIColor+SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B5169163DB004E9E63 /* UIColor+SwitchButton.m */; };
@@ -46,6 +47,7 @@
 		626BB0EC1691DF41004E9E63 /* CCSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0EA1691DF41004E9E63 /* CCSettingViewController.m */; };
 		626BB0ED1691DF41004E9E63 /* CCSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 626BB0EB1691DF41004E9E63 /* CCSettingViewController.xib */; };
 		626BB0F01691E094004E9E63 /* CCAppDelegate+Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0EF1691E091004E9E63 /* CCAppDelegate+Setting.m */; };
+		626BB0F41691E9A7004E9E63 /* NSString+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0F31691E9A5004E9E63 /* NSString+Calculator.m */; };
 		62A144CA16859BE3001E2843 /* key_click.aif in Resources */ = {isa = PBXBuildFile; fileRef = 62A144C916859BE3001E2843 /* key_click.aif */; };
 		62A144CE1685F4BD001E2843 /* NSArray+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144CD1685F4BD001E2843 /* NSArray+safe.m */; };
 		62A144D11685F559001E2843 /* ASCCalendarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D01685F559001E2843 /* ASCCalendarButton.m */; };
@@ -218,6 +220,8 @@
 		62324C64167C42A60062EF1B /* NSString+Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Locale.m"; sourceTree = "<group>"; };
 		62324C6C167C4D100062EF1B /* NSDateFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
+		626769461692BC53002857A7 /* CCCalendarCalc+Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCCalendarCalc+Function.h"; sourceTree = "<group>"; };
+		626769471692BC53002857A7 /* CCCalendarCalc+Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalc+Function.m"; sourceTree = "<group>"; };
 		626BB0A8169158D9004E9E63 /* CCWeekControllView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWeekControllView.h; sourceTree = "<group>"; };
 		626BB0A9169158D9004E9E63 /* CCWeekControllView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCWeekControllView.m; sourceTree = "<group>"; };
 		626BB0AC169159BE004E9E63 /* ASCWeek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCWeek.h; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 		626BB0EE1691E08D004E9E63 /* CCAppDelegate+Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCAppDelegate+Setting.h"; sourceTree = "<group>"; };
 		626BB0EF1691E091004E9E63 /* CCAppDelegate+Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCAppDelegate+Setting.m"; sourceTree = "<group>"; };
 		626BB0F11691E77F004E9E63 /* CCUserDefaultsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserDefaultsKeys.h; sourceTree = "<group>"; };
+		626BB0F21691E9A4004E9E63 /* NSString+Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Calculator.h"; sourceTree = "<group>"; };
+		626BB0F31691E9A5004E9E63 /* NSString+Calculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Calculator.m"; sourceTree = "<group>"; };
 		62A144C916859BE3001E2843 /* key_click.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = key_click.aif; sourceTree = "<group>"; };
 		62A144CC1685F4BD001E2843 /* NSArray+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+safe.h"; sourceTree = "<group>"; };
 		62A144CD1685F4BD001E2843 /* NSArray+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+safe.m"; sourceTree = "<group>"; };
@@ -534,7 +540,7 @@
 				626BB0E316918723004E9E63 /* CCEventViewController.m */,
 				62A144D81686CA5A001E2843 /* CCDateSelect.h */,
 			);
-			name = ViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		6213561A16737E0A00C93999 /* iPhone */ = {
@@ -547,8 +553,7 @@
 				626BB0EA1691DF41004E9E63 /* CCSettingViewController.m */,
 				626BB0EB1691DF41004E9E63 /* CCSettingViewController.xib */,
 			);
-			name = iPhone;
-			path = ViewController/iPhone;
+			path = iPhone;
 			sourceTree = "<group>";
 		};
 		6213561B16737E1100C93999 /* iPad */ = {
@@ -556,8 +561,35 @@
 			children = (
 				621355F916737DA100C93999 /* CCViewController_iPad.xib */,
 			);
-			name = iPad;
-			path = ViewController/iPad;
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		6267694A1692BEB5002857A7 /* CCCalendarCalc */ = {
+			isa = PBXGroup;
+			children = (
+				62A2D13516738A48001CC9AE /* CCCalendarCalc.h */,
+				62A2D13616738A48001CC9AE /* CCCalendarCalc.m */,
+				626769461692BC53002857A7 /* CCCalendarCalc+Function.h */,
+				626769471692BC53002857A7 /* CCCalendarCalc+Function.m */,
+			);
+			path = CCCalendarCalc;
+			sourceTree = "<group>";
+		};
+		6267694B1692BECA002857A7 /* CCCalendarCalcResult */ = {
+			isa = PBXGroup;
+			children = (
+				62A2D13816738A79001CC9AE /* CCCalendarCalcResult.h */,
+				62A2D13916738A79001CC9AE /* CCCalendarCalcResult.m */,
+				62B53EE2167C67A100394427 /* CCCalendarCalcResult+Number.h */,
+				62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */,
+				62B53EE5167C685000394427 /* CCCalendarCalcResult+Date.h */,
+				62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */,
+				62B53EDC167C64B800394427 /* CCNumberResult.h */,
+				62B53EDD167C64B800394427 /* CCNumberResult.m */,
+				62B53EDF167C64C500394427 /* CCDateResult.h */,
+				62B53EE0167C64C600394427 /* CCDateResult.m */,
+			);
+			path = CCCalendarCalcResult;
 			sourceTree = "<group>";
 		};
 		62A2D05316737FBC001CC9AE /* resources */ = {
@@ -763,22 +795,12 @@
 		62A2D125167384D2001CC9AE /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				62A2D13516738A48001CC9AE /* CCCalendarCalc.h */,
-				62A2D13616738A48001CC9AE /* CCCalendarCalc.m */,
+				6267694A1692BEB5002857A7 /* CCCalendarCalc */,
+				6267694B1692BECA002857A7 /* CCCalendarCalcResult */,
 				62A2D13B16738BE6001CC9AE /* CCNumberCalculator.h */,
 				62A2D13C16738BE6001CC9AE /* CCNumberCalculator.m */,
 				62A2D13E16738BF4001CC9AE /* CCDateCalculator.h */,
 				62A2D13F16738BF4001CC9AE /* CCDateCalculator.m */,
-				62A2D13816738A79001CC9AE /* CCCalendarCalcResult.h */,
-				62A2D13916738A79001CC9AE /* CCCalendarCalcResult.m */,
-				62B53EE2167C67A100394427 /* CCCalendarCalcResult+Number.h */,
-				62B53EE3167C67A100394427 /* CCCalendarCalcResult+Number.m */,
-				62B53EE5167C685000394427 /* CCCalendarCalcResult+Date.h */,
-				62B53EE6167C685000394427 /* CCCalendarCalcResult+Date.m */,
-				62B53EDC167C64B800394427 /* CCNumberResult.h */,
-				62B53EDD167C64B800394427 /* CCNumberResult.m */,
-				62B53EDF167C64C500394427 /* CCDateResult.h */,
-				62B53EE0167C64C600394427 /* CCDateResult.m */,
 				62021333167DA7D300BFF836 /* CCCalcType.h */,
 				621B0D2B168FE33D00DE2150 /* CCFunction.h */,
 				626BB0D016917E54004E9E63 /* ASCEventManager.h */,
@@ -810,6 +832,8 @@
 				62A2D14916739E83001CC9AE /* NSNumber+Predicate.m */,
 				62B53ED6167C592E00394427 /* NSNumberFormatter+CalendarCalc.h */,
 				62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */,
+				626BB0F21691E9A4004E9E63 /* NSString+Calculator.h */,
+				626BB0F31691E9A5004E9E63 /* NSString+Calculator.m */,
 				62F4D9291681EA6F001FF7FA /* NSString+Date.h */,
 				62F4D92A1681EA6F001FF7FA /* NSString+Date.m */,
 				62324C63167C42A50062EF1B /* NSString+Locale.h */,
@@ -1088,6 +1112,8 @@
 				626BB0E416918723004E9E63 /* CCEventViewController.m in Sources */,
 				626BB0EC1691DF41004E9E63 /* CCSettingViewController.m in Sources */,
 				626BB0F01691E094004E9E63 /* CCAppDelegate+Setting.m in Sources */,
+				626BB0F41691E9A7004E9E63 /* NSString+Calculator.m in Sources */,
+				626769481692BC53002857A7 /* CCCalendarCalc+Function.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
