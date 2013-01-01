@@ -207,4 +207,20 @@
     STAssertEqualObjects(@"50", result2, @"RESULT: %@", result2);
 }
 
+- (void)testInputFunction_12_Plus_3_Equal_Clear_Plus_3_Equal
+{
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCEqual];
+    [_calendarCalc inputFunction: CCClear];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCEqual];
+   
+    NSString *const result = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
+}
+
 @end

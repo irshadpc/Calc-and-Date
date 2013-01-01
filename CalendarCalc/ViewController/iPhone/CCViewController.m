@@ -10,7 +10,7 @@
 #import "CCCalendarViewController.h"
 #import "CCEventViewController.h"
 #import "CCCalendarCalc.h"
-#import "CCCalendarCalcResult.h"
+#import "CCCalendarCalcFormatter.h"
 #import "CCViewSheet.h"
 #import "CCDateSelect.h"
 #import "NSDate+Component.h"
@@ -24,6 +24,7 @@
 @property (strong, nonatomic) CCCalendarViewController *calendarViewController;
 @property (strong, nonatomic) CCEventViewController *eventViewController;
 @property (strong, nonatomic) CCCalendarCalc *calendarCalc;
+@property (strong, nonatomic) CCCalendarCalcFormatter *calendarCalcFormatter;
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *indicator;
@@ -40,6 +41,7 @@
 - (void)onEventDone:(UIBarButtonItem *)sender;
 - (UIBarButtonItem *)eventButton;
 - (UIBarButtonItem *)eventDoneButton;
+- (void)configureView;
 @end
 
 
@@ -62,6 +64,7 @@ enum {
         [_player prepareToPlay];
 
         _calendarCalc = [[CCCalendarCalc alloc] init];
+        _calendarCalcFormatter = [[CCCalendarCalcFormatter alloc] initWithCalendarCalc:_calendarCalc];
         _calendarViewController = [[CCCalendarViewController alloc] init];
         _eventViewController = [[CCEventViewController alloc] init];
     }
@@ -90,20 +93,22 @@ enum {
 
 - (IBAction)onFunction:(UIButton *)sender
 {
-    self.display.text = [[_calendarCalc inputFunction:sender.tag] displayResult];
+    [self.calendarCalc inputFunction:sender.tag];
+    [self configureView];
 }
 
 - (IBAction)onNumber:(UIButton *)sender
 {
     if (sender.tag < CCDoubleZero) {
-        self.display.text = [[_calendarCalc inputInteger:sender.tag] displayResult];
+        [self.calendarCalc inputInteger:sender.tag];
     } else if (sender.tag == CCDoubleZero) {
-        [_calendarCalc inputInteger:0];
-        self.display.text = [[_calendarCalc inputInteger:0] displayResult];
+        [self.calendarCalc inputInteger:0];
+        [self.calendarCalc inputInteger:0];
     } else {
         NSLog(@"TAG: %d", sender.tag);
         abort();
     }
+    [self configureView];
 }
 
 - (IBAction)onDate:(UIButton *)sender
@@ -146,11 +151,12 @@ enum {
 
 - (void)onEventDone:(UIBarButtonItem *)sender
 {
-    self.display.text = [[self.calendarCalc inputDate:self.eventViewController.selectedDate] displayResult];
+    [self.calendarCalc inputDate:self.eventViewController.selectedDate];
+    [self configureView];
+    
     if ([_currentViewSheet isVisible]) {
         [_currentViewSheet dismissContainerViewWithAnimated:YES];
     }
-    
 }
 
 - (UIBarButtonItem *)eventButton
@@ -168,12 +174,21 @@ enum {
                                                          action:@selector(onEventDone:)];
 }
 
+- (void)configureView
+{
+    self.display.text = [self.calendarCalcFormatter displayResult];
+    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
+    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
+                      forState:UIControlStateNormal];
+}
+
 
 #pragma mark - CCDateSelect
 
 - (void)didSelectDate:(NSDate *)date
 {
-    self.display.text = [[self.calendarCalc inputDate:date] displayResult];
+    [self.calendarCalc inputDate:date];
+    [self configureView];
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]] 
                      forState:UIControlStateNormal];
     if ([_currentViewSheet isVisible]) {

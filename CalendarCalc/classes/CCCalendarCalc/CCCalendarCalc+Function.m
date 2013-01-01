@@ -16,10 +16,10 @@
 @implementation CCCalendarCalc (Function)
 - (CCCalendarCalcResult *)clearResult
 {
-    if ([_result numberResult] || [_result dateResult]) {
+    if (!_isEqual && ([_result numberResult] || [_result dateResult])) {
         [_result clear];
     } else {
-        _currentFunction = CCFunctionMax;
+        _currentFunction = CCFunctionNone;
         [_result clear];
         [_numberCalculator clear];
         [_dateCalculator clear];
@@ -30,12 +30,14 @@
 
 - (CCCalendarCalcResult *)reverseNumber
 {
-    if (!_isEqual && [_result numberResult]) {
+    if (!_isEqual) {
         [_result reverseNumberResult];
-    } else if ([_numberCalculator result]) {
-        [_result setNumberResult:[_numberCalculator reverse]];
-    } else if ([_dateCalculator numberResult]) {
-        [_result setNumberResult:[_dateCalculator reverse]];
+    } else {
+        if ([_numberCalculator result]) {
+            [_result setNumberResult:[_numberCalculator reverse]];
+        } else if ([_dateCalculator numberResult]) {
+            [_result setNumberResult:[_dateCalculator reverse]];
+        }
     }
 
     if (_isEqual) {

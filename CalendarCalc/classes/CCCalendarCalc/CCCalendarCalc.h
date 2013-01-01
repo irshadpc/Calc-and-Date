@@ -22,6 +22,8 @@
     CCFunction _currentFunction;
     BOOL _isEqual;
 }
+@property (nonatomic, readonly) CCFunction lastFunction;
+@property (nonatomic, readonly) BOOL isAllCleared;
 
 - (CCCalendarCalcResult *)inputInteger:(NSInteger)integer;
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;

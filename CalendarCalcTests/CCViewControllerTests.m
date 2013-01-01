@@ -1681,6 +1681,12 @@ enum {
 
     STAssertEqualObjects(@"2012/07/31", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
+
+- (void)test_PlusMinus
+{
+    [_viewController pressFunctionButton:(UIButton *)[_view viewWithTag:PLUS_MINUS]];
+    STAssertEqualObjects(@"-0", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+}
 //}}}
 
 @end

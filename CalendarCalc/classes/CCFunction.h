@@ -10,6 +10,7 @@
 #define CalendarCalc_CCFunction_h
 
 typedef enum {
+    CCFunctionNone,
     CCDecimal = 301,
     CCEqual,
     CCPlus,

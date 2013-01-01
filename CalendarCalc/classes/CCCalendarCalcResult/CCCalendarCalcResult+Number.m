@@ -61,10 +61,15 @@
 
 - (CCCalendarCalcResult *)reverseNumberResult
 {
-    if (_calcType != CCDate) {
-        [_numberResult reverse];
-        _calcType = CCNumber;
+    if (_calcType == CCDate) {
+        return self;
     }
+   
+    if (_calcType == CCUnknown) {
+        [self inputNumber:[NSDecimalNumber zero]];
+    }
+    
+    [_numberResult reverse];
     [self updateDisplayResult];
     
     return self;

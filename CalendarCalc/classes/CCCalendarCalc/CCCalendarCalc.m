@@ -17,6 +17,8 @@
 #import "CCCalcType.h"
 
 @interface CCCalendarCalc ()
+@property (nonatomic, readwrite) CCFunction lastFunction;
+
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (CCCalendarCalcResult *)calculate;
 - (void)numberCalculate;
@@ -37,6 +39,8 @@
         _numberCalculator = [[CCNumberCalculator alloc] init];
         _dateCalculator  = [[CCDateCalculator alloc] init];
         _result = [[CCCalendarCalcResult alloc] init];
+        _currentFunction = CCFunctionNone;
+        _lastFunction = CCFunctionNone;
     }
     return self;
 }
@@ -71,6 +75,7 @@
 
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function
 {
+    self.lastFunction = function;
     switch (function) {
         case CCPlus:
         case CCMinus:
@@ -109,6 +114,13 @@
         [excludeWeeks addObject:@(week)];
     }
     [_dateCalculator setExcludeWeeks:excludeWeeks];
+}
+
+- (BOOL)isAllCleared
+{
+    return ![_result numberResult] && 
+            ![_result dateResult] &&
+            (_isEqual || _currentFunction == CCFunctionNone);
 }
 
 
