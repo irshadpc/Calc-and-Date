@@ -11,6 +11,7 @@
 #import "NSArray+safe.h"
 #import "NSDate+Component.h"
 #import "NSDate+Style.h"
+#import "NSString+Locale.h"
 
 @interface CCEventViewController () <ASCEventManagerDelegate>
 @property (strong, nonatomic) UIPickerView *pickerView;
@@ -87,9 +88,9 @@ numberOfRowsInComponent:(NSInteger)component
     NSDate *date = [event.startDate noTime];
     return [NSString stringWithFormat:@"%d%@%02d%@%02d %@",
             [date year],
-            NSLocalizedString(@"SEPARATOR", nil),
+            [NSString dateSeparator],
             [date month],
-            NSLocalizedString(@"SEPARATOR", nil),
+            [NSString dateSeparator],
             [date day],
             event.title];
 }
