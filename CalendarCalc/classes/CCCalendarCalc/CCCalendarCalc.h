@@ -26,8 +26,8 @@
 @property (nonatomic, readonly) BOOL isAllCleared;
 
 - (CCCalendarCalcResult *)inputInteger:(NSInteger)integer;
-- (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date;
+- (CCCalendarCalcResult *)inputString:(NSString *)string;
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function;
 - (CCCalendarCalcResult *)result;
 - (void)setWeek:(ASCWeek)week exclude:(BOOL)exclude;

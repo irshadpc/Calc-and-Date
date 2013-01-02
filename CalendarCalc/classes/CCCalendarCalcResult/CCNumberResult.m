@@ -34,6 +34,22 @@ enum {
     return self;
 }
 
++ (NSDecimalNumber *)numberFromString:(NSString *)string
+{
+    NSNumber *number = [[NSNumberFormatter plainNumberFormatter] numberFromString:
+                        [string stringByReplacingOccurrencesOfString:[NSString groupingSeparator] withString:@""]];
+    if (!number) {
+        return nil;
+    }
+    
+    return ![number isNan] ? [NSDecimalNumber decimalNumberWithString:number.stringValue] : nil;
+}
+
++ (NSString *)stringFromNumber:(NSNumber *)number
+{
+    return [[NSNumberFormatter displayNumberFormatter] stringFromNumber:number];
+}
+
 - (void)clear
 {
     _isClear = YES;

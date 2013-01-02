@@ -10,4 +10,5 @@
 
 @interface NSDateFormatter (CalendarCalc)
 + (NSDateFormatter *)yyyymmddFormatter;
+- (BOOL)isDate:(NSString *)string;
 @end

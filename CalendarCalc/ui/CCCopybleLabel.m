@@ -16,8 +16,8 @@
     if (action == @selector(copy:)) {
         return YES;
     } else {
-        return [super canPerformAction: action
-                            withSender: sender];
+        return [super canPerformAction:action
+                            withSender:sender];
     }
 }
 
@@ -30,7 +30,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 - (void)copy:(id)sender
 {
-    [[UIPasteboard generalPasteboard] setString: self.text];
+    [[UIPasteboard generalPasteboard] setString:self.text];
     [self resignFirstResponder];
 }
 
@@ -39,20 +39,20 @@
            withEvent:(UIEvent *)event
 {
     if ([self isFirstResponder]) {
-        [[UIMenuController sharedMenuController] setMenuVisible: NO
-                                                       animated: YES];
+        [[UIMenuController sharedMenuController] setMenuVisible:NO
+                                                       animated:YES];
         
         [[UIMenuController sharedMenuController] update];
         [self resignFirstResponder];
     } else if ([self becomeFirstResponder]) {
-        [[UIMenuController sharedMenuController] setTargetRect: CGRectMake(self.bounds.origin.x,
-                                                                           self.bounds.origin.y,
-                                                                           self.bounds.size.width,
-                                                                           self.bounds.size.height / 2)
-                                                        inView: self];
+        [[UIMenuController sharedMenuController] setTargetRect:CGRectMake(self.bounds.origin.x,
+                                                                          self.bounds.origin.y,
+                                                                          self.bounds.size.width,
+                                                                          self.bounds.size.height / 2)
+                                                        inView:self];
         
-        [[UIMenuController sharedMenuController] setMenuVisible: YES
-                                                       animated: YES];
+        [[UIMenuController sharedMenuController] setMenuVisible:YES
+                                                       animated:YES];
     }
 }
 @end

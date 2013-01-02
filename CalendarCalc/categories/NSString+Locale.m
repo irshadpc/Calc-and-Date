@@ -15,9 +15,14 @@
     return [[NSLocale currentLocale] objectForKey: NSLocaleDecimalSeparator];
 }
 
++ (NSString *)groupingSeparator
+{
+    return [[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator];
+}
+
 + (NSString *)dateSeparator
 {
-    return @"/";
+    return NSLocalizedString(@"SEPARATOR", nil);
 }
 
 @end

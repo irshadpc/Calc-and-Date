@@ -11,6 +11,20 @@
 
 @implementation CCDateResult
 
++ (NSDate *)dateFromString:(NSString *)string
+{
+    if (![[NSDateFormatter yyyymmddFormatter] isDate:string]) {
+        NSLog(@"IN: %@",string);
+        return nil;
+    }
+    return [[NSDateFormatter yyyymmddFormatter] dateFromString:string];
+}
+
++ (NSString *)stringFromDate:(NSDate *)date
+{
+    return [[NSDateFormatter yyyymmddFormatter] stringFromDate:date];
+}
+
 - (void)clear
 {
     _date = nil;

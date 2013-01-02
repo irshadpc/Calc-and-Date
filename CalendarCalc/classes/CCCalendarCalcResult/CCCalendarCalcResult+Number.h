@@ -9,6 +9,8 @@
 #import "CCCalendarCalcResult.h"
 
 @interface CCCalendarCalcResult (Number)
++ (NSDecimalNumber *)numberFromString:(NSString *)string;
+
 - (NSDecimalNumber *)numberResult;
 - (void)setNumberResult:(NSDecimalNumber *)number;
 - (void)setNumberResultForDisplay:(NSDecimalNumber *)number;

@@ -104,6 +104,29 @@ enum {
     self.eventViewController = nil;
 }
 
+- (BOOL)canPerformAction:(SEL)action 
+              withSender:(id)sender
+{
+    if (action == @selector(copy:) || action == @selector(paste:)) {
+        return YES;
+    }
+    return [super canPerformAction:action withSender:sender];
+}
+
+- (void)paste:(id)sender
+{
+    NSString *string = [[UIPasteboard generalPasteboard] string];
+    if (!string) {
+        return;
+    }
+    
+    [self.calendarCalc inputString:string];
+    [self configureView];
+}
+
+
+#pragma mark - IBAction
+
 - (IBAction)onSetting:(UIButton *)sender {
     CCSettingViewController *settingViewController = [[CCSettingViewController alloc] initWithNibName:@"CCSettingViewController"
                                                                                                bundle:nil];
@@ -156,6 +179,9 @@ enum {
     [_player setCurrentTime:0];
     [_player play];
 }
+
+
+#pragma mark - Private
 
 - (void)onEventButton:(UIBarButtonItem *)sender
 {

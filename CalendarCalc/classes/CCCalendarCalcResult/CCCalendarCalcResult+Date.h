@@ -9,6 +9,8 @@
 #import "CCCalendarCalcResult.h"
 
 @interface CCCalendarCalcResult (Date)
++ (NSDate *)dateFromString:(NSString *)string;
+
 - (NSDate *)dateResult;
 - (void)setDateResult:(NSDate *)date;
 - (void)setDateResultForDisplay:(NSDate *)date;

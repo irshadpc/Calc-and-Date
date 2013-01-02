@@ -14,11 +14,15 @@
 #import "CCNumberCalculator.h"
 #import "CCDateCalculator.h"
 #import "NSDecimalNumber+Convert.h"
+#import "NSString+Locale.h"
 #import "CCCalcType.h"
 
 @interface CCCalendarCalc ()
 @property (nonatomic, readwrite) CCFunction lastFunction;
 
+- (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
+- (CCCalendarCalcResult *)inputNumberString:(NSString *)numberString;
+- (CCCalendarCalcResult *)inputDateString:(NSString *)dateString;
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (CCCalendarCalcResult *)calculate;
 - (void)numberCalculate;
@@ -51,17 +55,6 @@
             [NSDecimalNumber decimalNumberWithString:@(integer).stringValue]];
 }
 
-- (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
-{
-    if (_isEqual) {
-        [_result endInput];
-        [_numberCalculator clear];
-        [_dateCalculator clear];
-        _isEqual = NO;
-    }
-    return [_result inputNumber:number];
-}
-
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
     if (_isEqual) {
@@ -71,6 +64,17 @@
         _isEqual = NO;
     }
     return [_result inputDate:date];
+}
+
+- (CCCalendarCalcResult *)inputString:(NSString *)string
+{
+    if ([CCCalendarCalcResult numberFromString:string]) {
+        return [self inputNumberString:string];
+    } else if ([CCCalendarCalcResult dateFromString:string]) {
+        return [self inputDateString:string];
+    } else {
+        return _result;
+    }
 }
 
 - (CCCalendarCalcResult *)inputFunction:(CCFunction)function
@@ -125,6 +129,35 @@
 
 
 #pragma mark - Private
+
+- (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
+{
+    if (_isEqual) {
+        [_result endInput];
+        [_numberCalculator clear];
+        [_dateCalculator clear];
+        _isEqual = NO;
+    }
+    return [_result inputNumber:number];
+}
+
+- (CCCalendarCalcResult *)inputNumberString:(NSString *)numberString
+{
+    NSArray *numberComponents = [numberString componentsSeparatedByString:[NSString decimalSeparator]];
+    if (numberComponents.count == 1) {
+        [self inputNumber:[CCCalendarCalcResult numberFromString:numberComponents[0]]];
+    } else if (numberComponents.count == 2) {
+        [self inputNumber:[CCCalendarCalcResult numberFromString:numberComponents[0]]];
+        [self inputFunction:CCDecimal];
+        [self inputNumber:[CCCalendarCalcResult numberFromString:numberComponents[1]]];
+    }
+    return _result;
+}
+
+- (CCCalendarCalcResult *)inputDateString:(NSString *)dateString
+{
+    return [self inputDate:[CCCalendarCalcResult dateFromString:dateString]];
+}
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
 {

@@ -13,6 +13,9 @@
     NSDate *_date;
 }
 
++ (NSDate *)dateFromString:(NSString *)string;
++ (NSString *)stringFromDate:(NSDate *)date;
+
 - (void)clear;
 
 - (NSDate *)result;

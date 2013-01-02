@@ -8,9 +8,13 @@
 
 #import "CCCalendarCalcResult+Number.h"
 #import "CCNumberResult.h"
-#import "NSNumberFormatter+CalendarCalc.h"
 
 @implementation CCCalendarCalcResult (Number)
+
++ (NSDecimalNumber *)numberFromString:(NSString *)string
+{
+    return [CCNumberResult numberFromString:string];
+}
 
 - (NSDecimalNumber *)numberResult
 {
@@ -37,7 +41,7 @@
     if (!number) {
         return;
     }
-    _displayResult = [[NSNumberFormatter displayNumberFormatter] stringFromNumber:number];
+    _displayResult = [CCNumberResult stringFromNumber:number];
 }
 
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number

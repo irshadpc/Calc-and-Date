@@ -10,5 +10,6 @@
 
 @interface NSString (Locale)
 + (NSString *)decimalSeparator;
++ (NSString *)groupingSeparator;
 + (NSString *)dateSeparator;
 @end

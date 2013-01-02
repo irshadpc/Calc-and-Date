@@ -7,12 +7,13 @@
 //
 
 #import "NSString+Date.h"
+#import "NSString+Locale.h"
 
 @implementation NSString (Date)
 + (NSString *)stringWithYear:(NSInteger)year 
                        month:(NSInteger)month
 {
-    return [NSString stringWithFormat:@"%d%@%02d", year, NSLocalizedString(@"SEPARATOR", nil), month];
+    return [NSString stringWithFormat:@"%d%@%02d", year, [NSString dateSeparator], month];
 }
 
 @end
