@@ -9,6 +9,7 @@
 #import "CCCalendarCalcViewController.h"
 #import "CCCalendarViewController.h"
 #import "CCEventViewController.h"
+#import "CCSettingViewController.h"
 #import "CCCalendarCalc.h"
 #import "CCCalendarCalcFormatter.h"
 #import "CCViewSheet.h"
@@ -19,7 +20,7 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CCCalendarCalcViewController () <CCDateSelect, CCViewSheetDelegate>
+@interface CCCalendarCalcViewController () <CCSettingViewControllerDelegate, CCDateSelect, CCViewSheetDelegate>
 
 // properties
 @property (strong, nonatomic) CCCalendarViewController *calendarViewController;
@@ -34,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *decimalButton;
 
 // methods
+- (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onFunction:(UIButton *)sender;
 - (IBAction)onNumber:(UIButton *)sender;
 - (IBAction)onDate:(UIButton *)sender;
@@ -57,17 +59,17 @@ enum {
                bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        _calendarCalc = [[CCCalendarCalc alloc] init];
+        _calendarCalcFormatter = [[CCCalendarCalcFormatter alloc] initWithCalendarCalc:_calendarCalc];
+        _calendarViewController = [[CCCalendarViewController alloc] init];
+        _eventViewController = [[CCEventViewController alloc] init];
+
         NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"key_click"
                                                               ofType:@"aif"];
         NSURL *soundUrl = [[NSURL alloc] initFileURLWithPath:soundPath];
         _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error: nil];
         [_player setVolume:0.5];
         [_player prepareToPlay];
-
-        _calendarCalc = [[CCCalendarCalc alloc] init];
-        _calendarCalcFormatter = [[CCCalendarCalcFormatter alloc] initWithCalendarCalc:_calendarCalc];
-        _calendarViewController = [[CCCalendarViewController alloc] init];
-        _eventViewController = [[CCEventViewController alloc] init];
     }
     return self;
 }
@@ -102,6 +104,14 @@ enum {
     self.eventViewController = nil;
 }
 
+- (IBAction)onSetting:(UIButton *)sender {
+    CCSettingViewController *settingViewController = [[CCSettingViewController alloc] initWithNibName:@"CCSettingViewController"
+                                                                                               bundle:nil];
+    [settingViewController setDelegate:self];
+    [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:settingViewController animated:YES completion:nil];
+}
+
 - (IBAction)onFunction:(UIButton *)sender
 {
     [self.calendarCalc inputFunction:sender.tag];
@@ -120,6 +130,7 @@ enum {
         abort();
     }
     [self configureView];
+    
 }
 
 - (IBAction)onDate:(UIButton *)sender
@@ -193,6 +204,13 @@ enum {
     self.indicator.text = [self.calendarCalcFormatter displayIndicator];
     [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
                       forState:UIControlStateNormal];
+}
+
+
+#pragma mark - CCSettingViewController
+- (void)settingViewControllerDidFinish:(CCSettingViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

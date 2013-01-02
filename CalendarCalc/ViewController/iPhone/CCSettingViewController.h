@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CCSettingViewController : UIViewController
+@protocol CCSettingViewControllerDelegate;
 
+@interface CCSettingViewController : UIViewController
+@property (weak, nonatomic) id <CCSettingViewControllerDelegate> delegate;
+@end
+
+@protocol CCSettingViewControllerDelegate <NSObject>
+- (void)settingViewControllerDidFinish:(CCSettingViewController *)viewController;
 @end

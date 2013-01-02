@@ -12,20 +12,12 @@
 @interface CCSettingViewController ()
 @property (weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
 @property (weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
-- (IBAction)onIncludeStartDayOptionChanged:(UISwitch *)sender;
-- (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender;
+- (IBAction)onDone:(UIBarButtonItem *)sender;
+- (IBAction)onCancel:(UIBarButtonItem *)sender;
+- (void)saveSettings;
 @end
 
 @implementation CCSettingViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -34,22 +26,37 @@
     self.dynamicCalendarOption.on = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption];
 }
 
+- (void)viewDidUnload {
+    [self setIncludeStartDayOption:nil];
+    [self setDynamicCalendarOption:nil];
+    [super viewDidUnload];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onIncludeStartDayOptionChanged:(UISwitch *)sender {
-    [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] setIncludeStartDayOption:sender.isOn];
+- (IBAction)onDone:(UIBarButtonItem *)sender {
+    [self saveSettings];
+    [self.delegate settingViewControllerDidFinish:self];
 }
 
-- (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender {
-    [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] setDynamicCalendarOption:sender.isOn];
+- (IBAction)onCancel:(UIBarButtonItem *)sender {
+    [self.delegate settingViewControllerDidFinish:self];
 }
-- (void)viewDidUnload {
-    [self setIncludeStartDayOption:nil];
-    [self setDynamicCalendarOption:nil];
-    [super viewDidUnload];
+
+
+
+#pragma mark - Private
+
+- (void)saveSettings
+{
+    CCAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
+    [delegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
 }
+
+
 @end

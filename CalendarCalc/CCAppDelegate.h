@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class CCViewController_iPhone;
+@class CCCalendarCalcViewController;
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) CCViewController_iPhone *viewController;
+@property (strong, nonatomic) CCCalendarCalcViewController *viewController;
 @end
