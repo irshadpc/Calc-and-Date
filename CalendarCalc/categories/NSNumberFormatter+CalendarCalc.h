@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSNumberFormatter (CalendarCalc)
-+ (NSNumberFormatter *)displayNumberFormatter;
++ (NSNumberFormatter *)displayLongNumberFormatter;
++ (NSNumberFormatter *)displayShortNumberFormatter;
 + (NSNumberFormatter *)plainNumberFormatter;
 @end

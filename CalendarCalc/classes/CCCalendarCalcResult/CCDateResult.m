@@ -14,7 +14,6 @@
 + (NSDate *)dateFromString:(NSString *)string
 {
     if (![[NSDateFormatter yyyymmddFormatter] isDate:string]) {
-        NSLog(@"IN: %@",string);
         return nil;
     }
     return [[NSDateFormatter yyyymmddFormatter] dateFromString:string];

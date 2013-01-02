@@ -11,9 +11,12 @@
 #import "NSNumber+Predicate.h"
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumberFormatter+CalendarCalc.h"
+#import "CCNumberFormat.h"
 
 @interface CCNumberResult ()
 - (void)innerClear;
+- (void)innerClearEntry;
+- (void)overFloor;
 @end
 
 @implementation CCNumberResult
@@ -45,9 +48,34 @@ enum {
     return ![number isNan] ? [NSDecimalNumber decimalNumberWithString:number.stringValue] : nil;
 }
 
-+ (NSString *)stringFromNumber:(NSNumber *)number
++ (NSString *)stringFromNumber:(NSDecimalNumber *)number
 {
-    return [[NSNumberFormatter displayNumberFormatter] stringFromNumber:number];
+    NSInteger maxDigits = CCMaxDigits + ([number isMinus] ? 1 : 0);
+    if (number.stringValue.length <= maxDigits) {
+        return [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:number];
+    }
+    
+    NSArray *numberComponents = [[[NSNumberFormatter plainNumberFormatter] stringFromNumber:number]
+                                 componentsSeparatedByString:[NSString decimalSeparator]];
+
+    if ([numberComponents[Number] length] <= maxDigits - 2) {
+        NSString *shortDecimal = nil;
+        if (numberComponents.count == DecimalCount) {
+            shortDecimal = [numberComponents[Decimal] substringToIndex:maxDigits - [numberComponents[Number] length]];
+        } else  {
+            shortDecimal = @"";
+        }
+        
+        NSNumber *shortNumber = [[NSNumberFormatter plainNumberFormatter] numberFromString:
+                                 [NSString stringWithFormat:@"%@%@%@",
+                                  numberComponents[Number],
+                                  [NSString decimalSeparator],
+                                  shortDecimal]];
+        
+        return [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:shortNumber];
+    } else {
+        return [[NSNumberFormatter displayShortNumberFormatter] stringFromNumber:number];
+    }
 }
 
 - (void)clear
@@ -62,7 +90,7 @@ enum {
     }
     
     return [NSDecimalNumber decimalNumberWithString:
-            [[NSNumberFormatter displayNumberFormatter] numberFromString:[self displayResult]].stringValue];
+            [[NSNumberFormatter displayLongNumberFormatter] numberFromString:[self displayResult]].stringValue];
 }
 
 - (NSString *)displayResult
@@ -75,9 +103,9 @@ enum {
 
     if (_number.length > 0) {
         [displayResult appendString:
-         [[NSNumberFormatter displayNumberFormatter] stringFromNumber:[NSDecimalNumber decimalNumberWithString:_number]]];
+         [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:[NSDecimalNumber decimalNumberWithString:_number]]];
     } else {
-        [displayResult appendString:[[NSNumberFormatter displayNumberFormatter] stringFromNumber:@0]];
+        [displayResult appendString:[[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:@0]];
     }
 
     if (_isDecimal) {
@@ -108,19 +136,15 @@ enum {
 
 - (void)clearEntry
 {
-    if (_isDecimal) {
-        [_decimal deleteCharactersInRange:NSMakeRange(_decimal.length - 1, 1)];
-        _isDecimal = _decimal.length > 0;
-    } else if (_number.integerValue != 0) {
-        [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
-        _isMinus = _number.length > 0 ? _isMinus : NO;
-    }
+    [self innerClearEntry];
     _isClear = NO;
 }
 
 - (void)inputNumber:(NSDecimalNumber *)number
 {
     [self innerClear];
+    [self overFloor];
+    
     if (_isDecimal) {
         [_decimal appendString:number.stringValue];
     } else if (_number.integerValue != 0) {
@@ -133,7 +157,10 @@ enum {
 - (void)inputDecimalPoint
 {
     [self innerClear];
-    _isDecimal = YES;
+
+    if (_number.length < CCMaxDigits) {
+        _isDecimal = YES;
+    }
 }
 
 - (void)reverse 
@@ -153,6 +180,29 @@ enum {
         _isMinus = NO;
         _isClear = NO;
     }
+}
+
+- (void)innerClearEntry
+{
+    if (_isDecimal) {
+        if (_decimal.length > 0) {
+            [_decimal deleteCharactersInRange:NSMakeRange(_decimal.length - 1, 1)];
+            _isDecimal = _decimal.length > 0;
+        } else {
+            _isDecimal = NO;
+        }
+    } else if (_number.integerValue != 0) {
+        [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
+        _isMinus = _number.length > 0 ? _isMinus : NO;
+    }
+}
+
+- (void)overFloor
+{
+    if (_number.length + _decimal.length < CCMaxDigits) {
+        return;
+    }
+    [self innerClearEntry];
 }
 
 @end

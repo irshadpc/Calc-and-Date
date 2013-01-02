@@ -19,7 +19,7 @@
     BOOL _isClear;
 }
 + (NSDecimalNumber *)numberFromString:(NSString *)string;
-+ (NSString *)stringFromNumber:(NSNumber *)number;
++ (NSString *)stringFromNumber:(NSDecimalNumber *)number;
 
 - (void)clear;
 

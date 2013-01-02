@@ -11,11 +11,19 @@
 
 @implementation NSNumberFormatter (CalendarCalc)
 
-+ (NSNumberFormatter *)displayNumberFormatter
++ (NSNumberFormatter *)displayLongNumberFormatter
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    [numberFormatter setMaximumFractionDigits:MaxDigits];
+    [numberFormatter setMaximumFractionDigits:CCMaxDigits];
+    return numberFormatter;
+}
+
++ (NSNumberFormatter *)displayShortNumberFormatter
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
+    [numberFormatter setMaximumFractionDigits:CCMaxDigits];
     return numberFormatter;
 }
 
@@ -23,7 +31,7 @@
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterNoStyle];
-    [numberFormatter setMaximumFractionDigits:MaxDigits];
+    [numberFormatter setMaximumFractionDigits:CCMaxDigits];
     return numberFormatter;
 }
 @end
