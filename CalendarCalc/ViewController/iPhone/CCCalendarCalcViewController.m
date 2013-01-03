@@ -83,7 +83,7 @@ enum {
                      forState:UIControlStateNormal];
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
-    
+    [self configureView];
     self.calendarViewController.delegate = self;
 }
 
