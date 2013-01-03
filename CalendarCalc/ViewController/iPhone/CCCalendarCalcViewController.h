@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *indicator;
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
+- (void)onEventDone;
 - (void)showEventView:(UIButton *)sender;
 - (void)configureView;
 @end

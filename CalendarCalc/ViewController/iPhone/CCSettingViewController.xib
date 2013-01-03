@@ -77,7 +77,6 @@
 						<string key="NSFrame">{{205, 111}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -98,7 +97,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">カレンダーのフリップ切替</string>
+						<string key="IBUIText">カレンダーのフリック切替</string>
 						<reference key="IBUITextColor" ref="295354375"/>
 						<nil key="IBUIHighlightedColor"/>
 						<string key="IBUIShadowOffset">{1, 1}</string>
@@ -121,7 +120,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIOn">YES</bool>
 					</object>
-					<object class="IBUINavigationBar" id="1035210829">
+					<object class="IBUINavigationBar" id="469239957">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 44}</string>
@@ -132,19 +131,19 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIBarStyle">1</int>
 						<array key="IBUIItems">
-							<object class="IBUINavigationItem" id="63776858">
-								<reference key="IBUINavigationBar" ref="1035210829"/>
+							<object class="IBUINavigationItem" id="628232806">
+								<reference key="IBUINavigationBar" ref="469239957"/>
 								<string key="IBUITitle">設定</string>
-								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="271373048">
+								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="633645237">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="63776858"/>
+									<reference key="IBUINavigationItem" ref="628232806"/>
 									<int key="IBUISystemItemIdentifier">1</int>
 								</object>
-								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="249972209">
+								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="377509005">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="63776858"/>
+									<reference key="IBUINavigationItem" ref="628232806"/>
 									<int key="IBUISystemItemIdentifier">0</int>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -155,7 +154,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1035210829"/>
+				<reference key="NSNextKeyView" ref="469239957"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -210,7 +209,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onDone:</string>
-						<reference key="source" ref="249972209"/>
+						<reference key="source" ref="377509005"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">28</int>
@@ -218,7 +217,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onCancel:</string>
-						<reference key="source" ref="271373048"/>
+						<reference key="source" ref="633645237"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">30</int>
@@ -240,7 +239,7 @@
 							<reference ref="893912344"/>
 							<reference ref="981788303"/>
 							<reference ref="874556750"/>
-							<reference ref="1035210829"/>
+							<reference ref="469239957"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -281,33 +280,33 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
-						<reference key="object" ref="1035210829"/>
+						<reference key="object" ref="469239957"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="63776858"/>
+							<reference ref="628232806"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">タイトルバー</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">26</int>
-						<reference key="object" ref="63776858"/>
+						<reference key="object" ref="628232806"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="249972209"/>
-							<reference ref="271373048"/>
+							<reference ref="377509005"/>
+							<reference ref="633645237"/>
 						</array>
-						<reference key="parent" ref="1035210829"/>
+						<reference key="parent" ref="469239957"/>
 						<string key="objectName">タイトル</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">27</int>
-						<reference key="object" ref="249972209"/>
-						<reference key="parent" ref="63776858"/>
+						<reference key="object" ref="377509005"/>
+						<reference key="parent" ref="628232806"/>
 						<string key="objectName">決定ボタン</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">29</int>
-						<reference key="object" ref="271373048"/>
-						<reference key="parent" ref="63776858"/>
+						<reference key="object" ref="633645237"/>
+						<reference key="parent" ref="628232806"/>
 						<string key="objectName">キャンセルボタン</string>
 					</object>
 				</array>

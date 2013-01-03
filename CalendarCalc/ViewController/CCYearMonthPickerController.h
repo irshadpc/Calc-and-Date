@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CCYearMonthPickerControllerDelegate;
+
 @interface CCYearMonthPickerController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@property (weak, nonatomic) id <CCYearMonthPickerControllerDelegate> delegate;
 @property (nonatomic) NSInteger year;
 @property (nonatomic) NSInteger month;
+@end
+
+@protocol CCYearMonthPickerControllerDelegate <NSObject>
+
+- (void)yearMonthPickearControllerDidDone:(CCYearMonthPickerController *)yearMonthPickerController;
+
 @end

@@ -17,6 +17,10 @@
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property (strong, nonatomic) ASCEventManager *eventManager;
+
+- (CGRect)viewFrame;
+- (UIToolbar *)toolbar;
+- (void)onDone:(UIBarButtonItem *)sender;
 @end
 
 @implementation CCEventViewController
@@ -45,7 +49,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.frame = self.pickerView.frame;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIToolbar *toolbar = [self toolbar];
+        [self.view addSubview:toolbar];
+        
+        CGRect pickerFrame = self.pickerView.frame;
+        pickerFrame.origin.y += toolbar.frame.size.height;
+        self.pickerView.frame = pickerFrame;
+    }
+
+    self.view.frame = [self viewFrame];
     self.contentSizeForViewInPopover = self.view.frame.size;
     
     self.pickerView.dataSource = self;
@@ -120,5 +134,30 @@ numberOfRowsInComponent:(NSInteger)component
     [self.pickerView setUserInteractionEnabled:YES];
 }
 
+- (CGRect)viewFrame
+{
+    return CGRectMake(0,
+                      0,
+                      self.pickerView.frame.size.width,
+                      self.pickerView.frame.origin.y + self.pickerView.frame.size.height);
+}
+
+- (UIToolbar *)toolbar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.pickerView.frame.size.width, 44.0)];
+    [toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                      target:nil
+                                                                      action:nil],
+                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                      target:self
+                                                                      action:@selector(onDone:)]]];
+    [toolbar setBarStyle:UIBarStyleBlackOpaque];
+    return toolbar;
+}
+
+- (void)onDone:(UIBarButtonItem *)sender
+{
+    [self.delegate eventViewControllerDidDone:self];
+}
 
 @end

@@ -28,7 +28,6 @@
 - (IBAction)onNumber:(UIButton *)sender;
 
 - (IBAction)onClick:(UIButton *)sender;
-- (void)onEventDone:(UIBarButtonItem *)sender;
 @end
 
 
@@ -147,7 +146,7 @@ enum {
     abort();
 }
 
-- (void)onEventDone:(UIBarButtonItem *)sender
+- (void)onEventDone
 {
     [self.calendarCalc inputDate:self.eventViewController.selectedDate];
     [self configureView];

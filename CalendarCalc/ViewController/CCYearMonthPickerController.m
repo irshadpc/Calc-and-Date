@@ -14,6 +14,9 @@
 
 - (NSArray *)years;
 - (NSArray *)months;
+- (UIToolbar *)toolbar;
+- (CGRect)viewFrame;
+- (void)onDone:(UIBarButtonItem *)sender;
 @end
 
 @implementation CCYearMonthPickerController
@@ -37,7 +40,17 @@ static const NSInteger MAX_YEAR = 2200;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.frame = self.pickerView.frame;
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIToolbar *toolbar = [self toolbar];
+        [self.view addSubview:toolbar];
+
+        CGRect pickerFrame = self.pickerView.frame;
+        pickerFrame.origin.y += toolbar.frame.size.height;
+        self.pickerView.frame = pickerFrame;
+    }
+    
+    self.view.frame = [self viewFrame];
     self.contentSizeForViewInPopover = self.view.frame.size;
 
     self.pickerView.dataSource = self;
@@ -89,36 +102,6 @@ static const NSInteger MAX_YEAR = 2200;
     }
 }
 
-#pragma mark - Private
-
-- (NSArray *)years
-{
-    static NSMutableArray *years = nil;
-    if (years) {
-        return years;
-    }
-   
-    years = [[NSMutableArray alloc] init];
-    for (NSInteger year = MIN_YEAR; year <= MAX_YEAR; year++) {
-        [years addObject:[[NSString alloc] initWithFormat:@"%d", year]];
-    }
-    return years;
-}
-
-- (NSArray *)months
-{
-    static NSMutableArray *months = nil;
-    if (months) {
-        return months;
-    }
-   
-    months = [[NSMutableArray alloc] init];
-    for (NSInteger month = 1; month <= 12; month++) {
-        [months addObject:[[NSString alloc] initWithFormat:@"%02d", month]];
-    }
-    return months;
-}
-
 
 #pragma UIPickerView
 
@@ -146,6 +129,66 @@ numberOfRowsInComponent:(NSInteger)component
     } else {
         return self.months[row];
     }
+}
+
+
+#pragma mark - Private
+
+- (NSArray *)years
+{
+    static NSMutableArray *years = nil;
+    if (years) {
+        return years;
+    }
+
+    years = [[NSMutableArray alloc] init];
+    for (NSInteger year = MIN_YEAR; year <= MAX_YEAR; year++) {
+        [years addObject:[[NSString alloc] initWithFormat:@"%d", year]];
+    }
+    return years;
+}
+
+- (NSArray *)months
+{
+    static NSMutableArray *months = nil;
+    if (months) {
+        return months;
+    }
+
+    months = [[NSMutableArray alloc] init];
+    for (NSInteger month = 1; month <= 12; month++) {
+        [months addObject:[[NSString alloc] initWithFormat:@"%02d", month]];
+    }
+    return months;
+}
+
+- (UIToolbar *)toolbar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0,
+                                                                     0,
+                                                                     self.pickerView.frame.size.width,
+                                                                     44.0)];
+    [toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                      target:nil
+                                                                      action:nil],
+                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                      target:self
+                                                                      action:@selector(onDone:)]]];
+    [toolbar setBarStyle:UIBarStyleBlackOpaque];
+    return toolbar;
+}
+
+- (CGRect)viewFrame
+{
+    return CGRectMake(0,
+                      0,
+                      self.pickerView.frame.size.width,
+                      self.pickerView.frame.origin.y + self.pickerView.frame.size.height);
+}
+
+- (void)onDone:(UIBarButtonItem *)sender
+{
+    [self.delegate yearMonthPickearControllerDidDone:self];
 }
 
 @end

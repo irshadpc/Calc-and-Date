@@ -9,7 +9,7 @@
 #import "CCCalendarCalcViewController_iPad.h"
 #import "CCYearMonthPickerController.h"
 
-@interface CCCalendarCalcViewController_iPad () {
+@interface CCCalendarCalcViewController_iPad () <CCEventViewControllerDelegate> {
   @private
     UIPopoverController *_currentPopover;
 }
@@ -50,6 +50,8 @@
 
     [self.calendarViewController.nextButton setFrame:[self nextButtonFrame]];
     [self.nextButtonContainer addSubview:self.calendarViewController.nextButton];
+
+    self.eventViewController.delegate = self;
 }
 
 - (void)viewDidUnload {
@@ -74,6 +76,7 @@
 {
     if (!self.eventViewController) {
         self.eventViewController = [[CCEventViewController alloc] init];
+        self.eventViewController.delegate = self;
     }
    
     if ([_currentPopover isPopoverVisible]) {
@@ -103,6 +106,16 @@
     [self showEventView:sender];
 }
 
+
+#pragma mark - CCEventViewController
+
+- (void)eventViewControllerDidDone:(CCEventViewController *)eventViewController
+{
+    if ([_currentPopover isPopoverVisible]) {
+        [_currentPopover dismissPopoverAnimated:YES];
+    }
+    [self onEventDone];
+}
 
 #pragma mark - Private
 
