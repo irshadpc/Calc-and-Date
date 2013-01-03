@@ -25,12 +25,13 @@
     ASCPageViewDelegate,
     CCViewSheetDelegate
   >
+@property (strong, nonatomic, readwrite) NSDate *date;
 
 - (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
 - (void)setCurrentYear:(NSInteger)year month:(NSInteger)month;
 - (void)prevMonth;
 - (void)nextMonth;
-- (void)onPickerToolbarDone:(UIBarButtonItem *)sender;
+- (void)onYearMonthSelectDone:(UIBarButtonItem *)sender;
 @end
 
 @implementation CCCalendarViewController
@@ -41,6 +42,7 @@
         NSDate *date = [NSDate date];
         NSInteger year = [date year];
         NSInteger month = [date month];
+        _date = date;
         _calendarViews = @[[self calendarViewWithYear:year month:month - 1],
                            [self calendarViewWithYear:year month:month],
                            [self calendarViewWithYear:year month:month + 1]];
@@ -108,9 +110,10 @@
         [_calendarViews[2] reloadCalendarViewWithYear:year month:month + 1];
     });
 
-    [_calendarControllView setCurrentDate:[NSDate dateWithYear:year
-                                                         month:month
-                                                           day:1]];
+    self.date = [NSDate dateWithYear:year
+                               month:month
+                                 day:1];
+    [_calendarControllView setCurrentDate:self.date];
 }
 
 - (void)prevMonth
@@ -143,6 +146,7 @@
 - (void)calendarView:(ASCCalendarView *)view
      onTouchUpInside:(NSDate *)date
 {
+    self.date = date;
     [self.delegate didSelectDate:date];
 }
 
@@ -153,18 +157,20 @@
             pressPrevMonthButton:(UIButton *)prevMonthButton
 {
     [self prevMonth];
-    return [NSDate dateWithYear:[_calendarViews[1] year]
-                          month:[_calendarViews[1] month]
-                            day:1];
+    self.date = [NSDate dateWithYear:[_calendarViews[1] year]
+                               month:[_calendarViews[1] month]
+                                 day:1];
+    return self.date;
 }
 
 - (NSDate *)calendarControllView:(ASCCalendarControllView *)calendarControllView
             pressNextMonthButton:(UIButton *)nextMonthBUtton
 {
     [self nextMonth];
-    return [NSDate dateWithYear:[_calendarViews[1] year]
-                          month:[_calendarViews[1] month]
-                            day:1];
+    self.date = [NSDate dateWithYear:[_calendarViews[1] year]
+                               month:[_calendarViews[1] month]
+                                 day:1];
+    return self.date;
 }
 
 - (void)calendarControllView:(ASCCalendarControllView *)calendarControllView
@@ -177,13 +183,13 @@
     _viewSheet = [[CCViewSheet alloc] initWithContentViewController:pickerViewController];
     [_viewSheet setRightButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                             target:self 
-                                                                            action:@selector(onPickerToolbarDone:)]];
+                                                                            action:@selector(onYearMonthSelectDone:)]];
     _viewSheet.delegate = self;
 
     [_viewSheet showInView:self.view animated:YES];
 }
 
-- (void)onPickerToolbarDone:(UIBarButtonItem *)sender
+- (void)onYearMonthSelectDone:(UIBarButtonItem *)sender
 {
     [_viewSheet dismissContainerViewWithAnimated:YES];
     
@@ -200,6 +206,7 @@
 {
     [self.delegate didSelectWeek:week exclude:!on];
 }
+
 
 #pragma mark - ASCPageView
 

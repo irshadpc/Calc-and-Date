@@ -8,6 +8,7 @@
 
 #import "CCAppDelegate.h"
 #import "CCCalendarCalcViewController.h"
+#import "CCCalendarCalcViewController_iPhone.h"
 #import "CCUserDefaultsKeys.h"
 
 @implementation CCAppDelegate
@@ -22,7 +23,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[CCCalendarCalcViewController alloc] initWithNibName:@"CCCalendarCalcViewController_iPhone" bundle:nil];
+        self.viewController = [[CCCalendarCalcViewController_iPhone alloc] initWithNibName:@"CCCalendarCalcViewController_iPhone" bundle:nil];
     } else {
         //self.viewController = [[CCCalendarCalcViewController alloc] initWithNibName:@"CCViewController_iPad" bundle:nil];
     }

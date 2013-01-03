@@ -8,13 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-
-@class CCViewSheet;
+#import "CCCalendarViewController.h"
+#import "CCEventViewController.h"
+#import "CCCalendarCalcFormatter.h"
 
 @interface CCCalendarCalcViewController : UIViewController {
   @private
     AVAudioPlayer *_player;
-    CCViewSheet *_currentViewSheet;
 }
+@property (strong, nonatomic) CCCalendarViewController *calendarViewController;
+@property (strong, nonatomic) CCEventViewController *eventViewController;
+@property (strong, nonatomic) CCCalendarCalcFormatter *calendarCalcFormatter;
+@property (weak, nonatomic) IBOutlet UILabel *display;
+@property (weak, nonatomic) IBOutlet UILabel *indicator;
+@property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
+- (void)onEventButton:(UIButton *)sender;
+- (void)configureView;
 @end

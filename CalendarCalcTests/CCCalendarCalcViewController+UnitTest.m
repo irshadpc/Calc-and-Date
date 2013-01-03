@@ -26,6 +26,6 @@
 
 - (NSString *)resultText
 {
-    return [[self performSelector:@selector(display)] text];
+    return [self.display text];
 }
 @end

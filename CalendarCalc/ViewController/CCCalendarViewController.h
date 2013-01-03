@@ -24,4 +24,5 @@
 }
 @property (weak, nonatomic) id <CCDateSelect> delegate;
 @property (nonatomic, getter = isDynamicCalendar) BOOL dynamicCalendar;
+@property (strong, nonatomic, readonly) NSDate *date;
 @end

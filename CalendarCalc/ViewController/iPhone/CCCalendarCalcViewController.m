@@ -7,12 +7,8 @@
 //
 
 #import "CCCalendarCalcViewController.h"
-#import "CCCalendarViewController.h"
-#import "CCEventViewController.h"
 #import "CCSettingViewController.h"
 #import "CCCalendarCalc.h"
-#import "CCCalendarCalcFormatter.h"
-#import "CCViewSheet.h"
 #import "CCDateSelect.h"
 #import "CCAppDelegate+Setting.h"
 #import "NSDate+Component.h"
@@ -20,36 +16,23 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CCCalendarCalcViewController () <CCSettingViewControllerDelegate, CCDateSelect, CCViewSheetDelegate>
+@interface CCCalendarCalcViewController () <CCSettingViewControllerDelegate, CCDateSelect>
 
 // properties
-@property (strong, nonatomic) CCCalendarViewController *calendarViewController;
-@property (strong, nonatomic) CCEventViewController *eventViewController;
 @property (strong, nonatomic) CCCalendarCalc *calendarCalc;
-@property (strong, nonatomic) CCCalendarCalcFormatter *calendarCalcFormatter;
-
-@property (weak, nonatomic) IBOutlet UILabel *display;
-@property (weak, nonatomic) IBOutlet UILabel *indicator;
-@property (weak, nonatomic) IBOutlet UIButton *dateButton;
-@property (weak, nonatomic) IBOutlet UIButton *clearButton;
 @property (weak, nonatomic) IBOutlet UIButton *decimalButton;
 
 // methods
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onFunction:(UIButton *)sender;
 - (IBAction)onNumber:(UIButton *)sender;
-- (IBAction)onDate:(UIButton *)sender;
+
 - (IBAction)onClick:(UIButton *)sender;
-- (void)onEventButton:(UIBarButtonItem *)sender;
 - (void)onEventDone:(UIBarButtonItem *)sender;
-- (UIBarButtonItem *)eventButton;
-- (UIBarButtonItem *)eventDoneButton;
-- (void)configureView;
 @end
 
 
 @implementation CCCalendarCalcViewController
-@synthesize dateButton = _dateButton;
 
 enum {
     CCDoubleZero = 10,
@@ -62,7 +45,6 @@ enum {
         _calendarCalc = [[CCCalendarCalc alloc] init];
         _calendarCalcFormatter = [[CCCalendarCalcFormatter alloc] initWithCalendarCalc:_calendarCalc];
         _calendarViewController = [[CCCalendarViewController alloc] init];
-        _eventViewController = [[CCEventViewController alloc] init];
 
         NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"key_click"
                                                               ofType:@"aif"];
@@ -78,9 +60,6 @@ enum {
 {
     [super viewDidLoad];
 
-    NSDate *date = [NSDate date];
-    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
-                     forState:UIControlStateNormal];
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
     [self configureView];
@@ -91,7 +70,6 @@ enum {
 {
     [self setDisplay:nil];
     [self setIndicator:nil];
-    [self setDateButton:nil];
     [self setClearButton:nil];
     [self setDecimalButton:nil];
     [super viewDidUnload];
@@ -101,7 +79,6 @@ enum {
 {
     [super didReceiveMemoryWarning];
     self.calendarViewController = nil;
-    self.eventViewController = nil;
 }
 
 - (BOOL)canPerformAction:(SEL)action 
@@ -156,24 +133,6 @@ enum {
     
 }
 
-- (IBAction)onDate:(UIButton *)sender
-{
-    if (!self.calendarViewController) {
-        self.calendarViewController = [[CCCalendarViewController alloc] init];
-    }
-    
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-    
-    [self.calendarViewController setDynamicCalendar:
-     [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
-    _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.calendarViewController];
-    _currentViewSheet.delegate = self;
-    [_currentViewSheet setRightButton:[self eventButton]];
-    [_currentViewSheet showInView:self.view animated:YES];
-}
-
 - (IBAction)onClick:(UIButton *)sender
 {
     [_player setCurrentTime:0];
@@ -185,55 +144,23 @@ enum {
 
 - (void)onEventButton:(UIBarButtonItem *)sender
 {
-    if (!self.eventViewController) {
-        self.eventViewController = [[CCEventViewController alloc] init];
-    }
-    
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-   
-    _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.eventViewController];
-    _currentViewSheet.delegate = self;
-    [_currentViewSheet setRightButton:[self eventDoneButton]];
-    [_currentViewSheet showInView:self.view animated:YES];
+    abort();
 }
 
 - (void)onEventDone:(UIBarButtonItem *)sender
 {
     [self.calendarCalc inputDate:self.eventViewController.selectedDate];
     [self configureView];
-    
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-}
-
-- (UIBarButtonItem *)eventButton
-{
-    return [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"EVENT", nil)
-                                            style:UIBarButtonItemStyleBordered
-                                           target:self 
-                                           action:@selector(onEventButton:)];
-}
-
-- (UIBarButtonItem *)eventDoneButton
-{
-    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                         target:self
-                                                         action:@selector(onEventDone:)];
 }
 
 - (void)configureView
 {
-    self.display.text = [self.calendarCalcFormatter displayResult];
-    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
-    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
-                      forState:UIControlStateNormal];
+    abort();
 }
 
 
 #pragma mark - CCSettingViewController
+
 - (void)settingViewControllerDidFinish:(CCSettingViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -246,27 +173,12 @@ enum {
 {
     [self.calendarCalc inputDate:date];
     [self configureView];
-    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]] 
-                     forState:UIControlStateNormal];
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
 }
 
 - (void)didSelectWeek:(ASCWeek)week
               exclude:(BOOL)exclude
 {
-    [_calendarCalc setWeek:week exclude:exclude];
-}
-
-
-#pragma mark - CCViewSheet
-
-- (void)viewSheetClickedCancelButton:(CCViewSheet *)viewSheet
-{
-    if ([viewSheet isVisible]) {
-        [viewSheet dismissContainerViewWithAnimated:YES];
-    }
+    [self.calendarCalc setWeek:week exclude:exclude];
 }
 
 @end

@@ -51,17 +51,20 @@ enum {
 + (NSString *)stringFromNumber:(NSDecimalNumber *)number
 {
     NSInteger maxDigits = CCMaxDigits + ([number isMinus] ? 1 : 0);
-    if (number.stringValue.length <= maxDigits) {
+    NSString *plainNumberString = [number.stringValue stringByReplacingOccurrencesOfString:
+                                   [NSString decimalSeparator] withString:@""];
+    if (plainNumberString.length <= maxDigits) {
         return [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:number];
     }
     
     NSArray *numberComponents = [[[NSNumberFormatter plainNumberFormatter] stringFromNumber:number]
                                  componentsSeparatedByString:[NSString decimalSeparator]];
+    NSInteger numberLength = [numberComponents[Number] length] == 0 ? 1 : [numberComponents[Number] length];
 
-    if ([numberComponents[Number] length] <= maxDigits - 2) {
+    if (numberLength <= maxDigits - 2) {
         NSString *shortDecimal = nil;
         if (numberComponents.count == DecimalCount) {
-            shortDecimal = [numberComponents[Decimal] substringToIndex:maxDigits - [numberComponents[Number] length]];
+            shortDecimal = [numberComponents[Decimal] substringToIndex:maxDigits - numberLength];
         } else  {
             shortDecimal = @"";
         }
@@ -137,6 +140,7 @@ enum {
 - (void)clearEntry
 {
     [self innerClearEntry];
+    _isDecimal = _decimal.length > 0;
     _isClear = NO;
 }
 
@@ -187,9 +191,6 @@ enum {
     if (_isDecimal) {
         if (_decimal.length > 0) {
             [_decimal deleteCharactersInRange:NSMakeRange(_decimal.length - 1, 1)];
-            _isDecimal = _decimal.length > 0;
-        } else {
-            _isDecimal = NO;
         }
     } else if (_number.integerValue != 0) {
         [_number deleteCharactersInRange:NSMakeRange(_number.length - 1, 1)];
@@ -199,7 +200,8 @@ enum {
 
 - (void)overFloor
 {
-    if (_number.length + _decimal.length < CCMaxDigits) {
+    NSInteger numberLength = _number.length == 0 ? 1 : _number.length;
+    if (numberLength + _decimal.length < CCMaxDigits) {
         return;
     }
     [self innerClearEntry];
