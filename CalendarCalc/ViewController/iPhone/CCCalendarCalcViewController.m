@@ -142,7 +142,7 @@ enum {
 
 #pragma mark - Private
 
-- (void)onEventButton:(UIBarButtonItem *)sender
+- (void)showEventView:(UIButton *)sender
 {
     abort();
 }

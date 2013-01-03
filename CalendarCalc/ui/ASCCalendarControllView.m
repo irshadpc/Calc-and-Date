@@ -14,55 +14,37 @@
 #import "NSString+Date.h"
 
 @interface ASCCalendarControllView ()
-@property (strong, nonatomic) UIButton *dateSelectButton;
-
+@property (strong, nonatomic, readwrite) UIButton *dateSelectButton;
+@property (strong, nonatomic, readwrite) UIButton *prevButton;
+@property (strong, nonatomic, readwrite) UIButton *nextButton;
 
 - (void)onPrev:(UIButton *)sender;
 - (void)onNext:(UIButton *)sender;
 - (void)onDateSelect:(UIButton *)sender;
 
 - (void)setDateSelectButtonTitle:(NSDate *)date;
+
+- (void)setupPrevButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;
+- (void)setupNextButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;;
+- (void)setupDateSelectButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;;
 @end
 
 @implementation ASCCalendarControllView
 
-static const CGFloat HEIGHT = 44.0;
-
 - (id)initWithCalendarView:(ASCCalendarView *)calendarView
 {
-    if ((self = [super initWithFrame:CGRectMake(0, 0, calendarView.frame.size.width, HEIGHT)])) {
-        const CGFloat CalendarButtonWidth = calendarView.calendarButtonSize.width;
-
-        UIButton *prevButton = [[UIButton alloc] initWithFrame:CGRectMake(ASCCalendarMargin,
-                                                                          0,
-                                                                          CalendarButtonWidth * 2,
-                                                                          HEIGHT)];
-        [prevButton setImage:[UIImage imageNamed:@"prev_button"] forState:UIControlStateNormal];
-        [prevButton addTarget:self action:@selector(onPrev:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:prevButton];
-
-
-        _dateSelectButton = [[UIButton alloc] initWithFrame:CGRectMake(ASCCalendarMargin + (CalendarButtonWidth * 2),
-                                                                       0,
-                                                                       CalendarButtonWidth * 3,
-                                                                       HEIGHT)];
-        [_dateSelectButton setBackgroundImage:[UIImage imageNamed:@"date_select_button"] forState:UIControlStateNormal];
-        [_dateSelectButton addTarget:self action:@selector(onDateSelect:) forControlEvents:UIControlEventTouchUpInside];
-        [_dateSelectButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
-        [_dateSelectButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-        [_dateSelectButton setTitle:[NSString stringWithYear:calendarView.year month:calendarView.month] forState:UIControlStateNormal];
-        [self addSubview:_dateSelectButton];
-
-
-        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(ASCCalendarMargin + CalendarButtonWidth * 5,
-                                                                          0,
-                                                                          CalendarButtonWidth * 2,
-                                                                          HEIGHT)];
-        [nextButton setImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(onNext:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:nextButton];
-
+    CGRect frame = CGRectMake(0, 0, calendarView.frame.size.width, calendarView.calendarButtonSize.height);
+    if ((self = [super initWithFrame:frame])) {
         _currentDate = [NSDate dateWithYear:calendarView.year month:calendarView.month day:1];
+
+        const CGFloat CalendarButtonWidth = calendarView.calendarButtonSize.width;
+        [self setupPrevButtonWithCalendarButtonWidth:CalendarButtonWidth];
+        [self setupNextButtonWithCalendarButtonWidth:CalendarButtonWidth];
+        [self setupDateSelectButtonWithCalendarButtonWidth:CalendarButtonWidth];
+
+        [self addSubview:_prevButton];
+        [self addSubview:_nextButton];
+        [self addSubview:_dateSelectButton];
     }
     return self;
 }
@@ -100,6 +82,39 @@ static const CGFloat HEIGHT = 44.0;
                                                         month: [date month]]
                            forState: UIControlStateNormal];
     self.currentDate = date;
+}
+
+- (void)setupPrevButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth
+{
+    _prevButton = [[UIButton alloc] initWithFrame:CGRectMake(ASCCalendarMargin,
+                                                             0,
+                                                             calendarButtonWidth * 2,
+                                                             self.frame.size.height)];
+    [_prevButton setImage:[UIImage imageNamed:@"prev_button"] forState:UIControlStateNormal];
+    [_prevButton addTarget:self action:@selector(onPrev:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setupNextButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth
+{
+    _nextButton = [[UIButton alloc] initWithFrame:CGRectMake(ASCCalendarMargin + calendarButtonWidth * 5,
+                                                             0,
+                                                             calendarButtonWidth * 2,
+                                                             self.frame.size.height)];
+    [_nextButton setImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+    [_nextButton addTarget:self action:@selector(onNext:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setupDateSelectButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth
+{
+    _dateSelectButton = [[UIButton alloc] initWithFrame:CGRectMake(ASCCalendarMargin + (calendarButtonWidth * 2),
+                                                                   0,
+                                                                   calendarButtonWidth * 3,
+                                                                   self.frame.size.height)];
+    [_dateSelectButton setBackgroundImage:[UIImage imageNamed:@"date_select_button"] forState:UIControlStateNormal];
+    [_dateSelectButton addTarget:self action:@selector(onDateSelect:) forControlEvents:UIControlEventTouchUpInside];
+    [_dateSelectButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [_dateSelectButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    [self setDateSelectButtonTitle:_currentDate];
 }
 
 @end

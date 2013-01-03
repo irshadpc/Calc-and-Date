@@ -32,9 +32,13 @@
 - (void)prevMonth;
 - (void)nextMonth;
 - (void)onYearMonthSelectDone:(UIBarButtonItem *)sender;
+- (void)showYearMonthPickerForPhoneWithPickerController:(CCYearMonthPickerController *)pickerController;
+- (void)showYearMonthPickerForPadWithPickerController:(CCYearMonthPickerController *)pickerController;
 @end
 
 @implementation CCCalendarViewController
+
+static const CGFloat iPadCalendarButtonSize = 66.0;
 
 - (id)init
 {
@@ -47,6 +51,10 @@
                            [self calendarViewWithYear:year month:month],
                            [self calendarViewWithYear:year month:month + 1]];
         _calendarControllView = [[ASCCalendarControllView alloc] initWithCalendarView:_calendarViews[1]];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            _calendarControllView.frame = CGRectZero;
+        }
+        
         _weekControllView = [[CCWeekControllView alloc] initWithCalendarView:_calendarViews[1]];
         _weekControllView.frame = CGRectMake(_weekControllView.frame.origin.x,
                                              _calendarControllView.frame.size.height,
@@ -98,48 +106,20 @@
     [_pageView setPagingEnabled:_dynamicCalendar];
 }
 
-
-#pragma mark - Private
-
-- (void)setCurrentYear:(NSInteger)year 
-                 month:(NSInteger)month
+- (UIButton *)dateSelectButton
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_calendarViews[0] reloadCalendarViewWithYear:year month:month - 1];
-        [_calendarViews[1] reloadCalendarViewWithYear:year month:month];
-        [_calendarViews[2] reloadCalendarViewWithYear:year month:month + 1];
-    });
-
-    self.date = [NSDate dateWithYear:year
-                               month:month
-                                 day:1];
-    [_calendarControllView setCurrentDate:self.date];
+    return _calendarControllView.dateSelectButton;
 }
 
-- (void)prevMonth
+- (UIButton *)prevButton
 {
-    for (ASCCalendarView *calendarView in _calendarViews) {
-        [calendarView prevMonth];
-    }
+    return _calendarControllView.prevButton;
 }
 
-- (void)nextMonth
+- (UIButton *)nextButton
 {
-    for (ASCCalendarView *calendarView in _calendarViews) {
-        [calendarView nextMonth];
-    }
+    return _calendarControllView.nextButton;
 }
-
-- (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month
-{
-    ASCCalendarView *calendarView = [[ASCCalendarView alloc] initWithFrame:CGRectZero];
-
-    [calendarView setDelegate:self];
-    [calendarView reloadCalendarViewWithYear:year month:month];
-
-    return calendarView;
-}
-
 
 #pragma mark - ASCCalendarView
 
@@ -180,21 +160,11 @@
     pickerViewController.year = [_calendarControllView.currentDate year];
     pickerViewController.month = [_calendarControllView.currentDate month];
 
-    _viewSheet = [[CCViewSheet alloc] initWithContentViewController:pickerViewController];
-    [_viewSheet setRightButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                            target:self 
-                                                                            action:@selector(onYearMonthSelectDone:)]];
-    _viewSheet.delegate = self;
-
-    [_viewSheet showInView:self.view animated:YES];
-}
-
-- (void)onYearMonthSelectDone:(UIBarButtonItem *)sender
-{
-    [_viewSheet dismissContainerViewWithAnimated:YES];
-    
-    [self setCurrentYear:[(CCYearMonthPickerController *)_viewSheet.contentViewController year]
-                   month:[(CCYearMonthPickerController *)_viewSheet.contentViewController month]];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self showYearMonthPickerForPhoneWithPickerController:pickerViewController];
+    } else {
+        [self showYearMonthPickerForPadWithPickerController:pickerViewController];
+    }
 }
 
 
@@ -239,6 +209,82 @@
 - (void)viewSheetClickedCancelButton:(CCViewSheet *)viewSheet
 {
     [viewSheet dismissContainerViewWithAnimated:YES];
+}
+
+
+#pragma mark - Private
+
+- (void)setCurrentYear:(NSInteger)year
+                 month:(NSInteger)month
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_calendarViews[0] reloadCalendarViewWithYear:year month:month - 1];
+        [_calendarViews[1] reloadCalendarViewWithYear:year month:month];
+        [_calendarViews[2] reloadCalendarViewWithYear:year month:month + 1];
+    });
+
+    self.date = [NSDate dateWithYear:year
+                               month:month
+                                 day:1];
+    [_calendarControllView setCurrentDate:self.date];
+}
+
+- (void)prevMonth
+{
+    for (ASCCalendarView *calendarView in _calendarViews) {
+        [calendarView prevMonth];
+    }
+}
+
+- (void)nextMonth
+{
+    for (ASCCalendarView *calendarView in _calendarViews) {
+        [calendarView nextMonth];
+    }
+}
+
+- (ASCCalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month
+{
+    CGSize calendarButtonSize = CGSizeZero;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        calendarButtonSize = CGSizeMake(44.0, 44.0);
+    } else {
+        calendarButtonSize = CGSizeMake(66.0, 66.0);
+    }
+    ASCCalendarView *calendarView = [[ASCCalendarView alloc] initWithCalendarButtonSize:calendarButtonSize];
+
+    [calendarView setDelegate:self];
+    [calendarView reloadCalendarViewWithYear:year month:month];
+
+    return calendarView;
+}
+
+- (void)onYearMonthSelectDone:(UIBarButtonItem *)sender
+{
+    [_viewSheet dismissContainerViewWithAnimated:YES];
+
+    [self setCurrentYear:[(CCYearMonthPickerController *)_viewSheet.contentViewController year]
+                   month:[(CCYearMonthPickerController *)_viewSheet.contentViewController month]];
+}
+
+- (void)showYearMonthPickerForPhoneWithPickerController:(CCYearMonthPickerController *)pickerController
+{
+    _viewSheet = [[CCViewSheet alloc] initWithContentViewController:pickerController];
+    [_viewSheet setRightButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                             target:self
+                                                                             action:@selector(onYearMonthSelectDone:)]];
+    _viewSheet.delegate = self;
+
+    [_viewSheet showInView:self.view animated:YES];
+}
+
+- (void)showYearMonthPickerForPadWithPickerController:(CCYearMonthPickerController *)pickerController
+{
+    _popover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
+    [_popover presentPopoverFromRect:self.dateSelectButton.superview.frame
+                              inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view]
+            permittedArrowDirections:UIPopoverArrowDirectionRight
+                            animated:YES];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "CCAppDelegate.h"
 #import "CCCalendarCalcViewController.h"
 #import "CCCalendarCalcViewController_iPhone.h"
+#import "CCCalendarCalcViewController_iPad.h"
 #import "CCUserDefaultsKeys.h"
 
 @implementation CCAppDelegate
@@ -25,7 +26,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.viewController = [[CCCalendarCalcViewController_iPhone alloc] initWithNibName:@"CCCalendarCalcViewController_iPhone" bundle:nil];
     } else {
-        //self.viewController = [[CCCalendarCalcViewController alloc] initWithNibName:@"CCViewController_iPad" bundle:nil];
+        self.viewController = [[CCCalendarCalcViewController_iPad alloc] initWithNibName:@"CCCalendarCalcViewController_iPad" bundle:nil];
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

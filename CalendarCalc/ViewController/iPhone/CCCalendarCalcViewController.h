@@ -11,6 +11,7 @@
 #import "CCCalendarViewController.h"
 #import "CCEventViewController.h"
 #import "CCCalendarCalcFormatter.h"
+#import "CCCopybleLabel.h"
 
 @interface CCCalendarCalcViewController : UIViewController {
   @private
@@ -19,10 +20,10 @@
 @property (strong, nonatomic) CCCalendarViewController *calendarViewController;
 @property (strong, nonatomic) CCEventViewController *eventViewController;
 @property (strong, nonatomic) CCCalendarCalcFormatter *calendarCalcFormatter;
-@property (weak, nonatomic) IBOutlet UILabel *display;
+@property (weak, nonatomic) IBOutlet CCCopybleLabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *indicator;
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
-- (void)onEventButton:(UIButton *)sender;
+- (void)showEventView:(UIButton *)sender;
 - (void)configureView;
 @end

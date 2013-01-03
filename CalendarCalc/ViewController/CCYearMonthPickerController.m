@@ -38,6 +38,7 @@ static const NSInteger MAX_YEAR = 2200;
 {
     [super viewDidLoad];
     self.view.frame = self.pickerView.frame;
+    self.contentSizeForViewInPopover = self.view.frame.size;
 
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;

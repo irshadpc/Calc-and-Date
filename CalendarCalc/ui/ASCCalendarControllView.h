@@ -13,6 +13,9 @@
 
 @interface ASCCalendarControllView : UIView
 @property (weak, nonatomic) id <ASCCalendarControllViewDelegate> delegate;
+@property (strong, nonatomic, readonly) UIButton *dateSelectButton;
+@property (strong, nonatomic, readonly) UIButton *prevButton;
+@property (strong, nonatomic, readonly) UIButton *nextButton;
 @property (strong, nonatomic) NSDate *currentDate;
 
 - (id)initWithCalendarView:(ASCCalendarView *)calendarView;

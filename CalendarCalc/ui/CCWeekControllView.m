@@ -30,7 +30,7 @@
     CGRect frame = CGRectMake(calendarView.frame.origin.x,
                               0,
                               calendarView.frame.size.width,
-                              44.0);
+                              calendarView.calendarButtonSize.height);
     if ((self = [super initWithFrame:frame])) {
         _buttonSize = calendarView.calendarButtonSize;
         

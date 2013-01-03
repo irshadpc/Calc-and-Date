@@ -63,7 +63,7 @@
 - (void)showInView:(UIView *)view
           animated:(BOOL)animated
 {
-    UIView *rootView = [[[UIApplication sharedApplication] delegate] window].rootViewController.view;
+    UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
     self.protectView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.protectView.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
     self.protectView.alpha = 0;

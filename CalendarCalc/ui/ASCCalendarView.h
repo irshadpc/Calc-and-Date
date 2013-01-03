@@ -17,10 +17,10 @@
 @property (nonatomic, readonly) NSInteger month;
 @property (nonatomic) CGSize calendarButtonSize;
 
+- (id)initWithCalendarButtonSize:(CGSize)calendarButtonSize;
 - (void)prevMonth;
 - (void)nextMonth;
 - (void)reloadCalendarViewWithYear:(NSInteger)year month:(NSInteger)month;
-
 @end
 
 @protocol ASCCalendarViewDelegate <NSObject>

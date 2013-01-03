@@ -38,6 +38,42 @@
     [super viewDidUnload];
 }
 
+
+#pragma mark - Override
+
+- (void)showEventView:(UIButton *)sender
+{
+    if (!self.eventViewController) {
+        self.eventViewController = [[CCEventViewController alloc] init];
+    }
+
+    if ([_currentViewSheet isVisible]) {
+        [_currentViewSheet dismissContainerViewWithAnimated:YES];
+    }
+
+    _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.eventViewController];
+    _currentViewSheet.delegate = self;
+    [_currentViewSheet setRightButton:[self eventDoneButton]];
+    [_currentViewSheet showInView:self.view animated:YES];
+}
+
+- (void)configureView
+{
+    if ([_currentViewSheet isVisible]) {
+        [_currentViewSheet dismissContainerViewWithAnimated:YES];
+    }
+
+    self.display.text = [self.calendarCalcFormatter displayResult];
+    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
+    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
+                      forState:UIControlStateNormal];
+
+    NSDate *date = self.calendarViewController.date;
+    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
+                     forState:UIControlStateNormal];
+}
+
+
 #pragma mark - IBAction
 
 - (IBAction)onDate:(UIButton *)sender
@@ -61,28 +97,12 @@
 
 #pragma mark - Private
 
-- (void)onEventButton:(UIBarButtonItem *)sender
-{
-    if (!self.eventViewController) {
-        self.eventViewController = [[CCEventViewController alloc] init];
-    }
-
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-
-    _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.eventViewController];
-    _currentViewSheet.delegate = self;
-    [_currentViewSheet setRightButton:[self eventDoneButton]];
-    [_currentViewSheet showInView:self.view animated:YES];
-}
-
 - (UIBarButtonItem *)eventButton
 {
     return [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"EVENT", nil)
                                             style:UIBarButtonItemStyleBordered
                                            target:self
-                                           action:@selector(onEventButton:)];
+                                           action:@selector(showEventView:)];
 }
 
 - (UIBarButtonItem *)eventDoneButton
@@ -90,22 +110,6 @@
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                          target:self
                                                          action:@selector(onEventDone:)];
-}
-
-- (void)configureView
-{
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-    
-    self.display.text = [self.calendarCalcFormatter displayResult];
-    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
-    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
-                      forState:UIControlStateNormal];
-
-    NSDate *date = self.calendarViewController.date;
-    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
-                     forState:UIControlStateNormal];
 }
 
 

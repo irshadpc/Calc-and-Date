@@ -21,22 +21,19 @@
 
 - (void)reloadCalendarView;
 - (void)onPressCalendarButton:(ASCCalendarButton *)sender;
+- (CGRect)calendarViewFrameWithButtonSize:(CGSize)buttonSize;
 @end
 
 
 @implementation ASCCalendarView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithCalendarButtonSize:(CGSize)calendarButtonSize
 {
-    static const CGFloat DefaultSize = 44.0;
-    if ((self = [super initWithFrame:CGRectMake(frame.origin.x,
-                                                frame.origin.y,
-                                                (DefaultSize * 7) + (ASCCalendarMargin * 2),
-                                                (DefaultSize * ASCWeekCount) + ASCCalendarMargin)])) {
+    if ((self = [super initWithFrame:[self calendarViewFrameWithButtonSize:calendarButtonSize]])) {
         NSDate *date = [NSDate date];
         _year = [date year];
         _month = [date month];
-        _calendarButtonSize = CGSizeMake(DefaultSize, DefaultSize);
+        _calendarButtonSize = calendarButtonSize;
     }
     return self;
 }
@@ -53,11 +50,7 @@
         return;
     }
     _calendarButtonSize = calendarButtonSize;
-
-    CGRect newFrame = self.frame;
-    newFrame.size.width = _calendarButtonSize.width * 7;
-    newFrame.size.height = _calendarButtonSize.height * ASCWeekCount;
-    self.frame = newFrame;
+    self.frame = [self calendarViewFrameWithButtonSize:_calendarButtonSize];
 
     [self reloadCalendarView];
 }
@@ -176,5 +169,13 @@
     [self.delegate calendarView:self onTouchUpInside:[NSDate dateWithYear:sender.year
                                                                     month:sender.month
                                                                       day:sender.dayOfCalendar]];
+}
+
+- (CGRect)calendarViewFrameWithButtonSize:(CGSize)buttonSize
+{
+    return CGRectMake(self.frame.origin.x,
+                      self.frame.origin.y,
+                      (buttonSize.width * 7) + (ASCCalendarMargin * 2),
+                      (buttonSize.height * ASCWeekCount) + ASCCalendarMargin);
 }
 @end

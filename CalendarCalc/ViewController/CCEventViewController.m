@@ -46,6 +46,7 @@
 {
     [super viewDidLoad];
     self.view.frame = self.pickerView.frame;
+    self.contentSizeForViewInPopover = self.view.frame.size;
     
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
@@ -54,7 +55,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSDate *)selectedDate
