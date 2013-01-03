@@ -7,6 +7,7 @@
 //
 
 #import "CCCalendarCalcViewController_iPad.h"
+#import "CCCalendarCalcViewController_iPad+Orientation.h"
 #import "CCYearMonthPickerController.h"
 
 @interface CCCalendarCalcViewController_iPad () <CCEventViewControllerDelegate> {
@@ -69,6 +70,13 @@
     self.yearMonthPickerController = nil;
 }
 
+- (BOOL)shouldAutorotate
+{
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        [self didOrientationLandscape];
+    }
+    return YES;
+}
 
 #pragma mark - Override
 
