@@ -10,4 +10,5 @@
 
 @interface UIFont (Calendar)
 + (UIFont *)calendarFont;
++ (UIFont *)dateSelectFont;
 @end

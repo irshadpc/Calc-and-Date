@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <AVFoundation/AVFoundation.h>
 @class CCCalendarCalcViewController;
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CCCalendarCalcViewController *viewController;
+@property (strong, nonatomic) AVAudioPlayer *player;
 @end

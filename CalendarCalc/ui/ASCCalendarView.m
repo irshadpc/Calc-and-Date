@@ -7,6 +7,7 @@
 //
 
 #import "ASCCalendarView.h"
+#import "CCAppDelegate.h"
 #import "ASCCalendarConstant.h"
 #import "ASCCalendarButton.h"
 #import "NSArray+safe.h"
@@ -22,6 +23,7 @@
 - (void)reloadCalendarView;
 - (void)onPressCalendarButton:(ASCCalendarButton *)sender;
 - (CGRect)calendarViewFrameWithButtonSize:(CGSize)buttonSize;
+- (void)onClick:(UIButton *)sender;
 @end
 
 
@@ -34,6 +36,8 @@
         _year = [date year];
         _month = [date month];
         _calendarButtonSize = calendarButtonSize;
+
+        _player = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] player];
     }
     return self;
 }
@@ -117,13 +121,18 @@
         ASCCalendarButton *calendarButton = (id)[self viewWithTag:calendarIndex];
         if (!calendarButton) {
             calendarButton = [[ASCCalendarButton alloc] init];
-            [calendarButton setImage:[UIImage calendarImage] forState:UIControlStateNormal];
 
             [self addSubview:calendarButton];
 
-            [calendarButton addTarget: self
-                               action: @selector(onPressCalendarButton:)
-                     forControlEvents: UIControlEventTouchUpInside];
+            [calendarButton addTarget:self
+                               action:@selector(onPressCalendarButton:)
+                     forControlEvents:UIControlEventTouchUpInside];
+           
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                [calendarButton addTarget:self
+                                   action:@selector(onClick:)
+                         forControlEvents:UIControlEventTouchDown];
+            }
         }
 
         [calendarButton setDayOfCalendar:targetDay + 1];
@@ -131,10 +140,11 @@
         [calendarButton setMonth:self.month];
         [calendarButton setDayOfMonth:dayOfMonth];
         if (targetDay < 0 || targetDay >= endOfMonthDay) {
-            [calendarButton setWeekday:0];
+            [calendarButton setOtherMonthDate:YES];
         } else {
-            [calendarButton setWeekday:weekday];
+            [calendarButton setOtherMonthDate:NO];
         }
+        [calendarButton setWeekday:weekday];
 
         if (weekday == ASCSunday) {
             subBaseY++;
@@ -178,4 +188,11 @@
                       (buttonSize.width * 7) + (ASCCalendarMargin * 2),
                       (buttonSize.height * ASCWeekCount) + ASCCalendarMargin);
 }
+
+- (void)onClick:(UIButton *)sender
+{
+    [self.player setCurrentTime:0];
+    [self.player play];
+}
+
 @end

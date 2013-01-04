@@ -16,6 +16,5 @@
 @property (nonatomic) NSInteger month;
 @property (nonatomic) NSInteger dayOfMonth;
 @property (nonatomic) NSInteger weekday;
-
-- (void)setImage:(UIImage *)image forState:(UIControlState)state;
+@property (nonatomic, getter = isOtherMonthDate) BOOL otherMonthDate;
 @end

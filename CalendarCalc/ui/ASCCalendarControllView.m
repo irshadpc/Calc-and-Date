@@ -7,10 +7,13 @@
 //
 
 #import "ASCCalendarControllView.h"
+#import "CCAppDelegate.h"
 #import "ASCCalendarConstant.h"
 #import "ASCCalendarView.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
+#import "UIFont+Calendar.h"
+#import "UIImage+Calendar.h"
 #import "NSString+Date.h"
 
 @interface ASCCalendarControllView ()
@@ -27,6 +30,8 @@
 - (void)setupPrevButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;
 - (void)setupNextButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;;
 - (void)setupDateSelectButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;;
+
+- (void)onClick:(UIButton *)sender;
 @end
 
 @implementation ASCCalendarControllView
@@ -45,6 +50,12 @@
         [self addSubview:_prevButton];
         [self addSubview:_nextButton];
         [self addSubview:_dateSelectButton];
+
+        _player = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] player];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [_prevButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchDown];
+            [_nextButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchDown];
+        }
     }
     return self;
 }
@@ -91,7 +102,8 @@
                                                              calendarButtonWidth * 2,
                                                              self.frame.size.height)];
     [_prevButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [_prevButton setImage:[UIImage imageNamed:@"prev_button"] forState:UIControlStateNormal];
+    [_prevButton setBackgroundImage:[UIImage calendarControllImage] forState:UIControlStateNormal];
+    [_prevButton setImage:[UIImage prevImage] forState:UIControlStateNormal];
     [_prevButton addTarget:self action:@selector(onPrev:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -102,7 +114,8 @@
                                                              calendarButtonWidth * 2,
                                                              self.frame.size.height)];
     [_nextButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [_nextButton setImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+    [_nextButton setBackgroundImage:[UIImage calendarControllImage] forState:UIControlStateNormal];
+    [_nextButton setImage:[UIImage nextImage] forState:UIControlStateNormal];
     [_nextButton addTarget:self action:@selector(onNext:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -113,11 +126,21 @@
                                                                    calendarButtonWidth * 3,
                                                                    self.frame.size.height)];
     [_dateSelectButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [_dateSelectButton setBackgroundImage:[UIImage imageNamed:@"date_select_button"] forState:UIControlStateNormal];
+    [_dateSelectButton setBackgroundImage:[UIImage dateSelectImage] forState:UIControlStateNormal];
     [_dateSelectButton addTarget:self action:@selector(onDateSelect:) forControlEvents:UIControlEventTouchUpInside];
-    [_dateSelectButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
     [_dateSelectButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    [_dateSelectButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_dateSelectButton.titleLabel setFont:[UIFont dateSelectFont]];
+    [_dateSelectButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
+
     [self setDateSelectButtonTitle:_currentDate];
+}
+
+
+- (void)onClick:(UIButton *)sender
+{
+    [self.player setCurrentTime:0];
+    [self.player play];
 }
 
 @end

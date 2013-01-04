@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @protocol ASCCalendarControllViewDelegate;
+@class AVAudioPlayer;
 @class ASCCalendarView;
 
 @interface ASCCalendarControllView : UIView
+
+@property (weak, nonatomic) AVAudioPlayer *player;
+
 @property (weak, nonatomic) id <ASCCalendarControllViewDelegate> delegate;
 @property (strong, nonatomic, readonly) UIButton *dateSelectButton;
 @property (strong, nonatomic, readonly) UIButton *prevButton;

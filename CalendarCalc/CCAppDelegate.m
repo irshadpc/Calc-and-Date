@@ -21,6 +21,13 @@
     [userDefaults setValue:@"YES" forKey:kDynamicCalendar];
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaults];
 
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"key_click"
+                                                          ofType:@"aif"];
+    NSURL *soundUrl = [[NSURL alloc] initFileURLWithPath:soundPath];
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error: nil];
+    [self.player setVolume:0.5];
+    [self.player prepareToPlay];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

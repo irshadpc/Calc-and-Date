@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @protocol ASCCalendarViewDelegate;
+@class AVAudioPlayer;
 
 @interface ASCCalendarView : UIView
+
+@property (weak, nonatomic) AVAudioPlayer *player;
 
 @property (weak, nonatomic) id <ASCCalendarViewDelegate> delegate;
 @property (nonatomic, readonly) NSInteger year;

@@ -9,11 +9,10 @@
 #import "ASCCalendarButton.h"
 #import "UIColor+Calendar.h"
 #import "UIFont+Calendar.h"
+#import "UIImage+Calendar.h"
 #import "ASCWeek.h"
 
 @interface ASCCalendarButton ()
-@property (strong, nonatomic) UIImage *imageForNormal;
-
 - (void)configureTitle;
 - (void)configureColor;
 - (void)configureImage;
@@ -32,9 +31,9 @@
         [self setTitleShadowColor:[UIColor whiteColor]
                                   forState: UIControlStateNormal];
 
-        [self setTitleShadowColor:[UIColor blackColor]
+        [self setTitleShadowColor:[UIColor darkTextColor]
                                   forState: UIControlStateHighlighted];
-
+        
     }
     return self;
 }
@@ -49,20 +48,13 @@
 {
     _weekday = weekday;
     [self configureColor];
+    [self configureImage];
 }
 
-- (void)setImage:(UIImage *)image
-        forState:(UIControlState)state
+- (void)setOtherMonthDate:(BOOL)otherMonthDate
 {
-    switch (state) {
-        case UIControlStateNormal:
-            self.imageForNormal = image;
-            break;
-        default:
-            NSLog(@"STATE: %d", state);
-            abort();
-    }
-    [self configureImage];
+    _otherMonthDate = otherMonthDate;
+    [self configureColor];
 }
 
 - (void)configureTitle 
@@ -73,7 +65,7 @@
 
 - (void)configureColor
 {
-    if (self.weekday == 0) {
+    if (self.isOtherMonthDate) {
         [self setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
     } else if (self.weekday == ASCSunday) {
         [self setTitleColor:[UIColor sundayColor] forState:UIControlStateNormal];
@@ -86,7 +78,13 @@
 
 - (void)configureImage
 {
-    [self setBackgroundImage:self.imageForNormal forState:UIControlStateNormal];
+    if (self.weekday == ASCSunday) {
+        [self setBackgroundImage:[UIImage calendarImageForSunday] forState:UIControlStateNormal];
+    } else if (self.weekday == ASCSaturday) {
+        [self setBackgroundImage:[UIImage calendarImageForSaturday] forState:UIControlStateNormal];
+    } else {
+        [self setBackgroundImage:[UIImage calendarImage] forState:UIControlStateNormal];
+    }
 }
 
 @end

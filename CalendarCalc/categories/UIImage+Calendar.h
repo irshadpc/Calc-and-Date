@@ -10,4 +10,10 @@
 
 @interface UIImage (Calendar)
 + (UIImage *)calendarImage;
++ (UIImage *)calendarImageForSunday;
++ (UIImage *)calendarImageForSaturday;
++ (UIImage *)dateSelectImage;
++ (UIImage *)calendarControllImage;
++ (UIImage *)prevImage;
++ (UIImage *)nextImage;
 @end

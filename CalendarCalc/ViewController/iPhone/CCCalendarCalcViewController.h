@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
 #import "CCCalendarViewController.h"
 #import "CCEventViewController.h"
 #import "CCCalendarCalcFormatter.h"
 #import "CCCopybleLabel.h"
 
-@interface CCCalendarCalcViewController : UIViewController {
-  @private
-    AVAudioPlayer *_player;
-}
+@class AVAudioPlayer;
+
+@interface CCCalendarCalcViewController : UIViewController
+
+@property (weak, nonatomic) AVAudioPlayer *player;
+
 @property (strong, nonatomic) CCCalendarViewController *calendarViewController;
 @property (strong, nonatomic) CCEventViewController *eventViewController;
 @property (strong, nonatomic) CCCalendarCalcFormatter *calendarCalcFormatter;

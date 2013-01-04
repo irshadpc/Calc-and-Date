@@ -11,6 +11,19 @@
 @implementation UIFont (Calendar)
 + (UIFont *)calendarFont
 {
-    return [UIFont boldSystemFontOfSize:18.0];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        return [UIFont boldSystemFontOfSize:18.0];
+    } else {
+        return [UIFont boldSystemFontOfSize:26.0];
+    }
+}
+
++ (UIFont *)dateSelectFont
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        return [UIFont boldSystemFontOfSize:18.0];
+    } else {
+        return [UIFont boldSystemFontOfSize:30.0];
+    }
 }
 @end

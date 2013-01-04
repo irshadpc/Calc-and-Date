@@ -7,10 +7,11 @@
 //
 
 #import "CCCalendarCalcViewController.h"
+#import "CCAppDelegate.h"
+#import "CCAppDelegate+Setting.h"
 #import "CCSettingViewController.h"
 #import "CCCalendarCalc.h"
 #import "CCDateSelect.h"
-#import "CCAppDelegate+Setting.h"
 #import "NSDate+Component.h"
 #import "NSString+Calculator.h"
 #import "NSString+Date.h"
@@ -44,13 +45,6 @@ enum {
         _calendarCalc = [[CCCalendarCalc alloc] init];
         _calendarCalcFormatter = [[CCCalendarCalcFormatter alloc] initWithCalendarCalc:_calendarCalc];
         _calendarViewController = [[CCCalendarViewController alloc] init];
-
-        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"key_click"
-                                                              ofType:@"aif"];
-        NSURL *soundUrl = [[NSURL alloc] initFileURLWithPath:soundPath];
-        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error: nil];
-        [_player setVolume:0.5];
-        [_player prepareToPlay];
     }
     return self;
 }
@@ -63,6 +57,7 @@ enum {
                         forState:UIControlStateNormal];
     [self configureView];
     self.calendarViewController.delegate = self;
+    self.player = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] player];
 }
 
 - (void)viewDidUnload
@@ -134,8 +129,8 @@ enum {
 
 - (IBAction)onClick:(UIButton *)sender
 {
-    [_player setCurrentTime:0];
-    [_player play];
+    [self.player setCurrentTime:0];
+    [self.player play];
 }
 
 
