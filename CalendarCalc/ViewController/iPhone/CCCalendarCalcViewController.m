@@ -17,7 +17,10 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CCCalendarCalcViewController () <CCSettingViewControllerDelegate, CCDateSelect>
+@interface CCCalendarCalcViewController () <CCSettingViewControllerDelegate, CCDateSelect> {
+  @private
+    UIPopoverController *_settingPopover;
+}
 
 // properties
 @property (strong, nonatomic) CCCalendarCalc *calendarCalc;
@@ -102,8 +105,19 @@ enum {
     CCSettingViewController *settingViewController = [[CCSettingViewController alloc] initWithNibName:@"CCSettingViewController"
                                                                                                bundle:nil];
     [settingViewController setDelegate:self];
-    [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentViewController:settingViewController animated:YES completion:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [self presentViewController:settingViewController animated:YES completion:nil];
+    } else {
+        if ([_settingPopover isPopoverVisible]){
+            [_settingPopover dismissPopoverAnimated:YES];
+        }
+        _settingPopover = [[UIPopoverController alloc] initWithContentViewController:settingViewController];
+        [_settingPopover presentPopoverFromRect:sender.frame
+                                         inView:self.view
+                       permittedArrowDirections:UIPopoverArrowDirectionAny
+                                       animated:YES];
+    }
 }
 
 - (IBAction)onFunction:(UIButton *)sender
@@ -134,6 +148,35 @@ enum {
 }
 
 
+#pragma mark - CCSettingViewController
+
+- (void)settingViewControllerDidFinish:(CCSettingViewController *)viewController
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        if ([_settingPopover isPopoverVisible]) {
+            [_settingPopover dismissPopoverAnimated:YES];
+        }
+    }
+}
+
+
+#pragma mark - CCDateSelect
+
+- (void)didSelectDate:(NSDate *)date
+{
+    [self.calendarCalc inputDate:date];
+    [self configureView];
+}
+
+- (void)didSelectWeek:(ASCWeek)week
+              exclude:(BOOL)exclude
+{
+    [self.calendarCalc setWeek:week exclude:exclude];
+}
+
+
 #pragma mark - Private
 
 - (void)showEventView:(UIButton *)sender
@@ -150,29 +193,6 @@ enum {
 - (void)configureView
 {
     abort();
-}
-
-
-#pragma mark - CCSettingViewController
-
-- (void)settingViewControllerDidFinish:(CCSettingViewController *)viewController
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - CCDateSelect
-
-- (void)didSelectDate:(NSDate *)date
-{
-    [self.calendarCalc inputDate:date];
-    [self configureView];
-}
-
-- (void)didSelectWeek:(ASCWeek)week
-              exclude:(BOOL)exclude
-{
-    [self.calendarCalc setWeek:week exclude:exclude];
 }
 
 @end

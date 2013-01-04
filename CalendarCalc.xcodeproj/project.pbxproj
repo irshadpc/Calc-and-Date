@@ -231,9 +231,9 @@
 		626BB0E01691853C004E9E63 /* EKEvent+Today.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EKEvent+Today.m"; sourceTree = "<group>"; };
 		626BB0E216918723004E9E63 /* CCEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEventViewController.h; sourceTree = "<group>"; };
 		626BB0E316918723004E9E63 /* CCEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCEventViewController.m; sourceTree = "<group>"; };
-		626BB0E91691DF40004E9E63 /* CCSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSettingViewController.h; sourceTree = "<group>"; };
-		626BB0EA1691DF41004E9E63 /* CCSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSettingViewController.m; sourceTree = "<group>"; };
-		626BB0EB1691DF41004E9E63 /* CCSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSettingViewController.xib; sourceTree = "<group>"; };
+		626BB0E91691DF40004E9E63 /* CCSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSettingViewController.h; path = iPhone/CCSettingViewController.h; sourceTree = "<group>"; };
+		626BB0EA1691DF41004E9E63 /* CCSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSettingViewController.m; path = iPhone/CCSettingViewController.m; sourceTree = "<group>"; };
+		626BB0EB1691DF41004E9E63 /* CCSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CCSettingViewController.xib; path = iPhone/CCSettingViewController.xib; sourceTree = "<group>"; };
 		626BB0EE1691E08D004E9E63 /* CCAppDelegate+Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCAppDelegate+Setting.h"; sourceTree = "<group>"; };
 		626BB0EF1691E091004E9E63 /* CCAppDelegate+Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCAppDelegate+Setting.m"; sourceTree = "<group>"; };
 		626BB0F11691E77F004E9E63 /* CCUserDefaultsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserDefaultsKeys.h; sourceTree = "<group>"; };
@@ -517,6 +517,9 @@
 				62A144DB1687357A001E2843 /* CCYearMonthPickerController.m */,
 				626BB0E216918723004E9E63 /* CCEventViewController.h */,
 				626BB0E316918723004E9E63 /* CCEventViewController.m */,
+				626BB0E91691DF40004E9E63 /* CCSettingViewController.h */,
+				626BB0EA1691DF41004E9E63 /* CCSettingViewController.m */,
+				626BB0EB1691DF41004E9E63 /* CCSettingViewController.xib */,
 				62A144D81686CA5A001E2843 /* CCDateSelect.h */,
 			);
 			path = ViewController;
@@ -528,9 +531,6 @@
 				62910A49169510840032960F /* CCCalendarCalcViewController_iPhone.h */,
 				62910A4A169510840032960F /* CCCalendarCalcViewController_iPhone.m */,
 				621355F616737DA100C93999 /* CCCalendarCalcViewController_iPhone.xib */,
-				626BB0E91691DF40004E9E63 /* CCSettingViewController.h */,
-				626BB0EA1691DF41004E9E63 /* CCSettingViewController.m */,
-				626BB0EB1691DF41004E9E63 /* CCSettingViewController.xib */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
