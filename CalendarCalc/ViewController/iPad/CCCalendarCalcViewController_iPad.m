@@ -13,7 +13,10 @@
 @interface CCCalendarCalcViewController_iPad () <CCEventViewControllerDelegate> {
   @private
     UIPopoverController *_currentPopover;
+    BOOL _isEventPopoverVisible;
+    BOOL _isDateSelectPopoverVisible;
 }
+@property (weak, nonatomic) IBOutlet UIButton *eventButton;
 @property (weak, nonatomic) IBOutlet UIView *calendarViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *dateSelectButtonContainer;
 @property (weak, nonatomic) IBOutlet UIView *prevButtonContainer;
@@ -61,6 +64,7 @@
     [self setDateSelectButtonContainer:nil];
     [self setPrevButtonContainer:nil];
     [self setNextButtonContainer:nil];
+    [self setEventButton:nil];
     [super viewDidUnload];
 }
 
@@ -74,9 +78,35 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                 duration:(NSTimeInterval)duration
 {
+    if ([_currentPopover isPopoverVisible]) {
+        _isEventPopoverVisible = YES;
+        [_currentPopover dismissPopoverAnimated:YES];
+    }
+   
+    if ([self.calendarViewController isPopoverVisible]) {
+        _isDateSelectPopoverVisible = YES;
+        [self.calendarViewController dismissPopoverAnimated:YES];
+    }
+
     [UIView animateWithDuration:0.25 animations:^{
         [self setupLayoutWithOrientation:toInterfaceOrientation];
     }];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (_isEventPopoverVisible) {
+        [_currentPopover presentPopoverFromRect:self.eventButton.frame
+                                         inView:self.view
+                       permittedArrowDirections:UIPopoverArrowDirectionAny
+                                       animated:YES];
+        _isEventPopoverVisible = NO;
+    }
+   
+    if (_isDateSelectPopoverVisible) {
+        [self.calendarViewController presentPopoverAnimated:YES];
+        _isDateSelectPopoverVisible = NO;
+    }
 }
 
 #pragma mark - Override

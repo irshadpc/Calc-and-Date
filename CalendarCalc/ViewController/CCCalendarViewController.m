@@ -122,6 +122,26 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
     return _calendarControllView.nextButton;
 }
 
+- (BOOL)isPopoverVisible
+{
+    return [_popover isPopoverVisible];
+}
+
+- (void)presentPopoverAnimated:(BOOL)animated
+{
+    [_popover presentPopoverFromRect:self.dateSelectButton.superview.frame
+                              inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view]
+            permittedArrowDirections:UIPopoverArrowDirectionAny
+                            animated:animated];
+}
+
+- (void)dismissPopoverAnimated:(BOOL)animated
+{
+    if ([_popover isPopoverVisible]) {
+        [_popover dismissPopoverAnimated:animated];
+    }
+}
+
 #pragma mark - ASCCalendarView
 
 - (void)calendarView:(ASCCalendarView *)view
@@ -290,10 +310,7 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 {
     pickerController.delegate = self;
     _popover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
-    [_popover presentPopoverFromRect:self.dateSelectButton.superview.frame
-                              inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view]
-            permittedArrowDirections:UIPopoverArrowDirectionAny
-                            animated:YES];
+    [self presentPopoverAnimated:YES];
 }
 
 @end

@@ -29,4 +29,8 @@
 @property (nonatomic, readonly) UIButton *nextButton;
 @property (nonatomic, getter = isDynamicCalendar) BOOL dynamicCalendar;
 @property (strong, nonatomic, readonly) NSDate *date;
+@property (nonatomic, readonly) BOOL isPopoverVisible;
+
+- (void)presentPopoverAnimated:(BOOL)animated;
+- (void)dismissPopoverAnimated:(BOOL)animated;
 @end
