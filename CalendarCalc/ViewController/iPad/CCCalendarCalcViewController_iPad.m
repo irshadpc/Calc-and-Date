@@ -53,6 +53,7 @@
     [self.nextButtonContainer addSubview:self.calendarViewController.nextButton];
 
     self.eventViewController.delegate = self;
+    [self setupLayoutWithOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload {
@@ -70,12 +71,12 @@
     self.yearMonthPickerController = nil;
 }
 
-- (BOOL)shouldAutorotate
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+                                duration:(NSTimeInterval)duration
 {
-    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-        [self didOrientationLandscape];
-    }
-    return YES;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self setupLayoutWithOrientation:toInterfaceOrientation];
+    }];
 }
 
 #pragma mark - Override
@@ -95,7 +96,7 @@
     _currentPopover.delegate = self;
     [_currentPopover presentPopoverFromRect:sender.frame
                                      inView:self.view
-                   permittedArrowDirections:UIPopoverArrowDirectionRight
+                   permittedArrowDirections:UIPopoverArrowDirectionAny
                                    animated:YES];
 }
 

@@ -292,7 +292,7 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
     _popover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
     [_popover presentPopoverFromRect:self.dateSelectButton.superview.frame
                               inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view]
-            permittedArrowDirections:UIPopoverArrowDirectionRight
+            permittedArrowDirections:UIPopoverArrowDirectionAny
                             animated:YES];
 }
 

@@ -9,6 +9,5 @@
 #import "CCCalendarCalcViewController_iPad.h"
 
 @interface CCCalendarCalcViewController_iPad (Orientation)
-- (void)didOrientationPortrait;
-- (void)didOrientationLandscape;
+- (void)setupLayoutWithOrientation:(UIInterfaceOrientation)orientation;
 @end
