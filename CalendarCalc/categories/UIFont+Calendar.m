@@ -21,7 +21,7 @@
 + (UIFont *)dateSelectFont
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        return [UIFont boldSystemFontOfSize:18.0];
+        return [UIFont boldSystemFontOfSize:20.0];
     } else {
         return [UIFont boldSystemFontOfSize:30.0];
     }

@@ -219,9 +219,13 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="86076575"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">delete_key~ipad.png</string>
+							<string key="NSResourceName">delete~ipad.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="729038262">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">operator_key~ipad.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="471109051">
 							<int key="type">2</int>
@@ -549,10 +553,11 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="86076575"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">plus_minus_key~ipad.png</string>
+							<string key="NSResourceName">plus_minus~ipad.png</string>
 						</object>
+						<reference key="IBUINormalBackgroundImage" ref="729038262"/>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
 							<double key="pointSize">12</double>
@@ -611,10 +616,7 @@
 						<reference key="IBUIHighlightedTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleShadowColor" ref="86076575"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="478839823">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">operator_key~ipad.png</string>
-						</object>
+						<reference key="IBUINormalBackgroundImage" ref="729038262"/>
 						<reference key="IBUIFontDescription" ref="16555425"/>
 						<reference key="IBUIFont" ref="247450923"/>
 					</object>
@@ -635,7 +637,7 @@
 						<reference key="IBUIHighlightedTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleShadowColor" ref="86076575"/>
-						<reference key="IBUINormalBackgroundImage" ref="478839823"/>
+						<reference key="IBUINormalBackgroundImage" ref="729038262"/>
 						<reference key="IBUIFontDescription" ref="16555425"/>
 						<reference key="IBUIFont" ref="247450923"/>
 					</object>
@@ -656,7 +658,7 @@
 						<reference key="IBUIHighlightedTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleShadowColor" ref="86076575"/>
-						<reference key="IBUINormalBackgroundImage" ref="478839823"/>
+						<reference key="IBUINormalBackgroundImage" ref="729038262"/>
 						<reference key="IBUIFontDescription" ref="16555425"/>
 						<reference key="IBUIFont" ref="247450923"/>
 					</object>
@@ -677,7 +679,7 @@
 						<reference key="IBUIHighlightedTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleColor" ref="1013026685"/>
 						<reference key="IBUINormalTitleShadowColor" ref="86076575"/>
-						<reference key="IBUINormalBackgroundImage" ref="478839823"/>
+						<reference key="IBUINormalBackgroundImage" ref="729038262"/>
 						<reference key="IBUIFontDescription" ref="16555425"/>
 						<reference key="IBUIFont" ref="247450923"/>
 					</object>
@@ -1209,7 +1211,6 @@
 							<reference ref="476251861"/>
 							<reference ref="67243255"/>
 							<reference ref="569595646"/>
-							<reference ref="722333973"/>
 							<reference ref="824846160"/>
 							<reference ref="372586107"/>
 							<reference ref="490031118"/>
@@ -1234,6 +1235,7 @@
 							<reference ref="220544152"/>
 							<reference ref="462287396"/>
 							<reference ref="3117973"/>
+							<reference ref="722333973"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1580,12 +1582,12 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="clear_key~ipad.png">{284, 176}</string>
 			<string key="date_key~ipad.png">{284, 66}</string>
-			<string key="delete_key~ipad.png">{192, 80}</string>
+			<string key="delete~ipad.png">{16, 16}</string>
 			<string key="display~ipad.png">{768, 98}</string>
 			<string key="equal_key~ipad.png">{192, 160}</string>
 			<string key="number_key~ipad.png">{192, 80}</string>
 			<string key="operator_key~ipad.png">{192, 80}</string>
-			<string key="plus_minus_key~ipad.png">{192, 80}</string>
+			<string key="plus_minus~ipad.png">{16, 16}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
