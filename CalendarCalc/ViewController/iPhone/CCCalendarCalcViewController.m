@@ -32,6 +32,7 @@
 - (IBAction)onNumber:(UIButton *)sender;
 
 - (IBAction)onClick:(UIButton *)sender;
+- (void)settingDynamicCalendar;
 @end
 
 
@@ -60,6 +61,7 @@ enum {
                         forState:UIControlStateNormal];
     [self configureView];
     self.calendarViewController.delegate = self;
+    [self settingDynamicCalendar];
     self.player = [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] player];
 }
 
@@ -113,6 +115,7 @@ enum {
             [_settingPopover dismissPopoverAnimated:YES];
         }
         _settingPopover = [[UIPopoverController alloc] initWithContentViewController:settingViewController];
+        _settingPopover.delegate = self;
         [_settingPopover presentPopoverFromRect:sender.frame
                                          inView:self.view
                        permittedArrowDirections:UIPopoverArrowDirectionAny
@@ -147,6 +150,11 @@ enum {
     [self.player play];
 }
 
+- (void)settingDynamicCalendar
+{
+    [self.calendarViewController setDynamicCalendar:
+     [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
+}
 
 #pragma mark - CCSettingViewController
 
@@ -159,6 +167,7 @@ enum {
             [_settingPopover dismissPopoverAnimated:YES];
         }
     }
+    [self settingDynamicCalendar];
 }
 
 
@@ -176,6 +185,16 @@ enum {
     [self.calendarCalc setWeek:week exclude:exclude];
 }
 
+
+#pragma mark - UIPopoverController
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    if (popoverController == _settingPopover) {
+        [self settingDynamicCalendar];
+    }
+    return YES;
+}
 
 #pragma mark - Private
 

@@ -28,6 +28,16 @@
 		62324C5C167C34D70062EF1B /* CCCalendarCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C5B167C34D70062EF1B /* CCCalendarCalcTests.m */; };
 		62324C65167C42A70062EF1B /* NSString+Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C64167C42A60062EF1B /* NSString+Locale.m */; };
 		62324C6E167C4D120062EF1B /* NSDateFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */; };
+		625B4E671698613600D94A4E /* UIImage+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 625B4E661698613600D94A4E /* UIImage+Calculator.m */; };
+		625B4E7416986DDC00D94A4E /* delete~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7016986DDC00D94A4E /* delete~ipad.png */; };
+		625B4E7516986DDC00D94A4E /* next~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7116986DDC00D94A4E /* next~ipad.png */; };
+		625B4E7616986DDC00D94A4E /* plus_minus~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7216986DDC00D94A4E /* plus_minus~ipad.png */; };
+		625B4E7716986DDC00D94A4E /* prev~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7316986DDC00D94A4E /* prev~ipad.png */; };
+		625B4E7A16986EE900D94A4E /* calendar_controll_button~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7816986EE900D94A4E /* calendar_controll_button~ipad.png */; };
+		625B4E7D1698703600D94A4E /* date_select_button~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7C1698703600D94A4E /* date_select_button~ipad.png */; };
+		625B4E81169870E100D94A4E /* switch_button_on~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E80169870E100D94A4E /* switch_button_on~ipad.png */; };
+		625B4E831698713D00D94A4E /* display~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E821698713D00D94A4E /* display~ipad.png */; };
+		625B4E851698773C00D94A4E /* plus_minus@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E841698773C00D94A4E /* plus_minus@2x~ipad.png */; };
 		626769481692BC53002857A7 /* CCCalendarCalc+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 626769471692BC53002857A7 /* CCCalendarCalc+Function.m */; };
 		626BB0AA169158D9004E9E63 /* CCWeekControllView.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0A9169158D9004E9E63 /* CCWeekControllView.m */; };
 		626BB0B316915D97004E9E63 /* ASCSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B216915D96004E9E63 /* ASCSwitchButton.m */; };
@@ -77,29 +87,6 @@
 		62A2D0CD167380DB001CC9AE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B2167380DB001CC9AE /* Icon-72.png */; };
 		62A2D0CE167380DB001CC9AE /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B3167380DB001CC9AE /* Default-Portrait~ipad.png */; };
 		62A2D0CF167380DB001CC9AE /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B4167380DB001CC9AE /* Default-Landscape~ipad.png */; };
-		62A2D0D0167380DB001CC9AE /* number_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B5167380DB001CC9AE /* number_key~ipad.png */; };
-		62A2D0D1167380DB001CC9AE /* number_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B6167380DB001CC9AE /* number_key-Landscape~ipad.png */; };
-		62A2D0D3167380DB001CC9AE /* date_select_button~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B8167380DB001CC9AE /* date_select_button~ipad.png */; };
-		62A2D0D4167380DB001CC9AE /* next_button~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0B9167380DB001CC9AE /* next_button~ipad.png */; };
-		62A2D0D5167380DB001CC9AE /* prev_button~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0BA167380DB001CC9AE /* prev_button~ipad.png */; };
-		62A2D0D6167380DB001CC9AE /* display~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0BB167380DB001CC9AE /* display~ipad.png */; };
-		62A2D0D7167380DB001CC9AE /* delete_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0BC167380DB001CC9AE /* delete_key~ipad.png */; };
-		62A2D0D8167380DB001CC9AE /* delete_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0BD167380DB001CC9AE /* delete_key-Landscape~ipad.png */; };
-		62A2D0D9167380DB001CC9AE /* equal_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0BE167380DB001CC9AE /* equal_key~ipad.png */; };
-		62A2D0DA167380DB001CC9AE /* equal_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0BF167380DB001CC9AE /* equal_key-Landscape~ipad.png */; };
-		62A2D0DB167380DB001CC9AE /* date_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C0167380DB001CC9AE /* date_key~ipad.png */; };
-		62A2D0DC167380DB001CC9AE /* operator_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C1167380DB001CC9AE /* operator_key~ipad.png */; };
-		62A2D0DD167380DB001CC9AE /* operator_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C2167380DB001CC9AE /* operator_key-Landscape~ipad.png */; };
-		62A2D0DE167380DB001CC9AE /* plus_minus_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C3167380DB001CC9AE /* plus_minus_key~ipad.png */; };
-		62A2D0DF167380DB001CC9AE /* plus_minus_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C4167380DB001CC9AE /* plus_minus_key-Landscape~ipad.png */; };
-		62A2D0E0167380DB001CC9AE /* switch_button_off~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C5167380DB001CC9AE /* switch_button_off~ipad.png */; };
-		62A2D0E1167380DB001CC9AE /* switch_button_on~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C6167380DB001CC9AE /* switch_button_on~ipad.png */; };
-		62A2D0E2167380DB001CC9AE /* clear_key~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C7167380DB001CC9AE /* clear_key~ipad.png */; };
-		62A2D0E3167380DB001CC9AE /* clear_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C8167380DB001CC9AE /* clear_key-Landscape~ipad.png */; };
-		62A2D0E4167380DB001CC9AE /* next_button-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0C9167380DB001CC9AE /* next_button-Landscape~ipad.png */; };
-		62A2D0E5167380DB001CC9AE /* prev_button-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0CA167380DB001CC9AE /* prev_button-Landscape~ipad.png */; };
-		62A2D0E6167380DB001CC9AE /* date_key-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0CB167380DB001CC9AE /* date_key-Landscape~ipad.png */; };
-		62A2D0E7167380DB001CC9AE /* date_select_button-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0CC167380DB001CC9AE /* date_select_button-Landscape~ipad.png */; };
 		62A2D103167380E8001CC9AE /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0E8167380E8001CC9AE /* Icon-72@2x.png */; };
 		62A2D104167380E8001CC9AE /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0E9167380E8001CC9AE /* Default-Portrait@2x~ipad.png */; };
 		62A2D105167380E8001CC9AE /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2D0EA167380E8001CC9AE /* Default-Landscape@2x~ipad.png */; };
@@ -151,7 +138,6 @@
 		62B59A5A16971E1800126000 /* next@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A5816971E1800126000 /* next@2x~iphone.png */; };
 		62B59A5B16971E1800126000 /* prev@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A5916971E1800126000 /* prev@2x~iphone.png */; };
 		62B59A5E1697220D00126000 /* delete@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A5C1697220D00126000 /* delete@2x~ipad.png */; };
-		62B59A5F1697220D00126000 /* plus_minus@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A5D1697220D00126000 /* plus_minus@2x~ipad.png */; };
 		62B59A6D169806D500126000 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A6C169806D400126000 /* setting@2x.png */; };
 		62B59A6F1698084400126000 /* CCCalendarCalcViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A6E1698084400126000 /* CCCalendarCalcViewController_iPhone.xib */; };
 		62B59A751698144700126000 /* delete_key@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B59A741698144700126000 /* delete_key@2x~iphone.png */; };
@@ -211,6 +197,17 @@
 		62324C64167C42A60062EF1B /* NSString+Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Locale.m"; sourceTree = "<group>"; };
 		62324C6C167C4D100062EF1B /* NSDateFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62324C6D167C4D110062EF1B /* NSDateFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
+		625B4E651698613600D94A4E /* UIImage+Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Calculator.h"; sourceTree = "<group>"; };
+		625B4E661698613600D94A4E /* UIImage+Calculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Calculator.m"; sourceTree = "<group>"; };
+		625B4E7016986DDC00D94A4E /* delete~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete~ipad.png"; sourceTree = "<group>"; };
+		625B4E7116986DDC00D94A4E /* next~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next~ipad.png"; sourceTree = "<group>"; };
+		625B4E7216986DDC00D94A4E /* plus_minus~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_minus~ipad.png"; sourceTree = "<group>"; };
+		625B4E7316986DDC00D94A4E /* prev~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev~ipad.png"; sourceTree = "<group>"; };
+		625B4E7816986EE900D94A4E /* calendar_controll_button~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_controll_button~ipad.png"; sourceTree = "<group>"; };
+		625B4E7C1698703600D94A4E /* date_select_button~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_select_button~ipad.png"; sourceTree = "<group>"; };
+		625B4E80169870E100D94A4E /* switch_button_on~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_on~ipad.png"; sourceTree = "<group>"; };
+		625B4E821698713D00D94A4E /* display~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "display~ipad.png"; sourceTree = "<group>"; };
+		625B4E841698773C00D94A4E /* plus_minus@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_minus@2x~ipad.png"; sourceTree = "<group>"; };
 		626769461692BC53002857A7 /* CCCalendarCalc+Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCCalendarCalc+Function.h"; sourceTree = "<group>"; };
 		626769471692BC53002857A7 /* CCCalendarCalc+Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalc+Function.m"; sourceTree = "<group>"; };
 		626BB0A8169158D9004E9E63 /* CCWeekControllView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWeekControllView.h; sourceTree = "<group>"; };
@@ -251,7 +248,7 @@
 		62910A4D16953A090032960F /* CCCalendarCalcViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCalendarCalcViewController_iPad.m; sourceTree = "<group>"; };
 		62910A571695BB680032960F /* CCCalendarCalcViewController_iPad+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCCalendarCalcViewController_iPad+Orientation.h"; sourceTree = "<group>"; };
 		62910A581695BB690032960F /* CCCalendarCalcViewController_iPad+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCCalendarCalcViewController_iPad+Orientation.m"; sourceTree = "<group>"; };
-		62A144C916859BE3001E2843 /* key_click.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = key_click.aif; sourceTree = "<group>"; };
+		62A144C916859BE3001E2843 /* key_click.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = key_click.aif; path = resources/key_click.aif; sourceTree = "<group>"; };
 		62A144CC1685F4BD001E2843 /* NSArray+safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+safe.h"; sourceTree = "<group>"; };
 		62A144CD1685F4BD001E2843 /* NSArray+safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+safe.m"; sourceTree = "<group>"; };
 		62A144CF1685F559001E2843 /* ASCCalendarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCCalendarButton.h; sourceTree = "<group>"; };
@@ -286,29 +283,6 @@
 		62A2D0B2167380DB001CC9AE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		62A2D0B3167380DB001CC9AE /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		62A2D0B4167380DB001CC9AE /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0B5167380DB001CC9AE /* number_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0B6167380DB001CC9AE /* number_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0B8167380DB001CC9AE /* date_select_button~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_select_button~ipad.png"; sourceTree = "<group>"; };
-		62A2D0B9167380DB001CC9AE /* next_button~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button~ipad.png"; sourceTree = "<group>"; };
-		62A2D0BA167380DB001CC9AE /* prev_button~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev_button~ipad.png"; sourceTree = "<group>"; };
-		62A2D0BB167380DB001CC9AE /* display~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "display~ipad.png"; sourceTree = "<group>"; };
-		62A2D0BC167380DB001CC9AE /* delete_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0BD167380DB001CC9AE /* delete_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0BE167380DB001CC9AE /* equal_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "equal_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0BF167380DB001CC9AE /* equal_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "equal_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C0167380DB001CC9AE /* date_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C1167380DB001CC9AE /* operator_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C2167380DB001CC9AE /* operator_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C3167380DB001CC9AE /* plus_minus_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_minus_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C4167380DB001CC9AE /* plus_minus_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_minus_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C5167380DB001CC9AE /* switch_button_off~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_off~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C6167380DB001CC9AE /* switch_button_on~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_button_on~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C7167380DB001CC9AE /* clear_key~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear_key~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C8167380DB001CC9AE /* clear_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0C9167380DB001CC9AE /* next_button-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0CA167380DB001CC9AE /* prev_button-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev_button-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0CB167380DB001CC9AE /* date_key-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_key-Landscape~ipad.png"; sourceTree = "<group>"; };
-		62A2D0CC167380DB001CC9AE /* date_select_button-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_select_button-Landscape~ipad.png"; sourceTree = "<group>"; };
 		62A2D0E8167380E8001CC9AE /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		62A2D0E9167380E8001CC9AE /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		62A2D0EA167380E8001CC9AE /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
@@ -379,7 +353,6 @@
 		62B59A5816971E1800126000 /* next@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x~iphone.png"; sourceTree = "<group>"; };
 		62B59A5916971E1800126000 /* prev@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev@2x~iphone.png"; sourceTree = "<group>"; };
 		62B59A5C1697220D00126000 /* delete@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x~ipad.png"; sourceTree = "<group>"; };
-		62B59A5D1697220D00126000 /* plus_minus@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus_minus@2x~ipad.png"; sourceTree = "<group>"; };
 		62B59A6C169806D400126000 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		62B59A6E1698084400126000 /* CCCalendarCalcViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCCalendarCalcViewController_iPhone.xib; sourceTree = "<group>"; };
 		62B59A741698144700126000 /* delete_key@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_key@2x~iphone.png"; sourceTree = "<group>"; };
@@ -671,29 +644,14 @@
 				62A2D0B2167380DB001CC9AE /* Icon-72.png */,
 				62A2D0B3167380DB001CC9AE /* Default-Portrait~ipad.png */,
 				62A2D0B4167380DB001CC9AE /* Default-Landscape~ipad.png */,
-				62A2D0B5167380DB001CC9AE /* number_key~ipad.png */,
-				62A2D0B6167380DB001CC9AE /* number_key-Landscape~ipad.png */,
-				62A2D0B8167380DB001CC9AE /* date_select_button~ipad.png */,
-				62A2D0B9167380DB001CC9AE /* next_button~ipad.png */,
-				62A2D0BA167380DB001CC9AE /* prev_button~ipad.png */,
-				62A2D0BB167380DB001CC9AE /* display~ipad.png */,
-				62A2D0BC167380DB001CC9AE /* delete_key~ipad.png */,
-				62A2D0BD167380DB001CC9AE /* delete_key-Landscape~ipad.png */,
-				62A2D0BE167380DB001CC9AE /* equal_key~ipad.png */,
-				62A2D0BF167380DB001CC9AE /* equal_key-Landscape~ipad.png */,
-				62A2D0C0167380DB001CC9AE /* date_key~ipad.png */,
-				62A2D0C1167380DB001CC9AE /* operator_key~ipad.png */,
-				62A2D0C2167380DB001CC9AE /* operator_key-Landscape~ipad.png */,
-				62A2D0C3167380DB001CC9AE /* plus_minus_key~ipad.png */,
-				62A2D0C4167380DB001CC9AE /* plus_minus_key-Landscape~ipad.png */,
-				62A2D0C5167380DB001CC9AE /* switch_button_off~ipad.png */,
-				62A2D0C6167380DB001CC9AE /* switch_button_on~ipad.png */,
-				62A2D0C7167380DB001CC9AE /* clear_key~ipad.png */,
-				62A2D0C8167380DB001CC9AE /* clear_key-Landscape~ipad.png */,
-				62A2D0C9167380DB001CC9AE /* next_button-Landscape~ipad.png */,
-				62A2D0CA167380DB001CC9AE /* prev_button-Landscape~ipad.png */,
-				62A2D0CB167380DB001CC9AE /* date_key-Landscape~ipad.png */,
-				62A2D0CC167380DB001CC9AE /* date_select_button-Landscape~ipad.png */,
+				625B4E821698713D00D94A4E /* display~ipad.png */,
+				625B4E7016986DDC00D94A4E /* delete~ipad.png */,
+				625B4E7116986DDC00D94A4E /* next~ipad.png */,
+				625B4E7216986DDC00D94A4E /* plus_minus~ipad.png */,
+				625B4E7316986DDC00D94A4E /* prev~ipad.png */,
+				625B4E7816986EE900D94A4E /* calendar_controll_button~ipad.png */,
+				625B4E7C1698703600D94A4E /* date_select_button~ipad.png */,
+				625B4E80169870E100D94A4E /* switch_button_on~ipad.png */,
 			);
 			name = 1x;
 			path = iPad/1x;
@@ -724,7 +682,7 @@
 				62A2D0FF167380E8001CC9AE /* clear_key@2x~ipad.png */,
 				62A2D100167380E8001CC9AE /* clear_key-Landscape@2x~ipad.png */,
 				62B59A5C1697220D00126000 /* delete@2x~ipad.png */,
-				62B59A5D1697220D00126000 /* plus_minus@2x~ipad.png */,
+				625B4E841698773C00D94A4E /* plus_minus@2x~ipad.png */,
 				62B599F21696D1DF00126000 /* switch_button_on@2x~ipad.png */,
 				62A2D101167380E8001CC9AE /* switch_button_off@2x~ipad.png */,
 			);
@@ -827,6 +785,8 @@
 				6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */,
 				626BB0B4169163DB004E9E63 /* UIColor+SwitchButton.h */,
 				626BB0B5169163DB004E9E63 /* UIColor+SwitchButton.m */,
+				625B4E651698613600D94A4E /* UIImage+Calculator.h */,
+				625B4E661698613600D94A4E /* UIImage+Calculator.m */,
 				626BB0C116916A3D004E9E63 /* UIImage+Calendar.h */,
 				626BB0C216916A3E004E9E63 /* UIImage+Calendar.m */,
 				626BB0B71691642A004E9E63 /* UIImage+SwitchButton.h */,
@@ -938,29 +898,6 @@
 				62A2D0CD167380DB001CC9AE /* Icon-72.png in Resources */,
 				62A2D0CE167380DB001CC9AE /* Default-Portrait~ipad.png in Resources */,
 				62A2D0CF167380DB001CC9AE /* Default-Landscape~ipad.png in Resources */,
-				62A2D0D0167380DB001CC9AE /* number_key~ipad.png in Resources */,
-				62A2D0D1167380DB001CC9AE /* number_key-Landscape~ipad.png in Resources */,
-				62A2D0D3167380DB001CC9AE /* date_select_button~ipad.png in Resources */,
-				62A2D0D4167380DB001CC9AE /* next_button~ipad.png in Resources */,
-				62A2D0D5167380DB001CC9AE /* prev_button~ipad.png in Resources */,
-				62A2D0D6167380DB001CC9AE /* display~ipad.png in Resources */,
-				62A2D0D7167380DB001CC9AE /* delete_key~ipad.png in Resources */,
-				62A2D0D8167380DB001CC9AE /* delete_key-Landscape~ipad.png in Resources */,
-				62A2D0D9167380DB001CC9AE /* equal_key~ipad.png in Resources */,
-				62A2D0DA167380DB001CC9AE /* equal_key-Landscape~ipad.png in Resources */,
-				62A2D0DB167380DB001CC9AE /* date_key~ipad.png in Resources */,
-				62A2D0DC167380DB001CC9AE /* operator_key~ipad.png in Resources */,
-				62A2D0DD167380DB001CC9AE /* operator_key-Landscape~ipad.png in Resources */,
-				62A2D0DE167380DB001CC9AE /* plus_minus_key~ipad.png in Resources */,
-				62A2D0DF167380DB001CC9AE /* plus_minus_key-Landscape~ipad.png in Resources */,
-				62A2D0E0167380DB001CC9AE /* switch_button_off~ipad.png in Resources */,
-				62A2D0E1167380DB001CC9AE /* switch_button_on~ipad.png in Resources */,
-				62A2D0E2167380DB001CC9AE /* clear_key~ipad.png in Resources */,
-				62A2D0E3167380DB001CC9AE /* clear_key-Landscape~ipad.png in Resources */,
-				62A2D0E4167380DB001CC9AE /* next_button-Landscape~ipad.png in Resources */,
-				62A2D0E5167380DB001CC9AE /* prev_button-Landscape~ipad.png in Resources */,
-				62A2D0E6167380DB001CC9AE /* date_key-Landscape~ipad.png in Resources */,
-				62A2D0E7167380DB001CC9AE /* date_select_button-Landscape~ipad.png in Resources */,
 				62A2D103167380E8001CC9AE /* Icon-72@2x.png in Resources */,
 				62A2D104167380E8001CC9AE /* Default-Portrait@2x~ipad.png in Resources */,
 				62A2D105167380E8001CC9AE /* Default-Landscape@2x~ipad.png in Resources */,
@@ -996,11 +933,19 @@
 				62B59A5A16971E1800126000 /* next@2x~iphone.png in Resources */,
 				62B59A5B16971E1800126000 /* prev@2x~iphone.png in Resources */,
 				62B59A5E1697220D00126000 /* delete@2x~ipad.png in Resources */,
-				62B59A5F1697220D00126000 /* plus_minus@2x~ipad.png in Resources */,
 				62B59A6D169806D500126000 /* setting@2x.png in Resources */,
 				62B59A6F1698084400126000 /* CCCalendarCalcViewController_iPhone.xib in Resources */,
 				62B59A751698144700126000 /* delete_key@2x~iphone.png in Resources */,
 				62B59A771698151200126000 /* plus_minus_key@2x~iphone.png in Resources */,
+				625B4E7416986DDC00D94A4E /* delete~ipad.png in Resources */,
+				625B4E7516986DDC00D94A4E /* next~ipad.png in Resources */,
+				625B4E7616986DDC00D94A4E /* plus_minus~ipad.png in Resources */,
+				625B4E7716986DDC00D94A4E /* prev~ipad.png in Resources */,
+				625B4E7A16986EE900D94A4E /* calendar_controll_button~ipad.png in Resources */,
+				625B4E7D1698703600D94A4E /* date_select_button~ipad.png in Resources */,
+				625B4E81169870E100D94A4E /* switch_button_on~ipad.png in Resources */,
+				625B4E831698713D00D94A4E /* display~ipad.png in Resources */,
+				625B4E851698773C00D94A4E /* plus_minus@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1086,6 +1031,7 @@
 				62910A4B169510850032960F /* CCCalendarCalcViewController_iPhone.m in Sources */,
 				62910A4E16953A090032960F /* CCCalendarCalcViewController_iPad.m in Sources */,
 				62910A591695BB690032960F /* CCCalendarCalcViewController_iPad+Orientation.m in Sources */,
+				625B4E671698613600D94A4E /* UIImage+Calculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

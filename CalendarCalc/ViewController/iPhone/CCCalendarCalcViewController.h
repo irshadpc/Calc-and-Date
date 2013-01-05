@@ -14,7 +14,7 @@
 
 @class AVAudioPlayer;
 
-@interface CCCalendarCalcViewController : UIViewController
+@interface CCCalendarCalcViewController : UIViewController <UIPopoverControllerDelegate>
 
 @property (weak, nonatomic) AVAudioPlayer *player;
 

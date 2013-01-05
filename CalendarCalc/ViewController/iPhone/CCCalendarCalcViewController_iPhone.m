@@ -9,7 +9,6 @@
 #import "CCCalendarCalcViewController_iPhone.h"
 #import "CCCalendarCalcViewController.h"
 #import "CCViewSheet.h"
-#import "CCAppDelegate+Setting.h"
 #import "NSDate+Component.h"
 #import "NSString+Date.h"
 
@@ -86,8 +85,6 @@
         [_currentViewSheet dismissContainerViewWithAnimated:YES];
     }
 
-    [self.calendarViewController setDynamicCalendar:
-     [(CCAppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
     _currentViewSheet = [[CCViewSheet alloc] initWithContentViewController:self.calendarViewController];
     _currentViewSheet.delegate = self;
     [_currentViewSheet setRightButton:[self eventButton]];

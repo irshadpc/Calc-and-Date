@@ -75,6 +75,11 @@
     self.yearMonthPickerController = nil;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                 duration:(NSTimeInterval)duration
 {
@@ -155,6 +160,14 @@
         [_currentPopover dismissPopoverAnimated:YES];
     }
     [self onEventDone];
+}
+
+
+#pragma mark - UIPopoverController
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    
 }
 
 #pragma mark - Private

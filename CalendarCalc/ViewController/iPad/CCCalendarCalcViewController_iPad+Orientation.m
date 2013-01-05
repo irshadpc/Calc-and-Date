@@ -9,6 +9,7 @@
 #import "CCCalendarCalcViewController_iPad+Orientation.h"
 #import "CCFunction.h"
 #import "ASCCalendarConstant.h"
+#import "UIImage+Calculator.h"
 
 @interface CCCalendarCalcViewController_iPad (OrientationPrivate)
 - (CGFloat)portrateOriginXWithTag:(NSInteger)tag;
@@ -20,6 +21,8 @@
 - (CGFloat)landscapeOriginYWithTag:(NSInteger)tag;
 - (CGFloat)landscapeSizeWidthWithTag:(NSInteger)tag;
 - (CGFloat)landscapeSizeHeightWithTag:(NSInteger)tag;
+
+- (UIImage *)imageWithTag:(NSInteger)tag orientation:(UIInterfaceOrientation)orientation;
 @end
 
 @implementation CCCalendarCalcViewController_iPad (Orientation)
@@ -56,6 +59,12 @@ enum {
                                     [self landscapeOriginYWithTag:view.tag],
                                     [self landscapeSizeWidthWithTag:view.tag],
                                     [self landscapeSizeHeightWithTag:view.tag]);
+        }
+        
+        if (view.tag < CCCalendar) {
+            [(UIButton *)view setBackgroundImage:[self imageWithTag:view.tag
+                                                        orientation:orientation]
+                                        forState:UIControlStateNormal];
         }
     }
 }
@@ -397,6 +406,46 @@ enum {
         case 9:
             return (LandscapeHeight * 1);
         case CCDisplay:
+        default:
+            NSLog(@"TAG: %d", tag);
+            abort();
+    }
+}
+
+- (UIImage *)imageWithTag:(NSInteger)tag
+              orientation:(UIInterfaceOrientation)orientation
+{
+    switch (tag) {
+        case CCClear:
+            return [UIImage clearKeyImageWithOrientation:orientation];
+        case CCDecimal:
+        case 10:
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            return [UIImage numberKeyImageWithOrientation:orientation];
+        case CCDelete:
+        case CCPlusMinus:
+        case CCDivide:
+        case CCMinus:
+        case CCMultiply:
+        case CCPlus:
+            return [UIImage operatorKeyImageWithOrientation:orientation];
+        case CCEqual:
+            return [UIImage equalKeyImageWithOrientation:orientation];
+        case CCDisplay:
+        case CCEventButton:
+        case CCDateSelectButton:
+        case CCPrevButton:
+        case CCNextButton:
+        case CCCalendar:
         default:
             NSLog(@"TAG: %d", tag);
             abort();
