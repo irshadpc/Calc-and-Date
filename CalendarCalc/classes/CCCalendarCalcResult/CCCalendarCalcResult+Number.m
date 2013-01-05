@@ -57,6 +57,7 @@
 {
     if (_calcType != CCDate) {
         [_numberResult inputDecimalPoint];
+        _calcType = CCNumber;
     }
     [self updateDisplayResult];
     

@@ -223,4 +223,23 @@
     STAssertEqualObjects(@"3", result, @"RESULT: %@", result);
 }
 
+- (void)testInputFunction_3_Plus_4_Equal_Decimal_2_Plus_1_Equal
+{
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  4];
+    [_calendarCalc inputFunction: CCEqual];
+    [_calendarCalc inputFunction: CCDecimal];
+    [_calendarCalc inputInteger:  2];
+    
+    NSString *const result1 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"0.2", result1, @"RESULT: %@", result1);
+
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputInteger:  1];
+    [_calendarCalc inputFunction: CCEqual];
+   
+    NSString *const result2 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"1.2", result2, @"RESULT: %@", result2);
+}
 @end

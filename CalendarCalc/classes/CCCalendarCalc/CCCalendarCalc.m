@@ -23,6 +23,7 @@
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number;
 - (CCCalendarCalcResult *)inputNumberString:(NSString *)numberString;
 - (CCCalendarCalcResult *)inputDateString:(NSString *)dateString;
+- (CCCalendarCalcResult *)inputDecimalPoint;
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function;
 - (CCCalendarCalcResult *)calculate;
 - (void)numberCalculate;
@@ -31,6 +32,7 @@
 - (void)dateMinus;
 - (void)dateMultiply;
 - (void)dateDivide;
+- (void)endInput;
 - (CCCalcType)calcType;
 @end
 
@@ -58,9 +60,7 @@
 - (CCCalendarCalcResult *)inputDate:(NSDate *)date
 {
     if (_isEqual) {
-        [_result endInput];
-        [_numberCalculator clear];
-        [_dateCalculator clear];
+        [self endInput];
         _isEqual = NO;
     }
     return [_result inputDate:date];
@@ -90,7 +90,7 @@
             _isEqual = YES;
             return [self calculate];
         case CCDecimal:
-            return [_result inputDecimalPoint];
+            return [self inputDecimalPoint];
         case CCClear:
             return [self clearResult];
         case CCPlusMinus:
@@ -133,9 +133,7 @@
 - (CCCalendarCalcResult *)inputNumber:(NSDecimalNumber *)number
 {
     if (_isEqual) {
-        [_result endInput];
-        [_numberCalculator clear];
-        [_dateCalculator clear];
+        [self endInput];
         _isEqual = NO;
     }
     return [_result inputNumber:number];
@@ -157,6 +155,15 @@
 - (CCCalendarCalcResult *)inputDateString:(NSString *)dateString
 {
     return [self inputDate:[CCCalendarCalcResult dateFromString:dateString]];
+}
+
+- (CCCalendarCalcResult *)inputDecimalPoint
+{
+    if (_isEqual) {
+        [self endInput];
+        _isEqual = NO;
+    }
+    return [_result inputDecimalPoint];
 }
 
 - (CCCalendarCalcResult *)calculateWithFunction:(CCFunction)function
@@ -266,6 +273,13 @@
 {
     [_dateCalculator divideWithNumber:[_result numberResult]];
     [_dateCalculator divideWithDate:[_result dateResult]];
+}
+
+- (void)endInput
+{
+    [_result endInput];
+    [_numberCalculator clear];
+    [_dateCalculator clear];
 }
 
 - (CCCalcType)calcType

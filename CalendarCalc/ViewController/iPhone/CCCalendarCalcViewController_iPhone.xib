@@ -55,10 +55,10 @@
 					<object class="IBUILabel" id="923077440">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{320, 68}</string>
+						<string key="NSFrame">{{20, 0}, {300, 68}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="138589617"/>
+						<reference key="NSNextKeyView" ref="56220346"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -87,10 +87,10 @@
 					<object class="IBUILabel" id="56220346">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{2, 25}, {18, 18}}</string>
+						<string key="NSFrame">{{2, 2}, {18, 18}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1020764230"/>
+						<reference key="NSNextKeyView" ref="138589617"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -624,13 +624,13 @@
 					<object class="IBUIButton" id="138589617">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{2, 2}, {18, 19}}</string>
+						<string key="NSFrame">{{2, 47}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="56220346"/>
+						<reference key="NSNextKeyView" ref="1020764230"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
-						<float key="IBUIAlpha">0.60000002384185791</float>
+						<float key="IBUIAlpha">0.69999998807907104</float>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
@@ -1148,10 +1148,10 @@
 							<reference ref="1005541789"/>
 							<reference ref="236841590"/>
 							<reference ref="866953172"/>
-							<reference ref="923077440"/>
 							<reference ref="56220346"/>
 							<reference ref="138589617"/>
 							<reference ref="16650952"/>
+							<reference ref="923077440"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
