@@ -14,6 +14,8 @@
 
 @implementation CCAppDelegate
 
+static const CGFloat Phone4InchHeight = 568.0;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSMutableDictionary *userDefaults = [[NSMutableDictionary alloc] init];
@@ -31,9 +33,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[CCCalendarCalcViewController_iPhone alloc] initWithNibName:@"CCCalendarCalcViewController_iPhone" bundle:nil];
+        if ([UIScreen mainScreen].bounds.size.height == Phone4InchHeight) {
+            self.viewController = [[CCCalendarCalcViewController_iPhone alloc]
+                                   initWithNibName:@"CCCalendarCalcViewController_iPhone_4inch" bundle:nil];
+        } else {
+            self.viewController = [[CCCalendarCalcViewController_iPhone alloc] 
+                                   initWithNibName:@"CCCalendarCalcViewController_iPhone" bundle:nil];
+        }
     } else {
-        self.viewController = [[CCCalendarCalcViewController_iPad alloc] initWithNibName:@"CCCalendarCalcViewController_iPad" bundle:nil];
+        self.viewController = [[CCCalendarCalcViewController_iPad alloc]
+                               initWithNibName:@"CCCalendarCalcViewController_iPad" bundle:nil];
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

@@ -32,7 +32,7 @@
         CGRect dynaimcCalendarOptionFrame = self.dynamicCalendarOption.frame;
         self.contentSizeForViewInPopover = CGSizeMake(self.view.frame.size.width,
                                                       dynaimcCalendarOptionFrame.origin.y +
-                                                      dynaimcCalendarOptionFrame.size.height + 8.0);
+                                                      dynaimcCalendarOptionFrame.size.height + 20.0);
         self.titlebar.leftBarButtonItem = nil;
         self.titlebar.rightBarButtonItem = nil;
     }
