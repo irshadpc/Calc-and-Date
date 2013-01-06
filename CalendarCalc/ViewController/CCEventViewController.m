@@ -13,7 +13,10 @@
 #import "NSDate+Style.h"
 #import "NSString+Locale.h"
 
-@interface CCEventViewController () <ASCEventManagerDelegate>
+@interface CCEventViewController () <ASCEventManagerDelegate> {
+  @private
+    BOOL _isInit;
+}
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property (strong, nonatomic) ASCEventManager *eventManager;
@@ -42,6 +45,7 @@
         [self.view addSubview:_indicatorView];
         
         _eventManager = [[ASCEventManager alloc] initWithDelegate:self];
+        _isInit = YES;
     }
     return self;
 }
@@ -115,7 +119,6 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)startEventLoad:(ASCEventManager *)eventManager
 {
     [self.pickerView reloadAllComponents];
-    [self.pickerView setUserInteractionEnabled:NO];
     [self.indicatorView startAnimating];
     [self.indicatorView setHidden:NO];
 }
@@ -123,10 +126,14 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)completeEventLoad:(ASCEventManager *)eventManager
                   granted:(BOOL)granted
 {
-    NSInteger index = [self.eventManager.events indexOfObject:self.eventManager.todayEvent];
     [self.pickerView reloadComponent:0];
-    if (index != NSNotFound) {
-        [self.pickerView selectRow:index inComponent:0 animated:NO];
+    
+    if (_isInit) {
+        NSInteger index = [self.eventManager.events indexOfObject:self.eventManager.todayEvent];
+        if (index != NSNotFound) {
+            [self.pickerView selectRow:index inComponent:0 animated:NO];
+        }
+        _isInit = NO;
     }
     
     [self.indicatorView setHidden:YES];

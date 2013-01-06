@@ -55,7 +55,6 @@ static const NSInteger EventIntervalYear = 2;
 
 - (void)reloadEvents
 {
-    self.events = nil;
     [self.delegate startEventLoad:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.todayEvent = [EKEvent todayEventWithEventStore:_eventStore];
