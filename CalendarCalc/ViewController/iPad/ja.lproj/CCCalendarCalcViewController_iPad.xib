@@ -168,7 +168,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">Events</string>
+						<string key="IBUINormalTitle">イベント</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="1013026685">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -550,6 +550,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{576, 844}, {192, 160}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">302</int>
