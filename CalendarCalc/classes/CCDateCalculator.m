@@ -187,20 +187,22 @@ typedef enum {
         return nil;
     }
 
+    NSDate *lOperand = nil;
+     if ([(CCAppDelegate *)[[UIApplication sharedApplication] delegate] includeStartDayOption]) {
+         lOperand = [_dateResult addingByDay:-1];
+     } else {
+         lOperand = _dateResult;
+     }
+
     _isDateResult = NO;
-    _numberResult = [NSDecimalNumber decimalNumberWithString:
-                                 @([_dateResult dayIntervalWithDate:[rOperand noTime]]).stringValue];
+    _numberResult = [NSDecimalNumber decimalNumberWithString:@([lOperand dayIntervalWithDate:[rOperand noTime]]).stringValue];
 
     if ([_numberResult isMinus]) {
         _numberResult = [NSDecimalNumber reverse:_numberResult];
     }
 
-    if ([(CCAppDelegate *)[[UIApplication sharedApplication] delegate] includeStartDayOption]) {
-        _numberResult = [NSDecimalNumber addingByDecimalNumber:_numberResult rOperand:[NSDecimalNumber one]];
-    }
-
     _numberResult = [NSDecimalNumber subtractingByDecimalNumber:_numberResult
-                                                       rOperand:[self excludeDayCountWithStartDate:_dateResult
+                                                       rOperand:[self excludeDayCountWithStartDate:lOperand
                                                                                            endDate:[rOperand noTime]]];
 
     if ((function == CCPlus && [_numberResult isMinus]) || (function == CCMinus && ![_numberResult isMinus])) {
