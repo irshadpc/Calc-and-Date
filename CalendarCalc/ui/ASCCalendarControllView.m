@@ -130,6 +130,8 @@
     [_dateSelectButton addTarget:self action:@selector(onDateSelect:) forControlEvents:UIControlEventTouchUpInside];
     [_dateSelectButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     [_dateSelectButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_dateSelectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [_dateSelectButton setTitleShadowColor:[UIColor darkTextColor] forState:UIControlStateHighlighted];
     [_dateSelectButton.titleLabel setFont:[UIFont dateSelectFont]];
     [_dateSelectButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
 
