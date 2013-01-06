@@ -50,19 +50,10 @@
 
 - (CCCalendarCalcResult *)deleteNumber
 {
-    if (!_isEqual && ([_result numberResult] || [_result dateResult])) {
+    if (!_isEqual) {
         [_result clearEntry];
-    } else if ([_numberCalculator result]) {
-        [_result setNumberResult:[_numberCalculator result]];
-        [_result clearEntry];
-    } else if ([_dateCalculator numberResult]) {
-        [_result setNumberResult:[_dateCalculator numberResult]];
-        [_result clearEntry];
-    }
-    if (_isEqual) {
-        [_numberCalculator clear];
-        [_dateCalculator clear];
-        _isEqual = NO;
+    } else {
+        [_result clear];
     }
 
     return _result;

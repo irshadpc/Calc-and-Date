@@ -171,6 +171,8 @@
     if (!_isEqual) {        
         [self calculate];
     } else {
+        [_result setNumberResultForDisplay:[_numberCalculator result]];
+        [_result setDateResultForDisplay:[_dateCalculator dateResult]];
         _isEqual = NO;
     }
 
