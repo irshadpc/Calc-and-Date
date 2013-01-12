@@ -207,9 +207,10 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 - (void)pageViewDidPrevPage:(ASCPageView *)pageView
 {
     [_calendarViews[1] prevMonth];
-    [_calendarControllView setCurrentDate:[NSDate dateWithYear:[_calendarViews[1] year]
-                                                         month:[_calendarViews[1] month]
-                                                           day:1]];
+    self.date = [NSDate dateWithYear:[_calendarViews[1] year]
+                               month:[_calendarViews[1] month]
+                                 day:1];
+    [_calendarControllView setCurrentDate:self.date];
     [pageView setPage:1 animated:NO];
     [_calendarViews[0] prevMonth];
     [_calendarViews[2] prevMonth];
@@ -218,9 +219,10 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 - (void)pageViewDidNextPage:(ASCPageView *)pageView
 {
     [_calendarViews[1] nextMonth];
-    [_calendarControllView setCurrentDate:[NSDate dateWithYear:[_calendarViews[1] year]
-                                                         month:[_calendarViews[1] month]
-                                                           day:1]];
+    self.date = [NSDate dateWithYear:[_calendarViews[1] year]
+                               month:[_calendarViews[1] month]
+                                 day:1];
+    [_calendarControllView setCurrentDate:self.date];
     [pageView setPage:1 animated:NO];
 
     [_calendarViews[2] nextMonth];
