@@ -148,6 +148,7 @@ typedef enum {
 
 
 #pragma mark - Private
+
 ////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)calcWithNumber:(NSDecimalNumber *)rOperand 
                   function:(CCDateFunction)function
@@ -171,6 +172,7 @@ typedef enum {
             abort();
     }
 
+    _numberResult = nil;
     return [self setDateRusult:[_dateResult addingByDay:addingDay]];
 }
 
@@ -219,6 +221,7 @@ typedef enum {
         _tmpOperand = nil;
     }
 
+    _dateResult = nil;
     return _numberResult;
 }
 

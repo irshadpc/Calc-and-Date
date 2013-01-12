@@ -121,4 +121,32 @@
     STAssertEqualObjects(@"18", result, @"RESULT: %@", result);
 }
 
+- (void)testInputFunction2012_12_31_Plus_2013_1_2_Equal_Plus_2013_1_7_Plus_2013_1_20_Equal
+{
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2012
+                                            month: 12
+                                              day: 31]];
+    [_calendarCalc inputFunction: CCPlus];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2013
+                                            month: 1
+                                              day: 2]];
+    [_calendarCalc inputFunction:  CCEqual];
+    [_calendarCalc inputFunction:  CCPlus];
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2013
+                                            month: 1
+                                              day: 7]];
+    [_calendarCalc inputFunction:  CCPlus];
+   
+    NSString *const result1 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"2013/01/09", result1, @"RESULT: %@", result1);
+   
+    [_calendarCalc inputDate:[NSDate dateWithYear: 2013
+                                            month: 1
+                                              day: 20]];
+    [_calendarCalc inputFunction:  CCEqual];
+       
+    NSString *const result2 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"11", result2, @"RESULT: %@", result2);
+}
+
 @end

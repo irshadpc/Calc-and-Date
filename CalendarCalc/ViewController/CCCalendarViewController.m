@@ -69,20 +69,23 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
                                      _weekControllView.frame.origin.y + _weekControllView.frame.size.height,
                                      _pageView.frame.size.width,
                                      _pageView.frame.size.height);
-        
-        self.view.frame = CGRectMake(0,
-                                     0,
-                                     _pageView.frame.size.width,
-                                     _pageView.frame.size.height
-                                     + _weekControllView.frame.size.height
-                                     + _calendarControllView.frame.size.height);
-        
-        [self.view addSubview:_calendarControllView];
-        [self.view addSubview:_weekControllView];
-        [self.view addSubview:_pageView];
-        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
     }
     return self;
+}
+
+- (void)loadView
+{
+    self.view = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                         0,
+                                                         _pageView.frame.size.width,
+                                                         _pageView.frame.size.height
+                                                         + _weekControllView.frame.size.height
+                                                         + _calendarControllView.frame.size.height)];
+
+    [self.view addSubview:_calendarControllView];
+    [self.view addSubview:_weekControllView];
+    [self.view addSubview:_pageView];
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
 }
 
 - (void)viewDidLoad
