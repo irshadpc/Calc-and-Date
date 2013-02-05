@@ -43,6 +43,7 @@
     if (_isEqual) {
         [_numberCalculator clear];
         [_dateCalculator clear];
+        _currentFunction = CCFunctionNone;
         _isEqual = NO;
     }
     return _result;

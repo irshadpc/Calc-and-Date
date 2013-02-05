@@ -75,4 +75,25 @@
     STAssertEqualObjects(@"2012/12/15", result, @"RESULT: %@", result);
 }
 
+- (void)testInputFunction_20_Minus_30_Equal_PlusMinus_Minus_3_Equal
+{
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputFunction: CCMinus];
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputFunction: CCEqual];
+    [_calendarCalc inputFunction: CCPlusMinus];
+    [_calendarCalc inputFunction: CCMinus];
+    
+    NSString *const result1 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"10", result1, @"RESULT: %@", result1);
+    
+    [_calendarCalc inputInteger:  3];
+    [_calendarCalc inputFunction: CCEqual];
+   
+    NSString *const result2 = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"7", result2, @"RESULT: %@", result2);
+}
+
 @end
