@@ -96,4 +96,19 @@
     STAssertEqualObjects(@"7", result2, @"RESULT: %@", result2);
 }
 
+- (void)testInputNumber_2_Multiply_00_Point_88_Equal
+{
+    [_calendarCalc inputInteger:  2];
+    [_calendarCalc inputFunction: CCMultiply];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputFunction: CCDecimal];
+    [_calendarCalc inputInteger:  0];
+    [_calendarCalc inputInteger:  8];
+    [_calendarCalc inputInteger:  8];
+    [_calendarCalc inputFunction: CCEqual];
+   
+    NSString *const result = [[_calendarCalc result] displayResult];
+    STAssertEqualObjects(@"0.176", result, @"RESULT: %@", result);
+}
+
 @end

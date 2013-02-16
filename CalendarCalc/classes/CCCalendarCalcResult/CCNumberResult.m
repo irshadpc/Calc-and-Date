@@ -12,6 +12,7 @@
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumberFormatter+CalendarCalc.h"
 #import "CCNumberFormat.h"
+#import "NSString+Safe.h"
 
 @interface CCNumberResult ()
 - (void)innerClear;
@@ -53,7 +54,8 @@ enum {
     NSInteger maxDigits = CCMaxDigits + ([number isMinus] ? 1 : 0);
     NSString *plainNumberString = [number.stringValue stringByReplacingOccurrencesOfString:
                                    [NSString decimalSeparator] withString:@""];
-    if (plainNumberString.length <= maxDigits) {
+
+    if ([plainNumberString length] <= maxDigits) {
         return [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:number];
     }
     
@@ -64,7 +66,7 @@ enum {
     if (numberLength <= maxDigits - 2) {
         NSString *shortDecimal = nil;
         if (numberComponents.count == DecimalCount) {
-            shortDecimal = [numberComponents[Decimal] substringToIndex:maxDigits - numberLength];
+            shortDecimal = [numberComponents[Decimal] safeSubstringToIndex:maxDigits - numberLength];
         } else  {
             shortDecimal = @"";
         }
