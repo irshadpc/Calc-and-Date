@@ -1,5 +1,5 @@
 //
-//  ASCPageView.h
+//  PageView.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/18.
@@ -10,20 +10,15 @@
 
 @protocol PageViewDelegate;
 
-@interface PageView : UIView <UIScrollViewDelegate> {
-  @private
-    NSInteger _currentPage;
-}
+@interface PageView : UIView<UIScrollViewDelegate>
+@property(weak, nonatomic) id<PageViewDelegate> delegate;
+@property(nonatomic, getter=isPagingEnabled) BOOL pagingEnabled;
 
-@property (weak, nonatomic) id <PageViewDelegate> delegate;
-@property (nonatomic, getter = isPagingEnabled) BOOL pagingEnabled;
 - (id)initWithContentView:(UIView *)contentView prevPage:(UIView *)prevView nextPage:(UIView *)nextView;
 - (void)setPage:(NSUInteger)page animated:(BOOL)animated;
 @end
 
-@protocol PageViewDelegate <NSObject>
-@optional
+@protocol PageViewDelegate<NSObject>
 - (void)pageViewDidPrevPage:(PageView *)pageView;
 - (void)pageViewDidNextPage:(PageView *)pageView;
-
 @end

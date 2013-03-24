@@ -9,16 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Week.h"
 
-@protocol WeekControllViewDelegate;
 @class CalendarView;
+@protocol WeekControllViewDelegate;
 
 @interface WeekControllView : UIView
-@property (weak, nonatomic) id <WeekControllViewDelegate> delegate;
+@property(weak, nonatomic) id<WeekControllViewDelegate> delegate;
+
 - (id)initWithCalendarView:(CalendarView *)calendarView;
 @end
 
-@protocol WeekControllViewDelegate <NSObject>
-
+@protocol WeekControllViewDelegate<NSObject>
 - (void)weekControllView:(WeekControllView *)view week:(Week)week on:(BOOL)on;
-
 @end

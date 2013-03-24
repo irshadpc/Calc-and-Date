@@ -9,6 +9,10 @@
 #import "UIColor+Calendar.h"
 
 @implementation UIColor (Calendar)
++ (UIColor *)todayColor
+{
+    return [UIColor whiteColor];
+}
 
 + (UIColor *)sundayColor
 {
@@ -36,5 +40,4 @@
     return [UIColor colorWithWhite: 0.6
                              alpha: 1];
 }
-
 @end

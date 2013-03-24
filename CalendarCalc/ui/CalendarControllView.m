@@ -1,5 +1,5 @@
 //
-//  ASCCalendarControllView.m
+//  CalendarControllView.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/19.
@@ -7,8 +7,6 @@
 //
 
 #import "CalendarControllView.h"
-#import "AppDelegate.h"
-#import "CalendarConstant.h"
 #import "CalendarView.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
@@ -17,45 +15,33 @@
 #import "NSString+Date.h"
 
 @interface CalendarControllView ()
-@property (strong, nonatomic, readwrite) UIButton *dateSelectButton;
-@property (strong, nonatomic, readwrite) UIButton *prevButton;
-@property (strong, nonatomic, readwrite) UIButton *nextButton;
+@property(strong, nonatomic, readwrite) UIButton *dateSelectButton;
+@property(strong, nonatomic, readwrite) UIButton *prevButton;
+@property(strong, nonatomic, readwrite) UIButton *nextButton;
 
 - (void)onPrev:(UIButton *)sender;
 - (void)onNext:(UIButton *)sender;
 - (void)onDateSelect:(UIButton *)sender;
-
 - (void)setDateSelectButtonTitle:(NSDate *)date;
-
-- (void)setupPrevButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;
-- (void)setupNextButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;;
-- (void)setupDateSelectButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth;;
-
-- (void)onClick:(UIButton *)sender;
+- (void)setupPrevButtonWithCalendarView:(CalendarView *)calendarView;
+- (void)setupNextButtonWithCalendarView:(CalendarView *)calendarView;
+- (void)setupDateSelectButtonWithCalendarView:(CalendarView *)calendarView;
 @end
 
 @implementation CalendarControllView
-
 - (id)initWithCalendarView:(CalendarView *)calendarView
 {
-    CGRect frame = CGRectMake(0, 0, calendarView.frame.size.width, calendarView.calendarButtonSize.height);
+    CGRect frame = CGRectMake(0, 0, calendarView.frame.size.width, calendarView.buttonSize.height);
     if ((self = [super initWithFrame:frame])) {
         _currentDate = [NSDate dateWithYear:calendarView.year month:calendarView.month day:1];
 
-        const CGFloat CalendarButtonWidth = calendarView.calendarButtonSize.width;
-        [self setupPrevButtonWithCalendarButtonWidth:CalendarButtonWidth];
-        [self setupNextButtonWithCalendarButtonWidth:CalendarButtonWidth];
-        [self setupDateSelectButtonWithCalendarButtonWidth:CalendarButtonWidth];
+        [self setupPrevButtonWithCalendarView:calendarView];
+        [self setupNextButtonWithCalendarView:calendarView];
+        [self setupDateSelectButtonWithCalendarView:calendarView];
 
         [self addSubview:_prevButton];
         [self addSubview:_nextButton];
         [self addSubview:_dateSelectButton];
-
-        _player = [(AppDelegate *)[[UIApplication sharedApplication] delegate] player];
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            [_prevButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchDown];
-            [_nextButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchDown];
-        }
     }
     return self;
 }
@@ -70,16 +56,22 @@
 }
 
 
-#pragma mark - Private
+#pragma mark - Action
 
 - (void)onPrev:(UIButton *)sender
 {
-    [self setDateSelectButtonTitle:[self.delegate calendarControllView:self pressPrevMonthButton:sender]];
+    [self.delegate calendarControllView:self pressPrevMonthButton:sender];
+    self.currentDate = [NSDate dateWithYear:[self.currentDate year]
+                                      month:[self.currentDate month] - 1
+                                        day:1];
 }
 
 - (void)onNext:(UIButton *)sender
 {
-    [self setDateSelectButtonTitle:[self.delegate calendarControllView:self pressNextMonthButton:sender]];
+    [self.delegate calendarControllView:self pressNextMonthButton:sender];
+    self.currentDate = [NSDate dateWithYear:[self.currentDate year]
+                                      month:[self.currentDate month] + 1
+                                        day:1];
 }
 
 - (void)onDateSelect:(UIButton *)sender
@@ -87,44 +79,50 @@
     [self.delegate calendarControllView:self pressDateSelectButton:sender];
 }
 
+
+#pragma mark - Private
+
 - (void)setDateSelectButtonTitle:(NSDate *)date
 {
-    [self.dateSelectButton setTitle: [NSString stringWithYear: [date year]
-                                                        month: [date month]]
+    [self.dateSelectButton setTitle: [NSString stringWithYear:[date year]
+                                                        month:[date month]]
                            forState: UIControlStateNormal];
     self.currentDate = date;
 }
 
-- (void)setupPrevButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth
+- (void)setupPrevButtonWithCalendarView:(CalendarView *)calendarView
 {
-    _prevButton = [[UIButton alloc] initWithFrame:CGRectMake(CalendarMargin,
+    _prevButton = [[UIButton alloc] initWithFrame:CGRectMake(calendarView.margin,
                                                              0,
-                                                             calendarButtonWidth * 2,
+                                                             calendarView.buttonSize.width * 2,
                                                              self.frame.size.height)];
+    
     [_prevButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_prevButton setBackgroundImage:[UIImage calendarControllImage] forState:UIControlStateNormal];
     [_prevButton setImage:[UIImage prevImage] forState:UIControlStateNormal];
     [_prevButton addTarget:self action:@selector(onPrev:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)setupNextButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth
+- (void)setupNextButtonWithCalendarView:(CalendarView *)calendarView
 {
-    _nextButton = [[UIButton alloc] initWithFrame:CGRectMake(CalendarMargin + calendarButtonWidth * 5,
+    _nextButton = [[UIButton alloc] initWithFrame:CGRectMake(calendarView.margin + (calendarView.buttonSize.width * 5),
                                                              0,
-                                                             calendarButtonWidth * 2,
+                                                             calendarView.buttonSize.width * 2,
                                                              self.frame.size.height)];
+    
     [_nextButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_nextButton setBackgroundImage:[UIImage calendarControllImage] forState:UIControlStateNormal];
     [_nextButton setImage:[UIImage nextImage] forState:UIControlStateNormal];
     [_nextButton addTarget:self action:@selector(onNext:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)setupDateSelectButtonWithCalendarButtonWidth:(CGFloat)calendarButtonWidth
+- (void)setupDateSelectButtonWithCalendarView:(CalendarView *)calendarView
 {
-    _dateSelectButton = [[UIButton alloc] initWithFrame:CGRectMake(CalendarMargin + (calendarButtonWidth * 2),
+    _dateSelectButton = [[UIButton alloc] initWithFrame:CGRectMake(calendarView.margin + (calendarView.buttonSize.width * 2),
                                                                    0,
-                                                                   calendarButtonWidth * 3,
+                                                                   calendarView.buttonSize.width * 3,
                                                                    self.frame.size.height)];
+
     [_dateSelectButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_dateSelectButton setBackgroundImage:[UIImage dateSelectImage] forState:UIControlStateNormal];
     [_dateSelectButton addTarget:self action:@selector(onDateSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -137,12 +135,4 @@
 
     [self setDateSelectButtonTitle:_currentDate];
 }
-
-
-- (void)onClick:(UIButton *)sender
-{
-    [self.player setCurrentTime:0];
-    [self.player play];
-}
-
 @end

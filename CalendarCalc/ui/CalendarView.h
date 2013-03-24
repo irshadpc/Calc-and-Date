@@ -1,5 +1,5 @@
 //
-//  ASCCalendarView.h
+//  CalendarView.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/16.
@@ -9,25 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @protocol CalendarViewDelegate;
-@class AVAudioPlayer;
 
 @interface CalendarView : UIView
+@property(weak, nonatomic) id<CalendarViewDelegate> delegate;
+@property(nonatomic, readonly) NSInteger year;
+@property(nonatomic, readonly) NSInteger month;
+@property(strong, nonatomic) NSArray *eventDates;
+@property(nonatomic, readonly) CGSize buttonSize;
+@property(nonatomic) CGFloat margin;
 
-@property (weak, nonatomic) AVAudioPlayer *player;
-
-@property (weak, nonatomic) id <CalendarViewDelegate> delegate;
-@property (nonatomic, readonly) NSInteger year;
-@property (nonatomic, readonly) NSInteger month;
-@property (nonatomic) CGSize calendarButtonSize;
-
-- (id)initWithCalendarButtonSize:(CGSize)calendarButtonSize;
++ (CalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
+- (id)initWithMargin:(CGFloat)margin;
 - (void)prevMonth;
 - (void)nextMonth;
-- (void)reloadCalendarViewWithYear:(NSInteger)year month:(NSInteger)month;
+- (void)setYear:(NSInteger)year month:(NSInteger)month;
 @end
 
-@protocol CalendarViewDelegate <NSObject>
-@optional
-- (void)calendarView:(CalendarView *)view onTouchUpInside:(NSDate *)date;
-
+@protocol CalendarViewDelegate<NSObject>
+@required
+- (void)calendarView:(CalendarView *)calendarView didSelectDate:(NSDate *)date;
 @end

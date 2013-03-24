@@ -10,7 +10,6 @@
 #import "UIColor+Calendar.h"
 #import "UIFont+Calendar.h"
 #import "UIImage+Calendar.h"
-#import "Week.h"
 
 @interface CalendarButton ()
 - (void)configureTitle;
@@ -19,21 +18,13 @@
 @end
 
 @implementation CalendarButton
-
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-
+        [self setTitleShadowColor:[UIColor darkTextColor] forState:UIControlStateHighlighted];
         [self.titleLabel setFont:[UIFont calendarFont]];
         [self.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
-
-        [self setTitleShadowColor:[UIColor whiteColor]
-                                  forState: UIControlStateNormal];
-
-        [self setTitleShadowColor:[UIColor darkTextColor]
-                                  forState: UIControlStateHighlighted];
-        
     }
     return self;
 }
@@ -44,7 +35,7 @@
     [self configureTitle];
 }
 
-- (void)setWeekday:(NSInteger)weekday
+- (void)setWeekday:(Week)weekday
 {
     _weekday = weekday;
     [self configureColor];
@@ -57,34 +48,54 @@
     [self configureColor];
 }
 
-- (void)configureTitle 
+- (void)setToday:(BOOL)today
 {
-    [self setTitle: [NSString stringWithFormat:@"%d", self.dayOfMonth]
-          forState: UIControlStateNormal];
+    _today = today;
+    [self configureImage];
+    [self configureColor];
+}
+
+- (void)setHasEvent:(BOOL)hasEvent
+{
+    _hasEvent = hasEvent;
+    [self configureImage];
+}
+
+- (void)setOn:(BOOL)on
+{
+    _on = on;
+    [self configureImage];
+    [self configureColor];
+}
+
+- (void)configureTitle
+{
+    [self setTitle:[NSString stringWithFormat:@"%d", self.dayOfMonth]
+          forState:UIControlStateNormal];
 }
 
 - (void)configureColor
 {
-    if (self.isOtherMonthDate) {
-        [self setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
-    } else if (self.weekday == Sunday) {
-        [self setTitleColor:[UIColor sundayColor] forState:UIControlStateNormal];
-    } else if (self.weekday == Saturday) {
-        [self setTitleColor:[UIColor saturdayColor] forState:UIControlStateNormal];
+    if (self.isToday || self.isOn) {
+        [self setTitleColor:[UIColor todayColor] forState:UIControlStateNormal];
+        [self setTitleShadowColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     } else {
-        [self setTitleColor:[UIColor usualdayColor] forState:UIControlStateNormal];
+        if (self.isOtherMonthDate) {
+            [self setTitleColor:[UIColor otherMonthColor] forState:UIControlStateNormal];
+        } else if (self.weekday == Sunday) {
+            [self setTitleColor:[UIColor sundayColor] forState:UIControlStateNormal];
+        } else if (self.weekday == Saturday) {
+            [self setTitleColor:[UIColor saturdayColor] forState:UIControlStateNormal];
+        } else {
+            [self setTitleColor:[UIColor usualdayColor] forState:UIControlStateNormal];
+        }
+        [self setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 
 - (void)configureImage
 {
-    if (self.weekday == Sunday) {
-        [self setBackgroundImage:[UIImage calendarImageForSunday] forState:UIControlStateNormal];
-    } else if (self.weekday == Saturday) {
-        [self setBackgroundImage:[UIImage calendarImageForSaturday] forState:UIControlStateNormal];
-    } else {
-        [self setBackgroundImage:[UIImage calendarImage] forState:UIControlStateNormal];
-    }
+    [self setBackgroundImage:[UIImage calendarImageWithToday:self.isToday]
+                    forState:UIControlStateNormal];
 }
-
 @end

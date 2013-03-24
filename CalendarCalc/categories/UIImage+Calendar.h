@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (Calendar)
-+ (UIImage *)calendarImage;
-+ (UIImage *)calendarImageForSunday;
-+ (UIImage *)calendarImageForSaturday;
-+ (UIImage *)dateSelectImage;
++ (UIImage *)calendarImageWithToday:(BOOL)isToday;
++ (UIImage *)todayImage;
++ (UIImage *)usualdayImage;
 + (UIImage *)calendarControllImage;
 + (UIImage *)prevImage;
 + (UIImage *)nextImage;
++ (UIImage *)dateSelectImage;
 @end

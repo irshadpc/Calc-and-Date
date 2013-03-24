@@ -9,67 +9,42 @@
 #import "UIImage+Calendar.h"
 
 @implementation UIImage (Calendar)
-+ (UIImage *)calendarImage
++ (UIImage *)calendarImageWithToday:(BOOL)isToday
 {
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"calendar_day"];
+    if (isToday) {
+        return [UIImage todayImage];
+    } else {
+        return [UIImage usualdayImage];
     }
-    return image;
 }
 
-+ (UIImage *)calendarImageForSunday
++ (UIImage *)todayImage
 {
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"calendar_day_sun"];
-    }
-    return image;
+    return [UIImage imageNamed:@"calendar_day_today"];
 }
 
-+ (UIImage *)calendarImageForSaturday
++ (UIImage *)usualdayImage
 {
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"calendar_day_sat"];
-    }
-    return image;
-}
-
-+ (UIImage *)dateSelectImage
-{
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"date_select_button"];
-    }
-    return image;
+    return [UIImage imageNamed:@"calendar_day"];
 }
 
 + (UIImage *)calendarControllImage
 {
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"calendar_controll_button"];
-    }
-    return image;
+    return [UIImage imageNamed:@"calendar_controll_button"];
 }
 
 + (UIImage *)prevImage
 {
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"prev"];
-    }
-    return image;
+    return [UIImage imageNamed:@"prev"];
 }
 
 + (UIImage *)nextImage
 {
-    static UIImage *image = nil;
-    if (!image) {
-        image = [UIImage imageNamed:@"next"];
-    }
-    return image;
+    return [UIImage imageNamed:@"next"];
 }
 
++ (UIImage *)dateSelectImage
+{
+    return [UIImage imageNamed:@"date_select_button"];
+}
 @end

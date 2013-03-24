@@ -18,14 +18,13 @@
 #import "NSDate+Component.h"
 
 @interface CalendarViewController ()
-  < 
-    CalendarViewDelegate,
-    CalendarControllViewDelegate,
-    WeekControllViewDelegate,
-    PageViewDelegate,
-    ViewSheetDelegate,
-    YearMonthPickerControllerDelegate
-  >
+  <CalendarViewDelegate,
+   CalendarControllViewDelegate,
+   WeekControllViewDelegate,
+   PageViewDelegate,
+   ViewSheetDelegate,
+   YearMonthPickerControllerDelegate>
+
 @property (strong, nonatomic, readwrite) NSDate *date;
 
 - (CalendarView *)calendarViewWithYear:(NSInteger)year month:(NSInteger)month;
@@ -38,7 +37,6 @@
 @end
 
 @implementation CalendarViewController
-
 static const CGFloat iPadCalendarButtonSize = 66.0;
 
 - (id)init
@@ -147,8 +145,8 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 
 #pragma mark - CalendarView
 
-- (void)calendarView:(CalendarView *)view
-     onTouchUpInside:(NSDate *)date
+- (void)calendarView:(CalendarView *)calendarView
+       didSelectDate:(NSDate *)date
 {
     self.date = date;
     [self.delegate didSelectDate:date];
@@ -178,7 +176,7 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 }
 
 - (void)calendarControllView:(CalendarControllView *)calendarControllView
-       pressDateSelectButton:(UIButton *)dateSelectButton
+           pressDateSelectButton:(UIButton *)dateSelectButton
 {
     YearMonthPickerController *pickerViewController = [[YearMonthPickerController alloc] init];
     pickerViewController.year = [_calendarControllView.currentDate year];
@@ -253,9 +251,9 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 - (void)setCurrentWithYearMonthPickerController:(YearMonthPickerController *)yearMonthController
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_calendarViews[0] reloadCalendarViewWithYear:yearMonthController.year month:yearMonthController.month - 1];
-        [_calendarViews[1] reloadCalendarViewWithYear:yearMonthController.year month:yearMonthController.month];
-        [_calendarViews[2] reloadCalendarViewWithYear:yearMonthController.year month:yearMonthController.month + 1];
+        [_calendarViews[0] setYear:yearMonthController.year month:yearMonthController.month - 1];
+        [_calendarViews[1] setYear:yearMonthController.year month:yearMonthController.month];
+        [_calendarViews[2] setYear:yearMonthController.year month:yearMonthController.month + 1];
     });
 
     self.date = [NSDate dateWithYear:yearMonthController.year
@@ -287,9 +285,9 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
         calendarButtonSize = CGSizeMake(66.0, 66.0);
     }
     
-    CalendarView *calendarView = [[CalendarView alloc] initWithCalendarButtonSize:calendarButtonSize];
+    CalendarView *calendarView = [[CalendarView alloc] initWithMargin:6.0];
     [calendarView setDelegate:self];
-    [calendarView reloadCalendarViewWithYear:year month:month];
+    [calendarView setYear:year month:month];
 
     return calendarView;
 }
@@ -317,5 +315,4 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
     _popover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
     [self presentPopoverAnimated:YES];
 }
-
 @end

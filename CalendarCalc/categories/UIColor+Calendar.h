@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Calendar)
++ (UIColor *)todayColor;
 + (UIColor *)sundayColor;
 + (UIColor *)saturdayColor;
 + (UIColor *)usualdayColor;

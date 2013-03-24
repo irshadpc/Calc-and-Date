@@ -1,5 +1,5 @@
 //
-//  ASCPageView.m
+//  PageView.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/18.
@@ -9,16 +9,17 @@
 #import "PageView.h"
 
 typedef enum {
-    Prev,
-    Next,
-    Same,
-} MoveMode;
+    MovePrev,
+    MoveNext,
+    MoveEnd,
+} Move;
 
 @interface PageView ()
-@property (nonatomic) MoveMode currentMoveMode;
-@property (strong, nonatomic) NSArray *contentViews;
-@property (strong, nonatomic) NSArray *containerViews;
-@property (strong, nonatomic) UIScrollView *scrollView;
+@property(nonatomic) Move currentMove;
+@property(nonatomic) NSInteger currentPage;
+@property(strong, nonatomic) NSArray *contentViews;
+@property(strong, nonatomic) NSArray *containerViews;
+@property(strong, nonatomic) UIScrollView *scrollView;
 
 - (void)configureView;
 - (CGFloat)prevPointX;
@@ -57,12 +58,12 @@ static const NSUInteger PageSize = 3;
 - (void)setPage:(NSUInteger)page animated:(BOOL)animated
 {
     if (page >= PageSize) {
-        _currentPage = PageSize - 1;
+        self.currentPage = PageSize - 1;
     } else {
-        _currentPage = page;
+        self.currentPage = page;
     }
 
-    [self.scrollView setContentOffset:CGPointMake([self offsetWithPage:_currentPage], 0)
+    [self.scrollView setContentOffset:CGPointMake([self offsetWithPage:self.currentPage], 0)
                              animated:animated];
 }
 
@@ -94,30 +95,31 @@ static const NSUInteger PageSize = 3;
     }
 
     CGRect lastContainerFrame = [self.containerViews[page - 1] frame];
-    self.scrollView.contentSize = CGSizeMake(lastContainerFrame.origin.x + lastContainerFrame.size.width, 0);
+    self.scrollView.contentSize = CGSizeMake(lastContainerFrame.origin.x + lastContainerFrame.size.width,
+                                             self.scrollView.bounds.size.height);
 }
 
 - (CGFloat)prevPointX
 {
-    _currentPage--;
-    if (_currentPage < 0) {
-        _currentPage = 0;
+    self.currentPage--;
+    if (self.currentPage < 0) {
+        self.currentPage = 0;
     }
-    return [self offsetWithPage:_currentPage];
+    return [self offsetWithPage:self.currentPage];
 }
 
 - (CGFloat)nextPointX
 {
-    _currentPage++;
-    if (_currentPage >= PageSize) {
-        _currentPage = PageSize - 1;
+    self.currentPage++;
+    if (self.currentPage >= PageSize) {
+        self.currentPage = PageSize - 1;
     }
-    return [self offsetWithPage:_currentPage];
+    return [self offsetWithPage:self.currentPage];
 }
 
 - (CGFloat)offsetWithPage:(NSInteger)page
 {
-    if (self.containerViews.count < page) {
+    if ([self.containerViews count] < page) {
         return 0;
     }
     return [self.containerViews[page] frame].origin.x;
@@ -159,25 +161,22 @@ static const NSUInteger PageSize = 3;
     }];
     
     if (page == 0) {
-        self.currentMoveMode = Prev;
+        self.currentMove = MovePrev;
     } else if (page >= PageSize - 1) {
-        self.currentMoveMode = Next;
+        self.currentMove = MoveNext;
     } else {
-        self.currentMoveMode = Same;
+        self.currentMove = MoveEnd;
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        @autoreleasepool {
-            if (self.currentMoveMode == Prev) {
-                [self.delegate pageViewDidPrevPage:self];
-            } else if (self.currentMoveMode == Next) {
-                [self.delegate pageViewDidNextPage:self];
-            }
+        if (self.currentMove == MovePrev) {
+            [self.delegate pageViewDidPrevPage:self];
+        } else if (self.currentMove == MoveNext) {
+            [self.delegate pageViewDidNextPage:self];
         }
     });
 }
-
 @end

@@ -9,47 +9,44 @@
 #import "WeekControllView.h"
 #import "CalendarView.h"
 #import "SwitchButton.h"
-#import "Week.h"
 #import "NSString+Week.h"
 #import "UIFont+Calendar.h"
 #import "CalendarConstant.h"
+#import "Week.h"
 
-@interface WeekControllView () {
-  @private
-    CGSize _buttonSize;
-}
-- (SwitchButton *)weekButton:(NSInteger)week;
-- (CGRect)weekButtonFrame:(NSInteger)week;
+@interface WeekControllView ()
+- (SwitchButton *)weekButton:(Week)week size:(CGSize)size;
+- (CGRect)weekButtonFrame:(Week)week size:(CGSize)size;
 - (void)onWeekButton:(SwitchButton *)sender;
 @end
 
 @implementation WeekControllView
-
 - (id)initWithCalendarView:(CalendarView *)calendarView
 {
-    CGRect frame = CGRectMake(calendarView.frame.origin.x,
-                              0,
-                              calendarView.frame.size.width,
-                              calendarView.calendarButtonSize.height);
+    const CGRect frame = CGRectMake(calendarView.frame.origin.x,
+                                    0,
+                                    calendarView.frame.size.width,
+                                    calendarView.buttonSize.height);
+
     if ((self = [super initWithFrame:frame])) {
-        _buttonSize = calendarView.calendarButtonSize;
-        
-        [self addSubview:[self weekButton:Sunday]];
-        [self addSubview:[self weekButton:Monday]];
-        [self addSubview:[self weekButton:Tuesday]];
-        [self addSubview:[self weekButton:Wednesday]];
-        [self addSubview:[self weekButton:Thursday]];
-        [self addSubview:[self weekButton:Friday]];
-        [self addSubview:[self weekButton:Saturday]];
+        const CGSize buttonSize = calendarView.buttonSize;
+        [self addSubview:[self weekButton:Sunday size:buttonSize]];
+        [self addSubview:[self weekButton:Monday size:buttonSize]];
+        [self addSubview:[self weekButton:Tuesday size:buttonSize]];
+        [self addSubview:[self weekButton:Wednesday size:buttonSize]];
+        [self addSubview:[self weekButton:Thursday size:buttonSize]];
+        [self addSubview:[self weekButton:Friday size:buttonSize]];
+        [self addSubview:[self weekButton:Saturday size:buttonSize]];
     }
     return self;
 }
 
+
 #pragma mark - Private
 
-- (SwitchButton *)weekButton:(NSInteger)week
+- (SwitchButton *)weekButton:(Week)week size:(CGSize)size
 {
-    SwitchButton *weekButton = [[SwitchButton alloc] initWithFrame:[self weekButtonFrame:week]];
+    SwitchButton *weekButton = [[SwitchButton alloc] initWithFrame:[self weekButtonFrame:week size:size]];
     [weekButton setTitle:[NSString stringWithWeek:week] forState:UIControlStateNormal];
     [weekButton.titleLabel setFont:[UIFont calendarFont]];
     [weekButton addTarget:self action:@selector(onWeekButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -58,12 +55,12 @@
     return weekButton;
 }
 
-- (CGRect)weekButtonFrame:(NSInteger)week
+- (CGRect)weekButtonFrame:(Week)week size:(CGSize)size
 {
-    return CGRectMake(CalendarMargin + ((week - 1) * _buttonSize.width),
+    return CGRectMake(CalendarMargin + ((week - 1) * size.width),
                       0,
-                      _buttonSize.width,
-                      _buttonSize.height);
+                      size.width,
+                      size.height);
 }
 
 - (void)onWeekButton:(SwitchButton *)sender
@@ -71,5 +68,4 @@
     sender.on = !sender.on;
     [self.delegate weekControllView:self week:sender.tag on:sender.on];
 }
-
 @end
