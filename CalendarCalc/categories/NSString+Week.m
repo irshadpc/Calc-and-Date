@@ -7,26 +7,26 @@
 //
 
 #import "NSString+Week.h"
-#import "ASCWeek.h"
+#import "Week.h"
 
 @implementation NSString (Week)
 
 + (NSString *)stringWithWeek:(NSInteger)week
 {
     switch (week) {
-        case ASCSunday:
+        case Sunday:
             return NSLocalizedString(@"SUN", nil);
-        case ASCMonday:
+        case Monday:
             return NSLocalizedString(@"MON", nil);
-        case ASCTuesday:
+        case Tuesday:
             return NSLocalizedString(@"TUE", nil);
-        case ASCWednesday:
+        case Wednesday:
             return NSLocalizedString(@"WED", nil);
-        case ASCThursday:
+        case Thursday:
             return NSLocalizedString(@"THU", nil);
-        case ASCFriday:
+        case Friday:
             return NSLocalizedString(@"FRI", nil);
-        case ASCSaturday:
+        case Saturday:
             return NSLocalizedString(@"SAT", nil);
         default:
             NSLog(@"WEEK: %d", week);

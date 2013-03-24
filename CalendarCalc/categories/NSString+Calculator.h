@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CCFunction.h"
+#import "Function.h"
 
 @interface NSString (Calculator)
-+ (NSString *)stringWithFunction:(CCFunction)function;
++ (NSString *)stringWithFunction:(Function)function;
 @end

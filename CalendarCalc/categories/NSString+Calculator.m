@@ -9,19 +9,19 @@
 #import "NSString+Calculator.h"
 
 @implementation NSString (Calculator)
-+ (NSString *)stringWithFunction:(CCFunction)function
++ (NSString *)stringWithFunction:(Function)function
 {
     switch (function) {
-        case CCPlus:
+        case FunctionPlus:
             return @"+";
-        case CCMinus:
+        case FunctionMinus:
             return @"-";
-        case CCMultiply:
+        case FunctionMultiply:
             return @"×";
-        case CCDivide:
+        case FunctionDivide:
             return @"÷";
-        case CCEqual:
-        case CCClear:
+        case FunctionEqual:
+        case FunctionClear:
             return @"";
         default:
             return nil;

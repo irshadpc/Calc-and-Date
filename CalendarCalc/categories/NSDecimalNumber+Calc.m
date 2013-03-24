@@ -8,12 +8,12 @@
 
 #import "NSDecimalNumber+Calc.h"
 
-typedef NSCalculationError (^CCDecimalCalculate)(NSDecimal *, const NSDecimal *, const NSDecimal *, NSRoundingMode);
+typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, const NSDecimal *, NSRoundingMode);
 
 @interface NSDecimalNumber (CalcPrivate)
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
-                                       method:(CCDecimalCalculate)method;
+                                       method:(DecimalCalculate)method;
 @end
 
 @implementation NSDecimalNumber (Calc)
@@ -70,7 +70,7 @@ typedef NSCalculationError (^CCDecimalCalculate)(NSDecimal *, const NSDecimal *,
 ////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
-                                       method:(CCDecimalCalculate)method
+                                       method:(DecimalCalculate)method
 {
     NSDecimal l = [[NSDecimalNumber zero] decimalValue];
     if (lOperand) {
