@@ -17,8 +17,6 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 @end
 
 @implementation NSDecimalNumber (Calc)
-
-////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)addingByDecimalNumber:(NSDecimalNumber *)lOperand
                                   rOperand:(NSDecimalNumber *)rOperand
 {
@@ -29,7 +27,6 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
                                    }];
 }
 
-////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)subtractingByDecimalNumber:(NSDecimalNumber *)lOperand
                                        rOperand:(NSDecimalNumber *)rOperand
 {
@@ -40,7 +37,6 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
                                    }];
 }
 
-////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)multiplyingByDecimalNumber:(NSDecimalNumber *)lOperand
                                        rOperand:(NSDecimalNumber *)rOperand
 {
@@ -51,7 +47,6 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
                                    }];
 }
 
-////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)dividingByDecimalNumber:(NSDecimalNumber *)lOperand
                                     rOperand:(NSDecimalNumber *)rOperand
 {
@@ -66,8 +61,6 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 
 
 @implementation NSDecimalNumber (CalcPrivate)
-
-////////////////////////////////////////////////////////////////////////////////
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
                                        method:(DecimalCalculate)method
@@ -90,5 +83,4 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 
     return [NSDecimalNumber decimalNumberWithDecimal: result];
 }
-
 @end

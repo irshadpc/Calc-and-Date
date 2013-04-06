@@ -1,30 +1,19 @@
 //
-//  CCContainerView.h
-//  CalendarCalc
+//  ViewSheet.h
+//  DateNumber
 //
-//  Created by Ishida Junichi on 2012/12/16.
-//  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
+//  Created by Ishida Junichi on 2013/01/08.
+//  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@protocol ViewSheetDelegate;
-
 @interface ViewSheet : UIView
-
-@property (weak, nonatomic) id <ViewSheetDelegate> delegate;
-@property (strong, nonatomic, readonly) UIViewController *contentViewController;
-@property (nonatomic, readonly, getter = isVisible) BOOL visible;
+@property(strong, nonatomic, readonly) UIViewController *contentViewController;
+@property(nonatomic, readonly, getter=isVisible) BOOL visible;
+@property(nonatomic, getter=isTopAlign) BOOL topAlign;
 
 - (id)initWithContentViewController:(UIViewController *)contentViewController;
-- (id)initWithContentView:(UIView *)contentView;
-- (void)showInView:(UIView *)view animated:(BOOL)animated;
-- (void)dismissContainerViewWithAnimated:(BOOL)animated;
-- (void)setRightButton:(UIBarButtonItem *)rightButton;
-@end
-
-
-@protocol ViewSheetDelegate <NSObject>
-@required
-- (void)viewSheetClickedCancelButton:(ViewSheet *)viewSheet;
+- (void)showViewSheetAnimated:(BOOL)animated;
+- (void)dismissViewSheetAnimated:(BOOL)animated shoot:(BOOL)shoot;
 @end

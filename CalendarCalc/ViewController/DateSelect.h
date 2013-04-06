@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Week.h"
 
-@protocol DateSelect <NSObject>
+@protocol DateSelect<NSObject>
 - (void)didSelectDate:(NSDate *)date;
 - (void)didSelectWeek:(Week)week exclude:(BOOL)exclude;
 @end

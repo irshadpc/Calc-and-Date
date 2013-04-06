@@ -1,87 +1,55 @@
 //
-//  CCContainerView.m
-//  CalendarCalc
+//  ViewSheet.m
+//  DateNumber
 //
-//  Created by Ishida Junichi on 2012/12/16.
-//  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
+//  Created by Ishida Junichi on 2013/01/08.
+//  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
 #import "ViewSheet.h"
+#import "UIView+MutableFrame.h"
 
 @interface ViewSheet ()
-@property (strong, nonatomic) UIToolbar *toolbar;
-@property (strong, nonatomic) NSMutableArray *barButonItems;
-@property (strong, nonatomic, readwrite) UIViewController *contentViewController;
-@property (strong, nonatomic) UIView *protectView;
-@property (nonatomic, readwrite) BOOL visible;
-
-- (CGRect)containerFrameWithContentView:(UIView *)view;
-- (UIBarButtonItem *)cancelButton;
-- (UIBarButtonItem *)flexibleSpace;
-- (void)onCancel:(UIBarButtonItem *)sender;
+@property(strong, nonatomic, readwrite) UIViewController *contentViewController;
+@property(nonatomic, readwrite) BOOL visible;
+@property(strong, nonatomic) UIView *containerView;
+@property(strong, nonatomic) UIView *protectView;
 @end
 
 @implementation ViewSheet
-
 - (id)initWithContentViewController:(UIViewController *)contentViewController
 {
-    _contentViewController = contentViewController;
-    return [self initWithContentView:_contentViewController.view];
-}
-
-- (id)initWithContentView:(UIView *)contentView
-{
-    CGRect frame = [self containerFrameWithContentView:contentView];
-    frame.origin.y = 0;
-    frame.size.height += 44.0;
+    CGRect frame = [UIScreen mainScreen].bounds;
+    frame.size.height -= 20.0;
     if ((self = [super initWithFrame:frame])) {
-        _barButonItems = [[NSMutableArray alloc] init];
-        [_barButonItems addObject:[self cancelButton]];
+        _contentViewController = contentViewController;
 
-        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0,
-                                                               0,
-                                                               [UIScreen mainScreen].bounds.size.width,
-                                                               44.0)];
-        _toolbar.barStyle = UIBarStyleBlackOpaque;
-        _toolbar.items = _barButonItems;
-        [self addSubview:_toolbar];
-       
-        UIView *containerView = [[UIView alloc] initWithFrame:[self containerFrameWithContentView:contentView]];
-        [self addSubview:containerView];
-        [containerView addSubview:contentView];
+        _protectView = [[UIView alloc] initWithFrame:self.bounds];
+        [_protectView setBackgroundColor:[UIColor colorWithWhite:0 alpha:1]];
+        [_protectView setAlpha:0];
+        [self addSubview:_protectView];
+
+        _containerView = [[UIView alloc] initWithFrame:_contentViewController.view.bounds];
+        [_containerView addSubview:_contentViewController.view];
+        [self addSubview:_containerView];
+        [self bringSubviewToFront:_containerView];
     }
     return self;
 }
 
-- (void)setRightButton:(UIBarButtonItem *)rightButton
+- (void)showViewSheetAnimated:(BOOL)animated
 {
-    self.toolbar.items = @[[self cancelButton],
-                           [self flexibleSpace],
-                           rightButton];
-}
+    [self.containerView setFrameOriginY:self.frame.size.height];
 
-- (void)showInView:(UIView *)view
-          animated:(BOOL)animated
-{
     UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
-    self.protectView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.protectView.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
-    self.protectView.alpha = 0;
-    [rootView addSubview:self.protectView];
-    [rootView bringSubviewToFront:self.protectView];
-    
-    CGRect hideFrame = self.frame;
-    hideFrame.origin.y = rootView.frame.size.height;
-    self.frame = hideFrame;
     [rootView addSubview:self];
     [rootView bringSubviewToFront:self];
-    
-    [UIView animateWithDuration: animated ? 0.25 : 0
+
+    CGFloat originY = self.isTopAlign ? 0 : (self.frame.size.height - self.containerView.frame.size.height);
+    [UIView animateWithDuration: animated ? 0.25 : 0.0
                      animations: ^{
                          self.protectView.alpha = 0.5;
-                         CGRect showFrame = self.frame;
-                         showFrame.origin.y -= self.frame.size.height;
-                         self.frame = showFrame;
+                         [self.containerView setFrameOriginY:originY];
                      }
                      completion:^(BOOL finished) {
                          self.visible = YES;
@@ -89,53 +57,28 @@
      ];
 }
 
-- (void)dismissContainerViewWithAnimated:(BOOL)animated
+- (void)dismissViewSheetAnimated:(BOOL)animated
+                           shoot:(BOOL)shoot
 {
+    if (!self.isVisible) {
+        return;
+    }
+    
+    CGFloat originY = self.frame.size.height;
+    if (shoot) {
+        originY *= -1;
+    }
+
     [UIView animateWithDuration: animated ? 0.25 : 0
                      animations: ^{
-                         CGRect hideFrame = self.frame;
-                         hideFrame.origin.y += self.frame.size.height;
-                         self.frame = hideFrame;
+                         [self.containerView setFrameOriginY:originY];
                          self.protectView.alpha = 0;
                      }
                      completion: ^(BOOL finished) {
                          if (finished) {
-                             [self.protectView removeFromSuperview];
                              [self removeFromSuperview];
                              self.visible = NO;
                          }
                      }];
 }
-
-#pragma mark - Private
-
-- (CGRect)containerFrameWithContentView:(UIView *)view
-{
-    return CGRectMake(0,
-                      44.0,
-                      view.frame.size.width, 
-                      view.frame.size.height);
-}
-
-
-
-- (UIBarButtonItem *)cancelButton
-{
-   return [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
-                                                        target: self
-                                                        action: @selector(onCancel:)];
-}
-
-- (UIBarButtonItem *)flexibleSpace
-{
-    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                         target:nil
-                                                         action:nil];
-}
-
-- (void)onCancel:(UIBarButtonItem *)sender
-{
-    [self.delegate viewSheetClickedCancelButton:self];
-}
-
 @end

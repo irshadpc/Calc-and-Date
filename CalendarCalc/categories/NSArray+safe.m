@@ -9,13 +9,11 @@
 #import "NSArray+safe.h"
 
 @implementation NSArray (safe)
-
-///////////////////////////////////////////////////////////////////////////////
-- (id)safeObjectAtIndex:(NSUInteger)index {
+- (id)safeObjectAtIndex:(NSUInteger)index
+{
     if (self.count <= index) {
         return nil;
     }
     return [self objectAtIndex:index];
 }
-
 @end

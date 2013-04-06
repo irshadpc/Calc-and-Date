@@ -22,25 +22,19 @@
     UIPopoverController *_settingPopover;
 }
 
-// properties
 @property (strong, nonatomic) CalendarCalc *calendarCalc;
 @property (weak, nonatomic) IBOutlet UIButton *decimalButton;
 
-// methods
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onFunction:(UIButton *)sender;
 - (IBAction)onNumber:(UIButton *)sender;
-
 - (IBAction)onClick:(UIButton *)sender;
 - (void)settingDynamicCalendar;
 @end
 
 
 @implementation CalendarCalcViewController
-
-enum {
-    DoubleZero = 10,
-};
+static const NSInteger DoubleZero = 10;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
@@ -60,7 +54,8 @@ enum {
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
     [self configureView];
-    self.calendarViewController.delegate = self;
+    [self.calendarViewController setDelegate:self];
+    [self.eventViewController setDelegate:self];
     [self settingDynamicCalendar];
     self.player = [(AppDelegate *)[[UIApplication sharedApplication] delegate] player];
 }
@@ -111,9 +106,7 @@ enum {
         [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         [self presentViewController:settingViewController animated:YES completion:nil];
     } else {
-        if ([_settingPopover isPopoverVisible]){
-            [_settingPopover dismissPopoverAnimated:YES];
-        }
+        [_settingPopover dismissPopoverAnimated:YES];
         _settingPopover = [[UIPopoverController alloc] initWithContentViewController:settingViewController];
         _settingPopover.delegate = self;
         [_settingPopover presentPopoverFromRect:sender.frame
@@ -163,9 +156,7 @@ enum {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        if ([_settingPopover isPopoverVisible]) {
-            [_settingPopover dismissPopoverAnimated:YES];
-        }
+        [_settingPopover dismissPopoverAnimated:YES];
     }
     [self settingDynamicCalendar];
 }
@@ -185,6 +176,19 @@ enum {
     [self.calendarCalc setWeek:week exclude:exclude];
 }
 
+- (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
+{
+    [self showEventView:nil];
+}
+
+
+#pragma mark - EventViewController
+
+- (void)eventViewControllerDidDone:(EventViewController *)eventViewController
+{
+    [self onEventDone];
+}
+
 
 #pragma mark - UIPopoverController
 
@@ -195,6 +199,7 @@ enum {
     }
     return YES;
 }
+
 
 #pragma mark - Private
 
@@ -213,5 +218,4 @@ enum {
 {
     abort();
 }
-
 @end

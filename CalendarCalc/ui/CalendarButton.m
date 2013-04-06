@@ -76,7 +76,7 @@
 
 - (void)configureColor
 {
-    if (self.isToday || self.isOn) {
+    if (self.isToday) {
         [self setTitleColor:[UIColor todayColor] forState:UIControlStateNormal];
         [self setTitleShadowColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     } else {

@@ -253,6 +253,6 @@
     return CGRectMake(self.frame.origin.x,
                       self.frame.origin.y,
                       (_buttonSize.width * 7) + (_margin * 2),
-                      (_buttonSize.height * 7) + _margin);
+                      (_buttonSize.height * 6) + _margin);
 }
 @end

@@ -12,17 +12,19 @@
 #import "NSDate+Component.h"
 #import "NSDate+Style.h"
 #import "NSString+Locale.h"
+#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
+#import "UIView+MutableFrame.h"
 
 @interface EventViewController () <EventManagerDelegate> {
   @private
     BOOL _isInit;
 }
-@property (strong, nonatomic) UIPickerView *pickerView;
-@property (strong, nonatomic) UIActivityIndicatorView *indicatorView;
-@property (strong, nonatomic) EventManager *eventManager;
+@property(strong, nonatomic) UIToolbar *toolbar;
+@property(strong, nonatomic) UIPickerView *pickerView;
+@property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
+@property(strong, nonatomic) EventManager *eventManager;
 
 - (CGRect)viewFrame;
-- (UIToolbar *)toolbar;
 - (void)onDone:(UIBarButtonItem *)sender;
 @end
 
@@ -32,22 +34,36 @@
 - (id)init
 {
     if ((self = [super init])) {
+        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
+        [_toolbar setBarStyle:UIBarStyleBlackOpaque];
+        [_toolbar setItems:@[[UIBarButtonItem flexibleSpaceItem],
+                             [UIBarButtonItem doneButtonItemWithTarget:self
+                                                                action:@selector(onDone:)]]];
+        [_toolbar sizeToFit];
+        
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
+        [_pickerView setFrameOriginY:_toolbar.bounds.size.height];
         _pickerView.showsSelectionIndicator = YES;
         _pickerView.userInteractionEnabled = NO;
-        [self.view addSubview:_pickerView];
        
         _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:_pickerView.frame];
         _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         _indicatorView.color = [UIColor grayColor];
         [_indicatorView startAnimating];
         _indicatorView.hidden = NO;
-        [self.view addSubview:_indicatorView];
         
         _eventManager = [[EventManager alloc] initWithDelegate:self];
         _isInit = YES;
     }
     return self;
+}
+
+- (void)loadView
+{
+    self.view = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:self.toolbar];
+    [self.view addSubview:self.pickerView];
+    [self.view addSubview:self.indicatorView];
 }
 
 - (void)viewDidLoad
@@ -149,22 +165,8 @@ numberOfRowsInComponent:(NSInteger)component
                       self.pickerView.frame.origin.y + self.pickerView.frame.size.height);
 }
 
-- (UIToolbar *)toolbar
-{
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.pickerView.frame.size.width, 44.0)];
-    [toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                      target:nil
-                                                                      action:nil],
-                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                      target:self
-                                                                      action:@selector(onDone:)]]];
-    [toolbar setBarStyle:UIBarStyleBlackOpaque];
-    return toolbar;
-}
-
 - (void)onDone:(UIBarButtonItem *)sender
 {
     [self.delegate eventViewControllerDidDone:self];
 }
-
 @end

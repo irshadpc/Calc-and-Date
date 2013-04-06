@@ -9,7 +9,6 @@
 #import "NSString+Locale.h"
 
 @implementation NSString (Locale)
-
 + (NSString *)decimalSeparator
 {
     return [[NSLocale currentLocale] objectForKey: NSLocaleDecimalSeparator];
@@ -24,5 +23,4 @@
 {
     return NSLocalizedString(@"SEPARATOR", nil);
 }
-
 @end

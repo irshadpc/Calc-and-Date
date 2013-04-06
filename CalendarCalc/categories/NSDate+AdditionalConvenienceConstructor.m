@@ -9,7 +9,6 @@
 #import "NSDate+AdditionalConvenienceConstructor.h"
 
 @implementation NSDate (AdditionalConvenienceConstructor)
-
 + (NSDate *)dateWithYear:(NSInteger)year
                    month:(NSInteger)month
                      day:(NSInteger)day

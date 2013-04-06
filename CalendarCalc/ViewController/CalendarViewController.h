@@ -9,28 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @protocol DateSelect;
-@class CalendarControllView;
-@class WeekControllView;
-@class PageView;
-@class ViewSheet;
+@protocol CalendarViewControllerDelegate;
 
-@interface CalendarViewController : UIViewController {
-  @private
-    NSArray *_calendarViews;
-    CalendarControllView *_calendarControllView;
-    WeekControllView *_weekControllView;
-    PageView *_pageView;
-    ViewSheet *_viewSheet;
-    UIPopoverController *_popover;
-}
-@property (weak, nonatomic) id <DateSelect> delegate;
-@property (nonatomic, readonly) UIButton *dateSelectButton;
-@property (nonatomic, readonly) UIButton *prevButton;
-@property (nonatomic, readonly) UIButton *nextButton;
-@property (nonatomic, getter = isDynamicCalendar) BOOL dynamicCalendar;
-@property (strong, nonatomic, readonly) NSDate *date;
-@property (nonatomic, readonly) BOOL isPopoverVisible;
+@interface CalendarViewController : UIViewController
+@property(weak, nonatomic) id<DateSelect> delegate;
+@property(weak, nonatomic) id<CalendarViewControllerDelegate> toolbarDelegate;
+@property(strong, nonatomic, readonly) NSDate *date;
+@property(nonatomic, getter=isDynamicCalendar) BOOL dynamicCalendar;
 
+- (BOOL)isPopoverVisible;
 - (void)presentPopoverAnimated:(BOOL)animated;
 - (void)dismissPopoverAnimated:(BOOL)animated;
+- (UIButton *)dateSelectButton;
+- (UIButton *)prevButton;
+- (UIButton *)nextButton;
+@end
+
+@protocol CalendarViewControllerDelegate<NSObject>
+- (void)calendarViewControllerDidCancel:(CalendarViewController *)calendarViewController;
+- (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)calendarViewController;
 @end

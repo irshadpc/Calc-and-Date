@@ -8,20 +8,17 @@
 
 #import "CalendarCalcViewController_iPad.h"
 #import "CalendarCalcViewController_iPad+Orientation.h"
-#import "YearMonthPickerController.h"
+#import "DatePickerController.h"
 
-@interface CalendarCalcViewController_iPad () <EventViewControllerDelegate> {
-  @private
-    UIPopoverController *_currentPopover;
-    BOOL _isEventPopoverVisible;
-    BOOL _isDateSelectPopoverVisible;
-}
-@property (weak, nonatomic) IBOutlet UIButton *eventButton;
-@property (weak, nonatomic) IBOutlet UIView *calendarViewContainer;
-@property (weak, nonatomic) IBOutlet UIView *dateSelectButtonContainer;
-@property (weak, nonatomic) IBOutlet UIView *prevButtonContainer;
-@property (weak, nonatomic) IBOutlet UIView *nextButtonContainer;
-@property (strong, nonatomic) YearMonthPickerController *yearMonthPickerController;
+@interface CalendarCalcViewController_iPad ()<EventViewControllerDelegate> 
+@property(weak, nonatomic) IBOutlet UIButton *eventButton;
+@property(weak, nonatomic) IBOutlet UIView *calendarViewContainer;
+@property(weak, nonatomic) IBOutlet UIView *dateSelectButtonContainer;
+@property(weak, nonatomic) IBOutlet UIView *prevButtonContainer;
+@property(weak, nonatomic) IBOutlet UIView *nextButtonContainer;
+@property(strong, nonatomic) DatePickerController *datePickerController;
+@property(nonatomic, getter=isEventPopoverVisible) BOOL eventPopoverVisible;
+@property(nonatomic, getter=isDateSelectPopoverVisible) BOOL dateSelectPopoverVisible;
 
 - (IBAction)onEvent:(UIButton *)sender;
 - (CGRect)dateSelectButtonFrame;
@@ -29,13 +26,15 @@
 - (CGRect)nextButtonFrame;
 @end
 
-@implementation CalendarCalcViewController_iPad
+@implementation CalendarCalcViewController_iPad {
+    UIPopoverController *_currentPopover;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        _yearMonthPickerController = [[YearMonthPickerController alloc] init];
+        _datePickerController = [[DatePickerController alloc] init];
     }
     return self;
 }
@@ -71,8 +70,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    self.eventViewController = nil;
-    self.yearMonthPickerController = nil;
+    self.datePickerController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -84,12 +82,12 @@
                                 duration:(NSTimeInterval)duration
 {
     if ([_currentPopover isPopoverVisible]) {
-        _isEventPopoverVisible = YES;
+        self.eventPopoverVisible = YES;
         [_currentPopover dismissPopoverAnimated:YES];
     }
    
     if ([self.calendarViewController isPopoverVisible]) {
-        _isDateSelectPopoverVisible = YES;
+        self.dateSelectPopoverVisible = YES;
         [self.calendarViewController dismissPopoverAnimated:YES];
     }
 
@@ -100,17 +98,17 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    if (_isEventPopoverVisible) {
+    if (self.isEventPopoverVisible) {
         [_currentPopover presentPopoverFromRect:self.eventButton.frame
                                          inView:self.view
                        permittedArrowDirections:UIPopoverArrowDirectionAny
                                        animated:YES];
-        _isEventPopoverVisible = NO;
+        self.eventPopoverVisible = NO;
     }
    
-    if (_isDateSelectPopoverVisible) {
+    if (self.isDateSelectPopoverVisible) {
         [self.calendarViewController presentPopoverAnimated:YES];
-        _isDateSelectPopoverVisible = NO;
+        self.dateSelectPopoverVisible = NO;
     }
 }
 
@@ -119,11 +117,6 @@
 
 - (void)showEventView:(UIButton *)sender
 {
-    if (!self.eventViewController) {
-        self.eventViewController = [[EventViewController alloc] init];
-        self.eventViewController.delegate = self;
-    }
-   
     if ([_currentPopover isPopoverVisible]) {
         [_currentPopover dismissPopoverAnimated:YES];
     }
@@ -145,7 +138,7 @@
 }
 
 
-#pragma mark - IBAction
+#pragma mark - Action
 
 - (IBAction)onEvent:(UIButton *)sender {
     [self showEventView:sender];
@@ -169,6 +162,7 @@
 {
     
 }
+
 
 #pragma mark - Private
 
@@ -195,5 +189,4 @@
                       self.nextButtonContainer.bounds.size.width,
                       self.nextButtonContainer.bounds.size.height);
 }
-
 @end

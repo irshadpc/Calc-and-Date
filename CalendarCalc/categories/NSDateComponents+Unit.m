@@ -9,8 +9,6 @@
 #import "NSDateComponents+Unit.h"
 
 @implementation NSDateComponents (Unit)
-
-////////////////////////////////////////////////////////////////////////////////
 + (NSUInteger)componentsYMD
 {
     return NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;

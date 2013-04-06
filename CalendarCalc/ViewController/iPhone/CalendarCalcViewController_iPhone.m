@@ -8,24 +8,24 @@
 
 #import "CalendarCalcViewController_iPhone.h"
 #import "CalendarCalcViewController.h"
+#import "CalendarViewController+Week.h"
 #import "ViewSheet.h"
 #import "NSDate+Component.h"
 #import "NSString+Date.h"
 
-@interface CalendarCalcViewController_iPhone () <ViewSheetDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *dateButton;
+@interface CalendarCalcViewController_iPhone ()<CalendarViewControllerDelegate>
+@property(weak, nonatomic) IBOutlet UIButton *dateButton;
+@property(strong, nonatomic) ViewSheet *currentViewSheet;
 
 - (IBAction)onDate:(UIButton *)sender;
-- (UIBarButtonItem *)eventButton;
-- (UIBarButtonItem *)eventDoneButton;
 @end
 
 @implementation CalendarCalcViewController_iPhone
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self.calendarViewController setToolbarDelegate:self];
+    [self.calendarViewController setShowWeekView:YES];
     NSDate *date = [NSDate date];
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];
@@ -44,24 +44,17 @@
 {
     if (!self.eventViewController) {
         self.eventViewController = [[EventViewController alloc] init];
+        [self.eventViewController setDelegate:self];
     }
 
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-
-    _currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.eventViewController];
-    _currentViewSheet.delegate = self;
-    [_currentViewSheet setRightButton:[self eventDoneButton]];
-    [_currentViewSheet showInView:self.view animated:YES];
+    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
+    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.eventViewController];
+    [self.currentViewSheet showViewSheetAnimated:YES];
 }
 
 - (void)configureView
 {
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-
+    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
     self.display.text = [self.calendarCalcFormatter displayResult];
     self.indicator.text = [self.calendarCalcFormatter displayIndicator];
     [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
@@ -73,7 +66,7 @@
 }
 
 
-#pragma mark - IBAction
+#pragma mark - Action
 
 - (IBAction)onDate:(UIButton *)sender
 {
@@ -81,40 +74,19 @@
         self.calendarViewController = [[CalendarViewController alloc] init];
     }
 
-    if ([_currentViewSheet isVisible]) {
-        [_currentViewSheet dismissContainerViewWithAnimated:YES];
-    }
-
-    _currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.calendarViewController];
-    _currentViewSheet.delegate = self;
-    [_currentViewSheet setRightButton:[self eventButton]];
-    [_currentViewSheet showInView:self.view animated:YES];
+    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
+    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.calendarViewController];
+    [self.currentViewSheet showViewSheetAnimated:YES];
 }
 
 
-#pragma mark - Private
-
-- (UIBarButtonItem *)eventButton
+- (void)calendarViewControllerDidCancel:(CalendarViewController *)viewController
 {
-    return [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"EVENT", nil)
-                                            style:UIBarButtonItemStyleBordered
-                                           target:self
-                                           action:@selector(showEventView:)];
+    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
 }
 
-- (UIBarButtonItem *)eventDoneButton
+- (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
 {
-    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                         target:self
-                                                         action:@selector(onEventDone)];
+    [self showEventView:nil];
 }
-
-
-#pragma mark - ViewSheet
-
-- (void)viewSheetClickedCancelButton:(ViewSheet *)viewSheet
-{
-    [self configureView];
-}
-
 @end

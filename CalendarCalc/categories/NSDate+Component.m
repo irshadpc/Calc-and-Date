@@ -9,7 +9,6 @@
 #import "NSDate+Component.h"
 
 @implementation NSDate (Component)
-
 - (NSInteger)year
 {
     return [[[NSCalendar currentCalendar] components: NSYearCalendarUnit
@@ -37,5 +36,4 @@
                                             fromDate: self]
             weekday];
 }
-
 @end

@@ -8,74 +8,49 @@
 
 #import "UIImage+Calculator.h"
 
-@implementation UIImage (Calculator)
+@interface UIImage (Caluculator_Private)
++ (UIImage *)imageWithOrientation:(UIInterfaceOrientation)orientation
+                portraitImageName:(NSString *)portraitImageName
+               landscapeImageName:(NSString *)landscapeImageName;
+@end
 
+@implementation UIImage (Calculator)
 + (UIImage *)numberKeyImageWithOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        static UIImage *portrateImage = nil;
-        if (!portrateImage) {
-            portrateImage = [UIImage imageNamed:@"number_key"];
-        }
-        return portrateImage;
-    } else {
-        static UIImage *landscapeImage = nil;
-        if (!landscapeImage) {
-            landscapeImage = [UIImage imageNamed:@"number_key-Landscape"];
-        }
-        return landscapeImage;
-    }
+    return [UIImage imageWithOrientation:orientation
+                       portraitImageName:@"number_key"
+                      landscapeImageName:@"number_key-Landscape"];
 }
 
 + (UIImage *)operatorKeyImageWithOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        static UIImage *portrateImage = nil;
-        if (!portrateImage) {
-            portrateImage = [UIImage imageNamed:@"operator_key"];
-        }
-        return portrateImage;
-    } else {
-        static UIImage *landscapeImage = nil;
-        if (!landscapeImage) {
-            landscapeImage = [UIImage imageNamed:@"operator_key-Landscape"];
-        }
-        return landscapeImage;
-    }
+    return [UIImage imageWithOrientation:orientation
+                       portraitImageName:@"operator_key"
+                      landscapeImageName:@"operator_key-Landscape"];
 }
 
 +(UIImage *)clearKeyImageWithOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        static UIImage *portrateImage = nil;
-        if (!portrateImage) {
-            portrateImage = [UIImage imageNamed:@"clear_key"];
-        }
-        return portrateImage;
-    } else {
-        static UIImage *landscapeImage = nil;
-        if (!landscapeImage) {
-            landscapeImage = [UIImage imageNamed:@"clear_key-Landscape"];
-        }
-        return landscapeImage;
-    }
+    return [UIImage imageWithOrientation:orientation
+                       portraitImageName:@"clear_key"
+                      landscapeImageName:@"clear_key-Landscape"];
 }
 
 + (UIImage *)equalKeyImageWithOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        static UIImage *portrateImage = nil;
-        if (!portrateImage) {
-            portrateImage = [UIImage imageNamed:@"equal_key"];
-        }
-        return portrateImage;
-    } else {
-        static UIImage *landscapeImage = nil;
-        if (!landscapeImage) {
-            landscapeImage = [UIImage imageNamed:@"equal_key-Landscape"];
-        }
-        return landscapeImage;
-    }
+    return [UIImage imageWithOrientation:orientation
+                       portraitImageName:@"equal_key"
+                      landscapeImageName:@"equal_key-Landscape"];
 }
+@end
 
+
+@implementation UIImage (Caluculator_Private)
++ (UIImage *)imageWithOrientation:(UIInterfaceOrientation)orientation
+                portraitImageName:(NSString *)portraitImageName
+               landscapeImageName:(NSString *)landscapeImageName
+{
+    return UIInterfaceOrientationIsPortrait(orientation) ? [UIImage imageNamed:portraitImageName]
+                                                         : [UIImage imageNamed:landscapeImageName];
+}
 @end

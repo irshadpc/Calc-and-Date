@@ -10,8 +10,6 @@
 #import "NSDateComponents+Unit.h"
 
 @implementation NSDate (Calc)
-
-////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)addingByYear:(NSInteger)year
 {
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
@@ -21,8 +19,6 @@
     return [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
 - (NSDate *)addingByDay:(NSInteger)day
 {
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
@@ -32,10 +28,8 @@
     return [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
 }
 
-////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)dayIntervalWithDate:(NSDate *)date
 {
     return (NSInteger) ([date timeIntervalSinceDate: self] / 60 / 60 / 24);
 }
-
 @end

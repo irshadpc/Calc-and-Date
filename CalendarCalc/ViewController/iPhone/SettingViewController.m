@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *titlebar;
 @property (weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
 @property (weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
+
 - (IBAction)onDone:(UIBarButtonItem *)sender;
 - (IBAction)onCancel:(UIBarButtonItem *)sender;
 - (IBAction)onIncludeStartDayOptionChanged:(UISwitch *)sender;
@@ -73,7 +74,6 @@
 }
 
 
-
 #pragma mark - Private
 
 - (void)saveSettings
@@ -82,6 +82,4 @@
     [delegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
     [delegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
 }
-
-
 @end

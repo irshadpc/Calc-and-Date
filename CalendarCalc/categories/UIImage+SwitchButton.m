@@ -11,19 +11,11 @@
 @implementation UIImage (SwitchButton)
 + (UIImage *)stateOnImage
 {
-    static UIImage *stateOnImage = nil;
-    if (!stateOnImage) {
-        stateOnImage = [UIImage imageNamed:@"switch_button_on"];
-    }
-    return stateOnImage;
- }
+    return [UIImage imageNamed:@"switch_button_on"];
+}
 
 + (UIImage *)stateOffImage
 {
-    static UIImage *stateOffImage = nil;
-    if (!stateOffImage) {
-        stateOffImage = [UIImage imageNamed:@"switch_button_off"];
-    }
-    return stateOffImage;
+    return [UIImage imageNamed:@"switch_button_off"];
 }
 @end

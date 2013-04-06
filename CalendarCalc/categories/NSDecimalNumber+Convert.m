@@ -24,4 +24,3 @@
     return [NSDecimalNumber reverse:number];
 }
 @end
-

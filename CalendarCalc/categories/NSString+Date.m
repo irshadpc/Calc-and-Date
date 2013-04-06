@@ -15,5 +15,4 @@
 {
     return [NSString stringWithFormat:@"%d%@%02d", year, [NSString dateSeparator], month];
 }
-
 @end

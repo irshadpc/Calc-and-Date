@@ -8,11 +8,5 @@
 
 #import "CalendarCalcViewController.h"
 
-
-
-@interface CalendarCalcViewController_iPhone : CalendarCalcViewController {
-  @private
-    ViewSheet *_currentViewSheet; 
-}
-
+@interface CalendarCalcViewController_iPhone : CalendarCalcViewController
 @end

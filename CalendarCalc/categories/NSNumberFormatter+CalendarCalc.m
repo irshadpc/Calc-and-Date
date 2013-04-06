@@ -10,7 +10,6 @@
 #import "NumberFormat.h"
 
 @implementation NSNumberFormatter (CalendarCalc)
-
 + (NSNumberFormatter *)displayLongNumberFormatter
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
