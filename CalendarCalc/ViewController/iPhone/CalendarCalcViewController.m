@@ -17,7 +17,7 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CalendarCalcViewController () <SettingViewControllerDelegate, DateSelect> {
+@interface CalendarCalcViewController ()<SettingViewControllerDelegate, DateSelect> {
   @private
     UIPopoverController *_settingPopover;
 }
@@ -72,7 +72,6 @@ static const NSInteger DoubleZero = 10;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    self.calendarViewController = nil;
 }
 
 - (BOOL)canPerformAction:(SEL)action 
@@ -100,7 +99,7 @@ static const NSInteger DoubleZero = 10;
 
 - (IBAction)onSetting:(UIButton *)sender {
     SettingViewController *settingViewController = [[SettingViewController alloc] initWithNibName:@"SettingViewController"
-                                                                                               bundle:nil];
+                                                                                           bundle:nil];
     [settingViewController setDelegate:self];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
@@ -183,6 +182,11 @@ static const NSInteger DoubleZero = 10;
 
 
 #pragma mark - EventViewController
+
+- (void)eventViewControllerDidCancel:(EventViewController *)eventViewController
+{
+
+}
 
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController
 {

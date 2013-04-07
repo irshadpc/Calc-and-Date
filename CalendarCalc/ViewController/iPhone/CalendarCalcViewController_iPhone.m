@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     [self.calendarViewController setToolbarDelegate:self];
-    [self.calendarViewController setShowWeekView:YES];
+    [self.calendarViewController showWeekView];
     NSDate *date = [NSDate date];
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];

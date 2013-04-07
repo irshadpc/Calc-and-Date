@@ -16,5 +16,6 @@
 @end
 
 @protocol EventViewControllerDelegate <NSObject>
+- (void)eventViewControllerDidCancel:(EventViewController *)eventViewController;
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController;
 @end

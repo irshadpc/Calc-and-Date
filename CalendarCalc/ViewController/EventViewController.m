@@ -15,30 +15,29 @@
 #import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
 #import "UIView+MutableFrame.h"
 
-@interface EventViewController () <EventManagerDelegate> {
-  @private
-    BOOL _isInit;
-}
+@interface EventViewController ()<EventManagerDelegate>
 @property(strong, nonatomic) UIToolbar *toolbar;
 @property(strong, nonatomic) UIPickerView *pickerView;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
 
-- (CGRect)viewFrame;
 - (void)onDone:(UIBarButtonItem *)sender;
+- (void)onCancel:(UIBarButtonItem *)sender;
+- (CGRect)viewFrame;
 @end
 
-@implementation EventViewController
-@synthesize selectedDate = _selectedDate;
+@implementation EventViewController {
+    BOOL _isInit;
+}
 
 - (id)init
 {
     if ((self = [super init])) {
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
         [_toolbar setBarStyle:UIBarStyleBlackOpaque];
-        [_toolbar setItems:@[[UIBarButtonItem flexibleSpaceItem],
-                             [UIBarButtonItem doneButtonItemWithTarget:self
-                                                                action:@selector(onDone:)]]];
+        [_toolbar setItems:@[[UIBarButtonItem cancelButtonItemWithTarget:self action:@selector(onCancel:)],
+                             [UIBarButtonItem flexibleSpaceItem],
+                             [UIBarButtonItem doneButtonItemWithTarget:self action:@selector(onDone:)]]];
         [_toolbar sizeToFit];
         
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
@@ -157,16 +156,27 @@ numberOfRowsInComponent:(NSInteger)component
     [self.pickerView setUserInteractionEnabled:YES];
 }
 
+
+#pragma mark - Action
+
+- (void)onCancel:(UIBarButtonItem *)sender
+{
+    [self.delegate eventViewControllerDidCancel:self];
+}
+
+- (void)onDone:(UIBarButtonItem *)sender
+{
+    [self.delegate eventViewControllerDidDone:self];
+}
+
+
+#pragma mark - Private
+
 - (CGRect)viewFrame
 {
     return CGRectMake(0,
                       0,
                       self.pickerView.frame.size.width,
                       self.pickerView.frame.origin.y + self.pickerView.frame.size.height);
-}
-
-- (void)onDone:(UIBarButtonItem *)sender
-{
-    [self.delegate eventViewControllerDidDone:self];
 }
 @end

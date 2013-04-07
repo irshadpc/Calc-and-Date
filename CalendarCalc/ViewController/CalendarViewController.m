@@ -63,6 +63,7 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
         [_calendarControllView setFrameOriginY:_toolbar.bounds.size.height];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             _calendarControllView.frame = CGRectZero;
+            _toolbar.frame = CGRectZero;
         }
 
         _pageView = [[PageView alloc] initWithContentView:_calendarViews[1]

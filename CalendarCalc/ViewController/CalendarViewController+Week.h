@@ -10,5 +10,5 @@
 #import "WeekView.h"
 
 @interface CalendarViewController (Week)<WeekViewDelegate>
-- (void)setShowWeekView:(BOOL)show;
+- (void)showWeekView;
 @end

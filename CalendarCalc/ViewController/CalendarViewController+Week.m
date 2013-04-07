@@ -10,9 +10,10 @@
 #import "CalendarViewController_Common.h"
 #import "WeekView.h"
 #import "DateSelect.h"
+#import "UIView+MutableFrame.h"
 
 @implementation CalendarViewController (Week)
-- (void)setShowWeekView:(BOOL)show
+- (void)showWeekView
 {
     WeekView *weekControllView = [[WeekView alloc] initWithCalendarView:self.calendarViews[1]];
     weekControllView.frame = CGRectMake(weekControllView.frame.origin.x,
@@ -22,10 +23,7 @@
     [weekControllView setDelegate:self];
     [self.view addSubview:weekControllView];
    
-    self.pageView.frame = CGRectMake(0,
-                                     weekControllView.frame.origin.y + weekControllView.frame.size.height,
-                                     self.pageView.frame.size.width,
-                                     self.pageView.frame.size.height);
+    [self.pageView setFrameOriginY:weekControllView.frame.origin.y + weekControllView.frame.size.height];
     [self.view setFrame:[self viewFrame]];
 }
 
