@@ -9,5 +9,10 @@
 #import "CalendarCalcViewController.h"
 
 @interface CalendarCalcViewController_iPad : CalendarCalcViewController <UIPopoverControllerDelegate>
-
+@property(weak, nonatomic) IBOutlet UIButton *eventButton;
+@property(weak, nonatomic) IBOutlet UIView *calendarViewContainer;
+@property(weak, nonatomic) IBOutlet UIView *calcViewContainer;
+@property(weak, nonatomic) IBOutlet UIView *dateSelectButtonContainer;
+@property(weak, nonatomic) IBOutlet UIView *prevButtonContainer;
+@property(weak, nonatomic) IBOutlet UIView *nextButtonContainer;
 @end

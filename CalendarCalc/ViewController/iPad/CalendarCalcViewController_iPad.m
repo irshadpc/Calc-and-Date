@@ -11,12 +11,6 @@
 #import "DatePickerController.h"
 
 @interface CalendarCalcViewController_iPad ()<EventViewControllerDelegate> 
-@property(weak, nonatomic) IBOutlet UIButton *eventButton;
-@property(weak, nonatomic) IBOutlet UIView *calendarViewContainer;
-@property(weak, nonatomic) IBOutlet UIView *dateSelectButtonContainer;
-@property(weak, nonatomic) IBOutlet UIView *prevButtonContainer;
-@property(weak, nonatomic) IBOutlet UIView *nextButtonContainer;
-@property(strong, nonatomic) DatePickerController *datePickerController;
 @property(nonatomic, getter=isEventPopoverVisible) BOOL eventPopoverVisible;
 @property(nonatomic, getter=isDateSelectPopoverVisible) BOOL dateSelectPopoverVisible;
 
@@ -26,19 +20,7 @@
 - (CGRect)nextButtonFrame;
 @end
 
-@implementation CalendarCalcViewController_iPad {
-    UIPopoverController *_currentPopover;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil
-               bundle:(NSBundle *)nibBundleOrNil
-{
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        _datePickerController = [[DatePickerController alloc] init];
-    }
-    return self;
-}
-
+@implementation CalendarCalcViewController_iPad
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,7 +36,6 @@
     [self.calendarViewController.nextButton setFrame:[self nextButtonFrame]];
     [self.nextButtonContainer addSubview:self.calendarViewController.nextButton];
 
-    self.eventViewController.delegate = self;
     [self setupLayoutWithOrientation:self.interfaceOrientation];
 }
 
@@ -64,13 +45,13 @@
     [self setPrevButtonContainer:nil];
     [self setNextButtonContainer:nil];
     [self setEventButton:nil];
+    [self setCalcViewContainer:nil];
     [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    self.datePickerController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -81,9 +62,9 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                 duration:(NSTimeInterval)duration
 {
-    if ([_currentPopover isPopoverVisible]) {
+    if ([self.currentPopover isPopoverVisible]) {
         self.eventPopoverVisible = YES;
-        [_currentPopover dismissPopoverAnimated:YES];
+        [self.currentPopover dismissPopoverAnimated:YES];
     }
    
     if ([self.calendarViewController isPopoverVisible]) {
@@ -99,10 +80,10 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if (self.isEventPopoverVisible) {
-        [_currentPopover presentPopoverFromRect:self.eventButton.frame
-                                         inView:self.view
-                       permittedArrowDirections:UIPopoverArrowDirectionAny
-                                       animated:YES];
+        [self.currentPopover presentPopoverFromRect:self.eventButton.frame
+                                             inView:self.view
+                           permittedArrowDirections:UIPopoverArrowDirectionAny
+                                           animated:YES];
         self.eventPopoverVisible = NO;
     }
    
@@ -113,40 +94,10 @@
 }
 
 
-#pragma mark - Override
-
-- (void)configureView
-{
-    self.display.text = [self.calendarCalcFormatter displayResult];
-    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
-    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
-                      forState:UIControlStateNormal];
-}
-
-
 #pragma mark - Action
 
 - (IBAction)onEvent:(UIButton *)sender {
     [self showEventView:sender];
-}
-
-
-#pragma mark - EventViewController
-
-- (void)eventViewControllerDidDone:(EventViewController *)eventViewController
-{
-    if ([_currentPopover isPopoverVisible]) {
-        [_currentPopover dismissPopoverAnimated:YES];
-    }
-    [self onEventDone];
-}
-
-
-#pragma mark - UIPopoverController
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    
 }
 
 

@@ -14,18 +14,18 @@
 
 @class AVAudioPlayer;
 
-@interface CalendarCalcViewController : UIViewController <UIPopoverControllerDelegate, EventViewControllerDelegate>
+@interface CalendarCalcViewController : UIViewController<UIPopoverControllerDelegate, EventViewControllerDelegate>
 
-@property (weak, nonatomic) AVAudioPlayer *player;
+@property(weak, nonatomic) AVAudioPlayer *player;
 
-@property (strong, nonatomic) CalendarViewController *calendarViewController;
-@property (strong, nonatomic) EventViewController *eventViewController;
-@property (strong, nonatomic) CalendarCalcFormatter *calendarCalcFormatter;
-@property (weak, nonatomic) IBOutlet CopybleLabel *display;
-@property (weak, nonatomic) IBOutlet UILabel *indicator;
-@property (weak, nonatomic) IBOutlet UIButton *clearButton;
+@property(strong, nonatomic) CalendarViewController *calendarViewController;
+@property(strong, nonatomic) EventViewController *eventViewController;
+@property(strong, nonatomic) CalendarCalcFormatter *calendarCalcFormatter;
+@property(strong, nonatomic) UIPopoverController *currentPopover;
+@property(weak, nonatomic) IBOutlet CopybleLabel *display;
+@property(weak, nonatomic) IBOutlet UILabel *indicator;
+@property(weak, nonatomic) IBOutlet UIButton *clearButton;
 
-- (void)onEventDone;
 - (void)showCalendarView;
 - (void)showEventView:(UIButton *)sender;
 - (void)configureView;

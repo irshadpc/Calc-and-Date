@@ -10,12 +10,12 @@
 
 @protocol EventViewControllerDelegate;
 
-@interface EventViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
-@property (weak, nonatomic) id <EventViewControllerDelegate> delegate;
-@property (strong, nonatomic) NSDate *selectedDate;
+@interface EventViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@property(weak, nonatomic) id<EventViewControllerDelegate> delegate;
+@property(strong, nonatomic) NSDate *selectedDate;
 @end
 
-@protocol EventViewControllerDelegate <NSObject>
+@protocol EventViewControllerDelegate<NSObject>
 - (void)eventViewControllerDidCancel:(EventViewController *)eventViewController;
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController;
 @end

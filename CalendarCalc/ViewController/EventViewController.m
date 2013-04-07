@@ -44,7 +44,7 @@
         [_pickerView setFrameOriginY:_toolbar.bounds.size.height];
         _pickerView.showsSelectionIndicator = YES;
         _pickerView.userInteractionEnabled = NO;
-       
+        
         _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:_pickerView.frame];
         _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         _indicatorView.color = [UIColor grayColor];
@@ -60,6 +60,8 @@
 - (void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self.toolbar setFrameSizeWidth:self.pickerView.bounds.size.width];
     [self.view addSubview:self.toolbar];
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.indicatorView];
@@ -69,20 +71,11 @@
 {
     [super viewDidLoad];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        UIToolbar *toolbar = [self toolbar];
-        [self.view addSubview:toolbar];
-        
-        CGRect pickerFrame = self.pickerView.frame;
-        pickerFrame.origin.y += toolbar.frame.size.height;
-        self.pickerView.frame = pickerFrame;
-    }
-
-    self.view.frame = [self viewFrame];
-    self.contentSizeForViewInPopover = self.view.frame.size;
+    [self.view setFrame:[self viewFrame]];
+    [self setContentSizeForViewInPopover:self.view.bounds.size];
     
-    self.pickerView.dataSource = self;
-    self.pickerView.delegate = self;
+    [self.pickerView setDataSource:self];
+    [self.pickerView setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning

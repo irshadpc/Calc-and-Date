@@ -24,14 +24,12 @@
 @property(weak, nonatomic) IBOutlet UIButton *decimalButton;
 @property(strong, nonatomic) UIPopoverController *settingPopover;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
-@property(strong, nonatomic) UIPopoverController *currentPopover;
 
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onFunction:(UIButton *)sender;
 - (IBAction)onNumber:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
 - (void)settingDynamicCalendar;
-- (void)showCalendarView;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
 - (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect;
 @end
@@ -201,7 +199,9 @@ static const NSInteger DoubleZero = 10;
 
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController
 {
-    [self onEventDone];
+    [self dismissContentViewControllerAnimated:YES];
+    [self.calendarCalc inputDate:self.eventViewController.selectedDate];
+    [self configureView];
 }
 
 
@@ -235,12 +235,6 @@ static const NSInteger DoubleZero = 10;
     }
     
     [self presentContentViewControllerAnimated:YES fromRect:sender.frame];
-}
-
-- (void)onEventDone
-{
-    [self.calendarCalc inputDate:self.eventViewController.selectedDate];
-    [self configureView];
 }
 
 - (void)configureView

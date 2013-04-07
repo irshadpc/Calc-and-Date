@@ -48,12 +48,14 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
         NSInteger month = [date month];
         _date = date;
        
-        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        [_toolbar setBarStyle:UIBarStyleBlackOpaque];
-        [_toolbar setItems:@[[UIBarButtonItem cancelButtonItemWithTarget:self action:@selector(onCancel:)],
-                             [UIBarButtonItem flexibleSpaceItem],
-                             [self eventButtonItem]]];
-        [_toolbar sizeToFit];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
+            [_toolbar setBarStyle:UIBarStyleBlackOpaque];
+            [_toolbar setItems:@[[UIBarButtonItem cancelButtonItemWithTarget:self action:@selector(onCancel:)],
+                                 [UIBarButtonItem flexibleSpaceItem],
+                                 [self eventButtonItem]]];
+            [_toolbar sizeToFit];
+        }
 
         _calendarViews = @[[self calendarViewWithYear:year month:month - 1],
                            [self calendarViewWithYear:year month:month],

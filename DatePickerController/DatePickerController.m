@@ -10,15 +10,17 @@
 #import "NSArray+Safe.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
+#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
 
 @interface DatePickerController ()
+@property(weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property(weak, nonatomic) IBOutlet UIPickerView *picker;
 @property(strong, nonatomic) NSArray *years;
 @property(strong, nonatomic) NSArray *months;
 @property(strong, nonatomic) NSArray *days;
 
-- (IBAction)onCancel:(UIBarButtonItem *)sender;
-- (IBAction)onDone:(UIBarButtonItem *)sender;
+- (void)onCancel:(UIBarButtonItem *)sender;
+- (void)onDone:(UIBarButtonItem *)sender;
 - (void)setupYearComponent;
 - (void)setupMonthComponent;
 - (void)setupDayComponent;
@@ -37,6 +39,16 @@ static const NSInteger MAX_YEAR = 2200;
 {
     [super viewDidLoad];
 
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self.toolbar setItems:@[[UIBarButtonItem cancelButtonItemWithTarget:self action:@selector(onCancel:)],
+                                 [UIBarButtonItem flexibleSpaceItem],
+                                 [UIBarButtonItem doneButtonItemWithTarget:self action:@selector(onDone:)]]];
+    } else {
+        [self.toolbar setItems:@[[UIBarButtonItem flexibleSpaceItem],
+                                 [UIBarButtonItem doneButtonItemWithTarget:self action:@selector(onDone:)]]];
+    }
+    [self setContentSizeForViewInPopover:self.view.bounds.size];
+
     [self setupYearComponent];
     [self setupMonthComponent];
     [self setupDayComponent];
@@ -44,6 +56,7 @@ static const NSInteger MAX_YEAR = 2200;
 
 - (void)viewDidUnload {
     [self setPicker:nil];
+    [self setToolbar:nil];
     [super viewDidUnload];
 }
 
@@ -143,13 +156,13 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 
-#pragma mark - IBAction
+#pragma mark - Action
 
-- (IBAction)onCancel:(UIBarButtonItem *)sender {
+- (void)onCancel:(UIBarButtonItem *)sender {
     [self.delegate datePickerControllerDidCancel:self];
 }
 
-- (IBAction)onDone:(UIBarButtonItem *)sender {
+- (void)onDone:(UIBarButtonItem *)sender {
     [self.delegate datePickerControllerDidDone:self year:[self year] month:[self month] day:[self day]];
 }
 
