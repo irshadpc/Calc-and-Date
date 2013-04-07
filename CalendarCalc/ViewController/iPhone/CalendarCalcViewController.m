@@ -152,6 +152,7 @@ static const NSInteger DoubleZero = 10;
      [(AppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
 }
 
+
 #pragma mark - SettingViewController
 
 - (void)settingViewControllerDidFinish:(SettingViewController *)viewController

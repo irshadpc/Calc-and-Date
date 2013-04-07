@@ -34,6 +34,6 @@
                     week:(Week)week
                       on:(BOOL)on
 {
-    [self.delegate didSelectWeek:week exclude:on];
+    [self.delegate didSelectWeek:week exclude:!on];
 }
 @end
