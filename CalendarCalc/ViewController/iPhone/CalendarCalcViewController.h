@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
 - (void)onEventDone;
+- (void)showCalendarView;
 - (void)showEventView:(UIButton *)sender;
 - (void)configureView;
 @end

@@ -263,12 +263,12 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 
 - (void)onCancel:(UIBarButtonItem *)sender
 {
-    [self.toolbarDelegate calendarViewControllerDidCancel:self];
+    [self.actionDelegate calendarViewControllerDidCancel:self];
 }
 
 - (void)onEvent:(UIBarButtonItem *)sender
 {
-    [self.toolbarDelegate calendarViewControllerShouldShowEvent:self];
+    [self.actionDelegate calendarViewControllerShouldShowEvent:self];
 }
 
 - (UIBarButtonItem *)eventButtonItem

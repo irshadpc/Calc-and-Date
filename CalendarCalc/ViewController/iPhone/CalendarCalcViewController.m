@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
 #import "SettingViewController.h"
+#import "CalendarViewController+Week.h"
+#import "ViewSheet.h"
 #import "CalendarCalc.h"
 #import "DateSelect.h"
 #import "NSDate+Component.h"
@@ -17,19 +19,21 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CalendarCalcViewController ()<SettingViewControllerDelegate, DateSelect> {
-  @private
-    UIPopoverController *_settingPopover;
-}
-
-@property (strong, nonatomic) CalendarCalc *calendarCalc;
-@property (weak, nonatomic) IBOutlet UIButton *decimalButton;
+@interface CalendarCalcViewController ()<SettingViewControllerDelegate, DateSelect, CalendarViewControllerDelegate>
+@property(strong, nonatomic) CalendarCalc *calendarCalc;
+@property(weak, nonatomic) IBOutlet UIButton *decimalButton;
+@property(strong, nonatomic) UIPopoverController *settingPopover;
+@property(strong, nonatomic) ViewSheet *currentViewSheet;
+@property(strong, nonatomic) UIPopoverController *currentPopover;
 
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onFunction:(UIButton *)sender;
 - (IBAction)onNumber:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
 - (void)settingDynamicCalendar;
+- (void)showCalendarView;
+- (void)dismissContentViewControllerAnimated:(BOOL)animated;
+- (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect;
 @end
 
 
@@ -54,10 +58,12 @@ static const NSInteger DoubleZero = 10;
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
     [self configureView];
+    [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
+    [self.calendarViewController setActionDelegate:self];
     [self.eventViewController setDelegate:self];
     [self settingDynamicCalendar];
-    self.player = [(AppDelegate *)[[UIApplication sharedApplication] delegate] player];
+    [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
 }
 
 - (void)viewDidUnload
@@ -105,13 +111,13 @@ static const NSInteger DoubleZero = 10;
         [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         [self presentViewController:settingViewController animated:YES completion:nil];
     } else {
-        [_settingPopover dismissPopoverAnimated:YES];
-        _settingPopover = [[UIPopoverController alloc] initWithContentViewController:settingViewController];
-        _settingPopover.delegate = self;
-        [_settingPopover presentPopoverFromRect:sender.frame
-                                         inView:self.view
-                       permittedArrowDirections:UIPopoverArrowDirectionAny
-                                       animated:YES];
+        [self.settingPopover dismissPopoverAnimated:YES];
+        self.settingPopover = [[UIPopoverController alloc] initWithContentViewController:settingViewController];
+        self.settingPopover.delegate = self;
+        [self.settingPopover presentPopoverFromRect:sender.frame
+                                             inView:self.view
+                           permittedArrowDirections:UIPopoverArrowDirectionAny
+                                           animated:YES];
     }
 }
 
@@ -155,7 +161,7 @@ static const NSInteger DoubleZero = 10;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        [_settingPopover dismissPopoverAnimated:YES];
+        [self.settingPopover dismissPopoverAnimated:YES];
     }
     [self settingDynamicCalendar];
 }
@@ -165,6 +171,7 @@ static const NSInteger DoubleZero = 10;
 
 - (void)didSelectDate:(NSDate *)date
 {
+    [self dismissContentViewControllerAnimated:YES];
     [self.calendarCalc inputDate:date];
     [self configureView];
 }
@@ -175,17 +182,21 @@ static const NSInteger DoubleZero = 10;
     [self.calendarCalc setWeek:week exclude:exclude];
 }
 
+- (void)calendarViewControllerDidCancel:(CalendarViewController *)calendarViewController
+{
+    [self dismissContentViewControllerAnimated:YES];
+}
+
 - (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
 {
     [self showEventView:nil];
 }
 
-
 #pragma mark - EventViewController
 
 - (void)eventViewControllerDidCancel:(EventViewController *)eventViewController
 {
-
+    [self dismissContentViewControllerAnimated:YES];
 }
 
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController
@@ -198,7 +209,7 @@ static const NSInteger DoubleZero = 10;
 
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
-    if (popoverController == _settingPopover) {
+    if (popoverController == self.settingPopover) {
         [self settingDynamicCalendar];
     }
     return YES;
@@ -209,7 +220,21 @@ static const NSInteger DoubleZero = 10;
 
 - (void)showEventView:(UIButton *)sender
 {
-    abort();
+    if (!self.eventViewController) {
+        self.eventViewController = [[EventViewController alloc] init];
+        [self.eventViewController setDelegate:self];
+    }
+
+    [self dismissContentViewControllerAnimated:YES];
+   
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.eventViewController];
+    } else {
+        self.currentPopover = [[UIPopoverController alloc] initWithContentViewController:self.eventViewController];
+        self.currentPopover.delegate = self;
+    }
+    
+    [self presentContentViewControllerAnimated:YES fromRect:sender.frame];
 }
 
 - (void)onEventDone
@@ -220,6 +245,31 @@ static const NSInteger DoubleZero = 10;
 
 - (void)configureView
 {
-    abort();
+    self.display.text = [self.calendarCalcFormatter displayResult];
+    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
+    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
+                      forState:UIControlStateNormal];
+}
+
+- (void)showCalendarView
+{
+    [self dismissContentViewControllerAnimated:YES];
+    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.calendarViewController];
+    [self presentContentViewControllerAnimated:YES fromRect:CGRectZero];
+}
+
+- (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect
+{
+    [self.currentViewSheet showViewSheetAnimated:animated];
+    [self.currentPopover presentPopoverFromRect:rect
+                                         inView:self.view
+                       permittedArrowDirections:UIPopoverArrowDirectionAny
+                                       animated:animated];
+}
+
+- (void)dismissContentViewControllerAnimated:(BOOL)animated
+{
+    [self.currentViewSheet dismissViewSheetAnimated:animated shoot:NO];
+    [self.currentPopover dismissPopoverAnimated:animated];
 }
 @end

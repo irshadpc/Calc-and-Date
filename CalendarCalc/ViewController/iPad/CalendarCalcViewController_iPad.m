@@ -115,20 +115,6 @@
 
 #pragma mark - Override
 
-- (void)showEventView:(UIButton *)sender
-{
-    if ([_currentPopover isPopoverVisible]) {
-        [_currentPopover dismissPopoverAnimated:YES];
-    }
-    
-    _currentPopover = [[UIPopoverController alloc] initWithContentViewController:self.eventViewController];
-    _currentPopover.delegate = self;
-    [_currentPopover presentPopoverFromRect:sender.frame
-                                     inView:self.view
-                   permittedArrowDirections:UIPopoverArrowDirectionAny
-                                   animated:YES];
-}
-
 - (void)configureView
 {
     self.display.text = [self.calendarCalcFormatter displayResult];

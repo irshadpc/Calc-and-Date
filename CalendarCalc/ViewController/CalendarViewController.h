@@ -13,7 +13,7 @@
 
 @interface CalendarViewController : UIViewController
 @property(weak, nonatomic) id<DateSelect> delegate;
-@property(weak, nonatomic) id<CalendarViewControllerDelegate> toolbarDelegate;
+@property(weak, nonatomic) id<CalendarViewControllerDelegate> actionDelegate;
 @property(strong, nonatomic, readonly) NSDate *date;
 @property(nonatomic, getter=isDynamicCalendar) BOOL dynamicCalendar;
 

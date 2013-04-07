@@ -13,9 +13,8 @@
 #import "NSDate+Component.h"
 #import "NSString+Date.h"
 
-@interface CalendarCalcViewController_iPhone ()<CalendarViewControllerDelegate>
+@interface CalendarCalcViewController_iPhone ()
 @property(weak, nonatomic) IBOutlet UIButton *dateButton;
-@property(strong, nonatomic) ViewSheet *currentViewSheet;
 
 - (IBAction)onDate:(UIButton *)sender;
 @end
@@ -24,8 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.calendarViewController setToolbarDelegate:self];
-    [self.calendarViewController showWeekView];
+
     NSDate *date = [NSDate date];
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];
@@ -40,26 +38,9 @@
 
 #pragma mark - Override
 
-- (void)showEventView:(UIButton *)sender
-{
-    if (!self.eventViewController) {
-        self.eventViewController = [[EventViewController alloc] init];
-        [self.eventViewController setDelegate:self];
-    }
-
-    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
-    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.eventViewController];
-    [self.currentViewSheet showViewSheetAnimated:YES];
-}
-
 - (void)configureView
 {
-    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
-    self.display.text = [self.calendarCalcFormatter displayResult];
-    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
-    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
-                      forState:UIControlStateNormal];
-
+    [super configureView];
     NSDate *date = self.calendarViewController.date;
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];
@@ -70,23 +51,6 @@
 
 - (IBAction)onDate:(UIButton *)sender
 {
-    if (!self.calendarViewController) {
-        self.calendarViewController = [[CalendarViewController alloc] init];
-    }
-
-    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
-    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.calendarViewController];
-    [self.currentViewSheet showViewSheetAnimated:YES];
-}
-
-
-- (void)calendarViewControllerDidCancel:(CalendarViewController *)viewController
-{
-    [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
-}
-
-- (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
-{
-    [self showEventView:nil];
+    [self showCalendarView];
 }
 @end
