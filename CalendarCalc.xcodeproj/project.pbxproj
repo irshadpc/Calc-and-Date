@@ -119,8 +119,12 @@
 		62A2D15016739F93001CC9AE /* NSDateComponents+Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D14F16739F93001CC9AE /* NSDateComponents+Unit.m */; };
 		62A2D1531673A2E3001CC9AE /* NSDecimalNumber+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D1521673A2E2001CC9AE /* NSDecimalNumber+Convert.m */; };
 		62A2D1561673A614001CC9AE /* NSDate+Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D1551673A614001CC9AE /* NSDate+Component.m */; };
-		62A7CE10167CA1240080B362 /* NumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE0F167CA1240080B362 /* NumberCalcTests.m */; };
+		62A7CE10167CA1240080B362 /* OldNumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE0F167CA1240080B362 /* OldNumberCalcTests.m */; };
 		62A7CE13167CA1D70080B362 /* DateCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE12167CA1D70080B362 /* DateCalcTests.m */; };
+		62AB84B11716FFB1008A0972 /* NumberCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AB84B01716FFB1008A0972 /* NumberCalc.m */; };
+		62AB84B4171701BC008A0972 /* NumberCalcResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AB84B3171701BB008A0972 /* NumberCalcResult.m */; };
+		62AB84B717170465008A0972 /* NumberCalcProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AB84B617170465008A0972 /* NumberCalcProcess.m */; };
+		62AB84BA17170B5C008A0972 /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AB84B917170B5C008A0972 /* Result.m */; };
 		62B53ED8167C592E00394427 /* NSNumberFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */; };
 		62B53EDE167C64B900394427 /* NumberResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EDD167C64B800394427 /* NumberResult.m */; };
 		62B53EE1167C64C700394427 /* DateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53EE0167C64C600394427 /* DateResult.m */; };
@@ -149,6 +153,7 @@
 		62B65D981689F20A00C0055E /* CalendarCalcViewController+UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B65D971689F20A00C0055E /* CalendarCalcViewController+UnitTest.m */; };
 		62C97A601698FB72008B0EFE /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62C97A621698FB72008B0EFE /* SettingViewController.xib */; };
 		62C97A68169901B8008B0EFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62C97A6A169901B8008B0EFE /* Localizable.strings */; };
+		62D886061718DE0700EACAFA /* NumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D886051718DE0700EACAFA /* NumberCalcTests.m */; };
 		62DAF6161680AF6F00A14D3C /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DAF6151680AF6F00A14D3C /* PageView.m */; };
 		62F4D92B1681EA6F001FF7FA /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F4D92A1681EA6F001FF7FA /* NSString+Date.m */; };
 		62F4D92E1681F382001FF7FA /* CalendarControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F4D92D1681F381001FF7FA /* CalendarControlView.m */; };
@@ -318,8 +323,8 @@
 		62A2D13616738A48001CC9AE /* CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCalc.m; sourceTree = "<group>"; };
 		62A2D13816738A79001CC9AE /* CalendarCalcResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCalcResult.h; sourceTree = "<group>"; };
 		62A2D13916738A79001CC9AE /* CalendarCalcResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCalcResult.m; sourceTree = "<group>"; };
-		62A2D13B16738BE6001CC9AE /* NumberCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberCalculator.h; path = ../NumberCalculator.h; sourceTree = "<group>"; };
-		62A2D13C16738BE6001CC9AE /* NumberCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NumberCalculator.m; path = ../NumberCalculator.m; sourceTree = "<group>"; };
+		62A2D13B16738BE6001CC9AE /* NumberCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalculator.h; sourceTree = "<group>"; };
+		62A2D13C16738BE6001CC9AE /* NumberCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalculator.m; sourceTree = "<group>"; };
 		62A2D13E16738BF4001CC9AE /* DateCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateCalculator.h; path = ../DateCalculator.h; sourceTree = "<group>"; };
 		62A2D13F16738BF4001CC9AE /* DateCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateCalculator.m; path = ../DateCalculator.m; sourceTree = "<group>"; };
 		62A2D14216738D31001CC9AE /* NSDecimalNumber+Calc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Calc.h"; sourceTree = "<group>"; };
@@ -336,10 +341,18 @@
 		62A2D1521673A2E2001CC9AE /* NSDecimalNumber+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Convert.m"; sourceTree = "<group>"; };
 		62A2D1541673A613001CC9AE /* NSDate+Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Component.h"; sourceTree = "<group>"; };
 		62A2D1551673A614001CC9AE /* NSDate+Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Component.m"; sourceTree = "<group>"; };
-		62A7CE0E167CA1240080B362 /* NumberCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalcTests.h; sourceTree = "<group>"; };
-		62A7CE0F167CA1240080B362 /* NumberCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalcTests.m; sourceTree = "<group>"; };
+		62A7CE0E167CA1240080B362 /* OldNumberCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldNumberCalcTests.h; sourceTree = "<group>"; };
+		62A7CE0F167CA1240080B362 /* OldNumberCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldNumberCalcTests.m; sourceTree = "<group>"; };
 		62A7CE11167CA1D70080B362 /* DateCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCalcTests.h; sourceTree = "<group>"; };
 		62A7CE12167CA1D70080B362 /* DateCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCalcTests.m; sourceTree = "<group>"; };
+		62AB84AF1716FFB0008A0972 /* NumberCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalc.h; sourceTree = "<group>"; };
+		62AB84B01716FFB1008A0972 /* NumberCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalc.m; sourceTree = "<group>"; };
+		62AB84B2171701BB008A0972 /* NumberCalcResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalcResult.h; sourceTree = "<group>"; };
+		62AB84B3171701BB008A0972 /* NumberCalcResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalcResult.m; sourceTree = "<group>"; };
+		62AB84B517170465008A0972 /* NumberCalcProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalcProcess.h; sourceTree = "<group>"; };
+		62AB84B617170465008A0972 /* NumberCalcProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalcProcess.m; sourceTree = "<group>"; };
+		62AB84B817170B5C008A0972 /* Result.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Result.h; sourceTree = "<group>"; };
+		62AB84B917170B5C008A0972 /* Result.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
 		62B53ED6167C592E00394427 /* NSNumberFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
 		62B53EDC167C64B800394427 /* NumberResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberResult.h; sourceTree = "<group>"; };
@@ -380,6 +393,8 @@
 		62C97A631698FB7B008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SettingViewController.xib; sourceTree = "<group>"; };
 		62C97A69169901B8008B0EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		62C97A6B169901BC008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		62D886041718DE0700EACAFA /* NumberCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalcTests.h; sourceTree = "<group>"; };
+		62D886051718DE0700EACAFA /* NumberCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalcTests.m; sourceTree = "<group>"; };
 		62DAF6141680AF6F00A14D3C /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
 		62DAF6151680AF6F00A14D3C /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
 		62F4D9291681EA6F001FF7FA /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
@@ -480,16 +495,9 @@
 		6213560816737DA100C93999 /* CalendarCalcTests */ = {
 			isa = PBXGroup;
 			children = (
-				62B65D961689F20A00C0055E /* CalendarCalcViewController+UnitTest.h */,
-				62B65D971689F20A00C0055E /* CalendarCalcViewController+UnitTest.m */,
-				62B65D8E1689F0B300C0055E /* ViewControllerTests.h */,
-				62B65D8F1689F0B300C0055E /* ViewControllerTests.m */,
-				62324C5A167C34D70062EF1B /* CalendarCalcTests.h */,
-				62324C5B167C34D70062EF1B /* CalendarCalcTests.m */,
-				62A7CE0E167CA1240080B362 /* NumberCalcTests.h */,
-				62A7CE0F167CA1240080B362 /* NumberCalcTests.m */,
-				62A7CE11167CA1D70080B362 /* DateCalcTests.h */,
-				62A7CE12167CA1D70080B362 /* DateCalcTests.m */,
+				62D886041718DE0700EACAFA /* NumberCalcTests.h */,
+				62D886051718DE0700EACAFA /* NumberCalcTests.m */,
+				62D886031718DD4B00EACAFA /* old */,
 				6213560916737DA100C93999 /* Supporting Files */,
 			);
 			path = CalendarCalcTests;
@@ -566,13 +574,10 @@
 				62A2D13616738A48001CC9AE /* CalendarCalc.m */,
 				626769461692BC53002857A7 /* CalendarCalc+Function.h */,
 				626769471692BC53002857A7 /* CalendarCalc+Function.m */,
-				62A2D13B16738BE6001CC9AE /* NumberCalculator.h */,
-				62A2D13C16738BE6001CC9AE /* NumberCalculator.m */,
 				62A2D13E16738BF4001CC9AE /* DateCalculator.h */,
 				62A2D13F16738BF4001CC9AE /* DateCalculator.m */,
 			);
-			name = CalendarCalc;
-			path = CCCalendarCalc;
+			path = CalendarCalc;
 			sourceTree = "<group>";
 		};
 		6267694B1692BECA002857A7 /* CalendarCalcResult */ = {
@@ -766,6 +771,7 @@
 		62A2D125167384D2001CC9AE /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				62AB84AE1716FF03008A0972 /* NumberCalc */,
 				6267694A1692BEB5002857A7 /* CalendarCalc */,
 				6267694B1692BECA002857A7 /* CalendarCalcResult */,
 				627D85F31692CC5400093CE6 /* CalendarCalcFormatter.h */,
@@ -834,6 +840,40 @@
 				626BB0E01691853C004E9E63 /* EKEvent+Today.m */,
 			);
 			path = categories;
+			sourceTree = "<group>";
+		};
+		62AB84AE1716FF03008A0972 /* NumberCalc */ = {
+			isa = PBXGroup;
+			children = (
+				62AB84AF1716FFB0008A0972 /* NumberCalc.h */,
+				62AB84B01716FFB1008A0972 /* NumberCalc.m */,
+				62AB84B517170465008A0972 /* NumberCalcProcess.h */,
+				62AB84B617170465008A0972 /* NumberCalcProcess.m */,
+				62AB84B2171701BB008A0972 /* NumberCalcResult.h */,
+				62AB84B3171701BB008A0972 /* NumberCalcResult.m */,
+				62A2D13B16738BE6001CC9AE /* NumberCalculator.h */,
+				62A2D13C16738BE6001CC9AE /* NumberCalculator.m */,
+				62AB84B817170B5C008A0972 /* Result.h */,
+				62AB84B917170B5C008A0972 /* Result.m */,
+			);
+			path = NumberCalc;
+			sourceTree = "<group>";
+		};
+		62D886031718DD4B00EACAFA /* old */ = {
+			isa = PBXGroup;
+			children = (
+				62B65D961689F20A00C0055E /* CalendarCalcViewController+UnitTest.h */,
+				62B65D971689F20A00C0055E /* CalendarCalcViewController+UnitTest.m */,
+				62B65D8E1689F0B300C0055E /* ViewControllerTests.h */,
+				62B65D8F1689F0B300C0055E /* ViewControllerTests.m */,
+				62324C5A167C34D70062EF1B /* CalendarCalcTests.h */,
+				62324C5B167C34D70062EF1B /* CalendarCalcTests.m */,
+				62A7CE0E167CA1240080B362 /* OldNumberCalcTests.h */,
+				62A7CE0F167CA1240080B362 /* OldNumberCalcTests.m */,
+				62A7CE11167CA1D70080B362 /* DateCalcTests.h */,
+				62A7CE12167CA1D70080B362 /* DateCalcTests.m */,
+			);
+			path = old;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1074,6 +1114,10 @@
 				6235AD7016FF3B1800712A78 /* UIView+MutableFrame.m in Sources */,
 				6235AD7316FFB7DE00712A78 /* CalendarViewController+Week.m in Sources */,
 				62553A1E1710AC05000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m in Sources */,
+				62AB84B11716FFB1008A0972 /* NumberCalc.m in Sources */,
+				62AB84B4171701BC008A0972 /* NumberCalcResult.m in Sources */,
+				62AB84B717170465008A0972 /* NumberCalcProcess.m in Sources */,
+				62AB84BA17170B5C008A0972 /* Result.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,10 +1126,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62324C5C167C34D70062EF1B /* CalendarCalcTests.m in Sources */,
-				62A7CE10167CA1240080B362 /* NumberCalcTests.m in Sources */,
+				62A7CE10167CA1240080B362 /* OldNumberCalcTests.m in Sources */,
 				62A7CE13167CA1D70080B362 /* DateCalcTests.m in Sources */,
 				62B65D901689F0B300C0055E /* ViewControllerTests.m in Sources */,
 				62B65D981689F20A00C0055E /* CalendarCalcViewController+UnitTest.m in Sources */,
+				62D886061718DE0700EACAFA /* NumberCalcTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
