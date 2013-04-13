@@ -16,10 +16,14 @@
 @property(strong, nonatomic) NumberCalcProcess *process;
 @property(strong, nonatomic) NumberCalcResult *result;
 
+- (Result *)inputInteger:(NSInteger)integer;
+- (Result *)inputFunction:(Function)function;
 - (Result *)calculateWithFunction:(Function)function;
 @end
 
 @implementation NumberCalc
+static const NSInteger DOUBLE_ZERO = 10;
+
 - (instancetype)init
 {
     if ((self = [super init])) {
@@ -29,9 +33,28 @@
     return self;
 }
 
+- (Result *)input:(NSInteger)value
+{
+    if (value < FunctionDecimal) {
+        return [self inputInteger:value];
+    } else {
+        return [self inputFunction:value];
+    }
+}
+
+
+#pragma mark - Private
+
 - (Result *)inputInteger:(NSInteger)integer
 {
-    return [self.result inputNumberString:[@(integer) stringValue]];
+    NSString *numberString = nil;
+    if (integer == DOUBLE_ZERO) {
+        numberString = @"00";
+    } else {
+        numberString = [@(integer) stringValue];
+    }
+    
+    return [self.result inputNumberString:numberString];
 }
 
 - (Result *)inputFunction:(Function)function
@@ -57,9 +80,6 @@
             abort();
     }
 }
-
-
-#pragma mark - Private
 
 - (Result *)calculateWithFunction:(Function)function
 {

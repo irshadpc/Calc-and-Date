@@ -12,6 +12,5 @@
 @class Result;
 
 @interface NumberCalc : NSObject
-- (Result *)inputInteger:(NSInteger)integer;
-- (Result *)inputFunction:(Function)function;
+- (Result *)input:(NSInteger)value;
 @end

@@ -50,6 +50,9 @@ typedef NSDecimalNumber * (^Calculate)(NSDecimalNumber *, NSDecimalNumber *);
                                         return [NSDecimalNumber dividingByDecimalNumber:l rOperand:r];
                                     }];
         case FunctionEqual:
+            self.oldResult = operand;
+            return self.oldResult;
+            
         case FunctionDecimal:
         case FunctionClear:
         case FunctionPlusMinus:
