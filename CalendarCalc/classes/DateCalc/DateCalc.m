@@ -13,10 +13,11 @@
 #import "NSString+Calculator.h"
 
 @interface DateCalc ()
+@property(nonatomic) Function currentFunction;
 @property(strong, nonatomic) DateCalcProcessor *processor;
 @property(strong, nonatomic) DateCalcResult *result;
 
-- (CalcValue *)inputWithInteger:(NSInteger)integer;
+- (CalcValue *)inputWithKeyCode:(NSInteger)keycode;
 - (CalcValue *)inputWithFunction:(Function)function;
 @end
 
@@ -30,10 +31,10 @@
     return self;
 }
 
-- (CalcValue *)input:(NSInteger)integer
+- (CalcValue *)inputWithInteger:(NSInteger)integer
 {
     if (integer < FunctionDecimal) {
-        return [self inputWithInteger:integer];
+        return [self inputWithKeyCode:integer];
     } else {
         return [self inputWithFunction:integer];
     }
@@ -47,13 +48,18 @@
 
 #pragma mark - Private
 
-- (CalcValue *)inputWithInteger:(NSInteger)integer
+- (CalcValue *)inputWithKeyCode:(NSInteger)keycode
 {
-    return [self.result inputNumberString:[NSString stringWithKeyCode:integer]];
+    return [self.result inputNumberString:[NSString stringWithKeyCode:keycode]];
 }
 
 - (CalcValue *)inputWithFunction:(Function)function
 {
-
+    CalcValue *result = [self.processor calculateWithFunction:self.currentFunction
+                                                      operand:[self.result calcValue]];
+    [self setCurrentFunction:function];
+    [self setResult:[[DateCalcResult alloc] init]];
+   
+    return result;
 }
 @end

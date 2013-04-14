@@ -12,11 +12,20 @@
 @interface DateCalcResult ()
 @property(strong, nonatomic) NSMutableString *number;
 @property(strong, nonatomic) NSDate *date;
-
-- (CalcValue *)result;
 @end
 
 @implementation DateCalcResult
+- (CalcValue *)calcValue
+{
+    if (self.number) {
+        return [CalcValue calcValueWithNumberString:self.number decimalString:nil];
+    } else if (self.date) {
+        return [CalcValue calcValueWithDate:self.date];
+    } else {
+        return nil;
+    }
+}
+
 - (CalcValue *)inputNumberString:(NSString *)numberString
 {
     if (!self.number) {
@@ -25,19 +34,19 @@
 
     [self setDate:nil];
     [self.number appendString:numberString];
-    return [self result];
+    return [self calcValue];
 }
 
 - (CalcValue *)inputDate:(NSDate *)date
 {
     [self setNumber:nil];
     [self setDate:date];
-    return [self result];
+    return [self calcValue];
 }
 
 - (CalcValue *)inputDecimalPoint
 {
-    return [self result];
+    return [self calcValue];
 }
 
 - (CalcValue *)clear
@@ -45,7 +54,7 @@
     [self setNumber:nil];
     [self setDate:nil];
    
-    return [self result];
+    return [self calcValue];
 }
 
 - (CalcValue *)deleteNumber
@@ -55,7 +64,7 @@
     }
     [self setDate:nil];
 
-    return [self result];
+    return [self calcValue];
 }
 
 - (CalcValue *)reverseNumber
@@ -65,20 +74,6 @@
     } else {
         [self.number insertString:@"-" atIndex:0];
     }
-    return [self result];
-}
-
-
-#pragma mark - Private
-
-- (CalcValue *)result
-{
-    if (self.number) {
-        return [CalcValue calcValueWithNumberString:self.number decimalString:nil];
-    } else if (self.date) {
-        return [CalcValue calcValueWithDate:self.date];
-    } else {
-        return nil;
-    }
+    return [self calcValue];
 }
 @end

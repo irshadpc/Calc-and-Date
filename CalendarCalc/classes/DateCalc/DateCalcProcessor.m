@@ -22,27 +22,45 @@
 @property(strong, nonatomic) NSNumber *oldNumberOperand;
 @property(nonatomic) Function oldFunction;
 
-- (CalcValue *)calculateWithFunction:(Function)function numberOperand:(NSDecimalNumber *)operand;
-- (CalcValue *)calculateWithFunction:(Function)function dateOperand:(NSDate *)operand;
-- (NSUInteger)excludeDayCountWithStartDate:(NSDate *)startDate
-                                  endDate:(NSDate *)endDate;
+- (CalcValue *)calculateWithFunction:(Function)function dateOperand:(NSDate *)lOperand numberOperand:(NSDecimalNumber *)rOperand;
+- (CalcValue *)calculateWithFunction:(Function)function dateOperand:(NSDate *)lOperand dateOperand:(NSDate *)rOperand;
+- (NSUInteger)excludeDayCountWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 @end
 
 @implementation DateCalcProcessor
 - (CalcValue *)calculateWithFunction:(Function)function
                              operand:(CalcValue *)operand
 {
+    if (!self.oldResult) {
+        self.oldResult = operand;
+        return self.oldResult;
+    }
+    
+    NSDate *lOperand = nil;
+    NSDate *rDateOperand = nil;
+    NSDecimalNumber *rNumberOperand = nil;
+    if (![self.oldResult isNumber] && ![operand isNumber]) {
+        lOperand = [self.oldResult dateValue];
+        rDateOperand = [operand dateValue];
+    } else if (![self.oldResult isNumber] && [operand isNumber]) {
+        lOperand = [self.oldResult dateValue];
+        rNumberOperand = [operand decimalNumberValue];
+    } else if ([self.oldResult isNumber] && ![operand isNumber]) {
+        lOperand = [operand dateValue];
+        rNumberOperand = [self.oldResult decimalNumberValue];
+    } else {
+        abort();
+    }
+
     switch (function) {
         case FunctionPlus:
         case FunctionMinus:
         case FunctionMultiply:
         case FunctionDivide:
-            if ([operand isNumber]) {
-                return [self calculateWithFunction:function
-                                     numberOperand:[operand decimalNumberValue]];
+            if (rDateOperand) {
+                return [self calculateWithFunction:function dateOperand:lOperand dateOperand:rDateOperand];
             } else {
-                return [self calculateWithFunction:function
-                                       dateOperand:[operand dateValue]];
+                return [self calculateWithFunction:function dateOperand:lOperand numberOperand:rNumberOperand];
             }
         case FunctionEqual:
             [self setOldResult:operand];
@@ -63,15 +81,16 @@
 #pragma mark - Private
 
 - (CalcValue *)calculateWithFunction:(Function)function
-                       numberOperand:(NSDecimalNumber *)operand
+                         dateOperand:(NSDate *)lOperand
+                       numberOperand:(NSDecimalNumber *)rOperand
 {
     NSInteger addingDay = 0;
     switch (function) {
         case FunctionPlus:
-            addingDay = [operand integerValue];
+            addingDay = [rOperand integerValue];
             break;
         case FunctionMinus:
-            addingDay = -[operand integerValue];
+            addingDay = -[rOperand integerValue];
             break;
         case FunctionMultiply:
         case FunctionDivide:
@@ -80,23 +99,24 @@
             abort();
     }
 
-    [self setOldResult:[CalcValue calcValueWithDate:[[self.oldResult dateValue] addingByDay:addingDay]]];
+    [self setOldResult:[CalcValue calcValueWithDate:[lOperand addingByDay:addingDay]]];
     return self.oldResult;
 }
 
 - (CalcValue *)calculateWithFunction:(Function)function
-                         dateOperand:(NSDate *)operand
+                         dateOperand:(NSDate *)lOperand
+                         dateOperand:(NSDate *)rOperand
 {
-    NSDate *lOperand = nil;
+    NSDate *lOperandTMP = nil;
     if (self.isIncludeStartDay) {
-        lOperand = [[self.oldResult dateValue] addingByDay:-1];
+        lOperandTMP = [[self.oldResult dateValue] addingByDay:-1];
     } else {
-        lOperand = [self.oldResult dateValue];
+        lOperandTMP = [self.oldResult dateValue];
     }
 
-    NSInteger interval = ABS([lOperand dayIntervalWithDate:[operand noTime]]);
-    NSInteger calcResult = ABS(interval - [self excludeDayCountWithStartDate:lOperand
-                                                                     endDate:[operand noTime]]);
+    NSInteger interval = ABS([lOperandTMP dayIntervalWithDate:[rOperand noTime]]);
+    NSInteger calcResult = ABS(interval - [self excludeDayCountWithStartDate:lOperandTMP
+                                                                     endDate:[rOperand noTime]]);
     if (function == FunctionMinus) {
         calcResult = -calcResult;
     }

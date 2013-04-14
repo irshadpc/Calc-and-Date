@@ -11,6 +11,7 @@
 @class CalcValue;
 
 @interface DateCalcResult : NSObject
+- (CalcValue *)calcValue;
 - (CalcValue *)inputNumberString:(NSString *)numberString;
 - (CalcValue *)inputDate:(NSDate *)date;
 - (CalcValue *)inputDecimalPoint;

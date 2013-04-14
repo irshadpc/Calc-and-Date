@@ -85,8 +85,8 @@ static const NSInteger DOUBLE_ZERO = 10;
 {
     NSDecimalNumber *resultNumber = [self.process calculateWithFunction:self.currentFunction
                                                                 operand:[self.result decimalNumberValue]];
-    self.currentFunction = function;
-    self.result = [[NumberCalcResult alloc] init];
+    [self setCurrentFunction:function];
+    [self setResult:[[NumberCalcResult alloc] init]];
    
     return [CalcValue calcValueWithDecimalNumber:resultNumber];
 }
