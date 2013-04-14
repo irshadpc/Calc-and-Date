@@ -330,8 +330,8 @@
 		62A2D13916738A79001CC9AE /* CalendarCalcResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCalcResult.m; sourceTree = "<group>"; };
 		62A2D13B16738BE6001CC9AE /* NumberCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCalculator.h; sourceTree = "<group>"; };
 		62A2D13C16738BE6001CC9AE /* NumberCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalculator.m; sourceTree = "<group>"; };
-		62A2D13E16738BF4001CC9AE /* DateCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateCalculator.h; path = ../DateCalculator.h; sourceTree = "<group>"; };
-		62A2D13F16738BF4001CC9AE /* DateCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateCalculator.m; path = ../DateCalculator.m; sourceTree = "<group>"; };
+		62A2D13E16738BF4001CC9AE /* DateCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCalculator.h; sourceTree = "<group>"; };
+		62A2D13F16738BF4001CC9AE /* DateCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCalculator.m; sourceTree = "<group>"; };
 		62A2D14216738D31001CC9AE /* NSDecimalNumber+Calc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Calc.h"; sourceTree = "<group>"; };
 		62A2D14316738D31001CC9AE /* NSDecimalNumber+Calc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Calc.m"; sourceTree = "<group>"; };
 		62A2D14516739A80001CC9AE /* NSDate+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Style.h"; sourceTree = "<group>"; };
@@ -583,6 +583,14 @@
 				626769471692BC53002857A7 /* CalendarCalc+Function.m */,
 				62A2D13E16738BF4001CC9AE /* DateCalculator.h */,
 				62A2D13F16738BF4001CC9AE /* DateCalculator.m */,
+				62A2D13B16738BE6001CC9AE /* NumberCalculator.h */,
+				62A2D13C16738BE6001CC9AE /* NumberCalculator.m */,
+				62D8860B1719546100EACAFA /* DateCalcProcessor.h */,
+				62D8860C1719546100EACAFA /* DateCalcProcessor.m */,
+				62AB84B517170465008A0972 /* NumberCalcProcessor.h */,
+				62AB84B617170465008A0972 /* NumberCalcProcessor.m */,
+				62AB84B817170B5C008A0972 /* CalcValue.h */,
+				62AB84B917170B5C008A0972 /* CalcValue.m */,
 			);
 			path = CalendarCalc;
 			sourceTree = "<group>";
@@ -601,8 +609,7 @@
 				62B53EDF167C64C500394427 /* DateResult.h */,
 				62B53EE0167C64C600394427 /* DateResult.m */,
 			);
-			name = CalendarCalcResult;
-			path = CCCalendarCalcResult;
+			path = CalendarCalcResult;
 			sourceTree = "<group>";
 		};
 		62A2D05316737FBC001CC9AE /* resources */ = {
@@ -778,8 +785,6 @@
 		62A2D125167384D2001CC9AE /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				62D886071719540A00EACAFA /* DateCalc */,
-				62AB84AE1716FF03008A0972 /* NumberCalc */,
 				6267694A1692BEB5002857A7 /* CalendarCalc */,
 				6267694B1692BECA002857A7 /* CalendarCalcResult */,
 				627D85F31692CC5400093CE6 /* CalendarCalcFormatter.h */,
@@ -850,19 +855,6 @@
 			path = categories;
 			sourceTree = "<group>";
 		};
-		62AB84AE1716FF03008A0972 /* NumberCalc */ = {
-			isa = PBXGroup;
-			children = (
-				62AB84B517170465008A0972 /* NumberCalcProcessor.h */,
-				62AB84B617170465008A0972 /* NumberCalcProcessor.m */,
-				62A2D13B16738BE6001CC9AE /* NumberCalculator.h */,
-				62A2D13C16738BE6001CC9AE /* NumberCalculator.m */,
-				62AB84B817170B5C008A0972 /* CalcValue.h */,
-				62AB84B917170B5C008A0972 /* CalcValue.m */,
-			);
-			path = NumberCalc;
-			sourceTree = "<group>";
-		};
 		62D886031718DD4B00EACAFA /* old */ = {
 			isa = PBXGroup;
 			children = (
@@ -878,15 +870,6 @@
 				62A7CE12167CA1D70080B362 /* OldDateCalcTests.m */,
 			);
 			path = old;
-			sourceTree = "<group>";
-		};
-		62D886071719540A00EACAFA /* DateCalc */ = {
-			isa = PBXGroup;
-			children = (
-				62D8860B1719546100EACAFA /* DateCalcProcessor.h */,
-				62D8860C1719546100EACAFA /* DateCalcProcessor.m */,
-			);
-			path = DateCalc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
