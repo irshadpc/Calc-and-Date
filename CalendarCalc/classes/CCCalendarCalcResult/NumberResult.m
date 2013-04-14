@@ -208,5 +208,4 @@ enum {
     }
     [self innerClearEntry];
 }
-
 @end

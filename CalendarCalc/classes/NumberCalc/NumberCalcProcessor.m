@@ -8,51 +8,22 @@
 
 #import "NumberCalcProcessor.h"
 #import "NSDecimalNumber+Calc.h"
-#import "NSDecimalNumber+Convert.h"
-
-
-typedef NSDecimalNumber * (^Calculate)(NSDecimalNumber *, NSDecimalNumber *);
-
-@interface NumberCalcProcessor()
-@property(strong, nonatomic) NSDecimalNumber *oldResult;
-
-- (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)rOperand calculate:(Calculate)calculate;
-@end
 
 @implementation NumberCalcProcessor
 - (NSDecimalNumber *)calculateWithFunction:(Function)function
-                                   operand:(NSDecimalNumber *)operand
+                                  lOperand:(NSDecimalNumber *)lOperand
+                                  rOperand:(NSDecimalNumber *)rOperand
 {
-    if (!self.oldResult) {
-        self.oldResult = operand;
-        return self.oldResult;
-    }
-    
     switch (function) {
         case FunctionPlus:
-            return [self calculateWithOperand:operand
-                                    calculate:^(NSDecimalNumber *l, NSDecimalNumber *r) {
-                                        return [NSDecimalNumber addingByDecimalNumber:l rOperand:r];
-                                    }];
+            return [NSDecimalNumber addingByDecimalNumber:lOperand rOperand:rOperand];
         case FunctionMinus:
-            return [self calculateWithOperand:operand
-                                    calculate:^(NSDecimalNumber *l, NSDecimalNumber *r) {
-                                        return [NSDecimalNumber subtractingByDecimalNumber:l rOperand:r];
-                                    }];
+            return [NSDecimalNumber subtractingByDecimalNumber:lOperand rOperand:rOperand];
         case FunctionMultiply:
-            return [self calculateWithOperand:operand
-                                    calculate:^(NSDecimalNumber *l, NSDecimalNumber *r) {
-                                        return [NSDecimalNumber multiplyingByDecimalNumber:l rOperand:r];
-                                    }];
+            return [NSDecimalNumber multiplyingByDecimalNumber:lOperand rOperand:rOperand];
         case FunctionDivide:
-            return [self calculateWithOperand:operand
-                                    calculate:^(NSDecimalNumber *l, NSDecimalNumber *r) {
-                                        return [NSDecimalNumber dividingByDecimalNumber:l rOperand:r];
-                                    }];
+            return [NSDecimalNumber dividingByDecimalNumber:lOperand rOperand:rOperand];
         case FunctionEqual:
-            self.oldResult = operand;
-            return self.oldResult;
-            
         case FunctionDecimal:
         case FunctionClear:
         case FunctionPlusMinus:
@@ -62,15 +33,5 @@ typedef NSDecimalNumber * (^Calculate)(NSDecimalNumber *, NSDecimalNumber *);
             NSLog(@"FUNCTION: %d", function);
             abort();
     }
-}
-
-- (NSDecimalNumber *)calculateWithOperand:(NSDecimalNumber *)operand calculate:(Calculate)calculate
-{
-    if (!operand) {
-        return self.oldResult;
-    }
-
-    self.oldResult = calculate(self.oldResult, operand);
-    return self.oldResult;
 }
 @end

@@ -14,8 +14,13 @@
 + (CalcValue *)calcValueWithDate:(NSDate *)date;
 
 - (BOOL)isNumber;
-- (NSString *)stringNumberValue;
-- (NSString *)stringDateValue;
+- (NSString *)stringValue;
 - (NSDecimalNumber *)decimalNumberValue;
 - (NSDate *)dateValue;
+- (void)inputNumberString:(NSString *)numberString;
+- (void)inputDate:(NSDate *)date;
+- (void)inputDecimalPoint;
+- (void)clear;
+- (void)deleteNumber;
+- (void)reverseNumber;
 @end

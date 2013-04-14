@@ -13,9 +13,12 @@
 #import "NSNumber+Predicate.h"
 
 @interface CalcValue ()
-@property(copy, nonatomic) NSString *number;
-@property(copy, nonatomic) NSString *decimal;
+@property(strong, nonatomic) NSMutableString *number;
+@property(strong, nonatomic) NSMutableString *decimal;
 @property(strong, nonatomic) NSDate *date;
+
+- (NSString *)stringNumberValue;
+- (NSString *)stringDateValue;
 @end
 
 @implementation CalcValue
@@ -23,28 +26,23 @@
                            decimalString:(NSString *)decimal
 {
     CalcValue *result = [[CalcValue alloc] init];
-    [result setNumber:number];
-    [result setDecimal:decimal];
+
+    if (number) {
+        [result setNumber:[NSMutableString stringWithString:number]];
+    }
+    if (decimal) {
+        [result setDecimal:[NSMutableString stringWithString:decimal]];
+    }
     
     return result;
 }
 
 + (CalcValue *)calcValueWithDecimalNumber:(NSDecimalNumber *)decimalNumber
 {
-    CalcValue *result = [[CalcValue alloc] init];
     NSArray *components = [[decimalNumber stringValue] componentsSeparatedByString:[NSString decimalSeparator]];
-
-    NSString *number = [components safeObjectAtIndex:0];
-    if (number) {
-        [result setNumber:number];
-    }
-
-    NSString *decimal = [components safeObjectAtIndex:1];
-    if (decimal) {
-        [result setDecimal:decimal];
-    }
-
-    return result;
+ 
+    return [self calcValueWithNumberString:[components safeObjectAtIndex:0]
+                             decimalString:[components safeObjectAtIndex:1]];
 }
 
 + (CalcValue *)calcValueWithDate:(NSDate *)date
@@ -55,38 +53,21 @@
     return result;
 }
 
-- (BOOL)isNumber
+- (NSString *)stringValue
 {
-    return ![self date];
-}
-
-- (NSString *)stringNumberValue
-{
-    if (!self.number && !self.decimal) {
-        return nil;
-    }
-
-    NSMutableString *stringNumber = [NSMutableString string];
-    if ([self.number length] > 0) {
-        [stringNumber appendString:self.number];
+    if ([self isNumber]) {
+        return [self stringNumberValue];
     } else {
-        [stringNumber appendString:@"0"];
+        return [self stringDateValue];
     }
-
-    if (self.decimal) {
-        [stringNumber appendFormat:@"%@%@", [NSString decimalSeparator], self.decimal];
-    }
-    
-    return stringNumber;
-}
-
-- (NSString *)stringDateValue
-{
-    return [[NSDateFormatter yyyymmddFormatter] stringFromDate:self.date];
 }
 
 - (NSDecimalNumber *)decimalNumberValue
 {
+    if (![self isNumber]) {
+        return nil;
+    }
+
     NSString *stringNumber = [self stringNumberValue];
     if (!stringNumber) {
         return nil;
@@ -102,6 +83,110 @@
 
 - (NSDate *)dateValue
 {
-    return [self date];
+    return self.date;
+}
+
+- (void)inputNumberString:(NSString *)numberString
+{
+    self.date = nil;
+
+    if (!self.number) {
+        self.number = [NSMutableString string];
+    }
+
+    if (self.decimal) {
+        [self.decimal appendString:numberString];
+    } else {
+        [self.number appendString:numberString];
+    }
+}
+
+- (void)inputDate:(NSDate *)date
+{
+    self.number = nil;
+    self.decimal = nil;
+
+    self.date = date;
+}
+
+- (void)inputDecimalPoint
+{
+    if (![self isNumber]) {
+        return;
+    }
+
+    if (!self.decimal) {
+        self.decimal = [NSMutableString string];
+    }
+}
+
+- (void)clear
+{
+    [self setNumber:nil];
+    [self setDecimal:nil];
+    [self setDate:nil];
+}
+
+- (void)deleteNumber
+{
+    if (![self isNumber]) {
+        return;
+    }
+
+    if (self.decimal) {
+        [self.decimal deleteCharactersInRange:NSMakeRange([self.decimal length] - 1, 1)];
+    } else if (self.number) {
+        [self.number deleteCharactersInRange:NSMakeRange([self.number length] - 1, 1)];
+    }
+
+    if ([self.decimal length] == 0) {
+        self.decimal = nil;
+    }
+}
+
+- (void)reverseNumber
+{
+    if (![self isNumber]) {
+        return;
+    }
+
+    if (!self.number) {
+        self.number = [NSMutableString string];
+    }
+
+    if ([self.number hasPrefix:@"-"]) {
+        [self.number deleteCharactersInRange:NSMakeRange(0, 1)];
+    } else {
+        [self.number insertString:@"-" atIndex:0];
+    }
+}
+
+
+#pragma makr - Private
+
+- (BOOL)isNumber
+{
+    return !self.date;
+}
+
+- (NSString *)stringNumberValue
+{
+    NSMutableString *stringNumber = [NSMutableString string];
+    if (self.number && [self.number length] > 0) {
+        [stringNumber appendString:self.number];
+    } else {
+        [stringNumber appendString:@"0"];
+    }
+
+    if (self.decimal) {
+        [stringNumber appendFormat:@"%@%@", [NSString decimalSeparator], self.decimal];
+    }
+
+    return stringNumber;
+}
+
+- (NSString *)stringDateValue
+{
+    return [[NSDateFormatter yyyymmddFormatter] stringFromDate:self.date];
 }
 @end

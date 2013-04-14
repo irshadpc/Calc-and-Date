@@ -10,5 +10,7 @@
 #import "Function.h"
 
 @interface NumberCalcProcessor : NSObject
-- (NSDecimalNumber *)calculateWithFunction:(Function)function operand:(NSDecimalNumber *)operand;
+- (NSDecimalNumber *)calculateWithFunction:(Function)function
+                                  lOperand:(NSDecimalNumber *)lOperand
+                                  rOperand:(NSDecimalNumber *)rOperand;
 @end

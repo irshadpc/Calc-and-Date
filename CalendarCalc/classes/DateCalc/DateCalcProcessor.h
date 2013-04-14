@@ -15,5 +15,7 @@
 @property(strong, nonatomic) NSArray *excludeWeeks;
 @property(nonatomic, getter=isIncludeStartDay) BOOL includeStartDay;
 
-- (CalcValue *)calculateWithFunction:(Function)function operand:(CalcValue *)operand;
+- (CalcValue *)calculateWithFunction:(Function)function
+                            lOperand:(CalcValue *)lOperand
+                            rOperand:(CalcValue *)rOperand;
 @end
