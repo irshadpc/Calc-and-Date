@@ -140,7 +140,7 @@
                                    endDate:(NSDate *)endDate
 {
     if ([self.excludeWeeks count] == 0) {
-        return [NSDecimalNumber zero];
+        return 0;
     }
 
     NSDate *minDate, *maxDate;

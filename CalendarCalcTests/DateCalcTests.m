@@ -63,4 +63,14 @@
    
     STAssertEqualObjects(@"2013/04/09", [result stringDateValue], nil);
 }
+
+- (void)test_20130401_Plus_20130409_Equal_8
+{
+    [self.dateCalc inputWithDate:[NSDate dateWithYear:2013 month:4 day:1]];
+    [self.dateCalc inputWithInteger:FunctionPlus];
+    [self.dateCalc inputWithDate:[NSDate dateWithYear:2013 month:4 day:9]];
+    CalcValue *result = [self.dateCalc inputWithInteger:FunctionEqual];
+   
+    STAssertEqualObjects(@"8", [result stringNumberValue], nil);
+}
 @end
