@@ -7,13 +7,13 @@
 //
 
 #import "NumberCalcResult.h"
-#import "Result.h"
+#import "CalcValue.h"
 
 @interface NumberCalcResult ()
 @property(strong, nonatomic) NSMutableString *number;
 @property(strong, nonatomic) NSMutableString *decimal;
 
-- (Result *)result;
+- (CalcValue *)result;
 @end
 
 @implementation NumberCalcResult
@@ -30,7 +30,7 @@
     return [[self result] decimalNumberValue];
 }
 
-- (Result *)inputNumberString:(NSString *)numberString
+- (CalcValue *)inputNumberString:(NSString *)numberString
 {
     if (self.decimal) {
         [self.decimal appendString:numberString];
@@ -41,7 +41,7 @@
     return [self result];
 }
 
-- (Result *)inputDecimalPoint
+- (CalcValue *)inputDecimalPoint
 {
     if (!self.decimal) {
         self.decimal = [NSMutableString string];
@@ -50,7 +50,7 @@
     return [self result];
 }
 
-- (Result *)clear
+- (CalcValue *)clear
 {
     [self setNumber:[NSMutableString string]];
     [self setDecimal:nil];
@@ -58,7 +58,7 @@
     return [self result];
 }
 
-- (Result *)deleteNumber
+- (CalcValue *)deleteNumber
 {
     if (self.decimal) {
         [self.decimal deleteCharactersInRange:NSMakeRange([self.decimal length] - 1, 1)];
@@ -73,7 +73,7 @@
     return [self result];
 }
 
-- (Result *)reverseNumber
+- (CalcValue *)reverseNumber
 {
     if ([self.number hasPrefix:@"-"]) {
         [self.number deleteCharactersInRange:NSMakeRange(0, 1)];
@@ -86,8 +86,8 @@
 
 #pragma mark - Private
 
-- (Result *)result
+- (CalcValue *)result
 {
-    return [Result resultWithNumberString:self.number decimalString:self.decimal];
+    return [CalcValue calcValueWithNumberString:self.number decimalString:self.decimal];
 }
 @end

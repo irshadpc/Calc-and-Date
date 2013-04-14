@@ -1,9 +1,9 @@
 //
-//  CCDateCalcTests.h
+//  DateCalcTests.h
 //  CalendarCalc
 //
-//  Created by Ishida Junichi on 2012/12/15.
-//  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
+//  Created by Ishida Junichi on 2013/04/14.
+//  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
 #import <SenTestingKit/SenTestingKit.h>

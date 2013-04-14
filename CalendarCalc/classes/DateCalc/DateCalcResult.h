@@ -1,8 +1,8 @@
 //
-//  NumberCalcResult.h
+//  DateCalcResult.h
 //  CalendarCalc
 //
-//  Created by Ishida Junichi on 2013/04/11.
+//  Created by Ishida Junichi on 2013/04/13.
 //  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 
 @class CalcValue;
 
-@interface NumberCalcResult : NSObject
-- (NSDecimalNumber *)decimalNumberValue;
+@interface DateCalcResult : NSObject
 - (CalcValue *)inputNumberString:(NSString *)numberString;
+- (CalcValue *)inputDate:(NSDate *)date;
 - (CalcValue *)inputDecimalPoint;
 - (CalcValue *)clear;
 - (CalcValue *)deleteNumber;

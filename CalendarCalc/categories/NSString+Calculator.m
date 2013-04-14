@@ -9,6 +9,15 @@
 #import "NSString+Calculator.h"
 
 @implementation NSString (Calculator)
++ (NSString *)stringWithKeyCode:(NSInteger)keyCode
+{
+    const NSInteger KeyCodeDoubleZero = 10;
+    if (keyCode == KeyCodeDoubleZero) {
+        return @"00";
+    }
+    return [@(keyCode) stringValue];
+}
+
 + (NSString *)stringWithFunction:(Function)function
 {
     switch (function) {

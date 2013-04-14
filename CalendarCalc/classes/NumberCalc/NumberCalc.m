@@ -7,18 +7,18 @@
 //
 
 #import "NumberCalc.h"
-#import "NumberCalcProcess.h"
+#import "NumberCalcProcessor.h"
 #import "NumberCalcResult.h"
-#import "Result.h"
+#import "CalcValue.h"
 
 @interface NumberCalc ()
 @property(nonatomic) Function currentFunction;
-@property(strong, nonatomic) NumberCalcProcess *process;
+@property(strong, nonatomic) NumberCalcProcessor *process;
 @property(strong, nonatomic) NumberCalcResult *result;
 
-- (Result *)inputInteger:(NSInteger)integer;
-- (Result *)inputFunction:(Function)function;
-- (Result *)calculateWithFunction:(Function)function;
+- (CalcValue *)inputInteger:(NSInteger)integer;
+- (CalcValue *)inputFunction:(Function)function;
+- (CalcValue *)calculateWithFunction:(Function)function;
 @end
 
 @implementation NumberCalc
@@ -27,13 +27,13 @@ static const NSInteger DOUBLE_ZERO = 10;
 - (instancetype)init
 {
     if ((self = [super init])) {
-        _process = [[NumberCalcProcess alloc] init];
+        _process = [[NumberCalcProcessor alloc] init];
         _result = [[NumberCalcResult alloc] init];
     }
     return self;
 }
 
-- (Result *)input:(NSInteger)value
+- (CalcValue *)input:(NSInteger)value
 {
     if (value < FunctionDecimal) {
         return [self inputInteger:value];
@@ -45,7 +45,7 @@ static const NSInteger DOUBLE_ZERO = 10;
 
 #pragma mark - Private
 
-- (Result *)inputInteger:(NSInteger)integer
+- (CalcValue *)inputInteger:(NSInteger)integer
 {
     NSString *numberString = nil;
     if (integer == DOUBLE_ZERO) {
@@ -57,7 +57,7 @@ static const NSInteger DOUBLE_ZERO = 10;
     return [self.result inputNumberString:numberString];
 }
 
-- (Result *)inputFunction:(Function)function
+- (CalcValue *)inputFunction:(Function)function
 {
     switch (function) {
         case FunctionNone:
@@ -81,13 +81,13 @@ static const NSInteger DOUBLE_ZERO = 10;
     }
 }
 
-- (Result *)calculateWithFunction:(Function)function
+- (CalcValue *)calculateWithFunction:(Function)function
 {
     NSDecimalNumber *resultNumber = [self.process calculateWithFunction:self.currentFunction
                                                                 operand:[self.result decimalNumberValue]];
     self.currentFunction = function;
     self.result = [[NumberCalcResult alloc] init];
    
-    return [Result resultWithDecimalNumber:resultNumber];
+    return [CalcValue calcValueWithDecimalNumber:resultNumber];
 }
 @end

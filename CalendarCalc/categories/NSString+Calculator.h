@@ -10,5 +10,6 @@
 #import "Function.h"
 
 @interface NSString (Calculator)
++ (NSString *)stringWithKeyCode:(NSInteger)keyCode;
 + (NSString *)stringWithFunction:(Function)function;
 @end

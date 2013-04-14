@@ -1,5 +1,5 @@
 //
-//  NumberCalc.h
+//  NumberCalcProcessor.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2013/04/11.
@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Function.h"
 
-@class CalcValue;
-
-@interface NumberCalc : NSObject
-- (CalcValue *)input:(NSInteger)value;
+@interface NumberCalcProcessor : NSObject
+- (NSDecimalNumber *)calculateWithFunction:(Function)function operand:(NSDecimalNumber *)operand;
 @end
