@@ -19,10 +19,12 @@
 @property(strong, nonatomic) CalcValue *resultValue;
 @property(strong, nonatomic) CalcValue *inputValue;
 @property(nonatomic) Function currentFunction;
+@property(nonatomic, getter=isEqualMode) BOOL equalMode;
 
 - (NSString *)inputKeyCode:(NSInteger)keycode;
 - (NSString *)inputFunction:(Function)function;
 - (NSString *)calculateWithFunction:(Function)function;
+- (void)reset;
 @end
 
 @implementation CalcController
@@ -49,6 +51,9 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (NSString *)inputDate:(NSDate *)date
 {
+    if (self.isEqualMode) {
+        [self reset];
+    }
     [self.inputValue inputDate:date];
     return [self.inputValue stringValue];
 }
@@ -58,6 +63,10 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (NSString *)inputKeyCode:(NSInteger)keycode
 {
+    if (self.isEqualMode) {
+        [self reset];
+    }
+    
     if (keycode == KeyCodeDoubleZero) {
         [self.inputValue inputNumberString:@"00"];
     } else {
@@ -68,6 +77,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (NSString *)inputFunction:(Function)function
 {
+    self.equalMode = function == FunctionEqual;
     switch (function) {
         case FunctionNone:
         case FunctionPlus:
@@ -113,10 +123,20 @@ static const NSInteger KeyCodeDoubleZero = 10;
                                                                 lOperand:self.resultValue
                                                                 rOperand:self.inputValue];
     }
-   
-    self.currentFunction = function;
-    self.inputValue = [[CalcValue alloc] init];
+
+    if (!self.isEqualMode) {
+        self.currentFunction = function;
+        self.inputValue = [[CalcValue alloc] init];
+    } 
 
     return [self.resultValue stringValue];
+}
+
+- (void)reset
+{
+    self.currentFunction = FunctionNone;
+    self.resultValue = nil;
+    self.inputValue = [[CalcValue alloc] init];
+    self.equalMode = NO;
 }
 @end

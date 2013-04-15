@@ -53,6 +53,7 @@
 		625B4E851698773C00D94A4E /* plus_minus@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E841698773C00D94A4E /* plus_minus@2x~ipad.png */; };
 		6267641C171A7D4E00D0A32C /* DateCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6267641B171A7D4E00D0A32C /* DateCalcTests.m */; };
 		6267641F171A917A00D0A32C /* CalcController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6267641E171A917A00D0A32C /* CalcController.m */; };
+		62676428171B6EC100D0A32C /* CalcControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62676427171B6EC100D0A32C /* CalcControllerTests.m */; };
 		626769481692BC53002857A7 /* CalendarCalc+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 626769471692BC53002857A7 /* CalendarCalc+Function.m */; };
 		626BB0AA169158D9004E9E63 /* WeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0A9169158D9004E9E63 /* WeekView.m */; };
 		626BB0B316915D97004E9E63 /* SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0B216915D96004E9E63 /* SwitchButton.m */; };
@@ -240,6 +241,8 @@
 		6267641B171A7D4E00D0A32C /* DateCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCalcTests.m; sourceTree = "<group>"; };
 		6267641D171A917A00D0A32C /* CalcController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcController.h; sourceTree = "<group>"; };
 		6267641E171A917A00D0A32C /* CalcController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcController.m; sourceTree = "<group>"; };
+		62676426171B6EC000D0A32C /* CalcControllerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcControllerTests.h; sourceTree = "<group>"; };
+		62676427171B6EC100D0A32C /* CalcControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcControllerTests.m; sourceTree = "<group>"; };
 		626769461692BC53002857A7 /* CalendarCalc+Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CalendarCalc+Function.h"; sourceTree = "<group>"; };
 		626769471692BC53002857A7 /* CalendarCalc+Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CalendarCalc+Function.m"; sourceTree = "<group>"; };
 		626BB0A8169158D9004E9E63 /* WeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekView.h; sourceTree = "<group>"; };
@@ -498,6 +501,8 @@
 		6213560816737DA100C93999 /* CalendarCalcTests */ = {
 			isa = PBXGroup;
 			children = (
+				62676426171B6EC000D0A32C /* CalcControllerTests.h */,
+				62676427171B6EC100D0A32C /* CalcControllerTests.m */,
 				62D886041718DE0700EACAFA /* NumberCalcTests.h */,
 				62D886051718DE0700EACAFA /* NumberCalcTests.m */,
 				6267641A171A7D4E00D0A32C /* DateCalcTests.h */,
@@ -1128,6 +1133,7 @@
 				62B65D981689F20A00C0055E /* CalendarCalcViewController+UnitTest.m in Sources */,
 				62D886061718DE0700EACAFA /* NumberCalcTests.m in Sources */,
 				6267641C171A7D4E00D0A32C /* DateCalcTests.m in Sources */,
+				62676428171B6EC100D0A32C /* CalcControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

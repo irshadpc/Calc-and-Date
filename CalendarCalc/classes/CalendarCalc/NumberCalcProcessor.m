@@ -23,6 +23,7 @@
             return [NSDecimalNumber multiplyingByDecimalNumber:lOperand rOperand:rOperand];
         case FunctionDivide:
             return [NSDecimalNumber dividingByDecimalNumber:lOperand rOperand:rOperand];
+        case FunctionNone:
         case FunctionEqual:
         case FunctionDecimal:
         case FunctionClear:
