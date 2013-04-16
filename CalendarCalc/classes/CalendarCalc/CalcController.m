@@ -19,11 +19,15 @@
 @property(strong, nonatomic) CalcValue *resultValue;
 @property(strong, nonatomic) CalcValue *inputValue;
 @property(nonatomic) Function currentFunction;
+@property(strong, nonatomic) NSDecimalNumber *oldNumberInput;
+@property(nonatomic) Function oldFunction;
 @property(nonatomic, getter=isEqualMode) BOOL equalMode;
 
 - (NSString *)inputKeyCode:(NSInteger)keycode;
 - (NSString *)inputFunction:(Function)function;
 - (NSString *)calculateWithFunction:(Function)function;
+- (CalcValue *)numberCalculate;
+- (CalcValue *)dateCalculate;
 - (void)reset;
 @end
 
@@ -114,14 +118,9 @@ static const NSInteger KeyCodeDoubleZero = 10;
     }
 
     if ([self.resultValue isNumber] && [self.inputValue isNumber]) {
-        NSDecimalNumber *result = [self.numberCalcProcessor calculateWithFunction:self.currentFunction
-                                                                         lOperand:[self.resultValue decimalNumberValue]
-                                                                         rOperand:[self.inputValue decimalNumberValue]];
-        self.resultValue = [CalcValue calcValueWithDecimalNumber:result];
+        self.resultValue = [self numberCalculate];
     } else {
-        self.resultValue = [self.dateCalcProcessor calculateWithFunction:self.currentFunction
-                                                                lOperand:self.resultValue
-                                                                rOperand:self.inputValue];
+        self.resultValue = [self dateCalculate];
     }
 
     if (!self.isEqualMode) {
@@ -132,11 +131,43 @@ static const NSInteger KeyCodeDoubleZero = 10;
     return [self.resultValue stringValue];
 }
 
+- (CalcValue *)numberCalculate
+{
+    NSDecimalNumber *result = [self.numberCalcProcessor calculateWithFunction:self.currentFunction
+                                                                     lOperand:[self.resultValue decimalNumberValue] 
+                                                                     rOperand:[self.inputValue decimalNumberValue]];
+    return [CalcValue calcValueWithDecimalNumber:result];
+}
+
+- (CalcValue *)dateCalculate
+{
+    if (self.currentFunction == FunctionMultiply || self.currentFunction == FunctionDivide) {
+        self.oldNumberInput = [self.resultValue decimalNumberValue];
+        self.oldFunction = self.currentFunction;
+        return self.inputValue;
+    }
+    
+    CalcValue *result = [self.dateCalcProcessor calculateWithFunction:self.currentFunction
+                                                             lOperand:self.resultValue
+                                                             rOperand:self.inputValue];
+    if ([result isNumber] && self.oldNumberInput) {
+        NSDecimalNumber *numberResult = [self.numberCalcProcessor calculateWithFunction:self.oldFunction
+                                                                               lOperand:[result decimalNumberValue]
+                                                                               rOperand:self.oldNumberInput];
+        self.oldNumberInput = nil;
+        self.oldFunction = FunctionNone;
+        return [CalcValue calcValueWithDecimalNumber:numberResult];
+    } else {
+        return result;
+    }
+}
+
 - (void)reset
 {
     self.currentFunction = FunctionNone;
     self.resultValue = nil;
     self.inputValue = [[CalcValue alloc] init];
+    self.oldNumberInput = nil;
     self.equalMode = NO;
 }
 @end

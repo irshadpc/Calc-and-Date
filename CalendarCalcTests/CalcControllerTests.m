@@ -10,6 +10,7 @@
 #import "CalcController.h"
 #import "CalcValue.h"
 #import "Function.h"
+#import "NSDate+AdditionalConvenienceConstructor.h"
 
 @interface CalcControllerTests ()
 @property(strong, nonatomic) CalcController *calcController;
@@ -114,5 +115,30 @@
     NSString *result = [self.calcController inputInteger:FunctionEqual];
    
     STAssertEqualObjects(@"16", result, nil);
+}
+
+- (void)test_3_Plus_4_Plus_20130501_Equal_20130508
+{
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:FunctionPlus];
+    [self.calcController inputInteger:4];
+    [self.calcController inputInteger:FunctionPlus];
+    [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:1]];
+    NSString *result = [self.calcController inputInteger:FunctionEqual];
+   
+    STAssertEqualObjects(@"2013/05/08", result, nil);
+}
+
+- (void)test_20_Multi_20130501_Plus_20130510_Equal_180
+{
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:0];
+    [self.calcController inputInteger:FunctionMultiply];
+    [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:1]];
+    [self.calcController inputInteger:FunctionPlus];
+    [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:10]];
+    NSString *result = [self.calcController inputInteger:FunctionEqual];
+   
+    STAssertEqualObjects(@"180", result, nil);
 }
 @end
