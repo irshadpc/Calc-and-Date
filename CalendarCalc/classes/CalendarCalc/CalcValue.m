@@ -7,6 +7,7 @@
 //
 
 #import "CalcValue.h"
+#import "CalcValueFormatter.h"
 #import "NSArray+safe.h"
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
@@ -17,7 +18,7 @@
 @property(strong, nonatomic) NSMutableString *decimal;
 @property(strong, nonatomic) NSDate *date;
 
-- (NSString *)stringNumberValue;
+- (NSString *)stringDecimalNumberValue;
 - (NSString *)stringDateValue;
 @end
 
@@ -56,7 +57,8 @@
 - (NSString *)stringValue
 {
     if ([self isNumber]) {
-        return [self stringNumberValue];
+        return [CalcValueFormatter displayNumberWithCalcValue:self];
+        //return [self stringNumberValue];
     } else {
         return [self stringDateValue];
     }
@@ -68,7 +70,7 @@
         return nil;
     }
 
-    NSString *stringNumber = [self stringNumberValue];
+    NSString *stringNumber = [self stringDecimalNumberValue];
     if (!stringNumber) {
         return nil;
     }
@@ -76,9 +78,19 @@
     NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithString:stringNumber];
     if ([decimalNumber isNan]) {
         return [NSDecimalNumber zero];
-    } else {
-        return decimalNumber;
     }
+    return decimalNumber;
+
+}
+
+- (NSString *)stringNumberValue
+{
+    return self.number;
+}
+
+- (NSString *)stringDecimalValue
+{
+    return self.decimal;
 }
 
 - (NSDate *)dateValue
@@ -169,7 +181,7 @@
     return !self.date;
 }
 
-- (NSString *)stringNumberValue
+- (NSString *)stringDecimalNumberValue
 {
     NSMutableString *stringNumber = [NSMutableString string];
     if (self.number && [self.number length] > 0) {

@@ -16,6 +16,8 @@
 - (BOOL)isNumber;
 - (NSString *)stringValue;
 - (NSDecimalNumber *)decimalNumberValue;
+- (NSString *)stringNumberValue;
+- (NSString *)stringDecimalValue;
 - (NSDate *)dateValue;
 - (void)inputNumberString:(NSString *)numberString;
 - (void)inputDate:(NSDate *)date;

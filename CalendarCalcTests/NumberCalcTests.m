@@ -33,6 +33,23 @@
     STAssertEqualObjects(@"123", result, nil);
 }
 
+- (void)test_1234567890
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:4];
+    [self.calcController inputInteger:5];
+    [self.calcController inputInteger:6];
+    [self.calcController inputInteger:7];
+    [self.calcController inputInteger:8];
+    [self.calcController inputInteger:9];
+    NSString *result = [self.calcController inputInteger:0];
+   
+    STAssertEqualObjects(@"1,234,567,890", result, nil);
+
+}
+
 - (void)test_12_Decimal_3
 {
     [self.calcController inputInteger:1];
