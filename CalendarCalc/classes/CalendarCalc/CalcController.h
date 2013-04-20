@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Week.h"
 
+@class CalcValue;
 @interface CalcController : NSObject
-- (NSString *)inputInteger:(NSInteger)integer;
-- (NSString *)inputDate:(NSDate *)date;
+- (CalcValue *)inputInteger:(NSInteger)integer;
+- (CalcValue *)inputDate:(NSDate *)date;
+- (CalcValue *)inputNumberString:(NSString *)numberString;
+- (void)setWeek:(Week)week exclude:(BOOL)exclude;
 @end

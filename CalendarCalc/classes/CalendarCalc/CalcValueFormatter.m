@@ -8,6 +8,7 @@
 
 #import "CalcValueFormatter.h"
 #import "CalcValue.h"
+#import "NSDateFormatter+CalendarCalc.h"
 #import "NSNumber+Predicate.h"
 #import "NSNumberFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
@@ -31,5 +32,10 @@
         [numberString appendFormat:@"%@%@", [NSString decimalSeparator], [calcValue stringDecimalValue]];
     }
     return numberString;
+}
+
++ (NSString *)displayDateWithCalcValue:(CalcValue *)calcValue
+{
+    return [[NSDateFormatter yyyymmddFormatter] stringFromDate:[calcValue dateValue]];
 }
 @end

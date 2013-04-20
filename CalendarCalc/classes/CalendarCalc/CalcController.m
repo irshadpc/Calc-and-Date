@@ -11,7 +11,9 @@
 #import "DateCalcProcessor.h"
 #import "CalcValue.h"
 #import "Function.h"
+#import "NSArray+safe.h"
 #import "NSString+Calculator.h"
+#import "NSString+Locale.h"
 
 @interface CalcController ()
 @property(strong, nonatomic) NumberCalcProcessor *numberCalcProcessor;
@@ -23,9 +25,9 @@
 @property(nonatomic) Function oldFunction;
 @property(nonatomic, getter=isEqualMode) BOOL equalMode;
 
-- (NSString *)inputKeyCode:(NSInteger)keycode;
-- (NSString *)inputFunction:(Function)function;
-- (NSString *)calculateWithFunction:(Function)function;
+- (CalcValue *)inputKeyCode:(NSInteger)keycode;
+- (CalcValue *)inputFunction:(Function)function;
+- (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
 - (void)reset;
@@ -44,7 +46,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
     return self;
 }
 
-- (NSString *)inputInteger:(NSInteger)integer
+- (CalcValue *)inputInteger:(NSInteger)integer
 {
     if (integer < FunctionDecimal) {
         return [self inputKeyCode:integer];
@@ -53,19 +55,47 @@ static const NSInteger KeyCodeDoubleZero = 10;
     }
 }
 
-- (NSString *)inputDate:(NSDate *)date
+- (CalcValue *)inputDate:(NSDate *)date
 {
     if (self.isEqualMode) {
         [self reset];
     }
     [self.inputValue inputDate:date];
-    return [self.inputValue stringValue];
+    
+    return self.inputValue;
+}
+
+- (CalcValue *)inputNumberString:(NSString *)numberString
+{
+    NSArray *components = [numberString componentsSeparatedByString:[NSString decimalSeparator]];
+    NSString *number = [components safeObjectAtIndex:0];
+    if (number) {
+        [self.inputValue inputNumberString:[number stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
+                                                                             withString:@""]];
+    }
+    NSString *decimal = [components safeObjectAtIndex:1];
+    if (decimal) {
+        [self.inputValue inputDecimalPoint];
+        [self.inputValue inputNumberString:[decimal stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
+                                                                              withString:@""]];
+    }
+    return self.inputValue;
+}
+
+- (void)setWeek:(Week)week exclude:(BOOL)exclude
+{
+    NSMutableArray *excludeWeeks = [NSMutableArray arrayWithArray:[self.dateCalcProcessor excludeWeeks]];
+    [excludeWeeks removeObject:@(week)];
+    if (exclude) {
+        [excludeWeeks addObject:@(week)];
+    }
+    [self.dateCalcProcessor setExcludeWeeks:excludeWeeks];
 }
 
 
 #pragma mark - Private
 
-- (NSString *)inputKeyCode:(NSInteger)keycode
+- (CalcValue *)inputKeyCode:(NSInteger)keycode
 {
     if (self.isEqualMode) {
         [self reset];
@@ -76,10 +106,10 @@ static const NSInteger KeyCodeDoubleZero = 10;
     } else {
         [self.inputValue inputNumberString:[@(keycode) stringValue]];
     }
-    return [self.inputValue stringValue];
+    return self.inputValue;
 }
 
-- (NSString *)inputFunction:(Function)function
+- (CalcValue *)inputFunction:(Function)function
 {
     self.equalMode = function == FunctionEqual;
     switch (function) {
@@ -92,29 +122,29 @@ static const NSInteger KeyCodeDoubleZero = 10;
             return [self calculateWithFunction:function];
         case FunctionDecimal:
             [self.inputValue inputDecimalPoint];
-            return [self.inputValue stringValue];
+            return self.inputValue;
         case FunctionClear:
             [self.inputValue clear];
-            return [self.inputValue stringValue];
+            return self.inputValue;
         case FunctionPlusMinus:
             [self.inputValue reverseNumber];
-            return [self.inputValue stringValue];
+            return self.inputValue;
         case FunctionDelete:
             [self.inputValue deleteNumber];
-            return [self.inputValue stringValue];
+            return self.inputValue;
         case FunctionMax:
             NSLog(@"FUNCTION: %d", function);
             abort();
     }
 }
 
-- (NSString *)calculateWithFunction:(Function)function
+- (CalcValue *)calculateWithFunction:(Function)function
 {
     if (!self.resultValue || self.currentFunction == FunctionEqual) {
         self.resultValue = self.inputValue;
         self.inputValue = [[CalcValue alloc] init];
         self.currentFunction = function;
-        return [self.resultValue stringValue];
+        return self.resultValue;
     }
 
     if ([self.resultValue isNumber] && [self.inputValue isNumber]) {
@@ -128,7 +158,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
         self.inputValue = [[CalcValue alloc] init];
     } 
 
-    return [self.resultValue stringValue];
+    return self.resultValue;
 }
 
 - (CalcValue *)numberCalculate

@@ -8,9 +8,26 @@
 
 #import "AppDelegate.h"
 #import "CalendarCalcViewController.h"
-#import "CalendarCalcViewController_iPhone.h"
-#import "CalendarCalcViewController_iPad.h"
 #import "UserDefaultsKeys.h"
+
+@interface NSString (NibName)
++ (NSString *)calendarCalcViewController;
+@end
+@implementation NSString (NibName)
++ (NSString *)calendarCalcViewController
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return @"CalendarCalcViewController_iPad";
+    }
+    
+    if ([UIScreen mainScreen].bounds.size.height == 568.0) {
+        return @"CalendarCalcViewController_iPhone_4inch";
+    } else {
+        return @"CalendarCalcViewController_iPhone";
+    }
+}
+@end
+
 
 @implementation AppDelegate
 
@@ -31,19 +48,11 @@ static const CGFloat Phone4InchHeight = 568.0;
     [self.player prepareToPlay];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        if ([UIScreen mainScreen].bounds.size.height == Phone4InchHeight) {
-            self.viewController = [[CalendarCalcViewController_iPhone alloc]
-                                   initWithNibName:@"CalendarCalcViewController_iPhone_4inch" bundle:nil];
-        } else {
-            self.viewController = [[CalendarCalcViewController_iPhone alloc] 
-                                   initWithNibName:@"CalendarCalcViewController_iPhone" bundle:nil];
-        }
-    } else {
-        self.viewController = [[CalendarCalcViewController_iPad alloc]
-                               initWithNibName:@"CalendarCalcViewController_iPad" bundle:nil];
-    }
+    self.viewController = [[CalendarCalcViewController alloc] initWithNibName:[NSString calendarCalcViewController]
+                                                                       bundle:nil];
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

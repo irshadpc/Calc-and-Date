@@ -7,26 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CalendarViewController.h"
-#import "EventViewController.h"
-#import "CalendarCalcFormatter.h"
-#import "CopybleLabel.h"
 
-@class AVAudioPlayer;
+@interface CalendarCalcViewController : UIViewController
 
-@interface CalendarCalcViewController : UIViewController<UIPopoverControllerDelegate, EventViewControllerDelegate>
-
-@property(weak, nonatomic) AVAudioPlayer *player;
-
-@property(strong, nonatomic) CalendarViewController *calendarViewController;
-@property(strong, nonatomic) EventViewController *eventViewController;
-@property(strong, nonatomic) CalendarCalcFormatter *calendarCalcFormatter;
-@property(strong, nonatomic) UIPopoverController *currentPopover;
-@property(weak, nonatomic) IBOutlet CopybleLabel *display;
-@property(weak, nonatomic) IBOutlet UILabel *indicator;
-@property(weak, nonatomic) IBOutlet UIButton *clearButton;
-
-- (void)showCalendarView;
-- (void)showEventView:(UIButton *)sender;
-- (void)configureView;
 @end

@@ -1,14 +1,14 @@
 //
-//  CCCalendarCalcViewController_iPad.h
+//  CalendarCalcViewController_iPad.h
 //  CalendarCalc
 //
-//  Created by Ishida Junichi on 2013/01/03.
+//  Created by Ishida Junichi on 2013/04/20.
 //  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
 #import "CalendarCalcViewController.h"
 
-@interface CalendarCalcViewController_iPad : CalendarCalcViewController <UIPopoverControllerDelegate>
+@interface CalendarCalcViewController ()
 @property(weak, nonatomic) IBOutlet UIButton *eventButton;
 @property(weak, nonatomic) IBOutlet UIView *calendarViewContainer;
 @property(weak, nonatomic) IBOutlet UIView *calcViewContainer;

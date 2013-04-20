@@ -7,27 +7,40 @@
 //
 
 #import "CalendarCalcViewController.h"
+#import "CalendarCalcViewController_Common.h"
+#import "CalendarCalcViewController+iPad.h"
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
 #import "SettingViewController.h"
 #import "CalendarViewController+Week.h"
+#import "EventViewController.h"
+#import "CopybleLabel.h"
 #import "ViewSheet.h"
-#import "CalendarCalc.h"
+#import "CalcController.h"
+#import "CalcValue.h"
 #import "DateSelect.h"
 #import "NSDate+Component.h"
 #import "NSString+Calculator.h"
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CalendarCalcViewController ()<SettingViewControllerDelegate, DateSelect, CalendarViewControllerDelegate>
-@property(strong, nonatomic) CalendarCalc *calendarCalc;
+@interface CalendarCalcViewController ()<SettingViewControllerDelegate, DateSelect, CalendarViewControllerDelegate, UIPopoverControllerDelegate, EventViewControllerDelegate>
+@property(weak, nonatomic) IBOutlet CopybleLabel *display;
+@property(weak, nonatomic) IBOutlet UILabel *indicator;
 @property(weak, nonatomic) IBOutlet UIButton *decimalButton;
+@property(weak, nonatomic) IBOutlet UIButton *dateButton;
+@property(strong, nonatomic) CalcController *calcController;
 @property(strong, nonatomic) UIPopoverController *settingPopover;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
+@property(strong, nonatomic) CalcValue *result;
+@property(weak, nonatomic) AVAudioPlayer *player;
+@property(strong, nonatomic) UIPopoverController *currentPopover;
 
+- (void)showEventView:(UIButton *)sender;
+- (void)configureView;
+- (IBAction)onCalcKey:(UIButton *)sender;
+- (IBAction)onDateKey:(UIButton *)sender;
 - (IBAction)onSetting:(UIButton *)sender;
-- (IBAction)onFunction:(UIButton *)sender;
-- (IBAction)onNumber:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
 - (void)settingDynamicCalendar;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
@@ -36,14 +49,11 @@
 
 
 @implementation CalendarCalcViewController
-static const NSInteger DoubleZero = 10;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil
-               bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        _calendarCalc = [[CalendarCalc alloc] init];
-        _calendarCalcFormatter = [[CalendarCalcFormatter alloc] initWithCalendarCalc:_calendarCalc];
+        _calcController = [[CalcController alloc] init];
         _calendarViewController = [[CalendarViewController alloc] init];
     }
     return self;
@@ -62,20 +72,32 @@ static const NSInteger DoubleZero = 10;
     [self.eventViewController setDelegate:self];
     [self settingDynamicCalendar];
     [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self setupView];
+    }
 }
 
 - (void)viewDidUnload
 {
     [self setDisplay:nil];
     [self setIndicator:nil];
-    [self setClearButton:nil];
     [self setDecimalButton:nil];
+    [self setClearButton:nil];
     [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(NSTimeInterval)duration
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self setupLayoutWithOrientation:toInterfaceOrientation];
+    }
 }
 
 - (BOOL)canPerformAction:(SEL)action 
@@ -94,12 +116,23 @@ static const NSInteger DoubleZero = 10;
         return;
     }
     
-    [self.calendarCalc inputString:string];
+    [self.calcController inputNumberString:string];
     [self configureView];
 }
 
 
 #pragma mark - IBAction
+
+- (IBAction)onCalcKey:(UIButton *)sender
+{
+    self.result = [self.calcController inputInteger:sender.tag];
+    [self configureView];
+}
+
+- (IBAction)onDateKey:(UIButton *)sender
+{
+    [self showCalendarView];
+}
 
 - (IBAction)onSetting:(UIButton *)sender {
     SettingViewController *settingViewController = [[SettingViewController alloc] initWithNibName:@"SettingViewController"
@@ -119,27 +152,6 @@ static const NSInteger DoubleZero = 10;
     }
 }
 
-- (IBAction)onFunction:(UIButton *)sender
-{
-    [self.calendarCalc inputFunction:sender.tag];
-    [self configureView];
-}
-
-- (IBAction)onNumber:(UIButton *)sender
-{
-    if (sender.tag < DoubleZero) {
-        [self.calendarCalc inputInteger:sender.tag];
-    } else if (sender.tag == DoubleZero) {
-        [self.calendarCalc inputInteger:0];
-        [self.calendarCalc inputInteger:0];
-    } else {
-        NSLog(@"TAG: %d", sender.tag);
-        abort();
-    }
-    [self configureView];
-    
-}
-
 - (IBAction)onClick:(UIButton *)sender
 {
     [self.player setCurrentTime:0];
@@ -150,6 +162,32 @@ static const NSInteger DoubleZero = 10;
 {
     [self.calendarViewController setDynamicCalendar:
      [(AppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
+}
+
+
+#pragma mark - DateSelect
+
+- (void)didSelectDate:(NSDate *)date
+{
+    [self dismissContentViewControllerAnimated:YES];
+    self.result = [self.calcController inputDate:date];
+    [self configureView];
+}
+
+- (void)didSelectWeek:(Week)week
+              exclude:(BOOL)exclude
+{
+    [self.calcController setWeek:week exclude:exclude];
+}
+
+- (void)calendarViewControllerDidCancel:(CalendarViewController *)calendarViewController
+{
+    [self dismissContentViewControllerAnimated:YES];
+}
+
+- (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
+{
+    [self showEventView:nil];
 }
 
 
@@ -166,31 +204,6 @@ static const NSInteger DoubleZero = 10;
 }
 
 
-#pragma mark - DateSelect
-
-- (void)didSelectDate:(NSDate *)date
-{
-    [self dismissContentViewControllerAnimated:YES];
-    [self.calendarCalc inputDate:date];
-    [self configureView];
-}
-
-- (void)didSelectWeek:(Week)week
-              exclude:(BOOL)exclude
-{
-    [self.calendarCalc setWeek:week exclude:exclude];
-}
-
-- (void)calendarViewControllerDidCancel:(CalendarViewController *)calendarViewController
-{
-    [self dismissContentViewControllerAnimated:YES];
-}
-
-- (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
-{
-    [self showEventView:nil];
-}
-
 #pragma mark - EventViewController
 
 - (void)eventViewControllerDidCancel:(EventViewController *)eventViewController
@@ -201,7 +214,7 @@ static const NSInteger DoubleZero = 10;
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController
 {
     [self dismissContentViewControllerAnimated:YES];
-    [self.calendarCalc inputDate:self.eventViewController.selectedDate];
+    self.result = [self.calcController inputDate:[eventViewController selectedDate]];
     [self configureView];
 }
 
@@ -240,10 +253,10 @@ static const NSInteger DoubleZero = 10;
 
 - (void)configureView
 {
-    self.display.text = [self.calendarCalcFormatter displayResult];
-    self.indicator.text = [self.calendarCalcFormatter displayIndicator];
-    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
-                      forState:UIControlStateNormal];
+    self.display.text = [self.result stringValue];
+//    self.indicator.text = [self.calcController displayIndicator];
+//    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
+//                      forState:UIControlStateNormal];
 }
 
 - (void)showCalendarView

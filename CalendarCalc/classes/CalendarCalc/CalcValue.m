@@ -19,7 +19,6 @@
 @property(strong, nonatomic) NSDate *date;
 
 - (NSString *)stringDecimalNumberValue;
-- (NSString *)stringDateValue;
 @end
 
 @implementation CalcValue
@@ -58,9 +57,8 @@
 {
     if ([self isNumber]) {
         return [CalcValueFormatter displayNumberWithCalcValue:self];
-        //return [self stringNumberValue];
     } else {
-        return [self stringDateValue];
+        return [CalcValueFormatter displayDateWithCalcValue:self];
     }
 }
 
@@ -195,10 +193,5 @@
     }
 
     return stringNumber;
-}
-
-- (NSString *)stringDateValue
-{
-    return [[NSDateFormatter yyyymmddFormatter] stringFromDate:self.date];
 }
 @end

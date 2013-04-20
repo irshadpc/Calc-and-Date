@@ -12,4 +12,5 @@
 
 @interface CalcValueFormatter : NSObject
 + (NSString *)displayNumberWithCalcValue:(CalcValue *)calcValue;
++ (NSString *)displayDateWithCalcValue:(CalcValue *)calcValue;
 @end
