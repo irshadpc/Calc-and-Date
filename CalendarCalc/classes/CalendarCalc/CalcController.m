@@ -34,6 +34,7 @@ typedef enum {
 - (CalcValue *)inputDecimalPoint;
 - (CalcValue *)clear;
 - (CalcValue *)reverseNumber;
+- (CalcValue *)deleteNumber;
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
@@ -142,8 +143,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
         case FunctionPlusMinus:
             return [self reverseNumber];
         case FunctionDelete:
-            [self.inputValue deleteNumber];
-            return self.inputValue;
+            return [self deleteNumber];
         case FunctionMax:
             NSLog(@"FUNCTION: %d", function);
             abort();
@@ -184,6 +184,17 @@ static const NSInteger KeyCodeDoubleZero = 10;
         return self.inputValue;
     }
     [self.inputValue reverseNumber];
+    return self.inputValue;
+}
+
+- (CalcValue *)deleteNumber
+{
+    if (self.currentMode == ModeEqual) {
+        self.inputValue = [[CalcValue alloc] init];
+        return self.inputValue;
+    }
+    
+    [self.inputValue deleteNumber];
     return self.inputValue;
 }
 
