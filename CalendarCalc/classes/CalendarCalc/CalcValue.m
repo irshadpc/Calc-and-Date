@@ -53,6 +53,16 @@
     return result;
 }
 
+- (BOOL)isNumber
+{
+    return !self.date;
+}
+
+- (BOOL)isCleared
+{
+    return !self.number && !self.decimal && !self.date;
+}
+
 - (NSString *)stringValue
 {
     if ([self isNumber]) {
@@ -173,11 +183,6 @@
 
 
 #pragma makr - Private
-
-- (BOOL)isNumber
-{
-    return !self.date;
-}
 
 - (NSString *)stringDecimalNumberValue
 {

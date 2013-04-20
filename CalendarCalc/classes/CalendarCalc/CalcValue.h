@@ -14,6 +14,7 @@
 + (CalcValue *)calcValueWithDate:(NSDate *)date;
 
 - (BOOL)isNumber;
+- (BOOL)isCleared;
 - (NSString *)stringValue;
 - (NSDecimalNumber *)decimalNumberValue;
 - (NSString *)stringNumberValue;

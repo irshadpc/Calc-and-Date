@@ -27,7 +27,7 @@
 
 - (void)test_20130401
 {
-    NSString *result = [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
+    NSString *result = [[self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]] stringValue];
    
     STAssertEqualObjects(@"2013/04/01", result, nil);
 }
@@ -36,7 +36,7 @@
 {
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
-    NSString *result = [self.calcController inputInteger:3];
+    NSString *result = [[self.calcController inputInteger:3] stringValue];
 
     STAssertEqualObjects(@"123", result, nil);
 }
@@ -49,7 +49,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:7];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
    
     STAssertEqualObjects(@"2013/04/08", result, nil);
 }
@@ -59,7 +59,7 @@
     [self.calcController inputInteger:8];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
    
     STAssertEqualObjects(@"2013/04/09", result, nil);
 }
@@ -69,7 +69,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
     [self.calcController inputInteger:FunctionMinus];
     [self.calcController inputInteger:7];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"2013/03/25", result, nil);
 }
@@ -79,7 +79,7 @@
     [self.calcController inputInteger:8];
     [self.calcController inputInteger:FunctionMinus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"2013/03/24", result, nil);
 }
@@ -91,7 +91,7 @@
     [self.calcController inputInteger:8];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:2];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"2013/05/11", result, nil);
 }
@@ -105,7 +105,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:6 day:1]];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:2];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"2013/06/03", result, nil);
 }
@@ -118,7 +118,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:9]];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
    
     STAssertEqualObjects(@"8", result, nil);
 }
@@ -128,7 +128,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:1]];
     [self.calcController inputInteger:FunctionMinus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:9]];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"-8", result, nil);
 }
@@ -140,7 +140,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:9]];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:1]];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"2013/05/09", result, nil);
 }
@@ -155,7 +155,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:1]];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:4 day:29]];
-    NSString *result = [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
 
     STAssertEqualObjects(@"2", result, nil);
 }

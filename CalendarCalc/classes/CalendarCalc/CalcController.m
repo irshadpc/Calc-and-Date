@@ -27,6 +27,7 @@
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode;
 - (CalcValue *)inputFunction:(Function)function;
+- (CalcValue *)clear;
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
@@ -124,8 +125,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
             [self.inputValue inputDecimalPoint];
             return self.inputValue;
         case FunctionClear:
-            [self.inputValue clear];
-            return self.inputValue;
+            return [self clear];
         case FunctionPlusMinus:
             [self.inputValue reverseNumber];
             return self.inputValue;
@@ -135,6 +135,17 @@ static const NSInteger KeyCodeDoubleZero = 10;
         case FunctionMax:
             NSLog(@"FUNCTION: %d", function);
             abort();
+    }
+}
+
+- (CalcValue *)clear
+{
+    if (![self.inputValue isCleared]) {
+        [self.inputValue clear];
+        return self.inputValue;
+    } else {
+        [self.resultValue clear];
+        return self.resultValue;
     }
 }
 
