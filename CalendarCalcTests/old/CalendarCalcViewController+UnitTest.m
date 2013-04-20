@@ -9,23 +9,18 @@
 #import "CalendarCalcViewController+UnitTest.h"
 
 @implementation CalendarCalcViewController (UnitTest)
-//- (void)pressNumberButton:(UIButton *)sender
-//{
-//    [self performSelector:@selector(onNumber:) withObject:sender];
-//}
-//
-//- (void)pressFunctionButton:(UIButton *)sender
-//{
-//    [self performSelector:@selector(onFunction:) withObject:sender];
-//}
-//
-//- (void)inputOutDate:(NSDate *)date
-//{
-//    [self performSelector:@selector(didSelectDate:) withObject:date];
-//}
-//
-//- (NSString *)resultText
-//{
-//    return [self.display text];
-//}
+- (void)pressCalcKey:(UIButton *)sender
+{
+    [self performSelector:@selector(onCalcKey:) withObject:sender];
+}
+
+- (void)inputOutDate:(NSDate *)date
+{
+    [self performSelector:@selector(didSelectDate:) withObject:date];
+}
+
+- (NSString *)resultText
+{
+    return [[self valueForKey:@"display"] text];
+}
 @end

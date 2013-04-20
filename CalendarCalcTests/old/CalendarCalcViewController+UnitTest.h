@@ -9,8 +9,7 @@
 #import "CalendarCalcViewController.h"
 
 @interface CalendarCalcViewController (UnitTest)
-- (void)pressNumberButton:(UIButton *)sender;
-- (void)pressFunctionButton:(UIButton *)sender;
+- (void)pressCalcKey:(UIButton *)sender;
 - (void)inputOutDate:(NSDate *)date;
 - (NSString *)resultText;
 @end

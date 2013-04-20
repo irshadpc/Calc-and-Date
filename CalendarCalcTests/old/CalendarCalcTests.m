@@ -15,115 +15,106 @@
 
 @interface CalendarCalcTests () {
   @private
-    CalcController *_calendarCalc;
+    CalcController *_calcController;
 }
 @end
 
 @implementation CalendarCalcTests
+- (void)setUp 
+{
+    _calcController = [[CalcController alloc] init];
+}
 
-//- (void)setUp 
-//{
-//    _calendarCalc = [[CalcController alloc] init];
-//}
-//
-//- (void)testCalendarCalc
-//{
-//    STAssertNotNil(_calendarCalc, @"CalendarCalc is nil");
-//}
-//
-//- (void)testInputNumber_1
-//{
-//    NSString *const result = [[_calendarCalc inputInteger:1] displayResult];
-//    STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
-//}
-//
-//- (void)testInputNumber_12
-//{
-//    [_calendarCalc inputInteger: 1];
-//    [_calendarCalc inputInteger: 2];
-//
-//    NSString *const result = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"12", result, @"RESULT: %@", result);
-//}
-//
-//- (void)testInputNumber_12_Point_3
-//{
-//    [_calendarCalc inputInteger:  1];
-//    [_calendarCalc inputInteger:  2];
-//    [_calendarCalc inputFunction:FunctionDecimal];
-//    [_calendarCalc inputInteger:  3];
-//
-//    NSString *const result = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"12.3", result, @"RESULT: %@", result);
-//}
-//
-//- (void)testInputNumber_12_PlusMinus 
-//{
-//    [_calendarCalc inputInteger:  1];
-//    [_calendarCalc inputInteger:  2];
-//    [_calendarCalc inputFunction:FunctionPlusMinus];
-//   
-//    NSString *const result = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"-12", result, @"RESULT: %@", result);
-//}
-//
-//- (void)testInputDate_2012_12_15
-//{
-//    NSString *const result = [[_calendarCalc inputDate:[NSDate dateWithYear: 2012
-//                                                                      month: 12
-//                                                                        day: 15]] displayResult];
-//    STAssertEqualObjects(@"2012/12/15", result, @"RESULT: %@", result);
-//}
-//
-//- (void)testInputFunction_20_Minus_30_Equal_PlusMinus_Minus_3_Equal
-//{
-//    [_calendarCalc inputInteger:  2];
-//    [_calendarCalc inputInteger:  0];
-//    [_calendarCalc inputFunction:FunctionMinus];
-//    [_calendarCalc inputInteger:  3];
-//    [_calendarCalc inputInteger:  0];
-//    [_calendarCalc inputFunction:FunctionEqual];
-//    [_calendarCalc inputFunction:FunctionPlusMinus];
-//    [_calendarCalc inputFunction:FunctionMinus];
-//    
-//    NSString *const result1 = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"10", result1, @"RESULT: %@", result1);
-//    
-//    [_calendarCalc inputInteger:  3];
-//    [_calendarCalc inputFunction:FunctionEqual];
-//   
-//    NSString *const result2 = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"7", result2, @"RESULT: %@", result2);
-//}
-//
-//- (void)testInputNumber_2_Multiply_00_Point_88_Equal
-//{
-//    [_calendarCalc inputInteger:  2];
-//    [_calendarCalc inputFunction:FunctionMultiply];
-//    [_calendarCalc inputInteger:  0];
-//    [_calendarCalc inputFunction:FunctionDecimal];
-//    [_calendarCalc inputInteger:  0];
-//    [_calendarCalc inputInteger:  8];
-//    [_calendarCalc inputInteger:  8];
-//    [_calendarCalc inputFunction:FunctionEqual];
-//   
-//    NSString *const result = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"0.176", result, @"RESULT: %@", result);
-//}
-//
-//- (void)testInputNumber_4_Multiply_3_Equal_3_Multiply_2_Equal
-//{
-//    [_calendarCalc inputInteger:  4];
-//    [_calendarCalc inputFunction:FunctionMultiply];
-//    [_calendarCalc inputInteger:  3];
-//    [_calendarCalc inputFunction:FunctionEqual];
-//    [_calendarCalc inputInteger:  3];
-//    [_calendarCalc inputFunction:FunctionMultiply];
-//    [_calendarCalc inputInteger:  2];
-//    [_calendarCalc inputFunction:FunctionEqual];
-//    
-//    NSString *const result = [[_calendarCalc result] displayResult];
-//    STAssertEqualObjects(@"6", result, @"RESULT: %@", result);
-//}
+- (void)testCalendarCalc
+{
+    STAssertNotNil(_calcController, @"CalendarCalc is nil");
+}
 
+- (void)testInputNumber_1
+{
+    NSString *const result = [[_calcController inputInteger:1] stringValue];
+    STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
+}
+
+- (void)testInputNumber_12
+{
+    [_calcController inputInteger: 1];
+    NSString *const result = [[_calcController inputInteger: 2] stringValue];
+    
+    STAssertEqualObjects(@"12", result, @"RESULT: %@", result);
+}
+
+- (void)testInputNumber_12_Point_3
+{
+    [_calcController inputInteger:  1];
+    [_calcController inputInteger:  2];
+    [_calcController inputInteger:FunctionDecimal];
+    NSString *const result = [[_calcController inputInteger:  3] stringValue];
+    
+    STAssertEqualObjects(@"12.3", result, @"RESULT: %@", result);
+}
+
+- (void)testInputNumber_12_PlusMinus 
+{
+    [_calcController inputInteger:  1];
+    [_calcController inputInteger:  2];
+    NSString *const result = [[_calcController inputInteger:FunctionPlusMinus] stringValue];
+    
+    STAssertEqualObjects(@"-12", result, @"RESULT: %@", result);
+}
+
+- (void)testInputDate_2012_12_15
+{
+    NSString *const result = [[_calcController inputDate:[NSDate dateWithYear: 2012
+                                                                      month: 12
+                                                                        day: 15]] stringValue];
+    STAssertEqualObjects(@"2012/12/15", result, @"RESULT: %@", result);
+}
+
+- (void)testinputInteger_20_Minus_30_Equal_PlusMinus_Minus_3_Equal
+{
+    [_calcController inputInteger:  2];
+    [_calcController inputInteger:  0];
+    [_calcController inputInteger:FunctionMinus];
+    [_calcController inputInteger:  3];
+    [_calcController inputInteger:  0];
+    [_calcController inputInteger:FunctionEqual];
+    [_calcController inputInteger:FunctionPlusMinus];
+    NSString *const result1 = [[_calcController inputInteger:FunctionMinus] stringValue];
+    
+    STAssertEqualObjects(@"10", result1, @"RESULT: %@", result1);
+    
+    [_calcController inputInteger:  3];
+    NSString *const result2 = [[_calcController inputInteger:FunctionEqual] stringValue];
+    
+    STAssertEqualObjects(@"7", result2, @"RESULT: %@", result2);
+}
+
+- (void)testInputNumber_2_Multiply_00_Point_88_Equal
+{
+    [_calcController inputInteger:  2];
+    [_calcController inputInteger:FunctionMultiply];
+    [_calcController inputInteger:  0];
+    [_calcController inputInteger:FunctionDecimal];
+    [_calcController inputInteger:  0];
+    [_calcController inputInteger:  8];
+    [_calcController inputInteger:  8];
+    NSString *const result = [[_calcController inputInteger:FunctionEqual] stringValue];
+    
+    STAssertEqualObjects(@"0.176", result, @"RESULT: %@", result);
+}
+
+- (void)testInputNumber_4_Multiply_3_Equal_3_Multiply_2_Equal
+{
+    [_calcController inputInteger:  4];
+    [_calcController inputInteger:FunctionMultiply];
+    [_calcController inputInteger:  3];
+    [_calcController inputInteger:FunctionEqual];
+    [_calcController inputInteger:  3];
+    [_calcController inputInteger:FunctionMultiply];
+    [_calcController inputInteger:  2];
+    NSString *const result = [[_calcController inputInteger:FunctionEqual] stringValue];
+    
+    STAssertEqualObjects(@"6", result, @"RESULT: %@", result);
+}
 @end
