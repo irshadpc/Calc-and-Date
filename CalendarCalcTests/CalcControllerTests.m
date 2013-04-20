@@ -157,4 +157,20 @@
    
     STAssertEqualObjects(@"5", result, nil);
 }
+
+- (void)test_10_Plus_3_Equal_Clear_4_Plus_3_Equal_7
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:0];
+    [self.calcController inputInteger:FunctionPlus];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:FunctionEqual];
+    [self.calcController inputInteger:FunctionClear];
+    [self.calcController inputInteger:4];
+    [self.calcController inputInteger:FunctionPlus];
+    [self.calcController inputInteger:3];
+    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+   
+    STAssertEqualObjects(@"7", result, nil);
+}
 @end

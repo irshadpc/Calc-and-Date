@@ -112,7 +112,6 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)inputFunction:(Function)function
 {
-    self.equalMode = function == FunctionEqual;
     switch (function) {
         case FunctionNone:
         case FunctionPlus:
@@ -151,6 +150,8 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)calculateWithFunction:(Function)function
 {
+    self.equalMode = function == FunctionEqual;
+    
     if (!self.resultValue || self.currentFunction == FunctionEqual) {
         self.resultValue = self.inputValue;
         self.inputValue = [[CalcValue alloc] init];
