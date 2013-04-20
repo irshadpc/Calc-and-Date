@@ -155,6 +155,7 @@
 - (void)deleteNumber
 {
     if (![self isNumber]) {
+        self.date = nil;
         return;
     }
 

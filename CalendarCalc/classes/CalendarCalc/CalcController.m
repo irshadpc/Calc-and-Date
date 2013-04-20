@@ -193,7 +193,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
         self.inputValue = [[CalcValue alloc] init];
         return self.inputValue;
     }
-    
+
     [self.inputValue deleteNumber];
     return self.inputValue;
 }
