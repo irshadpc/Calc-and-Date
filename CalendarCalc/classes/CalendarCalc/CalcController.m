@@ -14,6 +14,12 @@
 #import "NSString+Calculator.h"
 #import "NSString+Locale.h"
 
+typedef enum {
+   ModeInput,
+   ModeFunction,
+   ModeEqual,
+} Mode;
+
 @interface CalcController ()
 @property(strong, nonatomic) NumberCalcProcessor *numberCalcProcessor;
 @property(strong, nonatomic) DateCalcProcessor *dateCalcProcessor;
@@ -21,7 +27,7 @@
 @property(strong, nonatomic) CalcValue *inputValue;
 @property(strong, nonatomic) NSDecimalNumber *oldNumberInput;
 @property(nonatomic) Function oldFunction;
-@property(nonatomic, getter=isEqualMode) BOOL equalMode;
+@property(nonatomic) Mode currentMode;
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode;
 - (CalcValue *)inputFunction:(Function)function;
@@ -30,6 +36,7 @@
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
+- (Mode)modeWithFunction:(Function)function;
 - (void)reset;
 @end
 
@@ -57,9 +64,11 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)inputDate:(NSDate *)date
 {
-    if (self.isEqualMode) {
+    if (self.currentMode == ModeEqual) {
         [self reset];
     }
+
+    self.currentMode = ModeInput;
     [self.inputValue inputDate:date];
     
     return self.inputValue;
@@ -103,9 +112,10 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode
 {
-    if (self.isEqualMode) {
+    if (self.currentMode == ModeEqual) {
         [self reset];
     }
+    self.currentMode = ModeInput;
     
     if (keycode == KeyCodeDoubleZero) {
         [self.inputValue inputNumberString:@"00"];
@@ -154,7 +164,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)reverseNumber
 {
-    if (self.isEqualMode) {
+    if (self.currentMode == ModeEqual) {
         CalcValue *resultValue = self.resultValue;
         [self reset];
         self.inputValue = resultValue;
@@ -167,7 +177,13 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)calculateWithFunction:(Function)function
 {
-    self.equalMode = function == FunctionEqual;
+    if (self.currentMode != ModeInput && function != FunctionEqual) {
+        self.currentFunction = function;
+        self.currentMode = [self modeWithFunction:function];
+        return self.resultValue;
+    }
+    
+    self.currentMode = [self modeWithFunction:function];
     
     if (!self.resultValue || self.currentFunction == FunctionEqual) {
         self.resultValue = self.inputValue;
@@ -175,14 +191,14 @@ static const NSInteger KeyCodeDoubleZero = 10;
         self.currentFunction = function;
         return self.resultValue;
     }
-
+    
     if ([self.resultValue isNumber] && [self.inputValue isNumber]) {
         self.resultValue = [self numberCalculate];
     } else {
         self.resultValue = [self dateCalculate];
     }
 
-    if (!self.isEqualMode) {
+    if (self.currentMode == ModeFunction) {
         self.currentFunction = function;
         self.inputValue = [[CalcValue alloc] init];
     } 
@@ -221,12 +237,17 @@ static const NSInteger KeyCodeDoubleZero = 10;
     }
 }
 
+- (Mode)modeWithFunction:(Function)function
+{
+    return function == FunctionEqual ? ModeEqual : ModeFunction;
+}
+
 - (void)reset
 {
     self.currentFunction = FunctionNone;
     self.resultValue = nil;
     self.inputValue = [[CalcValue alloc] init];
     self.oldNumberInput = nil;
-    self.equalMode = NO;
+    self.currentMode = ModeInput;
 }
 @end
