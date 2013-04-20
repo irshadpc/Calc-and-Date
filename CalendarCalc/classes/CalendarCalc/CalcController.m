@@ -239,8 +239,8 @@ static const NSInteger KeyCodeDoubleZero = 10;
                                                              rOperand:self.inputValue];
     if ([result isNumber] && self.oldNumberInput) {
         NSDecimalNumber *numberResult = [self.numberCalcProcessor calculateWithFunction:self.oldFunction
-                                                                               lOperand:[result decimalNumberValue]
-                                                                               rOperand:self.oldNumberInput];
+                                                                               lOperand:self.oldNumberInput
+                                                                               rOperand:[result decimalNumberValue]];
         self.oldNumberInput = nil;
         self.oldFunction = FunctionNone;
         return [CalcValue calcValueWithDecimalNumber:numberResult];
