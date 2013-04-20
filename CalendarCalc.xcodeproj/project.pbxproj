@@ -196,7 +196,7 @@
 		6213560216737DA100C93999 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		6213560A16737DA100C93999 /* CalendarCalcTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CalendarCalcTests-Info.plist"; sourceTree = "<group>"; };
 		6213560C16737DA100C93999 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		621B0D2B168FE33D00DE2150 /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Function.h; path = ../Function.h; sourceTree = "<group>"; };
+		621B0D2B168FE33D00DE2150 /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
 		62324C5A167C34D70062EF1B /* CalendarCalcTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCalcTests.h; sourceTree = "<group>"; };
 		62324C5B167C34D70062EF1B /* CalendarCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCalcTests.m; sourceTree = "<group>"; };
 		62324C63167C42A50062EF1B /* NSString+Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Locale.h"; sourceTree = "<group>"; };
