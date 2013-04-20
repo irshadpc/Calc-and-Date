@@ -253,10 +253,10 @@
 
 - (void)configureView
 {
-    self.display.text = [self.result stringValue];
-//    self.indicator.text = [self.calcController displayIndicator];
-//    [self.clearButton setTitle:[self.calendarCalcFormatter displayClearButtonTitle]
-//                      forState:UIControlStateNormal];
+    self.display.text = self.result ? [self.result stringValue] : @"0";
+    self.indicator.text = [NSString stringWithFunction:[self.calcController currentFunction]];
+    [self.clearButton setTitle:[self.calcController isAllCleared] ? @"AC" : @"C"
+                      forState:UIControlStateNormal];
 }
 
 - (void)showCalendarView

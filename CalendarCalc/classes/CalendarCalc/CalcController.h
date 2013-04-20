@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "Week.h"
+#import "Function.h"
 
 @class CalcValue;
 @interface CalcController : NSObject
+@property(nonatomic) Function currentFunction;
+
 - (CalcValue *)inputInteger:(NSInteger)integer;
 - (CalcValue *)inputDate:(NSDate *)date;
 - (CalcValue *)inputNumberString:(NSString *)numberString;
 - (void)setWeek:(Week)week exclude:(BOOL)exclude;
+- (BOOL)isAllCleared;
 @end

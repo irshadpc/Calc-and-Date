@@ -10,7 +10,6 @@
 #import "NumberCalcProcessor.h"
 #import "DateCalcProcessor.h"
 #import "CalcValue.h"
-#import "Function.h"
 #import "NSArray+safe.h"
 #import "NSString+Calculator.h"
 #import "NSString+Locale.h"
@@ -20,7 +19,6 @@
 @property(strong, nonatomic) DateCalcProcessor *dateCalcProcessor;
 @property(strong, nonatomic) CalcValue *resultValue;
 @property(strong, nonatomic) CalcValue *inputValue;
-@property(nonatomic) Function currentFunction;
 @property(strong, nonatomic) NSDecimalNumber *oldNumberInput;
 @property(nonatomic) Function oldFunction;
 @property(nonatomic, getter=isEqualMode) BOOL equalMode;
@@ -93,6 +91,12 @@ static const NSInteger KeyCodeDoubleZero = 10;
     [self.dateCalcProcessor setExcludeWeeks:excludeWeeks];
 }
 
+- (BOOL)isAllCleared
+{
+    return (!self.inputValue || [self.inputValue isCleared])
+            && (!self.resultValue || [self.resultValue isCleared]);
+}
+
 
 #pragma mark - Private
 
@@ -143,8 +147,8 @@ static const NSInteger KeyCodeDoubleZero = 10;
         [self.inputValue clear];
         return self.inputValue;
     } else {
-        [self.resultValue clear];
-        return self.resultValue;
+        [self reset];
+        return self.inputValue;
     }
 }
 
