@@ -26,6 +26,7 @@
 - (CalcValue *)inputKeyCode:(NSInteger)keycode;
 - (CalcValue *)inputFunction:(Function)function;
 - (CalcValue *)clear;
+- (CalcValue *)reverseNumber;
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
@@ -130,8 +131,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
         case FunctionClear:
             return [self clear];
         case FunctionPlusMinus:
-            [self.inputValue reverseNumber];
-            return self.inputValue;
+            return [self reverseNumber];
         case FunctionDelete:
             [self.inputValue deleteNumber];
             return self.inputValue;
@@ -150,6 +150,19 @@ static const NSInteger KeyCodeDoubleZero = 10;
         [self reset];
         return self.inputValue;
     }
+}
+
+- (CalcValue *)reverseNumber
+{
+    if (self.isEqualMode) {
+        CalcValue *resultValue = self.resultValue;
+        [self reset];
+        self.inputValue = resultValue;
+        [self.inputValue reverseNumber];
+        return self.inputValue;
+    }
+    [self.inputValue reverseNumber];
+    return self.inputValue;
 }
 
 - (CalcValue *)calculateWithFunction:(Function)function
