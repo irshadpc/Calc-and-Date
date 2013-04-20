@@ -31,12 +31,14 @@ typedef enum {
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode;
 - (CalcValue *)inputFunction:(Function)function;
+- (CalcValue *)inputDecimalPoint;
 - (CalcValue *)clear;
 - (CalcValue *)reverseNumber;
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
 - (Mode)modeWithFunction:(Function)function;
+- (void)willInputMode;
 - (void)reset;
 @end
 
@@ -64,18 +66,18 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)inputDate:(NSDate *)date
 {
-    if (self.currentMode == ModeEqual) {
-        [self reset];
-    }
-
+    [self willInputMode];
     self.currentMode = ModeInput;
+
     [self.inputValue inputDate:date];
-    
     return self.inputValue;
 }
 
 - (CalcValue *)inputNumberString:(NSString *)numberString
 {
+    [self willInputMode];
+    self.currentMode = ModeInput;
+    
     NSArray *components = [numberString componentsSeparatedByString:[NSString decimalSeparator]];
     NSString *number = [components safeObjectAtIndex:0];
     if (number) {
@@ -112,9 +114,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode
 {
-    if (self.currentMode == ModeEqual) {
-        [self reset];
-    }
+    [self willInputMode];
     self.currentMode = ModeInput;
     
     if (keycode == KeyCodeDoubleZero) {
@@ -136,8 +136,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
         case FunctionEqual:
             return [self calculateWithFunction:function];
         case FunctionDecimal:
-            [self.inputValue inputDecimalPoint];
-            return self.inputValue;
+            return [self inputDecimalPoint];
         case FunctionClear:
             return [self clear];
         case FunctionPlusMinus:
@@ -153,6 +152,11 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)clear
 {
+    if (self.currentMode == ModeEqual) {
+        [self reset];
+        return self.inputValue;
+    }
+    
     if (![self.inputValue isCleared]) {
         [self.inputValue clear];
         return self.inputValue;
@@ -160,6 +164,14 @@ static const NSInteger KeyCodeDoubleZero = 10;
         [self reset];
         return self.inputValue;
     }
+}
+
+- (CalcValue *)inputDecimalPoint
+{
+    [self willInputMode];
+    self.currentMode = ModeInput;
+    [self.inputValue inputDecimalPoint];
+    return self.inputValue;
 }
 
 - (CalcValue *)reverseNumber
@@ -240,6 +252,15 @@ static const NSInteger KeyCodeDoubleZero = 10;
 - (Mode)modeWithFunction:(Function)function
 {
     return function == FunctionEqual ? ModeEqual : ModeFunction;
+}
+
+- (void)willInputMode
+{
+    if (self.currentMode == ModeEqual) {
+        [self reset];
+    } else if (self.currentMode == ModeFunction) {
+        self.inputValue = [[CalcValue alloc] init];
+    }
 }
 
 - (void)reset
