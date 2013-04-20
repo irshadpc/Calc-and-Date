@@ -88,17 +88,22 @@
         return [NSDecimalNumber zero];
     }
     return decimalNumber;
-
 }
 
 - (NSString *)stringNumberValue
 {
+    if (!self.number || [self.number length] == 0) {
+        return @"0";
+    }
     return self.number;
 }
 
 - (NSString *)stringDecimalValue
 {
-    return self.decimal;
+    if (self.decimal) {
+        return [NSString stringWithFormat:@"%@%@", [NSString decimalSeparator], self.decimal];
+    }
+    return @"";
 }
 
 - (NSDate *)dateValue
@@ -173,7 +178,7 @@
     if (!self.number) {
         self.number = [NSMutableString string];
     }
-
+   
     if ([self.number hasPrefix:@"-"]) {
         [self.number deleteCharactersInRange:NSMakeRange(0, 1)];
     } else {
@@ -186,17 +191,6 @@
 
 - (NSString *)stringDecimalNumberValue
 {
-    NSMutableString *stringNumber = [NSMutableString string];
-    if (self.number && [self.number length] > 0) {
-        [stringNumber appendString:self.number];
-    } else {
-        [stringNumber appendString:@"0"];
-    }
-
-    if (self.decimal) {
-        [stringNumber appendFormat:@"%@%@", [NSString decimalSeparator], self.decimal];
-    }
-
-    return stringNumber;
+    return [NSString stringWithFormat:@"%@%@", [self stringNumberValue], [self stringDecimalValue]];
 }
 @end

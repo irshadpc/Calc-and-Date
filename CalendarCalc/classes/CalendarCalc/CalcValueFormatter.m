@@ -11,27 +11,24 @@
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSNumber+Predicate.h"
 #import "NSNumberFormatter+CalendarCalc.h"
-#import "NSString+Locale.h"
 
 @implementation CalcValueFormatter
 + (NSString *)displayNumberWithCalcValue:(CalcValue *)calcValue
 {
-    NSDecimalNumber *number = nil;
-    if ([calcValue stringNumberValue]) {
-        number = [NSDecimalNumber decimalNumberWithString:[calcValue stringNumberValue]];
-    } else {
-        number = [NSDecimalNumber zero];
+    NSMutableString *numberString = [NSMutableString stringWithString:[calcValue stringNumberValue]];
+    BOOL isMinus = [numberString hasPrefix:@"-"];
+    if (isMinus) {
+        [numberString deleteCharactersInRange:NSMakeRange(0, 1)];
     }
-    
+     
+    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:numberString];
     if ([number isNan]) {
         number = [NSDecimalNumber zero];
     }
-    NSMutableString *numberString = [NSMutableString stringWithString:[[NSNumberFormatter displayLongNumberFormatter]
-                                                                       stringFromNumber:number]];
-    if ([calcValue stringDecimalValue]) {
-        [numberString appendFormat:@"%@%@", [NSString decimalSeparator], [calcValue stringDecimalValue]];
-    }
-    return numberString;
+    
+    NSString *formattedNumberString = [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:number];
+    NSString *sign = isMinus ? @"-" : @"";
+    return [NSString stringWithFormat:@"%@%@%@", sign, formattedNumberString, [calcValue stringDecimalValue]];
 }
 
 + (NSString *)displayDateWithCalcValue:(CalcValue *)calcValue
