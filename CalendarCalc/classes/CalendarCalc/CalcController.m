@@ -25,8 +25,8 @@ typedef enum {
 @property(strong, nonatomic) DateCalcProcessor *dateCalcProcessor;
 @property(strong, nonatomic) CalcValue *resultValue;
 @property(strong, nonatomic) CalcValue *inputValue;
-@property(strong, nonatomic) NSDecimalNumber *oldNumberInput;
-@property(nonatomic) Function oldFunction;
+@property(strong, nonatomic) NSDecimalNumber *cachedNumberInput;
+@property(nonatomic) Function cachedFunction;
 @property(nonatomic) Mode currentMode;
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode;
@@ -38,6 +38,7 @@ typedef enum {
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
+- (CalcValue *)dateCalculateCacheWithFunction:(Function)function;
 - (Mode)modeWithFunction:(Function)function;
 - (void)willInputMode;
 - (void)reset;
@@ -214,7 +215,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
         self.currentFunction = function;
         return self.resultValue;
     }
-    
+
     if ([self.resultValue isNumber] && [self.inputValue isNumber]) {
         self.resultValue = [self numberCalculate];
     } else {
@@ -240,24 +241,35 @@ static const NSInteger KeyCodeDoubleZero = 10;
 - (CalcValue *)dateCalculate
 {
     if (self.currentFunction == FunctionMultiply || self.currentFunction == FunctionDivide) {
-        self.oldNumberInput = [self.resultValue decimalNumberValue];
-        self.oldFunction = self.currentFunction;
-        return self.inputValue;
+        return [self dateCalculateCacheWithFunction:self.currentFunction];
     }
     
     CalcValue *result = [self.dateCalcProcessor calculateWithFunction:self.currentFunction
                                                              lOperand:self.resultValue
                                                              rOperand:self.inputValue];
-    if ([result isNumber] && self.oldNumberInput) {
-        NSDecimalNumber *numberResult = [self.numberCalcProcessor calculateWithFunction:self.oldFunction
-                                                                               lOperand:self.oldNumberInput
+    if ([result isNumber] && self.cachedNumberInput) {
+        NSDecimalNumber *numberResult = [self.numberCalcProcessor calculateWithFunction:self.cachedFunction
+                                                                               lOperand:self.cachedNumberInput
                                                                                rOperand:[result decimalNumberValue]];
-        self.oldNumberInput = nil;
-        self.oldFunction = FunctionNone;
+        self.cachedNumberInput = nil;
+        self.cachedFunction = FunctionNone;
         return [CalcValue calcValueWithDecimalNumber:numberResult];
     } else {
         return result;
     }
+}
+
+- (CalcValue *)dateCalculateCacheWithFunction:(Function)function
+{
+    if (![self.resultValue isNumber] || [[self.resultValue decimalNumberValue] isEqualToNumber:@0]) {
+        self.resultValue = nil;
+        self.inputValue = [[CalcValue alloc] init];
+        return self.inputValue;
+    }
+    
+    self.cachedNumberInput = [self.resultValue decimalNumberValue];
+    self.cachedFunction = function;
+    return self.inputValue;   
 }
 
 - (Mode)modeWithFunction:(Function)function
@@ -279,7 +291,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
     self.currentFunction = FunctionNone;
     self.resultValue = nil;
     self.inputValue = [[CalcValue alloc] init];
-    self.oldNumberInput = nil;
+    self.cachedNumberInput = nil;
     self.currentMode = ModeInput;
 }
 @end

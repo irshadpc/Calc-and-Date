@@ -757,7 +757,7 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"5", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_10_Divide_2012_07_28_Plus_12_Plus_3_2012_08_15_Equal
+- (void)test_10_Divide_2012_07_28_Plus_12_Plus_3_Plus_2012_08_15_Equal
 {
     // 10 / 2012/07/28 + 12 + 3 + 2012/08/15 = 3.333333
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:1]];
