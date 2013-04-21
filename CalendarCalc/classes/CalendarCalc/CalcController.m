@@ -207,11 +207,10 @@ static const NSInteger KeyCodeDoubleZero = 10;
         return self.resultValue;
     }
     
-    self.currentMode = [self modeWithFunction:function];
-    
     if (!self.resultValue || self.currentFunction == FunctionEqual) {
         self.resultValue = self.inputValue;
         self.inputValue = [[CalcValue alloc] init];
+        self.currentMode = [self modeWithFunction:function];
         self.currentFunction = function;
         return self.resultValue;
     }
@@ -221,7 +220,8 @@ static const NSInteger KeyCodeDoubleZero = 10;
     } else {
         self.resultValue = [self dateCalculate];
     }
-
+    
+    self.currentMode = [self modeWithFunction:function];
     if (self.currentMode == ModeFunction) {
         self.currentFunction = function;
         self.inputValue = [[CalcValue alloc] init];
@@ -232,14 +232,26 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)numberCalculate
 {
+    NSDecimalNumber *rOperand = nil;
+    if (![self.inputValue isCleared]) {
+        rOperand = [self.inputValue decimalNumberValue];
+    } else {
+        rOperand = [self.resultValue decimalNumberValue];
+    }
     NSDecimalNumber *result = [self.numberCalcProcessor calculateWithFunction:self.currentFunction
                                                                      lOperand:[self.resultValue decimalNumberValue] 
-                                                                     rOperand:[self.inputValue decimalNumberValue]];
+                                                                     rOperand:rOperand];
     return [CalcValue calcValueWithDecimalNumber:result];
 }
 
 - (CalcValue *)dateCalculate
 {
+    if (self.currentMode == ModeEqual && [self.resultValue isNumber]) {
+        self.currentFunction = FunctionPlus;
+        [self.inputValue clear];
+        return [self numberCalculate];
+    }
+    
     if (self.currentFunction == FunctionMultiply || self.currentFunction == FunctionDivide) {
         return [self dateCalculateCacheWithFunction:self.currentFunction];
     }
