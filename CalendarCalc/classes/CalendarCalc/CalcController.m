@@ -232,15 +232,12 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)numberCalculate
 {
-    NSDecimalNumber *rOperand = nil;
-    if (![self.inputValue isCleared]) {
-        rOperand = [self.inputValue decimalNumberValue];
-    } else {
-        rOperand = [self.resultValue decimalNumberValue];
-    }
+    if ([self.inputValue isCleared]) {
+        self.inputValue = [CalcValue calcValueWithDecimalNumber:[self.resultValue decimalNumberValue]];
+    } 
     NSDecimalNumber *result = [self.numberCalcProcessor calculateWithFunction:self.currentFunction
                                                                      lOperand:[self.resultValue decimalNumberValue] 
-                                                                     rOperand:rOperand];
+                                                                     rOperand:[self.inputValue decimalNumberValue]];
     return [CalcValue calcValueWithDecimalNumber:result];
 }
 

@@ -147,9 +147,9 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"60", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_10_Plus_20_Plus_Equal
+- (void)test_10_Plus_20_Plus_Equal_Equal
 {
-    // 10 + 20 + = 60
+    // 10 + 20 + = = 90
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:1]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionPlus]];
@@ -162,11 +162,15 @@ static const NSInteger DOUBLE_ZERO = 10;
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
 
     STAssertEqualObjects(@"60", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+
+    STAssertEqualObjects(@"90", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_10_Plus_20_Equal_Equal
 {
-    // 10 + 20 = = 50
+    // 10 + 20 = = = 70
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:1]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionPlus]];
@@ -179,6 +183,10 @@ static const NSInteger DOUBLE_ZERO = 10;
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
 
     STAssertEqualObjects(@"50", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+
+    STAssertEqualObjects(@"70", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_10_Plus_2012_07_28_Plus_2012_07_30_Equal
@@ -349,9 +357,9 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"-40", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_10_Minus_20_Minus_Equal
+- (void)test_10_Minus_20_Minus_Equal_Equal
 {
-    // 10 - 20 - = 0
+    // 10 - 20 - = = 10
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:1]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionMinus]];
@@ -361,11 +369,13 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"-10", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
     STAssertEqualObjects(@"0", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+    STAssertEqualObjects(@"10", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_10_Minus_20_Equal_Equal
+- (void)test_10_Minus_20_Equal_Equal_Equal
 {
-    // 10 - 20 = = -30
+    // 10 - 20 = = = -50
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:1]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionMinus]];
@@ -375,6 +385,8 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"-10", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
     STAssertEqualObjects(@"-30", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+    STAssertEqualObjects(@"-50", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_10_Minus_2012_07_28_Minus_2012_07_30_Equal
@@ -531,9 +543,9 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"12,000", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_20_Multiply_20_Multiply_Equal
+- (void)test_20_Multiply_20_Multiply_Equal_Equal
 {
-    // 20 * 20 * = 160000
+    // 20 * 20 * = = 64000000
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:2]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionMultiply]];
@@ -543,11 +555,13 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"400", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
     STAssertEqualObjects(@"160,000", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+    STAssertEqualObjects(@"64,000,000", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_20_Multiply_20_Equal_Equal
+- (void)test_20_Multiply_20_Equal_Equal_Equal
 {
-    // 20 * 20 = = 8000
+    // 20 * 20 = = = 160000
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:2]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionMultiply]];
@@ -557,6 +571,8 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"400", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
     STAssertEqualObjects(@"8,000", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+    STAssertEqualObjects(@"160,000", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_20_Mlutiply_2012_07_28_Plus_2012_07_30_Equal
@@ -713,9 +729,9 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"0.03333333333", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_40_Divide_20_Divide_Equal
+- (void)test_40_Divide_20_Divide_Equal_Equal
 {
-    // 40 / 20 / = 1
+    // 40 / 20 / = = 0.5
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionClear]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionClear]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:4]];
@@ -727,11 +743,13 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"2", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
     STAssertEqualObjects(@"1", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+    STAssertEqualObjects(@"0.5", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
-- (void)test_40_Divide_20_Equal_Equal
+- (void)test_40_Divide_20_Equal_Equal_Equal
 {
-    // 40 / 20 = = 0.1
+    // 40 / 20 = = = 0.005
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:4]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:0]];
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionDivide]];
@@ -741,6 +759,8 @@ static const NSInteger DOUBLE_ZERO = 10;
     STAssertEqualObjects(@"2", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
     [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
     STAssertEqualObjects(@"0.1", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
+    [_viewController pressCalcKey:(UIButton *)[_view viewWithTag:FunctionEqual]];
+    STAssertEqualObjects(@"0.005", [_viewController resultText], @"RESULT: %@", [_viewController resultText]);
 }
 
 - (void)test_10_Divide_2012_07_28_Plus_2012_07_30_Equal
