@@ -8,9 +8,13 @@
 
 #import "CalcValueFormatter.h"
 #import "CalcValue.h"
+#import "NumberFormat.h"
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSNumber+Predicate.h"
 #import "NSNumberFormatter+CalendarCalc.h"
+#import "NSString+Locale.h"
+#import "NSString+Safe.h"
+
 
 @implementation CalcValueFormatter
 + (NSString *)displayNumberWithCalcValue:(CalcValue *)calcValue
@@ -26,9 +30,18 @@
         number = [NSDecimalNumber zero];
     }
     
-    NSString *formattedNumberString = [[NSNumberFormatter displayLongNumberFormatter] stringFromNumber:number];
+    NSNumberFormatter *numberFormatter = nil;
+    if ([numberString length] > MaxNumberDigits) {
+        numberFormatter = [NSNumberFormatter shortNumberFormatter];
+    } else {
+        numberFormatter = [NSNumberFormatter longNumberFormatter];
+    }
+
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:number];
+    NSUInteger decimalLength = MaxNumberDigits - [numberString length] + 3;
+    NSString *decimalString = [[calcValue stringDecimalValue] safeSubstringToIndex:decimalLength];
     NSString *sign = isMinus ? @"-" : @"";
-    return [NSString stringWithFormat:@"%@%@%@", sign, formattedNumberString, [calcValue stringDecimalValue]];
+    return [NSString stringWithFormat:@"%@%@%@", sign, formattedNumberString, decimalString];
 }
 
 + (NSString *)displayDateWithCalcValue:(CalcValue *)calcValue

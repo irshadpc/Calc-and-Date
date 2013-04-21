@@ -10,7 +10,7 @@
 #import "NumberFormat.h"
 
 @implementation NSNumberFormatter (CalendarCalc)
-+ (NSNumberFormatter *)displayLongNumberFormatter
++ (NSNumberFormatter *)longNumberFormatter
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
@@ -18,7 +18,7 @@
     return numberFormatter;
 }
 
-+ (NSNumberFormatter *)displayShortNumberFormatter
++ (NSNumberFormatter *)shortNumberFormatter
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
