@@ -40,6 +40,7 @@
 		6235AD6D16FF379400712A78 /* DatePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6235AD6B16FF379400712A78 /* DatePickerController.xib */; };
 		6235AD7016FF3B1800712A78 /* UIView+MutableFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6235AD6F16FF3B1800712A78 /* UIView+MutableFrame.m */; };
 		6235AD7316FFB7DE00712A78 /* CalendarViewController+Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 6235AD7216FFB7DE00712A78 /* CalendarViewController+Week.m */; };
+		623E99701723FE1D0012404E /* CalcValueFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 623E996F1723FE1D0012404E /* CalcValueFormatterTests.m */; };
 		62553A1E1710AC05000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62553A1D1710ABFD000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m */; };
 		625B4E671698613600D94A4E /* UIImage+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 625B4E661698613600D94A4E /* UIImage+Calculator.m */; };
 		625B4E7416986DDC00D94A4E /* delete~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 625B4E7016986DDC00D94A4E /* delete~ipad.png */; };
@@ -212,6 +213,8 @@
 		6235AD7116FFB7DE00712A78 /* CalendarViewController+Week.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CalendarViewController+Week.h"; sourceTree = "<group>"; };
 		6235AD7216FFB7DE00712A78 /* CalendarViewController+Week.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CalendarViewController+Week.m"; sourceTree = "<group>"; };
 		6235AD7416FFBC5500712A78 /* CalendarViewController_Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController_Common.h; sourceTree = "<group>"; };
+		623E996E1723FE1C0012404E /* CalcValueFormatterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcValueFormatterTests.h; sourceTree = "<group>"; };
+		623E996F1723FE1D0012404E /* CalcValueFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcValueFormatterTests.m; sourceTree = "<group>"; };
 		62553A1C1710ABF9000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+AdditionalConvenienceConstructor.h"; sourceTree = "<group>"; };
 		62553A1D1710ABFD000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+AdditionalConvenienceConstructor.m"; sourceTree = "<group>"; };
 		625B4E651698613600D94A4E /* UIImage+Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Calculator.h"; sourceTree = "<group>"; };
@@ -471,6 +474,8 @@
 			children = (
 				62676426171B6EC000D0A32C /* CalcControllerTests.h */,
 				62676427171B6EC100D0A32C /* CalcControllerTests.m */,
+				623E996E1723FE1C0012404E /* CalcValueFormatterTests.h */,
+				623E996F1723FE1D0012404E /* CalcValueFormatterTests.m */,
 				62D886041718DE0700EACAFA /* NumberCalcTests.h */,
 				62D886051718DE0700EACAFA /* NumberCalcTests.m */,
 				6267641A171A7D4E00D0A32C /* DateCalcTests.h */,
@@ -1078,6 +1083,7 @@
 				62D886061718DE0700EACAFA /* NumberCalcTests.m in Sources */,
 				6267641C171A7D4E00D0A32C /* DateCalcTests.m in Sources */,
 				62676428171B6EC100D0A32C /* CalcControllerTests.m in Sources */,
+				623E99701723FE1D0012404E /* CalcValueFormatterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,7 +31,9 @@
     }
     
     NSNumberFormatter *numberFormatter = nil;
-    if ([numberString length] > MaxNumberDigits) {
+    if ([calcValue decimalNumberLength] <= MaxDigits) {
+        numberFormatter = [NSNumberFormatter longNumberFormatter];
+    } else if ([numberString length] > MaxNumberDigits) {
         numberFormatter = [NSNumberFormatter shortNumberFormatter];
     } else {
         numberFormatter = [NSNumberFormatter longNumberFormatter];

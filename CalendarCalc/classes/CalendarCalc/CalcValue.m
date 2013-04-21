@@ -8,6 +8,7 @@
 
 #import "CalcValue.h"
 #import "CalcValueFormatter.h"
+#import "NumberFormat.h"
 #import "NSArray+safe.h"
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
@@ -111,6 +112,11 @@
     return self.date;
 }
 
+- (NSUInteger)decimalNumberLength
+{
+    return [self.number length] + [self.decimal length];
+}
+
 - (void)inputNumberString:(NSString *)numberString
 {
     self.date = nil;
@@ -119,10 +125,18 @@
         self.number = [NSMutableString string];
     }
 
+    while ([self decimalNumberLength] >= MaxDigits) {
+        [self deleteNumber];
+    }
+
     if (self.decimal) {
         [self.decimal appendString:numberString];
     } else {
         [self.number appendString:numberString];
+    }
+
+    while ([self decimalNumberLength] > MaxDigits) {
+        [self deleteNumber];
     }
 }
 
@@ -137,6 +151,10 @@
 - (void)inputDecimalPoint
 {
     if (![self isNumber]) {
+        return;
+    }
+   
+    if ([self decimalNumberLength] >= MaxDigits) {
         return;
     }
 
@@ -159,14 +177,12 @@
         return;
     }
 
-    if (self.decimal) {
+    if ([self.decimal length] > 0) {
         [self.decimal deleteCharactersInRange:NSMakeRange([self.decimal length] - 1, 1)];
-    } else if (self.number) {
-        [self.number deleteCharactersInRange:NSMakeRange([self.number length] - 1, 1)];
-    }
-
-    if ([self.decimal length] == 0) {
+    } else if (self.decimal) {
         self.decimal = nil;
+    } else if ([self.number length] > 0) {
+        [self.number deleteCharactersInRange:NSMakeRange([self.number length] - 1, 1)];
     }
 }
 

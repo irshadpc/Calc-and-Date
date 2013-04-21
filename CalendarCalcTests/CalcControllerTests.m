@@ -32,6 +32,44 @@
     STAssertEqualObjects(@"0", result, nil);
 }
 
+- (void)test_1234567890123
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:4];
+    [self.calcController inputInteger:5];
+    [self.calcController inputInteger:6];
+    [self.calcController inputInteger:7];
+    [self.calcController inputInteger:8];
+    [self.calcController inputInteger:9];
+    [self.calcController inputInteger:0];
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    NSString *result = [[self.calcController inputInteger:3] stringValue];
+   
+    STAssertEqualObjects(@"123,456,789,013", result, nil);
+}
+
+- (void)test_12345678901_Decimal_2
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:4];
+    [self.calcController inputInteger:5];
+    [self.calcController inputInteger:6];
+    [self.calcController inputInteger:7];
+    [self.calcController inputInteger:8];
+    [self.calcController inputInteger:9];
+    [self.calcController inputInteger:0];
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:FunctionDecimal];
+    NSString *result = [[self.calcController inputInteger:2] stringValue];
+   
+    STAssertEqualObjects(@"12,345,678,901.2", result, nil);
+}
+
 - (void)test_123_PlusMinus
 {
     [self.calcController inputInteger:1];
@@ -50,6 +88,29 @@
     NSString *result = [[self.calcController inputInteger:FunctionDelete] stringValue];
 
     STAssertEqualObjects(@"12", result, nil);
+}
+
+- (void)test_123_Decimal_Delete
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:FunctionDecimal];
+    NSString *result = [[self.calcController inputInteger:FunctionDelete] stringValue];
+
+    STAssertEqualObjects(@"123", result, nil);
+}
+
+- (void)test_123_Decimal_4_Delete
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:FunctionDecimal];
+    [self.calcController inputInteger:4];
+    NSString *result = [[self.calcController inputInteger:FunctionDelete] stringValue];
+
+    STAssertEqualObjects(@"123.", result, nil);
 }
 
 - (void)test_1_Plus_12_Clear_23_Equal_24

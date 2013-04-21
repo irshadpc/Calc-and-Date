@@ -20,6 +20,7 @@
 - (NSString *)stringNumberValue;
 - (NSString *)stringDecimalValue;
 - (NSDate *)dateValue;
+- (NSUInteger)decimalNumberLength;
 - (void)inputNumberString:(NSString *)numberString;
 - (void)inputDate:(NSDate *)date;
 - (void)inputDecimalPoint;
