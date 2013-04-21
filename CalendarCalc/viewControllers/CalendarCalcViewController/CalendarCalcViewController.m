@@ -42,6 +42,7 @@
 - (IBAction)onDateKey:(UIButton *)sender;
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
+- (void)configureDateButtonWithDate:(NSDate *)date;
 - (void)settingDynamicCalendar;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
 - (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect;
@@ -66,13 +67,13 @@
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
     [self configureView];
+    [self configureDateButtonWithDate:[NSDate date]];
     [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
     [self.calendarViewController setActionDelegate:self];
     [self.eventViewController setDelegate:self];
     [self settingDynamicCalendar];
     [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
-
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self setupView];
     }
@@ -172,6 +173,7 @@
     [self dismissContentViewControllerAnimated:YES];
     self.result = [self.calcController inputDate:date];
     [self configureView];
+    [self configureDateButtonWithDate:date];
 }
 
 - (void)didSelectWeek:(Week)week
@@ -213,9 +215,11 @@
 
 - (void)eventViewControllerDidDone:(EventViewController *)eventViewController
 {
+    NSDate *date = [eventViewController selectedDate];
     [self dismissContentViewControllerAnimated:YES];
-    self.result = [self.calcController inputDate:[eventViewController selectedDate]];
+    self.result = [self.calcController inputDate:date];
     [self configureView];
+    [self configureDateButtonWithDate:date];
 }
 
 
@@ -257,6 +261,12 @@
     self.indicator.text = [NSString stringWithFunction:[self.calcController currentFunction]];
     [self.clearButton setTitle:[self.calcController isAllCleared] ? @"AC" : @"C"
                       forState:UIControlStateNormal];
+}
+
+- (void)configureDateButtonWithDate:(NSDate *)date
+{
+    [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
+                     forState:UIControlStateNormal];
 }
 
 - (void)showCalendarView
