@@ -11,14 +11,15 @@
 #import "CalendarCalcViewController+iPad.h"
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
-#import "SettingViewController.h"
-#import "CalendarViewController+Week.h"
 #import "EventViewController.h"
+#import "SettingViewController.h"
 #import "CopybleLabel.h"
 #import "ViewSheet.h"
 #import "CalcController.h"
 #import "CalcValue.h"
+#import "CalcValueFormatter.h"
 #import "DateSelect.h"
+#import "CalendarViewController+Week.h"
 #import "NSDate+Component.h"
 #import "NSString+Calculator.h"
 #import "NSString+Date.h"
@@ -33,15 +34,16 @@
 @property(strong, nonatomic) UIPopoverController *settingPopover;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
 @property(strong, nonatomic) CalcValue *result;
+@property(strong, nonatomic) CalcValueFormatter *formatter;
 @property(weak, nonatomic) AVAudioPlayer *player;
 @property(strong, nonatomic) UIPopoverController *currentPopover;
 
-- (void)showEventView:(UIButton *)sender;
-- (void)configureView;
 - (IBAction)onCalcKey:(UIButton *)sender;
 - (IBAction)onDateKey:(UIButton *)sender;
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
+- (void)showEventView:(UIButton *)sender;
+- (void)configureView;
 - (void)configureDateButtonWithDate:(NSDate *)date;
 - (void)settingDynamicCalendar;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
@@ -55,6 +57,7 @@
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         _calcController = [[CalcController alloc] init];
+        _formatter = [[CalcValueFormatter alloc] init];
         _calendarViewController = [[CalendarViewController alloc] init];
     }
     return self;
@@ -66,12 +69,12 @@
 
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
-    [self configureView];
-    [self configureDateButtonWithDate:[NSDate date]];
     [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
     [self.calendarViewController setActionDelegate:self];
     [self.eventViewController setDelegate:self];
+    [self configureView];
+    [self configureDateButtonWithDate:[NSDate date]];
     [self settingDynamicCalendar];
     [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -257,7 +260,7 @@
 
 - (void)configureView
 {
-    self.display.text = self.result ? [self.result stringValue] : @"0";
+    self.display.text = self.result ? [self.formatter displayValueWithCalcValue:self.result] : @"0";
     self.indicator.text = [NSString stringWithFunction:[self.calcController currentFunction]];
     [self.clearButton setTitle:[self.calcController isAllCleared] ? @"AC" : @"C"
                       forState:UIControlStateNormal];

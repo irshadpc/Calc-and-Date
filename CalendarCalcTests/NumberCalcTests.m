@@ -9,16 +9,19 @@
 #import "NumberCalcTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
+#import "CalcValueFormatter.h"
 #import "Function.h"
 
 @interface NumberCalcTests ()
 @property(strong, nonatomic) CalcController *calcController;
+@property(strong, nonatomic) CalcValueFormatter *formatter;
 @end
 
 @implementation NumberCalcTests
 - (void)setUp
 {
     self.calcController = [[CalcController alloc] init];
+    self.formatter = [[CalcValueFormatter alloc] init];
 }
 
 
@@ -28,7 +31,7 @@
 {
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
-    NSString *result = [[self.calcController inputInteger:3] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:3]];
 
     STAssertEqualObjects(@"123", result, nil);
 }
@@ -44,7 +47,7 @@
     [self.calcController inputInteger:7];
     [self.calcController inputInteger:8];
     [self.calcController inputInteger:9];
-    NSString *result = [[self.calcController inputInteger:0] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:0]];
    
     STAssertEqualObjects(@"1,234,567,890", result, nil);
 
@@ -55,7 +58,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:FunctionDecimal];
-    NSString *result = [[self.calcController inputInteger:3] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:3]];
 
     STAssertEqualObjects(@"12.3", result, nil);
 }
@@ -63,14 +66,14 @@
 - (void)test_Decimal_3
 {
     [self.calcController inputInteger:FunctionDecimal];
-    NSString *result = [[self.calcController inputInteger:3] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:3]];
 
     STAssertEqualObjects(@"0.3", result, nil);
 }
 
 - (void)test_Decimal
 {
-    NSString *result = [[self.calcController inputInteger:FunctionDecimal] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionDecimal]];
 
     STAssertEqualObjects(@"0.", result, nil);
 }
@@ -83,7 +86,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:2];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"3", result, nil);
 }
@@ -93,7 +96,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:FunctionMinus];
     [self.calcController inputInteger:2];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"-1", result, nil);
 }
@@ -103,7 +106,7 @@
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:FunctionMultiply];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"6", result, nil);
 }
@@ -113,7 +116,7 @@
     [self.calcController inputInteger:6];
     [self.calcController inputInteger:FunctionDivide];
     [self.calcController inputInteger:2];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"3", result, nil);
 }
@@ -125,7 +128,7 @@
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"6", result, nil);
 }
@@ -139,7 +142,7 @@
     [self.calcController inputInteger:3];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:4];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"7", result, nil);
 }
@@ -151,7 +154,7 @@
     [self.calcController inputInteger:4];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:2];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"3.4", result, nil);
 }
@@ -163,7 +166,7 @@
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:FunctionDecimal];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"3.3", result, nil);
 }
@@ -177,7 +180,7 @@
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:FunctionDecimal];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"3.8", result, nil);
 }
@@ -189,7 +192,7 @@
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:FunctionDecimal];
     [self.calcController inputInteger:8];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
 
     STAssertEqualObjects(@"1.3", result, nil);
 }

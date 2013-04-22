@@ -9,6 +9,7 @@
 #import "CalendarCalcTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
+#import "CalcValueFormatter.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 #import "NSDecimalNumber+Convert.h"
@@ -17,12 +18,14 @@
   @private
     CalcController *_calcController;
 }
+@property(strong, nonatomic) CalcValueFormatter *formatter;
 @end
 
 @implementation CalendarCalcTests
 - (void)setUp 
 {
     _calcController = [[CalcController alloc] init];
+    self.formatter = [[CalcValueFormatter alloc] init];
 }
 
 - (void)testCalendarCalc
@@ -32,14 +35,14 @@
 
 - (void)testInputNumber_1
 {
-    NSString *const result = [[_calcController inputInteger:1] stringValue];
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:1]];
     STAssertEqualObjects(@"1", result, @"RESULT: %@", result);
 }
 
 - (void)testInputNumber_12
 {
     [_calcController inputInteger: 1];
-    NSString *const result = [[_calcController inputInteger: 2] stringValue];
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputInteger: 2]];
     
     STAssertEqualObjects(@"12", result, @"RESULT: %@", result);
 }
@@ -49,7 +52,7 @@
     [_calcController inputInteger:  1];
     [_calcController inputInteger:  2];
     [_calcController inputInteger:FunctionDecimal];
-    NSString *const result = [[_calcController inputInteger:  3] stringValue];
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:  3]];
     
     STAssertEqualObjects(@"12.3", result, @"RESULT: %@", result);
 }
@@ -58,16 +61,16 @@
 {
     [_calcController inputInteger:  1];
     [_calcController inputInteger:  2];
-    NSString *const result = [[_calcController inputInteger:FunctionPlusMinus] stringValue];
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:FunctionPlusMinus]];
     
     STAssertEqualObjects(@"-12", result, @"RESULT: %@", result);
 }
 
 - (void)testInputDate_2012_12_15
 {
-    NSString *const result = [[_calcController inputDate:[NSDate dateWithYear: 2012
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputDate:[NSDate dateWithYear: 2012
                                                                       month: 12
-                                                                        day: 15]] stringValue];
+                                                                        day: 15]]];
     STAssertEqualObjects(@"2012/12/15", result, @"RESULT: %@", result);
 }
 
@@ -80,12 +83,12 @@
     [_calcController inputInteger:  0];
     [_calcController inputInteger:FunctionEqual];
     [_calcController inputInteger:FunctionPlusMinus];
-    NSString *const result1 = [[_calcController inputInteger:FunctionMinus] stringValue];
+    NSString *const result1 = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:FunctionMinus]];
     
     STAssertEqualObjects(@"10", result1, @"RESULT: %@", result1);
     
     [_calcController inputInteger:  3];
-    NSString *const result2 = [[_calcController inputInteger:FunctionEqual] stringValue];
+    NSString *const result2 = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:FunctionEqual]];
     
     STAssertEqualObjects(@"7", result2, @"RESULT: %@", result2);
 }
@@ -99,7 +102,7 @@
     [_calcController inputInteger:  0];
     [_calcController inputInteger:  8];
     [_calcController inputInteger:  8];
-    NSString *const result = [[_calcController inputInteger:FunctionEqual] stringValue];
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:FunctionEqual]];
     
     STAssertEqualObjects(@"0.176", result, @"RESULT: %@", result);
 }
@@ -113,7 +116,7 @@
     [_calcController inputInteger:  3];
     [_calcController inputInteger:FunctionMultiply];
     [_calcController inputInteger:  2];
-    NSString *const result = [[_calcController inputInteger:FunctionEqual] stringValue];
+    NSString *const result = [self.formatter displayValueWithCalcValue:[_calcController inputInteger:FunctionEqual]];
     
     STAssertEqualObjects(@"6", result, @"RESULT: %@", result);
 }

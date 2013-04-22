@@ -64,15 +64,6 @@
     return !self.number && !self.decimal && !self.date;
 }
 
-- (NSString *)stringValue
-{
-    if ([self isNumber]) {
-        return [CalcValueFormatter displayNumberWithCalcValue:self];
-    } else {
-        return [CalcValueFormatter displayDateWithCalcValue:self];
-    }
-}
-
 - (NSDecimalNumber *)decimalNumberValue
 {
     if (![self isNumber]) {
@@ -114,7 +105,7 @@
 
 - (NSUInteger)decimalNumberLength
 {
-    return [self.number length] + [self.decimal length];
+    return [[self.number stringByReplacingOccurrencesOfString:@"-" withString:@""] length] + [self.decimal length];
 }
 
 - (void)inputNumberString:(NSString *)numberString

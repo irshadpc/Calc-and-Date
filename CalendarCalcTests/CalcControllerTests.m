@@ -9,17 +9,20 @@
 #import "CalcControllerTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
+#import "CalcValueFormatter.h"
 #import "Function.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 
 @interface CalcControllerTests ()
 @property(strong, nonatomic) CalcController *calcController;
+@property(strong, nonatomic) CalcValueFormatter *formatter;
 @end
 
 @implementation CalcControllerTests
 - (void)setUp
 {
     self.calcController = [[CalcController alloc] init];
+    self.formatter = [[CalcValueFormatter alloc] init];
 }
 
 - (void)test_123_Clear
@@ -27,7 +30,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionClear] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionClear]];
    
     STAssertEqualObjects(@"0", result, nil);
 }
@@ -46,7 +49,7 @@
     [self.calcController inputInteger:0];
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
-    NSString *result = [[self.calcController inputInteger:3] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:3]];
    
     STAssertEqualObjects(@"123,456,789,013", result, nil);
 }
@@ -65,7 +68,7 @@
     [self.calcController inputInteger:0];
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:FunctionDecimal];
-    NSString *result = [[self.calcController inputInteger:2] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:2]];
    
     STAssertEqualObjects(@"12,345,678,901.2", result, nil);
 }
@@ -75,7 +78,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionPlusMinus] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionPlusMinus]];
 
     STAssertEqualObjects(@"-123", result, nil);
 }
@@ -85,7 +88,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionDelete] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionDelete]];
 
     STAssertEqualObjects(@"12", result, nil);
 }
@@ -96,7 +99,7 @@
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:3];
     [self.calcController inputInteger:FunctionDecimal];
-    NSString *result = [[self.calcController inputInteger:FunctionDelete] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionDelete]];
 
     STAssertEqualObjects(@"123", result, nil);
 }
@@ -108,7 +111,7 @@
     [self.calcController inputInteger:3];
     [self.calcController inputInteger:FunctionDecimal];
     [self.calcController inputInteger:4];
-    NSString *result = [[self.calcController inputInteger:FunctionDelete] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionDelete]];
 
     STAssertEqualObjects(@"123.", result, nil);
 }
@@ -122,7 +125,7 @@
     [self.calcController inputInteger:FunctionClear];
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"24", result, nil);
 }
@@ -134,7 +137,7 @@
     [self.calcController inputInteger:FunctionPlusMinus];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
     
     STAssertEqualObjects(@"-9", result, nil);
 }
@@ -147,7 +150,7 @@
     [self.calcController inputInteger:4];
     [self.calcController inputInteger:2];
     [self.calcController inputInteger:FunctionDelete];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"14", result, nil);
 }
@@ -161,7 +164,7 @@
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:FunctionMinus];
     [self.calcController inputInteger:4];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"9", result, nil);
 }
@@ -173,7 +176,7 @@
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:3];
     [self.calcController inputInteger:FunctionEqual];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"16", result, nil);
 }
@@ -185,7 +188,7 @@
     [self.calcController inputInteger:4];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:1]];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"2013/05/08", result, nil);
 }
@@ -198,7 +201,7 @@
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:1]];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputDate:[NSDate dateWithYear:2013 month:5 day:10]];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"180", result, nil);
 }
@@ -214,7 +217,7 @@
     [self.calcController inputInteger:1];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:4];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"5", result, nil);
 }
@@ -230,7 +233,7 @@
     [self.calcController inputInteger:4];
     [self.calcController inputInteger:FunctionPlus];
     [self.calcController inputInteger:3];
-    NSString *result = [[self.calcController inputInteger:FunctionEqual] stringValue];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
    
     STAssertEqualObjects(@"7", result, nil);
 }

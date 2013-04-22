@@ -15,7 +15,6 @@
 
 - (BOOL)isNumber;
 - (BOOL)isCleared;
-- (NSString *)stringValue;
 - (NSDecimalNumber *)decimalNumberValue;
 - (NSString *)stringNumberValue;
 - (NSString *)stringDecimalValue;
