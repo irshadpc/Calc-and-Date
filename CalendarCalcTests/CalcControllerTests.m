@@ -73,6 +73,17 @@
     STAssertEqualObjects(@"12,345,678,901.2", result, nil);
 }
 
+- (void)test_123_Equal_Equal
+{
+    [self.calcController inputInteger:1];
+    [self.calcController inputInteger:2];
+    [self.calcController inputInteger:3];
+    [self.calcController inputInteger:FunctionEqual];
+    NSString *result = [self.formatter displayValueWithCalcValue:[self.calcController inputInteger:FunctionEqual]];
+   
+    STAssertEqualObjects(@"123", result, nil);
+}
+
 - (void)test_123_PlusMinus
 {
     [self.calcController inputInteger:1];

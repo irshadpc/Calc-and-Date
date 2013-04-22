@@ -201,7 +201,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (CalcValue *)calculateWithFunction:(Function)function
 {
-    if (self.currentMode != ModeInput && function != FunctionEqual) {
+    if ((self.currentMode != ModeInput && function != FunctionEqual) || (self.currentFunction == FunctionEqual)) {
         self.currentFunction = function;
         self.currentMode = [self modeWithFunction:function];
         return self.resultValue;
