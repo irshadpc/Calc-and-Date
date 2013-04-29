@@ -25,27 +25,35 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
-@interface CalendarCalcViewController ()<SettingViewControllerDelegate, DateSelect, CalendarViewControllerDelegate, UIPopoverControllerDelegate, EventViewControllerDelegate>
+@interface CalendarCalcViewController ()
+  < SettingViewControllerDelegate,
+    DateSelect,
+    CalendarViewControllerDelegate,
+    UIPopoverControllerDelegate,
+    EventViewControllerDelegate
+  >
+
 @property(weak, nonatomic) IBOutlet CopybleLabel *display;
 @property(weak, nonatomic) IBOutlet UILabel *indicator;
-@property(weak, nonatomic) IBOutlet UIButton *decimalButton;
 @property(weak, nonatomic) IBOutlet UIButton *dateButton;
-@property(strong, nonatomic) CalcController *calcController;
+@property(weak, nonatomic) IBOutlet UIButton *decimalButton;
 @property(strong, nonatomic) UIPopoverController *settingPopover;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
+@property(strong, nonatomic) UIPopoverController *currentPopover;
+@property(strong, nonatomic) CalcController *calcController;
 @property(strong, nonatomic) CalcValue *result;
 @property(strong, nonatomic) CalcValueFormatter *formatter;
 @property(weak, nonatomic) AVAudioPlayer *player;
-@property(strong, nonatomic) UIPopoverController *currentPopover;
 
 - (IBAction)onCalcKey:(UIButton *)sender;
 - (IBAction)onDateKey:(UIButton *)sender;
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
-- (void)showEventView:(UIButton *)sender;
+- (void)presentCalendarViewController;
+- (void)presentEventViewController:(UIButton *)sender;
+- (void)setupDynamicCalendar;
 - (void)configureView;
 - (void)configureDateButtonWithDate:(NSDate *)date;
-- (void)settingDynamicCalendar;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
 - (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect;
 @end
@@ -73,9 +81,9 @@
     [self.calendarViewController setDelegate:self];
     [self.calendarViewController setActionDelegate:self];
     [self.eventViewController setDelegate:self];
+    [self setupDynamicCalendar];
     [self configureView];
     [self configureDateButtonWithDate:[NSDate date]];
-    [self settingDynamicCalendar];
     [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self setupView];
@@ -125,7 +133,7 @@
 }
 
 
-#pragma mark - IBAction
+#pragma mark - Action
 
 - (IBAction)onCalcKey:(UIButton *)sender
 {
@@ -135,7 +143,7 @@
 
 - (IBAction)onDateKey:(UIButton *)sender
 {
-    [self showCalendarView];
+    [self presentCalendarViewController];
 }
 
 - (IBAction)onSetting:(UIButton *)sender {
@@ -162,12 +170,6 @@
     [self.player play];
 }
 
-- (void)settingDynamicCalendar
-{
-    [self.calendarViewController setDynamicCalendar:
-     [(AppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
-}
-
 
 #pragma mark - DateSelect
 
@@ -185,6 +187,9 @@
     [self.calcController setWeek:week exclude:exclude];
 }
 
+
+#pragma mark - CalendarViewController
+
 - (void)calendarViewControllerDidCancel:(CalendarViewController *)calendarViewController
 {
     [self dismissContentViewControllerAnimated:YES];
@@ -192,7 +197,7 @@
 
 - (void)calendarViewControllerShouldShowEvent:(CalendarViewController *)viewController
 {
-    [self showEventView:nil];
+    [self presentEventViewController:nil];
 }
 
 
@@ -205,7 +210,7 @@
     } else {
         [self.settingPopover dismissPopoverAnimated:YES];
     }
-    [self settingDynamicCalendar];
+    [self setupDynamicCalendar];
 }
 
 
@@ -231,7 +236,7 @@
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
     if (popoverController == self.settingPopover) {
-        [self settingDynamicCalendar];
+        [self setupDynamicCalendar];
     }
     return YES;
 }
@@ -239,7 +244,14 @@
 
 #pragma mark - Private
 
-- (void)showEventView:(UIButton *)sender
+- (void)presentCalendarViewController
+{
+    [self dismissContentViewControllerAnimated:YES];
+    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.calendarViewController];
+    [self presentContentViewControllerAnimated:YES fromRect:CGRectZero];
+}
+
+- (void)presentEventViewController:(UIButton *)sender
 {
     if (!self.eventViewController) {
         self.eventViewController = [[EventViewController alloc] init];
@@ -258,6 +270,12 @@
     [self presentContentViewControllerAnimated:YES fromRect:sender.frame];
 }
 
+- (void)setupDynamicCalendar
+{
+    [self.calendarViewController setDynamicCalendar:
+     [(AppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
+}
+
 - (void)configureView
 {
     self.display.text = self.result ? [self.formatter displayValueWithCalcValue:self.result] : @"0";
@@ -270,13 +288,6 @@
 {
     [self.dateButton setTitle:[NSString stringWithYear:[date year] month:[date month]]
                      forState:UIControlStateNormal];
-}
-
-- (void)showCalendarView
-{
-    [self dismissContentViewControllerAnimated:YES];
-    self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.calendarViewController];
-    [self presentContentViewControllerAnimated:YES fromRect:CGRectZero];
 }
 
 - (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect

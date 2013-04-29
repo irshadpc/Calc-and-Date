@@ -15,6 +15,4 @@
 @property(weak, nonatomic) IBOutlet UIButton *clearButton;
 @property(strong, nonatomic) CalendarViewController *calendarViewController;
 @property(strong, nonatomic) EventViewController *eventViewController;
-
-- (void)showCalendarView;
 @end
