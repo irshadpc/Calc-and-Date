@@ -11,16 +11,12 @@
 
 @protocol EventManagerDelegate;
 
-@interface EventManager : NSObject {
-  @private
-    BOOL _granted;
-    EKEventStore *_eventStore;
-}
-@property (weak, nonatomic) id <EventManagerDelegate> delegate;
-@property (strong, nonatomic, readonly) NSArray *events;
-@property (strong, nonatomic, readonly) EKEvent *todayEvent;
+@interface EventManager : NSObject
+@property(weak, nonatomic) id <EventManagerDelegate> delegate;
+@property(strong, nonatomic, readonly) NSArray *events;
+@property(strong, nonatomic, readonly) EKEvent *todayEvent;
 
-- (id)initWithDelegate:(id <EventManagerDelegate>)delegate;
+- (id)initWithDelegate:(id<EventManagerDelegate>)delegate;
 @end
 
 @protocol EventManagerDelegate <NSObject>

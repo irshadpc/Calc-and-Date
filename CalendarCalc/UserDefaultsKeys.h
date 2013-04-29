@@ -9,7 +9,8 @@
 #ifndef CalendarCalc_UserDefaultsKeys_h
 #define CalendarCalc_UserDefaultsKeys_h
 
-static NSString *const kIncludeStartDay = @"IncludeStartDay";
-static NSString *const kDynamicCalendar = @"DynamicCalendar";
+static NSString *const IncludeStartDay = @"IncludeStartDay";
+static NSString *const DynamicCalendar = @"DynamicCalendar";
+static NSString *const DisabledCalendars = @"DisabledCalendars";
 
 #endif

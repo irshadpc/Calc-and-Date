@@ -55,7 +55,7 @@
                bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:_tableView.frame];
+        _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
         _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         _indicatorView.color = [UIColor grayColor];
         [_indicatorView startAnimating];
@@ -72,16 +72,22 @@
 {
     [super viewDidLoad];
 
-    [self.indicatorView setCenter:self.tableView.center];
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView addSubview:self.indicatorView];
     [self setContentSizeForViewInPopover:self.view.bounds.size];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTableView:nil];
     [self setSearchBar:nil];
     [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.indicatorView setCenter:self.view.center];
 }
 
 - (void)didReceiveMemoryWarning
@@ -220,7 +226,9 @@
                       [date month],
                       [NSString dateSeparator],
                       [date day]];
+
     [cell.dateLabel setText:text];
     [cell.titleLabel setText:[event title]];
+    [cell.titleLabel setTextColor:[UIColor colorWithCGColor:[[event calendar] CGColor]]];
 }
 @end

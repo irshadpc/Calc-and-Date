@@ -14,4 +14,7 @@
 
 - (BOOL)dynamicCalendarOption;
 - (void)setDynamicCalendarOption:(BOOL)isOn;
+
+- (NSArray *)disabledCalendars;
+- (void)setDisabledCalendars:(NSArray *)disabledCalendars;
 @end

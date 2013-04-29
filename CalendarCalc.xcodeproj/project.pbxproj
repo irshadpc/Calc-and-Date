@@ -150,6 +150,8 @@
 		62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F84172DFB6D000E887E /* EventViewController.xib */; };
 		62ED0F88172E4769000E887E /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F87172E4768000E887E /* EventCell.m */; };
 		62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8C172E4DA0000E887E /* UILabel+font.m */; };
+		62ED0F90172E9424000E887E /* CalendarSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8F172E9423000E887E /* CalendarSelectViewController.m */; };
+		62ED0F92172EB827000E887E /* CalendarSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F91172EB826000E887E /* CalendarSelectViewController.xib */; };
 		62F4D92B1681EA6F001FF7FA /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F4D92A1681EA6F001FF7FA /* NSString+Date.m */; };
 		62F4D92E1681F382001FF7FA /* CalendarControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F4D92D1681F381001FF7FA /* CalendarControlView.m */; };
 /* End PBXBuildFile section */
@@ -382,6 +384,9 @@
 		62ED0F87172E4768000E887E /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		62ED0F8B172E4DA0000E887E /* UILabel+font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+font.h"; sourceTree = "<group>"; };
 		62ED0F8C172E4DA0000E887E /* UILabel+font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+font.m"; sourceTree = "<group>"; };
+		62ED0F8E172E9422000E887E /* CalendarSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSelectViewController.h; sourceTree = "<group>"; };
+		62ED0F8F172E9423000E887E /* CalendarSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSelectViewController.m; sourceTree = "<group>"; };
+		62ED0F91172EB826000E887E /* CalendarSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarSelectViewController.xib; sourceTree = "<group>"; };
 		62F4D9291681EA6F001FF7FA /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		62F4D92A1681EA6F001FF7FA /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
 		62F4D92C1681F381001FF7FA /* CalendarControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarControlView.h; sourceTree = "<group>"; };
@@ -517,6 +522,9 @@
 				626BB0EA1691DF41004E9E63 /* SettingViewController.m */,
 				62C97A621698FB72008B0EFE /* SettingViewController.xib */,
 				62A144D81686CA5A001E2843 /* DateSelect.h */,
+				62ED0F8E172E9422000E887E /* CalendarSelectViewController.h */,
+				62ED0F8F172E9423000E887E /* CalendarSelectViewController.m */,
+				62ED0F91172EB826000E887E /* CalendarSelectViewController.xib */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -999,6 +1007,7 @@
 				6235AD6716FF323500712A78 /* calendar_day_today@2x~iphone.png in Resources */,
 				6235AD6D16FF379400712A78 /* DatePickerController.xib in Resources */,
 				62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */,
+				62ED0F92172EB827000E887E /* CalendarSelectViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1084,6 +1093,7 @@
 				62B1E5901720424F00ECE5B6 /* CalendarCalcViewController+iPad.m in Sources */,
 				62ED0F88172E4769000E887E /* EventCell.m in Sources */,
 				62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */,
+				62ED0F90172E9424000E887E /* CalendarSelectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

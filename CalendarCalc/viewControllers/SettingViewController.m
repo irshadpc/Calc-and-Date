@@ -7,22 +7,25 @@
 //
 
 #import "SettingViewController.h"
+#import "CalendarSelectViewController.h"
+#import "ViewSheet.h"
 #import "AppDelegate+Setting.h"
 
-@interface SettingViewController ()
-@property (weak, nonatomic) IBOutlet UINavigationItem *titlebar;
-@property (weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
-@property (weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
+@interface SettingViewController ()<CalendarSelectViewControllerDelegate>
+@property(weak, nonatomic) IBOutlet UINavigationItem *titlebar;
+@property(weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
+@property(weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
+@property(strong, nonatomic) UIView *childView;
 
 - (IBAction)onDone:(UIBarButtonItem *)sender;
 - (IBAction)onCancel:(UIBarButtonItem *)sender;
 - (IBAction)onIncludeStartDayOptionChanged:(UISwitch *)sender;
 - (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender;
+- (IBAction)onCalendarSettings:(UIButton *)sender;
 - (void)saveSettings;
 @end
 
 @implementation SettingViewController
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,6 +74,33 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [(AppDelegate *)[[UIApplication sharedApplication] delegate] setDynamicCalendarOption:sender.isOn];
     }
+}
+
+- (IBAction)onCalendarSettings:(UIButton *)sender
+{
+    CalendarSelectViewController *viewController = [[CalendarSelectViewController alloc]
+                                                    initWithNibName:@"CalendarSelectViewController"
+                                                    bundle:nil];
+    [viewController setDelegate:self];
+    [self addChildViewController:viewController];
+    [self.view addSubview:viewController.view];
+    [viewController didMoveToParentViewController:self];
+}
+
+
+#pragma mark - CalendarSelectViewController
+
+- (void)calendarSelectViewControllerDidFinish:(CalendarSelectViewController *)calendarSelectViewController
+{
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         [calendarSelectViewController.view setAlpha:0];
+                     } 
+                     completion:^(BOOL finished) {
+                         [calendarSelectViewController willMoveToParentViewController:nil];
+                         [calendarSelectViewController.view removeFromSuperview];
+                         [calendarSelectViewController removeFromParentViewController];
+                     }];
 }
 
 

@@ -13,24 +13,34 @@
 
 - (BOOL)includeStartDayOption
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kIncludeStartDay];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:IncludeStartDay];
 }
 
 - (void)setIncludeStartDayOption:(BOOL)isOn
 {
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:kIncludeStartDay];
+    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:IncludeStartDay];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)dynamicCalendarOption
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kDynamicCalendar];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DynamicCalendar];
 }
 
 - (void)setDynamicCalendarOption:(BOOL)isOn
 {
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:kDynamicCalendar];
+    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:DynamicCalendar];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (NSArray *)disabledCalendars
+{
+    return [[NSUserDefaults standardUserDefaults] stringArrayForKey:DisabledCalendars];
+}
+
+- (void)setDisabledCalendars:(NSArray *)disabledCalendars
+{
+    [[NSUserDefaults standardUserDefaults] setObject:disabledCalendars forKey:DisabledCalendars];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end
