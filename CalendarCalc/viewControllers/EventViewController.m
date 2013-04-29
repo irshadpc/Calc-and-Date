@@ -37,6 +37,7 @@
 @property(weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
+@property(strong, nonatomic) NSIndexPath *selectedIndexPath;
 @property(strong, nonatomic) NSPredicate *eventTitleFilterTemplate;
 
 - (IBAction)onCancel:(UIBarButtonItem *)sender;
@@ -107,13 +108,26 @@
         [cell.detailTextLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [cell.detailTextLabel setTextColor:[UIColor darkTextColor]];
     }
+    if ([indexPath isEqual:self.selectedIndexPath]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    
     [self configureCell:cell atIndexPath:indexPath];
 
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectedIndexPath = indexPath;
+    [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
     self.selectedDate = [[_filteredEvents objectAtIndex:indexPath.row] startDate];
     [self.delegate eventViewControllerDidDone:self];
 }

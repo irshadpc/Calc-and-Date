@@ -8,6 +8,7 @@
 
 #import "EventCell.h"
 #import "UILabel+font.h"
+#import "UIView+MutableFrame.h"
 
 @interface EventCell ()
 @property(strong, nonatomic, readwrite) UILabel *dateLabel;
@@ -27,8 +28,19 @@
         _titleLabel = [EventCell commonLabelWithFrame:CGRectMake(90.0, 11.0, 200.0, 21.0)];
         [_titleLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
         [self.contentView addSubview:_titleLabel];
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
+}
+
+- (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType
+{
+    if (accessoryType != UITableViewCellAccessoryNone) {
+        [self.titleLabel setFrameSizeWidth:180.0];
+    } else {
+        [self.titleLabel setFrameSizeWidth:200.0];
+    }
+    [super setAccessoryType:accessoryType];
 }
 
 + (UILabel *)commonLabelWithFrame:(CGRect)frame
