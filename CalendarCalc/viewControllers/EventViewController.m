@@ -7,6 +7,7 @@
 //
 
 #import "EventViewController.h"
+#import "EventCell.h"
 #import "EventManager.h"
 #import "NSArray+safe.h"
 #import "NSDate+Component.h"
@@ -15,37 +16,45 @@
 #import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
 #import "UIView+MutableFrame.h"
 
+@interface UISearchBar(UI)
+- (void)setEnabledCancelButton:(BOOL)enabled;
+@end
+
+@implementation UISearchBar(UI)
+- (void)setEnabledCancelButton:(BOOL)enabled
+{
+    for (id subview in self.subviews) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            [subview setEnabled:enabled];
+            break;
+        }
+    }
+}
+@end
+
 @interface EventViewController ()<EventManagerDelegate>
-@property(strong, nonatomic) UIToolbar *toolbar;
-@property(strong, nonatomic) UIPickerView *pickerView;
+@property(weak, nonatomic) IBOutlet UITableView *tableView;
+@property(weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
+@property(strong, nonatomic) NSPredicate *eventTitleFilterTemplate;
 
-- (void)onDone:(UIBarButtonItem *)sender;
-- (void)onCancel:(UIBarButtonItem *)sender;
-- (CGRect)viewFrame;
+- (IBAction)onCancel:(UIBarButtonItem *)sender;
+- (IBAction)onTop:(UIButton *)sender;
+- (void)reloadTableDataWithFilterText:(NSString *)filterText;
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation EventViewController {
+    NSArray *_filteredEvents;
     BOOL _isInit;
 }
 
-- (id)init
+- (id)initWithNibName:(NSString *)nibNameOrNil
+               bundle:(NSBundle *)nibBundleOrNil
 {
-    if ((self = [super init])) {
-        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        [_toolbar setBarStyle:UIBarStyleBlackOpaque];
-        [_toolbar setItems:@[[UIBarButtonItem cancelButtonItemWithTarget:self action:@selector(onCancel:)],
-                             [UIBarButtonItem flexibleSpaceItem],
-                             [UIBarButtonItem doneButtonItemWithTarget:self action:@selector(onDone:)]]];
-        [_toolbar sizeToFit];
-        
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
-        [_pickerView setFrameOriginY:_toolbar.bounds.size.height];
-        _pickerView.showsSelectionIndicator = YES;
-        _pickerView.userInteractionEnabled = NO;
-        
-        _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:_pickerView.frame];
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:_tableView.frame];
         _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         _indicatorView.color = [UIColor grayColor];
         [_indicatorView startAnimating];
@@ -53,29 +62,25 @@
         
         _eventManager = [[EventManager alloc] initWithDelegate:self];
         _isInit = YES;
+        _eventTitleFilterTemplate = [NSPredicate predicateWithFormat:@"title contains[cd] $title"];
     }
     return self;
-}
-
-- (void)loadView
-{
-    self.view = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    [self.toolbar setFrameSizeWidth:self.pickerView.bounds.size.width];
-    [self.view addSubview:self.toolbar];
-    [self.view addSubview:self.pickerView];
-    [self.view addSubview:self.indicatorView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.view setFrame:[self viewFrame]];
+
+    [self.indicatorView setCenter:self.tableView.center];
+    [self.tableView setUserInteractionEnabled:NO];
+    [self.tableView addSubview:self.indicatorView];
     [self setContentSizeForViewInPopover:self.view.bounds.size];
-    
-    [self.pickerView setDataSource:self];
-    [self.pickerView setDelegate:self];
+}
+
+- (void)viewDidUnload {
+    [self setTableView:nil];
+    [self setSearchBar:nil];
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,42 +88,58 @@
     [super didReceiveMemoryWarning];
 }
 
-- (NSDate *)selectedDate
+
+#pragma mark - UITableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    EKEvent *event = [self.eventManager.events safeObjectAtIndex:[self.pickerView selectedRowInComponent:0]];
-    if (event) {
-        _selectedDate = [[event startDate] noTime];
+    return [_filteredEvents count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"EventCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        [cell.textLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+        [cell.textLabel setTextColor:[UIColor darkTextColor]];
+        [cell.detailTextLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [cell.detailTextLabel setTextColor:[UIColor darkTextColor]];
     }
-    return _selectedDate;
+    [self configureCell:cell atIndexPath:indexPath];
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedDate = [[_filteredEvents objectAtIndex:indexPath.row] startDate];
+    [self.delegate eventViewControllerDidDone:self];
 }
 
 
-#pragma mark - UIPickerView
+#pragma mark - SearchBar
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (void)searchBar:(UISearchBar *)searchBar
+    textDidChange:(NSString *)searchText
 {
-    return 1;
+    [self reloadTableDataWithFilterText:searchText];
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    return self.eventManager.events.count;
+    [searchBar setText:nil];
+    [searchBar resignFirstResponder];
+    [searchBar setEnabledCancelButton:YES];
+    [self searchBar:searchBar textDidChange:nil];
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    EKEvent *event = self.eventManager.events[row];
-    NSDate *date = [event.startDate noTime];
-    return [NSString stringWithFormat:@"%d%@%02d%@%02d %@",
-            [date year],
-            [NSString dateSeparator],
-            [date month],
-            [NSString dateSeparator],
-            [date day],
-            event.title];
+    [searchBar resignFirstResponder];
+    [searchBar setEnabledCancelButton:YES];
+    [self reloadTableDataWithFilterText:[searchBar text]];
 }
 
 
@@ -126,7 +147,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (void)startEventLoad:(EventManager *)eventManager
 {
-    [self.pickerView reloadAllComponents];
+    [self.tableView reloadData];
     [self.indicatorView startAnimating];
     [self.indicatorView setHidden:NO];
 }
@@ -134,42 +155,58 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)completeEventLoad:(EventManager *)eventManager
                   granted:(BOOL)granted
 {
-    [self.pickerView reloadComponent:0];
+    [self reloadTableDataWithFilterText:self.searchBar.text];
+    [self.tableView reloadData];
     
     if (_isInit) {
         NSInteger index = [self.eventManager.events indexOfObject:self.eventManager.todayEvent];
         if (index != NSNotFound) {
-            [self.pickerView selectRow:index inComponent:0 animated:NO];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                  atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         }
         _isInit = NO;
     }
     
     [self.indicatorView setHidden:YES];
     [self.indicatorView stopAnimating];
-    [self.pickerView setUserInteractionEnabled:YES];
+    [self.tableView setUserInteractionEnabled:YES];
 }
 
 
 #pragma mark - Action
 
-- (void)onCancel:(UIBarButtonItem *)sender
+- (IBAction)onCancel:(UIBarButtonItem *)sender
 {
-    [self.delegate eventViewControllerDidCancel:self];
+     [self.delegate eventViewControllerDidCancel:self];
 }
 
-- (void)onDone:(UIBarButtonItem *)sender
+- (IBAction)onTop:(UIButton *)sender
 {
-    [self.delegate eventViewControllerDidDone:self];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
-
-#pragma mark - Private
-
-- (CGRect)viewFrame
+- (void)reloadTableDataWithFilterText:(NSString *)filterText
 {
-    return CGRectMake(0,
-                      0,
-                      self.pickerView.frame.size.width,
-                      self.pickerView.frame.origin.y + self.pickerView.frame.size.height);
+    if (!filterText || [filterText length] == 0) {
+        _filteredEvents = self.eventManager.events;
+    } else {
+        NSPredicate *predicate = [self.eventTitleFilterTemplate predicateWithSubstitutionVariables:@{@"title" : filterText}];
+        _filteredEvents = [self.eventManager.events filteredArrayUsingPredicate:predicate];
+    }
+    [self.tableView reloadData];
+}
+
+- (void)configureCell:(EventCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    EKEvent *event = _filteredEvents[indexPath.row];
+    NSDate *date = [event.startDate noTime];
+    NSString *text = [NSString stringWithFormat:@"%d%@%02d%@%02d",
+                      [date year],
+                      [NSString dateSeparator],
+                      [date month],
+                      [NSString dateSeparator],
+                      [date day]];
+    [cell.dateLabel setText:text];
+    [cell.titleLabel setText:[event title]];
 }
 @end

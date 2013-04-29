@@ -80,7 +80,6 @@
     [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
     [self.calendarViewController setActionDelegate:self];
-    [self.eventViewController setDelegate:self];
     [self setupDynamicCalendar];
     [self configureView];
     [self configureDateButtonWithDate:[NSDate date]];
@@ -254,7 +253,8 @@
 - (void)presentEventViewController:(UIButton *)sender
 {
     if (!self.eventViewController) {
-        self.eventViewController = [[EventViewController alloc] init];
+        self.eventViewController = [[EventViewController alloc] initWithNibName:@"EventViewController"
+                                                                         bundle:nil];
         [self.eventViewController setDelegate:self];
     }
 
