@@ -7,14 +7,14 @@
 //
 
 #import "SettingViewController.h"
-#import "CalendarSelectViewController.h"
+#import "EventSettingViewController.h"
 #import "ViewSheet.h"
 #import "AppDelegate+Setting.h"
 
 @interface SettingViewController ()
 @property(weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
 @property(weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
-@property(strong, nonatomic) CalendarSelectViewController *calendarSelectViewController;
+@property(strong, nonatomic) EventSettingViewController *eventSettingViewController;
 
 - (void)onDone:(UIBarButtonItem *)sender;
 - (void)onCancel:(UIBarButtonItem *)sender;
@@ -44,9 +44,9 @@
                                                                                                  action:@selector(onDone:)]];
     }
 
-    self.calendarSelectViewController = [[CalendarSelectViewController alloc] initWithNibName:@"CalendarSelectViewController"
-                                                                                       bundle:nil];
-    [self.calendarSelectViewController setDisabledCalendars:[appDelegate disabledCalendars]];
+    self.eventSettingViewController = [[EventSettingViewController alloc] initWithNibName:@"EventSettingViewController"
+                                                                                   bundle:nil];
+    [self.eventSettingViewController setDisabledCalendars:[appDelegate disabledCalendars]];
 }
 
 - (void)viewDidUnload {
@@ -80,7 +80,7 @@
 
 - (IBAction)onCalendarSettings:(UIButton *)sender
 {
-    [self.navigationController pushViewController:self.calendarSelectViewController
+    [self.navigationController pushViewController:self.eventSettingViewController
                                          animated:YES];
 }
 
@@ -92,8 +92,8 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
     [appDelegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
-    if ([self.calendarSelectViewController isChanged]) {
-        [appDelegate setDisabledCalendars:[self.calendarSelectViewController disabledCalendars]];
+    if ([self.eventSettingViewController isChanged]) {
+        [appDelegate setDisabledCalendars:[self.eventSettingViewController disabledCalendars]];
         [self.delegate settingViewControllerDidChangedCalendarSetting:self];
     }
 }
