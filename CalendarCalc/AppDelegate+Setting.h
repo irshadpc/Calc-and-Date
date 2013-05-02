@@ -10,11 +10,14 @@
 
 @interface AppDelegate (Setting)
 - (BOOL)includeStartDayOption;
-- (void)setIncludeStartDayOption:(BOOL)isOn;
+- (void)setIncludeStartDayOption:(BOOL)includeStartDayOption;
 
 - (BOOL)dynamicCalendarOption;
-- (void)setDynamicCalendarOption:(BOOL)isOn;
+- (void)setDynamicCalendarOption:(BOOL)dynamicCalendarOption;
 
 - (NSArray *)disabledCalendars;
 - (void)setDisabledCalendars:(NSArray *)disabledCalendars;
+
+- (BOOL)eventColorOption;
+- (void)setEventColorOption:(BOOL)eventColorOption;
 @end

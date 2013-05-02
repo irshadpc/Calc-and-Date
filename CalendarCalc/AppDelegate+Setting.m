@@ -16,9 +16,9 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:IncludeStartDay];
 }
 
-- (void)setIncludeStartDayOption:(BOOL)isOn
+- (void)setIncludeStartDayOption:(BOOL)includeStartDayOption
 {
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:IncludeStartDay];
+    [[NSUserDefaults standardUserDefaults] setBool:includeStartDayOption forKey:IncludeStartDay];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -27,9 +27,9 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:DynamicCalendar];
 }
 
-- (void)setDynamicCalendarOption:(BOOL)isOn
+- (void)setDynamicCalendarOption:(BOOL)dynamicCalendarOption
 {
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:DynamicCalendar];
+    [[NSUserDefaults standardUserDefaults] setBool:dynamicCalendarOption forKey:DynamicCalendar];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -41,6 +41,17 @@
 - (void)setDisabledCalendars:(NSArray *)disabledCalendars
 {
     [[NSUserDefaults standardUserDefaults] setObject:disabledCalendars forKey:DisabledCalendars];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)eventColorOption
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:EventColor];
+}
+
+- (void)setEventColorOption:(BOOL)eventColorOption
+{
+    [[NSUserDefaults standardUserDefaults] setBool:eventColorOption forKey:EventColor];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

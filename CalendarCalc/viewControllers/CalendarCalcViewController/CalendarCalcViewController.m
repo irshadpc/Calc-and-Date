@@ -264,6 +264,8 @@
         [self.eventViewController setDelegate:self];
     }
 
+    [self.eventViewController setEnabledEventColor:[(AppDelegate *)[[UIApplication sharedApplication] delegate] eventColorOption]];
+
     [self dismissContentViewControllerAnimated:YES];
    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {

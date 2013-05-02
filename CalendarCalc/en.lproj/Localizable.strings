@@ -16,3 +16,5 @@
 "EVENT"="Events";
 "TODAY"="Today";
 "SEPARATOR"="-";
+
+"EVENT_SETTINGS"="Event Settings";

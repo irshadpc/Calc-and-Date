@@ -12,5 +12,6 @@
 static NSString *const IncludeStartDay = @"IncludeStartDay";
 static NSString *const DynamicCalendar = @"DynamicCalendar";
 static NSString *const DisabledCalendars = @"DisabledCalendars";
+static NSString *const EventColor = @"EventColor";
 
 #endif

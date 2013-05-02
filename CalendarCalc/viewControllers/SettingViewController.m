@@ -47,6 +47,7 @@
     self.eventSettingViewController = [[EventSettingViewController alloc] initWithNibName:@"EventSettingViewController"
                                                                                    bundle:nil];
     [self.eventSettingViewController setDisabledCalendars:[appDelegate disabledCalendars]];
+    [self.eventSettingViewController setEnabledEventColor:[appDelegate eventColorOption]];
 }
 
 - (void)viewDidUnload {
@@ -92,6 +93,7 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
     [appDelegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
+    [appDelegate setEventColorOption:[self.eventSettingViewController isEnabledEventColor]];
     if ([self.eventSettingViewController isChanged]) {
         [appDelegate setDisabledCalendars:[self.eventSettingViewController disabledCalendars]];
         [self.delegate settingViewControllerDidChangedCalendarSetting:self];

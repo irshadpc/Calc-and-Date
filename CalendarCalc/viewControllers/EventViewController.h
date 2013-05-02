@@ -13,6 +13,7 @@
 @interface EventViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property(weak, nonatomic) id<EventViewControllerDelegate> delegate;
 @property(strong, nonatomic) NSDate *selectedDate;
+@property(nonatomic, getter=isEnabledEventColor) BOOL enabledEventColor;
 
 - (void)reloadEvents;
 @end

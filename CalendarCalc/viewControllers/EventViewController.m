@@ -95,6 +95,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)setEnabledEventColor:(BOOL)enabledEventColor
+{
+    _enabledEventColor = enabledEventColor;
+    [self.tableView reloadData];
+}
+
 - (void)reloadEvents
 {
     [self.eventManager reloadEvents];
@@ -235,6 +241,11 @@
 
     [cell.dateLabel setText:text];
     [cell.titleLabel setText:[event title]];
-    [cell.titleLabel setTextColor:[UIColor colorWithCGColor:[[event calendar] CGColor]]];
+
+    if (self.isEnabledEventColor) {
+        [cell.titleLabel setTextColor:[UIColor colorWithCGColor:[[event calendar] CGColor]]];
+    } else {
+        [cell.titleLabel setTextColor:[UIColor darkTextColor]];
+    }
 }
 @end
