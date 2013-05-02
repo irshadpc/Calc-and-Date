@@ -16,11 +16,23 @@
 #import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
 #import "UIView+MutableFrame.h"
 
-@interface UISearchBar(UI)
+@interface NSDictionary (Sort)
+- (NSArray *)sortedKeys;
+@end
+
+@implementation NSDictionary (Sort)
+- (NSArray *)sortedKeys
+{
+    return [[self allKeys] sortedArrayUsingSelector:@selector(compare:)];
+}
+@end
+
+
+@interface UISearchBar (UI)
 - (void)setEnabledCancelButton:(BOOL)enabled;
 @end
 
-@implementation UISearchBar(UI)
+@implementation UISearchBar (UI)
 - (void)setEnabledCancelButton:(BOOL)enabled
 {
     for (id subview in self.subviews) {
@@ -37,6 +49,7 @@
 @property(weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
+@property(strong, nonatomic) NSDictionary *filteredEvents;
 @property(strong, nonatomic) NSIndexPath *selectedIndexPath;
 @property(strong, nonatomic) NSPredicate *eventTitleFilterTemplate;
 
@@ -47,7 +60,6 @@
 @end
 
 @implementation EventViewController {
-    NSArray *_filteredEvents;
     BOOL _isInit;
 }
 
@@ -109,9 +121,20 @@
 
 #pragma mark - UITableView
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.filteredEvents count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.filteredEvents sortedKeys][section];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_filteredEvents count];
+    NSString *key = [self.filteredEvents sortedKeys][section];
+    return [[self.filteredEvents valueForKey:key] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,7 +169,9 @@
     self.selectedIndexPath = indexPath;
     [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    self.selectedDate = [[_filteredEvents objectAtIndex:indexPath.row] startDate];
+    NSString *key = [self.filteredEvents sortedKeys][indexPath.section];
+    EKEvent *event = [[self.filteredEvents objectForKey:key] objectAtIndex:indexPath.row];
+    self.selectedDate =  [event startDate];
     [self.delegate eventViewControllerDidDone:self];
 }
 
@@ -191,9 +216,17 @@
     [self.tableView reloadData];
     
     if (_isInit) {
-        NSInteger index = [self.eventManager.events indexOfObject:self.eventManager.todayEvent];
-        if (index != NSNotFound) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+        NSInteger section = 0;
+        NSInteger row = NSNotFound;
+        for (NSString *key in [self.filteredEvents sortedKeys]) {
+            row = [[self.filteredEvents objectForKey:key] indexOfObject:self.eventManager.todayEvent];
+            if (row != NSNotFound) {
+                break;
+            }
+            section++;
+        }
+        if (row != NSNotFound) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]
                                   atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         }
         _isInit = NO;
@@ -219,18 +252,41 @@
 
 - (void)reloadTableDataWithFilterText:(NSString *)filterText
 {
+    NSArray *filteredEvents = nil;
     if (!filterText || [filterText length] == 0) {
-        _filteredEvents = self.eventManager.events;
+        filteredEvents = self.eventManager.events;
     } else {
         NSPredicate *predicate = [self.eventTitleFilterTemplate predicateWithSubstitutionVariables:@{@"title" : filterText}];
-        _filteredEvents = [self.eventManager.events filteredArrayUsingPredicate:predicate];
+        filteredEvents = [self.eventManager.events filteredArrayUsingPredicate:predicate];
     }
+   
+    NSInteger oldYear = 0;
+    NSMutableDictionary *sectioningEvents = [NSMutableDictionary dictionary];
+    NSMutableArray *events = nil;
+    for (EKEvent *event in filteredEvents) {
+        NSInteger year = [[event startDate] year];
+
+        if (year != oldYear) {
+            if (events) {
+                [sectioningEvents setObject:events forKey:[NSString stringWithFormat:@"%d", oldYear]];
+            }
+            oldYear = year;
+            events = [NSMutableArray array];
+        }
+        [events addObject:event];
+    }
+    if ([events count] > 0) {
+        [sectioningEvents setObject:events forKey:[NSString stringWithFormat:@"%d", oldYear]];
+    }
+
+    self.filteredEvents = sectioningEvents;
     [self.tableView reloadData];
 }
 
 - (void)configureCell:(EventCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    EKEvent *event = _filteredEvents[indexPath.row];
+    NSString *key = [self.filteredEvents sortedKeys][indexPath.section];
+    EKEvent *event = [[self.filteredEvents objectForKey:key] objectAtIndex:indexPath.row];
     NSDate *date = [event.startDate noTime];
     NSString *text = [NSString stringWithFormat:@"%d%@%02d%@%02d",
                       [date year],
