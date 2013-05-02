@@ -38,6 +38,8 @@ static const CGFloat Phone4InchHeight = 568.0;
     NSMutableDictionary *userDefaults = [[NSMutableDictionary alloc] init];
     [userDefaults setValue:@"NO" forKey:IncludeStartDay];
     [userDefaults setValue:@"YES" forKey:DynamicCalendar];
+    [userDefaults setValue:@"YES" forKey:EventColor];
+    
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaults];
 
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"key_click"
