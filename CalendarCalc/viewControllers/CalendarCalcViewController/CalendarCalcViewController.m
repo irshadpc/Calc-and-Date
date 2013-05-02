@@ -149,12 +149,14 @@
     SettingViewController *settingViewController = [[SettingViewController alloc] initWithNibName:@"SettingViewController"
                                                                                            bundle:nil];
     [settingViewController setDelegate:self];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingViewController];
+    [navController.navigationBar setBarStyle:UIBarStyleBlackOpaque];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [settingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        [self presentViewController:settingViewController animated:YES completion:nil];
+        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [self presentViewController:navController animated:YES completion:nil];
     } else {
         [self.settingPopover dismissPopoverAnimated:YES];
-        self.settingPopover = [[UIPopoverController alloc] initWithContentViewController:settingViewController];
+        self.settingPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.settingPopover.delegate = self;
         [self.settingPopover presentPopoverFromRect:sender.frame
                                              inView:self.view
@@ -202,7 +204,7 @@
 
 #pragma mark - SettingViewController
 
-- (void)settingViewControllerDidFinish:(SettingViewController *)viewController
+- (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -212,6 +214,10 @@
     [self setupDynamicCalendar];
 }
 
+- (void)settingViewControllerDidChangedCalendarSetting:(SettingViewController *)settingViewController
+{
+    [self.eventViewController reloadEvents];
+}
 
 #pragma mark - EventViewController
 

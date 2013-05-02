@@ -11,9 +11,10 @@
 @protocol SettingViewControllerDelegate;
 
 @interface SettingViewController : UIViewController
-@property (weak, nonatomic) id <SettingViewControllerDelegate> delegate;
+@property(weak, nonatomic) id<SettingViewControllerDelegate> delegate;
 @end
 
 @protocol SettingViewControllerDelegate <NSObject>
-- (void)settingViewControllerDidFinish:(SettingViewController *)viewController;
+- (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController;
+- (void)settingViewControllerDidChangedCalendarSetting:(SettingViewController *)settingViewController;
 @end

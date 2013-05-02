@@ -13,6 +13,8 @@
 @interface EventViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property(weak, nonatomic) id<EventViewControllerDelegate> delegate;
 @property(strong, nonatomic) NSDate *selectedDate;
+
+- (void)reloadEvents;
 @end
 
 @protocol EventViewControllerDelegate<NSObject>

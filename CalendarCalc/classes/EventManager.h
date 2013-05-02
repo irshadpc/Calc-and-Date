@@ -17,9 +17,10 @@
 @property(strong, nonatomic, readonly) EKEvent *todayEvent;
 
 - (id)initWithDelegate:(id<EventManagerDelegate>)delegate;
+- (void)reloadEvents;
 @end
 
-@protocol EventManagerDelegate <NSObject>
+@protocol EventManagerDelegate<NSObject>
 - (void)startEventLoad:(EventManager *)eventManager;
 - (void)completeEventLoad:(EventManager *)eventManager granted:(BOOL)granted;
 @end

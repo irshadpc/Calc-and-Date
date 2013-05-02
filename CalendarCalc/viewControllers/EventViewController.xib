@@ -78,6 +78,7 @@
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
 						<int key="IBUISeparatorStyle">1</int>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
+						<bool key="IBUIAllowsSelectionDuringEditing">YES</bool>
 						<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
 						<float key="IBUIRowHeight">44</float>
 						<float key="IBUISectionHeaderHeight">22</float>
@@ -91,7 +92,7 @@
 							<object class="IBUIButton" id="710317716">
 								<reference key="NSNextResponder" ref="545647832"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{76, 6}, {215, 33}}</string>
+								<string key="NSFrame">{{72, 6}, {215, 33}}</string>
 								<reference key="NSSuperview" ref="545647832"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="970466738"/>
@@ -135,10 +136,10 @@
 						<int key="IBUIBarStyle">1</int>
 						<array class="NSMutableArray" key="IBUIItems">
 							<object class="IBUIBarButtonItem" id="621350011">
+								<string key="IBUITitle">閉じる</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="545647832"/>
-								<int key="IBUISystemItemIdentifier">1</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="403058786">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -277,6 +278,7 @@
 							<reference ref="958354370"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">イベント一覧</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
@@ -286,16 +288,19 @@
 							<reference ref="403058786"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">タイトルバー</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
 						<reference key="object" ref="621350011"/>
 						<reference key="parent" ref="545647832"/>
+						<string key="objectName">閉じるボタン</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
 						<reference key="object" ref="958354370"/>
 						<reference key="parent" ref="970466738"/>
+						<string key="objectName">検索バー</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">21</int>
@@ -304,11 +309,13 @@
 							<reference ref="710317716"/>
 						</array>
 						<reference key="parent" ref="545647832"/>
+						<string key="objectName">トップへ</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
 						<reference key="object" ref="710317716"/>
 						<reference key="parent" ref="403058786"/>
+						<string key="objectName">トップへボタン</string>
 					</object>
 				</array>
 			</object>

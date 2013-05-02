@@ -54,9 +54,6 @@ static const NSInteger EventIntervalYear = 2;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
-#pragma mark - Private
-
 - (void)reloadEvents
 {
     [self.delegate startEventLoad:self];
@@ -75,6 +72,9 @@ static const NSInteger EventIntervalYear = 2;
         });
     });
 }
+
+
+#pragma mark - Private
 
 - (NSArray *)pastEvents
 {

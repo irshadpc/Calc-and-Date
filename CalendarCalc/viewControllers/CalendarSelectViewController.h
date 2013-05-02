@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
 
-@protocol CalendarSelectViewControllerDelegate;
-
 @interface CalendarSelectViewController : UIViewController
-@property(weak, nonatomic) id<CalendarSelectViewControllerDelegate> delegate;
-@end
-
-@protocol CalendarSelectViewControllerDelegate<NSObject>
-- (void)calendarSelectViewControllerDidFinish:(CalendarSelectViewController *)calendarSelectViewController;
+@property(strong, nonatomic) NSArray *disabledCalendars;
+@property(nonatomic, getter=isChanged, readonly) BOOL changed;
 @end

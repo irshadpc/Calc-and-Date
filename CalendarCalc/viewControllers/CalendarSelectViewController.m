@@ -7,17 +7,15 @@
 //
 
 #import "CalendarSelectViewController.h"
-#import "AppDelegate.h"
-#import "AppDelegate+Setting.h"
 
 @interface CalendarSelectViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
+@property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EKEventStore *eventStore;
 @property(nonatomic, getter=isGranted) BOOL granted;
 @property(strong, nonatomic) NSArray *calendars;
-@property(strong, nonatomic) NSMutableArray *disabledCalendars;
+@property(nonatomic, getter=isChanged, readwrite) BOOL changed;
 
-- (IBAction)onClose:(id)sender;
 - (void)reloadTableData;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
@@ -36,6 +34,10 @@
             _granted = YES;
             [self reloadTableData];
         }
+       
+        _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [_indicatorView setColor:[UIColor darkGrayColor]];
+        [_indicatorView setHidesWhenStopped:YES];
     }
     return self;
 }
@@ -43,10 +45,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.disabledCalendars = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] disabledCalendars] mutableCopy];
-    if (!self.disabledCalendars) {
-        self.disabledCalendars = [NSMutableArray array];
-    }
+
+    if (self.isGranted && self.calendars) {
+        [self.tableView reloadData];
+    } 
+    if (!self.calendars) {
+        self.indicatorView.center = self.tableView.center;
+        [self.indicatorView startAnimating];
+        [self.tableView addSubview:self.indicatorView];
+    }   
 }
 
 - (void)viewDidUnload
@@ -58,15 +65,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-
-#pragma mark - Action
-
-- (IBAction)onClose:(UIButton *)sender
-{
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] setDisabledCalendars:self.disabledCalendars];
-    [self.delegate calendarSelectViewControllerDidFinish:self];
 }
 
 
@@ -95,14 +93,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EKCalendar *calendar = [self.calendars objectAtIndex:indexPath.row];
-    if ([self.disabledCalendars containsObject:[calendar calendarIdentifier]]) {
-        [self.disabledCalendars removeObject:[calendar calendarIdentifier]];
+    NSMutableArray *disabledCalendars = [self.disabledCalendars mutableCopy];
+    if ([disabledCalendars containsObject:[calendar calendarIdentifier]]) {
+        [disabledCalendars removeObject:[calendar calendarIdentifier]];
         [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
     } else {
-        [self.disabledCalendars addObject:[calendar calendarIdentifier]];
+        [disabledCalendars addObject:[calendar calendarIdentifier]];
         [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
     }
+
+    self.disabledCalendars = disabledCalendars;
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    self.changed = YES;
 }
 
 
@@ -110,6 +113,12 @@
 
 - (void)reloadTableData
 {
+    [self.indicatorView stopAnimating];
+    
+    if (!self.isGranted) {
+        return;
+    }
+    
     if ([self.eventStore respondsToSelector:@selector(calendarsForEntityType:)]) {
         self.calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
     } else {

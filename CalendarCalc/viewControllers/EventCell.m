@@ -28,7 +28,6 @@
         _titleLabel = [EventCell commonLabelWithFrame:CGRectMake(90.0, 11.0, 200.0, 21.0)];
         [_titleLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
         [self.contentView addSubview:_titleLabel];
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
 }

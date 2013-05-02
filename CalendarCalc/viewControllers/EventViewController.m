@@ -95,6 +95,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)reloadEvents
+{
+    [self.eventManager reloadEvents];
+}
+
 
 #pragma mark - UITableView
 
@@ -134,6 +139,7 @@
 {
     self.selectedIndexPath = indexPath;
     [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     self.selectedDate = [[_filteredEvents objectAtIndex:indexPath.row] startDate];
     [self.delegate eventViewControllerDidDone:self];
 }
