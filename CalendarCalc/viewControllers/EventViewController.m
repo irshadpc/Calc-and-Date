@@ -48,6 +48,7 @@
 @interface EventViewController ()<EventManagerDelegate>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIToolbar *titlebar;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
 @property(strong, nonatomic) NSDictionary *filteredEvents;
@@ -85,6 +86,9 @@
 {
     [super viewDidLoad];
 
+    [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
+                   forToolbarPosition:UIToolbarPositionAny
+                           barMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView addSubview:self.indicatorView];
     [self setContentSizeForViewInPopover:self.view.bounds.size];
@@ -94,6 +98,7 @@
 {
     [self setTableView:nil];
     [self setSearchBar:nil];
+    [self setTitlebar:nil];
     [super viewDidUnload];
 }
 
