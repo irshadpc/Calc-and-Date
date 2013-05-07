@@ -9,6 +9,7 @@
 #import "EventViewController.h"
 #import "EventCell.h"
 #import "EventManager.h"
+#import "SectionHeaderView.h"
 #import "NSArray+safe.h"
 #import "NSDate+Component.h"
 #import "NSDate+Style.h"
@@ -124,6 +125,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self.filteredEvents count];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [SectionHeaderView sectionHeaderWithTitle:[self tableView:tableView titleForHeaderInSection:section]];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
