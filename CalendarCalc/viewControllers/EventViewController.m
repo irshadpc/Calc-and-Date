@@ -48,15 +48,16 @@
 @interface EventViewController ()<EventManagerDelegate>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UIToolbar *titlebar;
+@property (weak, nonatomic) IBOutlet UINavigationBar *titlebar;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
 @property(strong, nonatomic) NSDictionary *filteredEvents;
 @property(strong, nonatomic) NSIndexPath *selectedIndexPath;
 @property(strong, nonatomic) NSPredicate *eventTitleFilterTemplate;
 
-- (IBAction)onCancel:(UIBarButtonItem *)sender;
-- (IBAction)onTop:(UIButton *)sender;
+- (IBAction)onClose:(UIBarButtonItem *)sender;
+- (void)onTop:(UIButton *)sender;
+- (UIButton *)topButton;
 - (void)reloadTableDataWithFilterText:(NSString *)filterText;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
@@ -87,8 +88,7 @@
     [super viewDidLoad];
 
     [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
-                   forToolbarPosition:UIToolbarPositionAny
-                           barMetrics:UIBarMetricsDefault];
+                        forBarMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView addSubview:self.indicatorView];
     [self setContentSizeForViewInPopover:self.view.bounds.size];
@@ -98,6 +98,7 @@
 {
     [self setTableView:nil];
     [self setSearchBar:nil];
+    [self setTitlebar:nil];
     [self setTitlebar:nil];
     [super viewDidUnload];
 }
@@ -251,14 +252,31 @@
 
 #pragma mark - Action
 
-- (IBAction)onCancel:(UIBarButtonItem *)sender
+- (IBAction)onClose:(UIBarButtonItem *)sender
 {
      [self.delegate eventViewControllerDidCancel:self];
 }
 
-- (IBAction)onTop:(UIButton *)sender
+- (void)onTop:(UIButton *)sender
 {
     [self.tableView setContentOffset:CGPointZero animated:YES];
+}
+
+- (UIButton *)topButton
+{
+    CGFloat x = self.titlebar.topItem.titleView.frame.origin.x;
+    CGFloat width = self.titlebar.bounds.size.width - x;
+    CGFloat height = self.titlebar.bounds.size.height;
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x,
+                                                                  0,
+                                                                  width,
+                                                                  height)];
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button addTarget:self
+               action:@selector(onTop:)
+     forControlEvents:UIControlEventTouchUpInside];
+   
+    return button;
 }
 
 - (void)reloadTableDataWithFilterText:(NSString *)filterText
