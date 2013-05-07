@@ -12,6 +12,9 @@
 
 @interface SettingViewController : UIViewController
 @property(weak, nonatomic) id<SettingViewControllerDelegate> delegate;
+@property(weak, nonatomic) UIPopoverController *popover;
+
+- (void)saveSettings;
 @end
 
 @protocol SettingViewControllerDelegate <NSObject>

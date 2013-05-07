@@ -14,27 +14,28 @@
 @interface SettingViewController ()
 @property(weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
 @property(weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
+@property(weak, nonatomic) IBOutlet UIView *lastOptionItem;
 @property(strong, nonatomic) EventSettingViewController *eventSettingViewController;
 
 - (void)onDone:(UIBarButtonItem *)sender;
 - (void)onCancel:(UIBarButtonItem *)sender;
 - (IBAction)onCalendarSettings:(UIButton *)sender;
-- (void)saveSettings;
 @end
 
 @implementation SettingViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.includeStartDayOption.on = [appDelegate includeStartDayOption];
     self.dynamicCalendarOption.on = [appDelegate dynamicCalendarOption];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        CGRect dynaimcCalendarOptionFrame = self.dynamicCalendarOption.frame;
+        CGRect lastOptionItemFrame = self.lastOptionItem.frame;
         self.contentSizeForViewInPopover = CGSizeMake(self.view.frame.size.width,
-                                                      dynaimcCalendarOptionFrame.origin.y +
-                                                      dynaimcCalendarOptionFrame.size.height + 20.0);
+                                                      lastOptionItemFrame.origin.y +
+                                                      lastOptionItemFrame.size.height + 44.0 - 20.0);
     } else {
         [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                 target:self
@@ -53,6 +54,7 @@
 - (void)viewDidUnload {
     [self setIncludeStartDayOption:nil];
     [self setDynamicCalendarOption:nil];
+    [self setLastOptionItem:nil];
     [super viewDidUnload];
 }
 
@@ -70,6 +72,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)saveSettings
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
+    [appDelegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
+    [appDelegate setEventColorOption:[self.eventSettingViewController isEnabledEventColor]];
+    if ([self.eventSettingViewController isChanged]) {
+        [appDelegate setDisabledCalendars:[self.eventSettingViewController disabledCalendars]];
+        [self.delegate settingViewControllerDidChangedCalendarSetting:self];
+    }
+}
+
 - (void)onDone:(UIBarButtonItem *)sender {
     [self saveSettings];
     [self.delegate settingViewControllerDidFinish:self];
@@ -83,20 +97,5 @@
 {
     [self.navigationController pushViewController:self.eventSettingViewController
                                          animated:YES];
-}
-
-
-#pragma mark - Private
-
-- (void)saveSettings
-{
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
-    [appDelegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
-    [appDelegate setEventColorOption:[self.eventSettingViewController isEnabledEventColor]];
-    if ([self.eventSettingViewController isChanged]) {
-        [appDelegate setDisabledCalendars:[self.eventSettingViewController disabledCalendars]];
-        [self.delegate settingViewControllerDidChangedCalendarSetting:self];
-    }
 }
 @end

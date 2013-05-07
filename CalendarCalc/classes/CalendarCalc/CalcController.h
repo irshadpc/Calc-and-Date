@@ -13,6 +13,7 @@
 @class CalcValue;
 @interface CalcController : NSObject
 @property(nonatomic) Function currentFunction;
+@property(nonatomic, getter=isIncludeStartDay) BOOL includeStartDay;
 
 - (CalcValue *)inputInteger:(NSInteger)integer;
 - (CalcValue *)inputDate:(NSDate *)date;

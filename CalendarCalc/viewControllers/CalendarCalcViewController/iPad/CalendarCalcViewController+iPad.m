@@ -8,7 +8,6 @@
 
 #import "CalendarCalcViewController+iPad.h"
 #import "CalendarCalcViewController_Common.h"
-#import "CalendarCalcViewController_iPad.h"
 #import "CalendarViewController.h"
 #import "Function.h"
 #import "CalendarConstant.h"

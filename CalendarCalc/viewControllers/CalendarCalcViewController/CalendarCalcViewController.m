@@ -51,7 +51,7 @@
 - (IBAction)onClick:(UIButton *)sender;
 - (void)presentCalendarViewController;
 - (void)presentEventViewController:(UIButton *)sender;
-- (void)setupDynamicCalendar;
+- (void)setupOptions;
 - (void)configureView;
 - (void)configureDateButtonWithDate:(NSDate *)date;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
@@ -80,7 +80,7 @@
     [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
     [self.calendarViewController setActionDelegate:self];
-    [self setupDynamicCalendar];
+    [self setupOptions];
     [self configureView];
     [self configureDateButtonWithDate:[NSDate date]];
     [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
@@ -157,6 +157,7 @@
     } else {
         [self.settingPopover dismissPopoverAnimated:YES];
         self.settingPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
+        [settingViewController setPopover:self.settingPopover];
         self.settingPopover.delegate = self;
         [self.settingPopover presentPopoverFromRect:sender.frame
                                              inView:self.view
@@ -211,7 +212,7 @@
     } else {
         [self.settingPopover dismissPopoverAnimated:YES];
     }
-    [self setupDynamicCalendar];
+    [self setupOptions];
 }
 
 - (void)settingViewControllerDidChangedCalendarSetting:(SettingViewController *)settingViewController
@@ -241,7 +242,9 @@
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
     if (popoverController == self.settingPopover) {
-        [self setupDynamicCalendar];
+        UINavigationController *navController = (UINavigationController *)[popoverController contentViewController];
+        [[navController childViewControllers][0] saveSettings];
+        [self setupOptions];
     }
     return YES;
 }
@@ -278,10 +281,11 @@
     [self presentContentViewControllerAnimated:YES fromRect:sender.frame];
 }
 
-- (void)setupDynamicCalendar
+- (void)setupOptions
 {
-    [self.calendarViewController setDynamicCalendar:
-     [(AppDelegate *)[[UIApplication sharedApplication] delegate] dynamicCalendarOption]];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [self.calcController setIncludeStartDay:[appDelegate includeStartDayOption]];
+    [self.calendarViewController setDynamicCalendar:[appDelegate dynamicCalendarOption]];
 }
 
 - (void)configureView

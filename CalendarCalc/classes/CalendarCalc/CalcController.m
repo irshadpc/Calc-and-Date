@@ -95,6 +95,12 @@ static const NSInteger KeyCodeDoubleZero = 10;
     return self.inputValue;
 }
 
+- (void)setIncludeStartDay:(BOOL)includeStartDay
+{
+    _includeStartDay = includeStartDay;
+    [self.dateCalcProcessor setIncludeStartDay:includeStartDay];
+}
+
 - (void)setWeek:(Week)week exclude:(BOOL)exclude
 {
     NSMutableArray *excludeWeeks = [NSMutableArray arrayWithArray:[self.dateCalcProcessor excludeWeeks]];
