@@ -151,6 +151,7 @@
 		62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6486F1738EAA60030DDFB /* SectionHeaderView.m */; };
 		62E6487E1738FA940030DDFB /* section_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6487D1738FA940030DDFB /* section_header@2x.png */; };
 		62E648801738FBA00030DDFB /* event_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6487F1738FBA00030DDFB /* event_header@2x.png */; };
+		62E64884173902BA0030DDFB /* setting_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E64883173902BA0030DDFB /* setting_navigation@2x.png */; };
 		62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F84172DFB6D000E887E /* EventViewController.xib */; };
 		62ED0F88172E4769000E887E /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F87172E4768000E887E /* EventCell.m */; };
 		62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8C172E4DA0000E887E /* UILabel+font.m */; };
@@ -388,6 +389,7 @@
 		62E6486F1738EAA60030DDFB /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
 		62E6487D1738FA940030DDFB /* section_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "section_header@2x.png"; sourceTree = "<group>"; };
 		62E6487F1738FBA00030DDFB /* event_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event_header@2x.png"; sourceTree = "<group>"; };
+		62E64883173902BA0030DDFB /* setting_navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_navigation@2x.png"; sourceTree = "<group>"; };
 		62ED0F84172DFB6D000E887E /* EventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventViewController.xib; sourceTree = "<group>"; };
 		62ED0F86172E4768000E887E /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		62ED0F87172E4768000E887E /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				62E6487F1738FBA00030DDFB /* event_header@2x.png */,
 				62E6486A1738EA1D0030DDFB /* event_background@2x~iphone.png */,
 				62B59A6C169806D400126000 /* setting@2x.png */,
+				62E64883173902BA0030DDFB /* setting_navigation@2x.png */,
 			);
 			name = 2x;
 			path = iPhone/2x;
@@ -1025,6 +1028,7 @@
 				62E6486B1738EA1E0030DDFB /* event_background@2x~iphone.png in Resources */,
 				62E6487E1738FA940030DDFB /* section_header@2x.png in Resources */,
 				62E648801738FBA00030DDFB /* event_header@2x.png in Resources */,
+				62E64884173902BA0030DDFB /* setting_navigation@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
