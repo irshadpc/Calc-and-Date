@@ -940,6 +940,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onEvent:</string>
+						<reference key="source" ref="3117973"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">223</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onClick:</string>
 						<reference key="source" ref="782616321"/>
 						<reference key="destination" ref="841351856"/>
@@ -1483,7 +1492,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">222</int>
+			<int key="maxID">223</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1494,6 +1503,7 @@
 						<string key="onCalcKey:">UIButton</string>
 						<string key="onClick:">UIButton</string>
 						<string key="onDateKey:">UIButton</string>
+						<string key="onEvent:">UIButton</string>
 						<string key="onSetting:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -1507,6 +1517,10 @@
 						</object>
 						<object class="IBActionInfo" key="onDateKey:">
 							<string key="name">onDateKey:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="onEvent:">
+							<string key="name">onEvent:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="onSetting:">

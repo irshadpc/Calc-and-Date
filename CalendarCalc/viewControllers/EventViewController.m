@@ -91,7 +91,11 @@
                         forBarMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView addSubview:self.indicatorView];
-    [self setContentSizeForViewInPopover:self.view.bounds.size];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.titlebar setHidden:YES];
+        [self.tableView setFrame:self.view.frame];
+        [self setContentSizeForViewInPopover:self.view.bounds.size];
+    }
 }
 
 - (void)viewDidUnload

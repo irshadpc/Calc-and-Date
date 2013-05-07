@@ -49,6 +49,7 @@
 - (IBAction)onDateKey:(UIButton *)sender;
 - (IBAction)onSetting:(UIButton *)sender;
 - (IBAction)onClick:(UIButton *)sender;
+- (IBAction)onEvent:(UIButton *)sender;
 - (void)presentCalendarViewController;
 - (void)presentEventViewController:(UIButton *)sender;
 - (void)setupSettings;
@@ -170,6 +171,11 @@
 {
     [self.player setCurrentTime:0];
     [self.player play];
+}
+
+- (IBAction)onEvent:(UIButton *)sender
+{
+    [self presentEventViewController:sender];
 }
 
 
