@@ -58,11 +58,11 @@
     [super viewDidUnload];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self saveSettings];
+    [super viewDidAppear:animated];
+    if ([self.eventSettingViewController isViewLoaded]) {
+        [self.popover setPopoverContentSize:self.contentSizeForViewInPopover animated:NO];
     }
 }
 
