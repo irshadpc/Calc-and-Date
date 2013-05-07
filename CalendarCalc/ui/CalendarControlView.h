@@ -17,6 +17,7 @@
 @property(strong, nonatomic, readonly) UIButton *prevButton;
 @property(strong, nonatomic, readonly) UIButton *nextButton;
 @property(strong, nonatomic) NSDate *currentDate;
+@property(nonatomic, getter=isStringTitleMode) BOOL stringTitleMode;
 
 - (id)initWithCalendarView:(CalendarView *)calendarView;
 @end

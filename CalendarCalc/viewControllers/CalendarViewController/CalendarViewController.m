@@ -110,6 +110,12 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
     [self.pageView setPagingEnabled:_dynamicCalendar];
 }
 
+- (void)setStringTitleMode:(BOOL)stringTitleMode
+{
+    _stringTitleMode = stringTitleMode;
+    [self.calendarControllView setStringTitleMode:stringTitleMode];
+}
+
 - (BOOL)isPopoverVisible
 {
     return [self.popover isPopoverVisible];

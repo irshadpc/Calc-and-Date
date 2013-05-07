@@ -48,6 +48,8 @@
 
 - (void)setupLayoutWithOrientation:(UIInterfaceOrientation)orientation
 {
+    [self.calendarViewController setStringTitleMode:UIInterfaceOrientationIsPortrait(orientation)];
+
     [self.calendarViewContainer setFrame:[self calendarContainerFrameWithOrientation:orientation]];
     [self.calcViewContainer setFrame:[self calcContainerFrameWithOrientation:orientation]];
     [self.clearButton setFrame:[self clearButtonFrameWithOrientation:orientation]];

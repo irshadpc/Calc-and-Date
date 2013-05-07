@@ -16,6 +16,7 @@
 @property(weak, nonatomic) id<CalendarViewControllerDelegate> actionDelegate;
 @property(strong, nonatomic, readonly) NSDate *date;
 @property(nonatomic, getter=isDynamicCalendar) BOOL dynamicCalendar;
+@property(nonatomic, getter=isStringTitleMode) BOOL stringTitleMode;
 
 - (BOOL)isPopoverVisible;
 - (void)presentPopoverAnimated:(BOOL)animated;
