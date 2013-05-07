@@ -51,7 +51,7 @@
 - (IBAction)onClick:(UIButton *)sender;
 - (void)presentCalendarViewController;
 - (void)presentEventViewController:(UIButton *)sender;
-- (void)setupOptions;
+- (void)setupSettings;
 - (void)configureView;
 - (void)configureDateButtonWithDate:(NSDate *)date;
 - (void)dismissContentViewControllerAnimated:(BOOL)animated;
@@ -80,7 +80,7 @@
     [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
     [self.calendarViewController setActionDelegate:self];
-    [self setupOptions];
+    [self setupSettings];
     [self configureView];
     [self configureDateButtonWithDate:[NSDate date]];
     [self setPlayer:[(AppDelegate *)[[UIApplication sharedApplication] delegate] player]];
@@ -212,7 +212,7 @@
     } else {
         [self.settingPopover dismissPopoverAnimated:YES];
     }
-    [self setupOptions];
+    [self setupSettings];
 }
 
 - (void)settingViewControllerDidChangedCalendarSetting:(SettingViewController *)settingViewController
@@ -244,7 +244,7 @@
     if (popoverController == self.settingPopover) {
         UINavigationController *navController = (UINavigationController *)[popoverController contentViewController];
         [[navController childViewControllers][0] saveSettings];
-        [self setupOptions];
+        [self setupSettings];
     }
     return YES;
 }
@@ -281,7 +281,7 @@
     [self presentContentViewControllerAnimated:YES fromRect:sender.frame];
 }
 
-- (void)setupOptions
+- (void)setupSettings
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [self.calcController setIncludeStartDay:[appDelegate includeStartDayOption]];

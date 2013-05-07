@@ -312,13 +312,6 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 - (CalendarView *)calendarViewWithYear:(NSInteger)year
                                  month:(NSInteger)month
 {
-    CGSize calendarButtonSize = CGSizeZero;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        calendarButtonSize = CGSizeMake(44.0, 44.0);
-    } else {
-        calendarButtonSize = CGSizeMake(66.0, 66.0);
-    }
-    
     CalendarView *calendarView = [[CalendarView alloc] initWithMargin:6.0];
     [calendarView setDelegate:self];
     [calendarView setYear:year month:month];
