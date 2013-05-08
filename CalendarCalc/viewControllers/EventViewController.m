@@ -52,7 +52,7 @@
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
 @property(strong, nonatomic) NSDictionary *filteredEvents;
-@property(strong, nonatomic) NSIndexPath *selectedIndexPath;
+@property(strong, nonatomic) EKEvent *selectedEvent;
 @property(strong, nonatomic) NSPredicate *eventTitleFilterTemplate;
 
 - (IBAction)onClose:(UIBarButtonItem *)sender;
@@ -91,6 +91,7 @@
                         forBarMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView addSubview:self.indicatorView];
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.titlebar setHidden:YES];
         [self.tableView setFrame:self.view.frame];
@@ -103,14 +104,18 @@
     [self setTableView:nil];
     [self setSearchBar:nil];
     [self setTitlebar:nil];
-    [self setTitlebar:nil];
     [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.indicatorView setCenter:self.view.center];
+    if ([self.indicatorView isAnimating]) {
+        [self.indicatorView setCenter:self.view.center];
+        CGFloat x = self.tableView.contentOffset.x;
+        CGFloat y = self.searchBar.frame.origin.y + self.searchBar.frame.size.height;
+        self.tableView.contentOffset = CGPointMake(x, y);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,11 +169,6 @@
         [cell.detailTextLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [cell.detailTextLabel setTextColor:[UIColor darkTextColor]];
     }
-    if ([indexPath isEqual:self.selectedIndexPath]) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    } else {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-    }
     
     [self configureCell:cell atIndexPath:indexPath];
 
@@ -182,12 +182,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedIndexPath = indexPath;
     [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSString *key = [self.filteredEvents sortedKeys][indexPath.section];
     EKEvent *event = [[self.filteredEvents objectForKey:key] objectAtIndex:indexPath.row];
-    self.selectedDate =  [event startDate];
+    self.selectedDate = [event startDate];
+    self.selectedEvent = event;
     [self.delegate eventViewControllerDidDone:self];
 }
 
@@ -221,6 +221,7 @@
 - (void)startEventLoad:(EventManager *)eventManager
 {
     [self.tableView reloadData];
+    self.tableView.tableHeaderView = nil;
     [self.indicatorView startAnimating];
     [self.indicatorView setHidden:NO];
 }
@@ -229,6 +230,7 @@
                   granted:(BOOL)granted
 {
     [self reloadTableDataWithFilterText:self.searchBar.text];
+    [self.tableView setTableHeaderView:self.searchBar];
     [self.tableView reloadData];
     
     if (_isInit) {
@@ -335,6 +337,12 @@
         [cell.titleLabel setTextColor:[UIColor colorWithCGColor:[[event calendar] CGColor]]];
     } else {
         [cell.titleLabel setTextColor:[UIColor darkTextColor]];
+    }
+   
+    if ([event isEqual:self.selectedEvent]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
 }
 @end
