@@ -151,6 +151,7 @@
 		62E64884173902BA0030DDFB /* setting_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E64883173902BA0030DDFB /* setting_navigation@2x.png */; };
 		62E64888173958670030DDFB /* calendar_day_today@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E64887173958660030DDFB /* calendar_day_today@2x~iphone.png */; };
 		62E6488A17395B070030DDFB /* calendar_day_today@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6488917395B070030DDFB /* calendar_day_today@2x~ipad.png */; };
+		62E64890173A115A0030DDFB /* EKEventStore+Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6488F173A115A0030DDFB /* EKEventStore+Event.m */; };
 		62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F84172DFB6D000E887E /* EventViewController.xib */; };
 		62ED0F88172E4769000E887E /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F87172E4768000E887E /* EventCell.m */; };
 		62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8C172E4DA0000E887E /* UILabel+font.m */; };
@@ -387,6 +388,8 @@
 		62E64883173902BA0030DDFB /* setting_navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_navigation@2x.png"; sourceTree = "<group>"; };
 		62E64887173958660030DDFB /* calendar_day_today@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day_today@2x~iphone.png"; sourceTree = "<group>"; };
 		62E6488917395B070030DDFB /* calendar_day_today@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day_today@2x~ipad.png"; sourceTree = "<group>"; };
+		62E6488E173A115A0030DDFB /* EKEventStore+Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EKEventStore+Event.h"; sourceTree = "<group>"; };
+		62E6488F173A115A0030DDFB /* EKEventStore+Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EKEventStore+Event.m"; sourceTree = "<group>"; };
 		62ED0F84172DFB6D000E887E /* EventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventViewController.xib; sourceTree = "<group>"; };
 		62ED0F86172E4768000E887E /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		62ED0F87172E4768000E887E /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
@@ -849,6 +852,8 @@
 				6235AD6F16FF3B1800712A78 /* UIView+MutableFrame.m */,
 				626BB0DF1691853A004E9E63 /* EKEvent+Today.h */,
 				626BB0E01691853C004E9E63 /* EKEvent+Today.m */,
+				62E6488E173A115A0030DDFB /* EKEventStore+Event.h */,
+				62E6488F173A115A0030DDFB /* EKEventStore+Event.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -1110,6 +1115,7 @@
 				62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */,
 				62ED0F90172E9424000E887E /* EventSettingViewController.m in Sources */,
 				62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */,
+				62E64890173A115A0030DDFB /* EKEventStore+Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

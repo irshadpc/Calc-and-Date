@@ -8,6 +8,7 @@
 
 #import "EventSettingViewController.h"
 #import "UIView+MutableFrame.h"
+#import "EKEventStore+Event.h"
 
 @interface EventSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -36,15 +37,10 @@ typedef enum {
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         _eventStore = [[EKEventStore alloc] init];
-        if ([_eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
-            [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-                _granted = granted;
-                [self reloadTableData];
-            }];
-        } else {
-            _granted = YES;
+        [_eventStore requestAccessToEventWithCompletion:^(BOOL granted, NSError *error) {
+            _granted = granted;
             [self reloadTableData];
-        }
+        }];
 
         _eventColorSettingSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
         [_eventColorSettingSwitch addTarget:self
@@ -196,11 +192,8 @@ typedef enum {
         return;
     }
 
-    if ([self.eventStore respondsToSelector:@selector(calendarsForEntityType:)]) {
-        self.calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
-    } else {
-        self.calendars = [self.eventStore calendars];
-    }
+    self.calendars = [self.eventStore eventCalendars];
+
     [self.tableView reloadData];
 }
 

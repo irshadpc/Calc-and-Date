@@ -12,14 +12,17 @@
 #import "NSDate+Calc.h"
 #import "NSDate+Style.h"
 #import "EKEvent+Today.h"
+#import "EKEventStore+Event.h"
 
 @interface EventManager ()
 @property(strong, nonatomic) EKEventStore *eventStore;
+@property(strong, nonatomic) NSArray *calendars;
 @property(strong, nonatomic, readwrite) NSArray *events;
 @property(strong, nonatomic, readwrite) EKEvent *todayEvent;
 @property(nonatomic, getter = isGranted) BOOL granted;
 
 - (void)reloadEvents;
+- (NSArray *)enabledCalendars;
 - (NSArray *)pastEvents;
 - (NSArray *)futureEvents;
 - (NSArray *)distinctEvents:(NSArray *)events;
@@ -34,17 +37,11 @@ static const NSInteger EventIntervalYear = 2;
         _delegate = delegate;
         
         _eventStore = [[EKEventStore alloc] init];
-        if ([_eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
-            [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-                _granted = granted;
-                [self reloadEvents];
-                [self setupNotification];
-            }];
-        } else {
-            _granted = YES;
+        [_eventStore requestAccessToEventWithCompletion:^(BOOL granted, NSError *error) {
+            _granted = granted;
             [self reloadEvents];
             [self setupNotification];
-        }
+        }];
     }
     return self;
 }
@@ -58,6 +55,7 @@ static const NSInteger EventIntervalYear = 2;
 {
     [self.delegate startEventLoad:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.calendars = [self enabledCalendars];
         self.todayEvent = [EKEvent todayEventWithEventStore:self.eventStore];
         if (self.isGranted) {
             NSMutableArray *events = [[NSMutableArray alloc] initWithArray:[self pastEvents]];
@@ -76,21 +74,25 @@ static const NSInteger EventIntervalYear = 2;
 
 #pragma mark - Private
 
-- (NSArray *)pastEvents
+- (NSArray *)enabledCalendars
 {
-    NSDate *date = [[NSDate date] noTime];
     NSMutableArray *calendars = [NSMutableArray array];
     NSArray *disabledCalendars = [(AppDelegate *)[[UIApplication sharedApplication] delegate] disabledCalendars];
-    for (EKCalendar *calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
+    for (EKCalendar *calendar in [self.eventStore eventCalendars]) {
         if (![disabledCalendars containsObject:[calendar calendarIdentifier]]) {
             [calendars addObject:calendar];
         }
     }
-    
+    return calendars;
+}
+
+- (NSArray *)pastEvents
+{
+    NSDate *date = [[NSDate date] noTime];
     NSArray *events = [[self.eventStore eventsMatchingPredicate:
                         [self.eventStore predicateForEventsWithStartDate:[date addingByYear:-EventIntervalYear]
                                                              endDate:date
-                                                           calendars:calendars]]
+                                                           calendars:self.calendars]]
                        sortedArrayUsingComparator:^NSComparisonResult(EKEvent *l, EKEvent *r) {
                            NSComparisonResult result = [l.startDate compare:r.startDate];
                            if (result == NSOrderedAscending) {
@@ -107,18 +109,11 @@ static const NSInteger EventIntervalYear = 2;
 
 - (NSArray *)futureEvents
 {
-    NSMutableArray *calendars = [NSMutableArray array];
-    NSArray *disabledCalendars = [(AppDelegate *)[[UIApplication sharedApplication] delegate] disabledCalendars];
-    for (EKCalendar *calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
-        if (![disabledCalendars containsObject:[calendar calendarIdentifier]]) {
-            [calendars addObject:calendar];
-        }
-    }
     NSDate *date = [[NSDate date] noTime];
     NSArray *events = [[self.eventStore eventsMatchingPredicate:
                         [self.eventStore predicateForEventsWithStartDate:date
                                                              endDate:[date addingByYear:EventIntervalYear]
-                                                           calendars:calendars]]
+                                                           calendars:self.calendars]]
                        sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
 
     return [self distinctEvents:events];
