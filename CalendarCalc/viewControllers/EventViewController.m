@@ -96,6 +96,8 @@
         [self.titlebar setHidden:YES];
         [self.tableView setFrame:self.view.frame];
         [self setContentSizeForViewInPopover:self.view.bounds.size];
+    } else {
+        [self.view setFrame:[UIScreen mainScreen].bounds];
     }
 }
 
