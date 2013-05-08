@@ -127,8 +127,8 @@
     if (!string) {
         return;
     }
-    
-    [self.calcController inputNumberString:string];
+
+    self.result = [self.calcController setStringValue:string];
     [self configureView];
 }
 

@@ -11,6 +11,7 @@
 #import "DateCalcProcessor.h"
 #import "CalcValue.h"
 #import "NSArray+safe.h"
+#import "NSDateFormatter+CalendarCalc.h"
 #import "NSString+Calculator.h"
 #import "NSString+Locale.h"
 
@@ -31,6 +32,7 @@ typedef enum {
 
 - (CalcValue *)inputKeyCode:(NSInteger)keycode;
 - (CalcValue *)inputFunction:(Function)function;
+- (CalcValue *)inputNumberString:(NSString *)numberString;
 - (CalcValue *)inputDecimalPoint;
 - (CalcValue *)clear;
 - (CalcValue *)reverseNumber;
@@ -75,24 +77,16 @@ static const NSInteger KeyCodeDoubleZero = 10;
     return self.inputValue;
 }
 
-- (CalcValue *)inputNumberString:(NSString *)numberString
+- (CalcValue *)setStringValue:(NSString *)stringValue
 {
-    [self willInputMode];
-    self.currentMode = ModeInput;
-    
-    NSArray *components = [numberString componentsSeparatedByString:[NSString decimalSeparator]];
-    NSString *number = [components safeObjectAtIndex:0];
-    if (number) {
-        [self.inputValue inputNumberString:[number stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
-                                                                             withString:@""]];
+    [self.inputValue clear];
+
+    NSDate *date = [[NSDateFormatter yyyymmddFormatter] dateFromString:stringValue];
+    if (date) {
+        return [self inputDate:date];
+    } else {
+        return [self inputNumberString:stringValue];
     }
-    NSString *decimal = [components safeObjectAtIndex:1];
-    if (decimal) {
-        [self.inputValue inputDecimalPoint];
-        [self.inputValue inputNumberString:[decimal stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
-                                                                              withString:@""]];
-    }
-    return self.inputValue;
 }
 
 - (void)setIncludeStartDay:(BOOL)includeStartDay
@@ -155,6 +149,26 @@ static const NSInteger KeyCodeDoubleZero = 10;
             NSLog(@"FUNCTION: %d", function);
             abort();
     }
+}
+
+- (CalcValue *)inputNumberString:(NSString *)numberString
+{
+    [self willInputMode];
+    self.currentMode = ModeInput;
+
+    NSArray *components = [numberString componentsSeparatedByString:[NSString decimalSeparator]];
+    NSString *number = [components safeObjectAtIndex:0];
+    if (number) {
+        [self.inputValue inputNumberString:[number stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
+                                                                             withString:@""]];
+    }
+    NSString *decimal = [components safeObjectAtIndex:1];
+    if (decimal) {
+        [self.inputValue inputDecimalPoint];
+        [self.inputValue inputNumberString:[decimal stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
+                                                                              withString:@""]];
+    }
+    return self.inputValue;
 }
 
 - (CalcValue *)clear

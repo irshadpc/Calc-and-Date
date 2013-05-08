@@ -17,7 +17,7 @@
 
 - (CalcValue *)inputInteger:(NSInteger)integer;
 - (CalcValue *)inputDate:(NSDate *)date;
-- (CalcValue *)inputNumberString:(NSString *)numberString;
+- (CalcValue *)setStringValue:(NSString *)stringValue;
 - (void)setWeek:(Week)week exclude:(BOOL)exclude;
 - (BOOL)isAllCleared;
 @end
