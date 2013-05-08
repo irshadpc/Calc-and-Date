@@ -144,14 +144,15 @@
 		62D886061718DE0700EACAFA /* NumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D886051718DE0700EACAFA /* NumberCalcTests.m */; };
 		62D8860D1719546100EACAFA /* DateCalcProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D8860C1719546100EACAFA /* DateCalcProcessor.m */; };
 		62DAF6161680AF6F00A14D3C /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DAF6151680AF6F00A14D3C /* PageView.m */; };
-		62E6486B1738EA1E0030DDFB /* event_background@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6486A1738EA1D0030DDFB /* event_background@2x~iphone.png */; };
 		62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6486F1738EAA60030DDFB /* SectionHeaderView.m */; };
 		62E6487E1738FA940030DDFB /* section_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6487D1738FA940030DDFB /* section_header@2x.png */; };
-		62E648801738FBA00030DDFB /* event_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6487F1738FBA00030DDFB /* event_header@2x.png */; };
 		62E64884173902BA0030DDFB /* setting_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E64883173902BA0030DDFB /* setting_navigation@2x.png */; };
 		62E64888173958670030DDFB /* calendar_day_today@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E64887173958660030DDFB /* calendar_day_today@2x~iphone.png */; };
 		62E6488A17395B070030DDFB /* calendar_day_today@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6488917395B070030DDFB /* calendar_day_today@2x~ipad.png */; };
 		62E64890173A115A0030DDFB /* EKEventStore+Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6488F173A115A0030DDFB /* EKEventStore+Event.m */; };
+		62E64898173AA7EF0030DDFB /* event_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E64897173AA7EF0030DDFB /* event_header@2x.png */; };
+		62E648A0173AAC120030DDFB /* event_background@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E6489F173AAC120030DDFB /* event_background@2x~iphone.png */; };
+		62E648A2173AACAA0030DDFB /* event_background_under@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E648A1173AACAA0030DDFB /* event_background_under@2x~iphone.png */; };
 		62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F84172DFB6D000E887E /* EventViewController.xib */; };
 		62ED0F88172E4769000E887E /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F87172E4768000E887E /* EventCell.m */; };
 		62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8C172E4DA0000E887E /* UILabel+font.m */; };
@@ -380,16 +381,17 @@
 		62D8860C1719546100EACAFA /* DateCalcProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCalcProcessor.m; sourceTree = "<group>"; };
 		62DAF6141680AF6F00A14D3C /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
 		62DAF6151680AF6F00A14D3C /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
-		62E6486A1738EA1D0030DDFB /* event_background@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event_background@2x~iphone.png"; sourceTree = "<group>"; };
 		62E6486E1738EAA60030DDFB /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		62E6486F1738EAA60030DDFB /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
 		62E6487D1738FA940030DDFB /* section_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "section_header@2x.png"; sourceTree = "<group>"; };
-		62E6487F1738FBA00030DDFB /* event_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event_header@2x.png"; sourceTree = "<group>"; };
 		62E64883173902BA0030DDFB /* setting_navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_navigation@2x.png"; sourceTree = "<group>"; };
 		62E64887173958660030DDFB /* calendar_day_today@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day_today@2x~iphone.png"; sourceTree = "<group>"; };
 		62E6488917395B070030DDFB /* calendar_day_today@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day_today@2x~ipad.png"; sourceTree = "<group>"; };
 		62E6488E173A115A0030DDFB /* EKEventStore+Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EKEventStore+Event.h"; sourceTree = "<group>"; };
 		62E6488F173A115A0030DDFB /* EKEventStore+Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EKEventStore+Event.m"; sourceTree = "<group>"; };
+		62E64897173AA7EF0030DDFB /* event_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event_header@2x.png"; sourceTree = "<group>"; };
+		62E6489F173AAC120030DDFB /* event_background@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event_background@2x~iphone.png"; sourceTree = "<group>"; };
+		62E648A1173AACAA0030DDFB /* event_background_under@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event_background_under@2x~iphone.png"; sourceTree = "<group>"; };
 		62ED0F84172DFB6D000E887E /* EventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventViewController.xib; sourceTree = "<group>"; };
 		62ED0F86172E4768000E887E /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		62ED0F87172E4768000E887E /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
@@ -682,8 +684,9 @@
 				62B59A28169712A000126000 /* switch_button_on@2x~iphone.png */,
 				62A2D08E167380BC001CC9AE /* switch_button_off@2x~iphone.png */,
 				62E6487D1738FA940030DDFB /* section_header@2x.png */,
-				62E6487F1738FBA00030DDFB /* event_header@2x.png */,
-				62E6486A1738EA1D0030DDFB /* event_background@2x~iphone.png */,
+				62E64897173AA7EF0030DDFB /* event_header@2x.png */,
+				62E6489F173AAC120030DDFB /* event_background@2x~iphone.png */,
+				62E648A1173AACAA0030DDFB /* event_background_under@2x~iphone.png */,
 				62B59A6C169806D400126000 /* setting@2x.png */,
 				62E64883173902BA0030DDFB /* setting_navigation@2x.png */,
 			);
@@ -1022,12 +1025,13 @@
 				6235AD6D16FF379400712A78 /* DatePickerController.xib in Resources */,
 				62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */,
 				62ED0F92172EB827000E887E /* EventSettingViewController.xib in Resources */,
-				62E6486B1738EA1E0030DDFB /* event_background@2x~iphone.png in Resources */,
 				62E6487E1738FA940030DDFB /* section_header@2x.png in Resources */,
-				62E648801738FBA00030DDFB /* event_header@2x.png in Resources */,
 				62E64884173902BA0030DDFB /* setting_navigation@2x.png in Resources */,
 				62E64888173958670030DDFB /* calendar_day_today@2x~iphone.png in Resources */,
 				62E6488A17395B070030DDFB /* calendar_day_today@2x~ipad.png in Resources */,
+				62E64898173AA7EF0030DDFB /* event_header@2x.png in Resources */,
+				62E648A0173AAC120030DDFB /* event_background@2x~iphone.png in Resources */,
+				62E648A2173AACAA0030DDFB /* event_background_under@2x~iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

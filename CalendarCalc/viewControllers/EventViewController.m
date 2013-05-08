@@ -87,6 +87,7 @@
 {
     [super viewDidLoad];
 
+    [self.titlebar.topItem setTitleView:[self topButton]];
     [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
                         forBarMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
