@@ -10,7 +10,5 @@
 #import <EventKit/EventKit.h>
 
 @interface EventSettingViewController : UIViewController
-@property(strong, nonatomic) NSArray *disabledCalendars;
-@property(nonatomic, getter=isEnabledEventColor) BOOL enabledEventColor;
 @property(nonatomic, getter=isChanged, readonly) BOOL changed;
 @end

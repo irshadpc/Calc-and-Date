@@ -231,19 +231,20 @@
 #pragma mark - SettingViewController
 
 - (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController
+                 calendarOptionChanged:(BOOL)calendarOptionChanged
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self.settingPopover dismissPopoverAnimated:YES];
     }
+    if (calendarOptionChanged) {
+        [self.eventViewController reloadEvents];
+    }
+
     [self setupSettings];
 }
 
-- (void)settingViewControllerDidChangedCalendarSetting:(SettingViewController *)settingViewController
-{
-    [self.eventViewController reloadEvents];
-}
 
 #pragma mark - EventViewController
 
@@ -267,8 +268,6 @@
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
     if (popoverController == self.settingPopover) {
-        UINavigationController *navController = (UINavigationController *)[popoverController contentViewController];
-        [[navController childViewControllers][0] saveSettings];
         [self setupSettings];
     }
     return YES;

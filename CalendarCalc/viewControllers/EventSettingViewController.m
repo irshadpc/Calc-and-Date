@@ -7,6 +7,8 @@
 //
 
 #import "EventSettingViewController.h"
+#import "AppDelegate.h"
+#import "AppDelegate+Setting.h"
 #import "UIView+MutableFrame.h"
 #import "EKEventStore+Event.h"
 
@@ -16,6 +18,7 @@
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EKEventStore *eventStore;
 @property(nonatomic, getter=isGranted) BOOL granted;
+@property(strong, nonatomic) NSMutableArray *disabledCalendars;
 @property(strong, nonatomic) NSArray *calendars;
 @property(nonatomic, getter=isChanged, readwrite) BOOL changed;
 
@@ -60,6 +63,14 @@ typedef enum {
 {
     [super viewDidLoad];
 
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.disabledCalendars = [[appDelegate disabledCalendars] mutableCopy];
+    if (!self.disabledCalendars) {
+        self.disabledCalendars = [NSMutableArray array];
+    }
+    
+    [self.eventColorSettingSwitch setOn:[appDelegate eventColorOption]];
+   
     if (self.isGranted && self.calendars) {
         [self.tableView reloadData];
     } 
@@ -188,21 +199,18 @@ typedef enum {
         return;
     }
 
-    EKCalendar *calendar = [self.calendars objectAtIndex:indexPath.row];
-    NSMutableArray *disabledCalendars = [self.disabledCalendars mutableCopy];
-    if (!disabledCalendars) {
-        disabledCalendars = [NSMutableArray array];
-    }
-    
-    if ([disabledCalendars containsObject:[calendar calendarIdentifier]]) {
-        [disabledCalendars removeObject:[calendar calendarIdentifier]];
+    EKCalendar *calendar = [self.calendars objectAtIndex:indexPath.row];    
+    if ([self.disabledCalendars containsObject:[calendar calendarIdentifier]]) {
+        [self.disabledCalendars removeObject:[calendar calendarIdentifier]];
         [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
     } else {
-        [disabledCalendars addObject:[calendar calendarIdentifier]];
+        [self.disabledCalendars addObject:[calendar calendarIdentifier]];
         [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
     }
 
-    self.disabledCalendars = disabledCalendars;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate setDisabledCalendars:self.disabledCalendars];
+
     self.changed = YES;
 }
 
@@ -211,7 +219,9 @@ typedef enum {
 
 - (void)onEventColorSettingChanged:(UISwitch *)sender
 {
-    self.enabledEventColor = [sender isOn];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate setEventColorOption:sender.isOn];
+    self.changed = YES;
 }
 
 
@@ -226,7 +236,6 @@ typedef enum {
     }
 
     self.calendars = [self.eventStore eventCalendars];
-
     [self.tableView reloadData];
 }
 
@@ -261,7 +270,6 @@ typedef enum {
         self.eventColorSettingSwitch.center = cell.contentView.center;
         CGFloat originX = cell.contentView.bounds.size.width - self.eventColorSettingSwitch.bounds.size.width - 20.0;
         [self.eventColorSettingSwitch setFrameOriginX:originX];
-        [self.eventColorSettingSwitch setOn:self.enabledEventColor];
         [cell.contentView addSubview:self.eventColorSettingSwitch];
     }
     return cell;

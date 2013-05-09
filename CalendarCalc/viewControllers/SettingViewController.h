@@ -13,11 +13,9 @@
 @interface SettingViewController : UIViewController
 @property(weak, nonatomic) id<SettingViewControllerDelegate> delegate;
 @property(weak, nonatomic) UIPopoverController *popover;
-
-- (void)saveSettings;
 @end
 
 @protocol SettingViewControllerDelegate <NSObject>
-- (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController;
-- (void)settingViewControllerDidChangedCalendarSetting:(SettingViewController *)settingViewController;
+- (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController
+                 calendarOptionChanged:(BOOL)calendarOptionChanged;
 @end

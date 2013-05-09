@@ -20,6 +20,8 @@
 @property(strong, nonatomic) EventSettingViewController *eventSettingViewController;
 
 - (void)onClose:(UIBarButtonItem *)sender;
+- (IBAction)onIncludeStartDateOptionChanged:(UISwitch *)sender;
+- (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender;
 - (IBAction)onEventSettings:(UIButton *)sender;
 - (IBAction)onEnterEventSettingNavigation:(UIButton *)sender;
 - (IBAction)onExitEventSettingNavigation:(UIButton *)sender;
@@ -46,8 +48,6 @@
     [self setTitle:NSLocalizedString(@"SETTINGS", nil)];
     self.eventSettingViewController = [[EventSettingViewController alloc] initWithNibName:@"EventSettingViewController"
                                                                                    bundle:nil];
-    [self.eventSettingViewController setDisabledCalendars:[appDelegate disabledCalendars]];
-    [self.eventSettingViewController setEnabledEventColor:[appDelegate eventColorOption]];
 }
 
 - (void)viewDidUnload {
@@ -72,24 +72,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)saveSettings
-{
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate setIncludeStartDayOption:self.includeStartDayOption.isOn];
-    [appDelegate setDynamicCalendarOption:self.dynamicCalendarOption.isOn];
-    [appDelegate setEventColorOption:[self.eventSettingViewController isEnabledEventColor]];
-    if ([self.eventSettingViewController isChanged]) {
-        [appDelegate setDisabledCalendars:[self.eventSettingViewController disabledCalendars]];
-        [self.delegate settingViewControllerDidChangedCalendarSetting:self];
-    }
-}
-
 
 #pragma mark - Action
 
 - (void)onClose:(UIBarButtonItem *)sender {
-    [self saveSettings];
-    [self.delegate settingViewControllerDidFinish:self];
+    [self.delegate settingViewControllerDidFinish:self 
+                            calendarOptionChanged:[self.eventSettingViewController isChanged]];
+}
+
+- (IBAction)onIncludeStartDateOptionChanged:(UISwitch *)sender
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate setIncludeStartDayOption:sender.isOn];
+}
+
+- (IBAction)onDynamicCalendarOptionChanged:(UISwitch *)sender
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate setDynamicCalendarOption:sender.isOn];
 }
 
 - (IBAction)onEventSettings:(UIButton *)sender
