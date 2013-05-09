@@ -91,8 +91,8 @@
 - (void)configurePrevNextButton
 {
     if (self.isStringTitleMode) {
-        [self.nextButton setTitle:@"次月" forState:UIControlStateNormal];
-        [self.prevButton setTitle:@"前月" forState:UIControlStateNormal];
+        [self.nextButton setTitle:NSLocalizedString(@"NEXT_MONTH", nil) forState:UIControlStateNormal];
+        [self.prevButton setTitle:NSLocalizedString(@"PREV_MONTH", nil) forState:UIControlStateNormal];
         [self.nextButton setImage:nil forState:UIControlStateNormal];
         [self.prevButton setImage:nil forState:UIControlStateNormal];
     } else {

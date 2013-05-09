@@ -10,6 +10,7 @@
 #import "EventSettingViewController.h"
 #import "ViewSheet.h"
 #import "AppDelegate+Setting.h"
+#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
 
 @interface SettingViewController ()
 @property(weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
@@ -39,10 +40,8 @@
                                                       lastOptionItemFrame.origin.y +
                                                       lastOptionItemFrame.size.height + 44.0 - 20.0);
     } else {
-        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"BACK", nil)
-                                                                                   style:UIBarButtonItemStyleBordered
-                                                                                  target:self
-                                                                                  action:@selector(onClose:)]];
+        [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem closeButtonItemWithTarget:self
+                                                                                      action:@selector(onClose:)]];
     }
     [self setTitle:NSLocalizedString(@"SETTINGS", nil)];
     self.eventSettingViewController = [[EventSettingViewController alloc] initWithNibName:@"EventSettingViewController"

@@ -20,7 +20,8 @@
 "SETTINGS"="設定";
 "EVENT_SETTINGS"="イベント設定";
 "CLOSE"="閉じる";
-"BACK"="戻る";
+"PREV_MONTH"="前月";
+"NEXT_MONTH"="次月";
 "ENABLED_CALNEDARS"="使用カレンダー";
 "USE_CALENDAR_COLORS"="カレンダーの色を使用";
 "CALENDAR_COLOR_EXPLAIN"="イベントの文字色に標準カレンダーで設定\nされているカラーを使用します。";

@@ -56,7 +56,7 @@
 					<object class="IBUILabel" id="564701705">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 31}, {193, 21}}</string>
+						<string key="NSFrame">{{20, 23}, {193, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="893912344"/>
@@ -88,7 +88,7 @@
 					<object class="IBUISwitch" id="981788303">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{205, 75}, {94, 27}}</string>
+						<string key="NSFrame">{{205, 67}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="398851295"/>
@@ -102,7 +102,7 @@
 					<object class="IBUILabel" id="874556750">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 78}, {193, 21}}</string>
+						<string key="NSFrame">{{20, 70}, {193, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="981788303"/>
@@ -124,7 +124,7 @@
 					<object class="IBUISwitch" id="893912344">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{206, 28}, {94, 27}}</string>
+						<string key="NSFrame">{{206, 20}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="874556750"/>
@@ -138,7 +138,7 @@
 					<object class="IBUIButton" id="398851295">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 118}, {320, 44}}</string>
+						<string key="NSFrame">{{0, 114}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="377319664"/>
@@ -168,7 +168,7 @@
 					<object class="IBUILabel" id="377319664">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 129}, {193, 21}}</string>
+						<string key="NSFrame">{{20, 125}, {193, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -326,12 +326,12 @@
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="981788303"/>
-							<reference ref="564701705"/>
 							<reference ref="868782990"/>
 							<reference ref="893912344"/>
-							<reference ref="398851295"/>
 							<reference ref="874556750"/>
 							<reference ref="377319664"/>
+							<reference ref="564701705"/>
+							<reference ref="398851295"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -380,12 +380,13 @@
 						<int key="objectID">35</int>
 						<reference key="object" ref="398851295"/>
 						<reference key="parent" ref="191373211"/>
-						<string key="objectName">イベント設定</string>
+						<string key="objectName">イベント設定ナビゲーション</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">38</int>
 						<reference key="object" ref="377319664"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">イベント設定</string>
 					</object>
 				</array>
 			</object>
@@ -416,22 +417,11 @@
 					<string key="className">SettingViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="onCancelEventSettingNavigation:">UIButton</string>
-						<string key="onDownEventSettingNavigation:">UIButton</string>
 						<string key="onEnterEventSettingNavigation:">UIButton</string>
 						<string key="onEventSettings:">UIButton</string>
 						<string key="onExitEventSettingNavigation:">UIButton</string>
-						<string key="onUpEventSettingNavigation:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="onCancelEventSettingNavigation:">
-							<string key="name">onCancelEventSettingNavigation:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="onDownEventSettingNavigation:">
-							<string key="name">onDownEventSettingNavigation:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBActionInfo" key="onEnterEventSettingNavigation:">
 							<string key="name">onEnterEventSettingNavigation:</string>
 							<string key="candidateClassName">UIButton</string>
@@ -442,10 +432,6 @@
 						</object>
 						<object class="IBActionInfo" key="onExitEventSettingNavigation:">
 							<string key="name">onExitEventSettingNavigation:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="onUpEventSettingNavigation:">
-							<string key="name">onUpEventSettingNavigation:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>

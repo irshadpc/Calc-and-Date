@@ -48,7 +48,8 @@
 @interface EventViewController ()<EventManagerDelegate>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UINavigationBar *titlebar;
+@property(weak, nonatomic) IBOutlet UINavigationBar *titlebar;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *closeButton;
 @property(strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property(strong, nonatomic) EventManager *eventManager;
 @property(strong, nonatomic) NSDictionary *filteredEvents;
@@ -87,11 +88,12 @@
 {
     [super viewDidLoad];
 
+    [self.closeButton setTitle:NSLocalizedString(@"CLOSE", nil)];
     [self.titlebar.topItem setTitleView:[self topButton]];
     [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
                         forBarMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
-    [self.tableView addSubview:self.indicatorView];
+    [self.view addSubview:self.indicatorView];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.titlebar setHidden:YES];
@@ -107,6 +109,7 @@
     [self setTableView:nil];
     [self setSearchBar:nil];
     [self setTitlebar:nil];
+    [self setCloseButton:nil];
     [super viewDidUnload];
 }
 

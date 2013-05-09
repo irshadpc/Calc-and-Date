@@ -151,8 +151,7 @@ typedef enum {
     }
     
     const CGFloat Margin =  16.0;
-    UIView *view = [[UIView alloc] initWithFrame:[tableView rectForFooterInSection:section]];
-    UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     [label setText:[self tableView:tableView titleForFooterInSection:section]];
     [label setTextColor:[UIColor lightTextColor]];
     [label setShadowColor:[UIColor darkGrayColor]];
@@ -160,10 +159,11 @@ typedef enum {
     [label setFont:[UIFont boldSystemFontOfSize:14.0]];
     [label setNumberOfLines:0];
     [label setLineBreakMode:NSLineBreakByWordWrapping];
-    [label setFrameSizeWidth:view.bounds.size.width - (Margin * 2)];
+    [label setFrameSizeWidth:self.view.bounds.size.width - (Margin * 2)];
     [label setFrameOrigin:CGPointMake(Margin, 2.0)];
     [label sizeToFit];
 
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     [view addSubview:label];
 
     return view;
