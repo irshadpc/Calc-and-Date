@@ -68,7 +68,7 @@ typedef enum {
         [self.indicatorView startAnimating];
         [self.tableView addSubview:self.indicatorView];
     }
-    
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.tableView setScrollEnabled:NO];
     }
@@ -108,16 +108,18 @@ typedef enum {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == SectionEventCalendars) {
-        return @"使用カレンダー";
-    } else {
+    if (section == SectionEventColor) {
         return nil;
     }
+    return NSLocalizedString(@"ENABLED_CALNEDARS", nil);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:[tableView rectForHeaderInSection:section]];
+    if (section == SectionEventColor) {
+        return nil;
+    }
+
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     [label setText:[self tableView:tableView titleForHeaderInSection:section]];
     [label setTextColor:[UIColor whiteColor]];
@@ -128,6 +130,40 @@ typedef enum {
     [label setFrameOriginX:10.0];
     [label setFrameOriginY:6.0];
     
+    UIView *view = [[UIView alloc] initWithFrame:[tableView rectForHeaderInSection:section]];
+    [view addSubview:label];
+
+    return view;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == SectionEventCalendars) {
+        return nil;
+    }
+    return NSLocalizedString(@"CALENDAR_COLOR_EXPLAIN", nil);
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == SectionEventCalendars) {
+        return nil;
+    }
+    
+    const CGFloat Margin =  16.0;
+    UIView *view = [[UIView alloc] initWithFrame:[tableView rectForFooterInSection:section]];
+    UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
+    [label setText:[self tableView:tableView titleForFooterInSection:section]];
+    [label setTextColor:[UIColor lightTextColor]];
+    [label setShadowColor:[UIColor darkGrayColor]];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [label setFont:[UIFont boldSystemFontOfSize:14.0]];
+    [label setNumberOfLines:0];
+    [label setLineBreakMode:NSLineBreakByWordWrapping];
+    [label setFrameSizeWidth:view.bounds.size.width - (Margin * 2)];
+    [label setFrameOrigin:CGPointMake(Margin, 2.0)];
+    [label sizeToFit];
+
     [view addSubview:label];
 
     return view;
@@ -224,7 +260,7 @@ typedef enum {
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:EventColorSettingCellIdentifier];
-        [cell.textLabel setText:@"イベントカラー"];
+        [cell.textLabel setText:NSLocalizedString(@"USE_CALENDAR_COLORS", nil)];
         self.eventColorSettingSwitch.center = cell.contentView.center;
         CGFloat originX = cell.contentView.bounds.size.width - self.eventColorSettingSwitch.bounds.size.width - 20.0;
         [self.eventColorSettingSwitch setFrameOriginX:originX];

@@ -26,7 +26,7 @@
 @property(strong, nonatomic) UIToolbar *toolbar;
 @property(strong, nonatomic) UIPopoverController *popover;
 
-- (void)onCancel:(UIBarButtonItem *)sender;
+- (void)onClose:(UIBarButtonItem *)sender;
 - (void)onEvent:(UIBarButtonItem *)sender;
 - (UIBarButtonItem *)eventButtonItem;
 - (void)setCurrentYear:(NSInteger)year month:(NSInteger)month;
@@ -51,7 +51,7 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             _toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
             [_toolbar setBarStyle:UIBarStyleBlackOpaque];
-            [_toolbar setItems:@[[UIBarButtonItem cancelButtonItemWithTarget:self action:@selector(onCancel:)],
+            [_toolbar setItems:@[[UIBarButtonItem closeButtonItemWithTarget:self action:@selector(onClose:)],
                                  [UIBarButtonItem flexibleSpaceItem],
                                  [self eventButtonItem]]];
             [_toolbar sizeToFit];
@@ -187,7 +187,8 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 - (void)calendarControlView:(CalendarControlView *)calendarControllView
       pressDateSelectButton:(UIButton *)dateSelectButton
 {
-    DatePickerController *pickerViewController = [[DatePickerController alloc] initWithNibName:@"DatePickerController" bundle:nil];
+    DatePickerController *pickerViewController = [[DatePickerController alloc] initWithNibName:@"DatePickerController"
+                                                                                        bundle:nil];
     pickerViewController.year = [self.calendarControllView.currentDate year];
     pickerViewController.month = [self.calendarControllView.currentDate month];
     [pickerViewController setHideDayComponent:YES];
@@ -269,7 +270,7 @@ static const CGFloat iPadCalendarButtonSize = 66.0;
 
 #pragma mark - Private
 
-- (void)onCancel:(UIBarButtonItem *)sender
+- (void)onClose:(UIBarButtonItem *)sender
 {
     [self.actionDelegate calendarViewControllerDidCancel:self];
 }

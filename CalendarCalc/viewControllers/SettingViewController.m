@@ -18,8 +18,7 @@
 @property(weak, nonatomic) IBOutlet UIView *lastOptionItem;
 @property(strong, nonatomic) EventSettingViewController *eventSettingViewController;
 
-- (void)onDone:(UIBarButtonItem *)sender;
-- (void)onCancel:(UIBarButtonItem *)sender;
+- (void)onClose:(UIBarButtonItem *)sender;
 - (IBAction)onEventSettings:(UIButton *)sender;
 - (IBAction)onEnterEventSettingNavigation:(UIButton *)sender;
 - (IBAction)onExitEventSettingNavigation:(UIButton *)sender;
@@ -40,14 +39,12 @@
                                                       lastOptionItemFrame.origin.y +
                                                       lastOptionItemFrame.size.height + 44.0 - 20.0);
     } else {
-        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                                target:self
-                                                                                                action:@selector(onCancel:)]];
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                                 target:self
-                                                                                                 action:@selector(onDone:)]];
+        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"BACK", nil)
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(onClose:)]];
     }
-
+    [self setTitle:NSLocalizedString(@"SETTINGS", nil)];
     self.eventSettingViewController = [[EventSettingViewController alloc] initWithNibName:@"EventSettingViewController"
                                                                                    bundle:nil];
     [self.eventSettingViewController setDisabledCalendars:[appDelegate disabledCalendars]];
@@ -88,12 +85,11 @@
     }
 }
 
-- (void)onDone:(UIBarButtonItem *)sender {
-    [self saveSettings];
-    [self.delegate settingViewControllerDidFinish:self];
-}
 
-- (void)onCancel:(UIBarButtonItem *)sender {
+#pragma mark - Action
+
+- (void)onClose:(UIBarButtonItem *)sender {
+    [self saveSettings];
     [self.delegate settingViewControllerDidFinish:self];
 }
 

@@ -16,6 +16,14 @@
                                                          action:nil];
 }
 
++ (UIBarButtonItem *)closeButtonItemWithTarget:(id)target action:(SEL)action
+{
+    return [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CLOSE", nil)
+                                            style:UIBarButtonItemStyleBordered
+                                           target:target
+                                           action:action];
+}
+
 + (UIBarButtonItem *)cancelButtonItemWithTarget:(id)target action:(SEL)action
 {
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel

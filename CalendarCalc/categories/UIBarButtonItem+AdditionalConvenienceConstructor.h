@@ -10,6 +10,7 @@
 
 @interface UIBarButtonItem (AdditionalConvenienceConstructor)
 + (UIBarButtonItem *)flexibleSpaceItem;
++ (UIBarButtonItem *)closeButtonItemWithTarget:(id)target action:(SEL)action;
 + (UIBarButtonItem *)cancelButtonItemWithTarget:(id)target action:(SEL)action;
 + (UIBarButtonItem *)doneButtonItemWithTarget:(id)target action:(SEL)action;
 @end
