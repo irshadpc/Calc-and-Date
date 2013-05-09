@@ -14,12 +14,15 @@
 @interface SettingViewController ()
 @property(weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
 @property(weak, nonatomic) IBOutlet UISwitch *dynamicCalendarOption;
+@property(weak, nonatomic) IBOutlet UILabel *eventSettingLabel;
 @property(weak, nonatomic) IBOutlet UIView *lastOptionItem;
 @property(strong, nonatomic) EventSettingViewController *eventSettingViewController;
 
 - (void)onDone:(UIBarButtonItem *)sender;
 - (void)onCancel:(UIBarButtonItem *)sender;
-- (IBAction)onCalendarSettings:(UIButton *)sender;
+- (IBAction)onEventSettings:(UIButton *)sender;
+- (IBAction)onEnterEventSettingNavigation:(UIButton *)sender;
+- (IBAction)onExitEventSettingNavigation:(UIButton *)sender;
 @end
 
 @implementation SettingViewController
@@ -55,6 +58,7 @@
     [self setIncludeStartDayOption:nil];
     [self setDynamicCalendarOption:nil];
     [self setLastOptionItem:nil];
+    [self setEventSettingLabel:nil];
     [super viewDidUnload];
 }
 
@@ -93,9 +97,20 @@
     [self.delegate settingViewControllerDidFinish:self];
 }
 
-- (IBAction)onCalendarSettings:(UIButton *)sender
+- (IBAction)onEventSettings:(UIButton *)sender
 {
     [self.navigationController pushViewController:self.eventSettingViewController
                                          animated:YES];
+    [self onExitEventSettingNavigation:sender];
+}
+
+- (IBAction)onEnterEventSettingNavigation:(UIButton *)sender
+{
+    [self.eventSettingLabel setHighlighted:YES];
+}
+
+- (IBAction)onExitEventSettingNavigation:(UIButton *)sender
+{
+    [self.eventSettingLabel setHighlighted:NO];
 }
 @end
