@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "CalendarCalcViewController.h"
+#import "CalendarCalcViewController_iPhone.h"
+#import "CalendarCalcViewController_iPad.h"
 #import "UserDefaultsKeys.h"
 
 @interface NSString (NibName)
@@ -52,8 +53,13 @@ static const CGFloat Phone4InchHeight = 568.0;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
-    self.viewController = [[CalendarCalcViewController alloc] initWithNibName:[NSString calendarCalcViewController]
-                                                                       bundle:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[CalendarCalcViewController_iPhone alloc] initWithNibName:[NSString calendarCalcViewController]
+                                                                                  bundle:nil];
+    } else {
+        self.viewController = [[CalendarCalcViewController_iPad alloc] initWithNibName:[NSString calendarCalcViewController]
+                                                                                bundle:nil];
+    }
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
