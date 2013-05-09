@@ -30,6 +30,6 @@
 - (void)test_Decimal_000000000001_Should_0
 {
     CalcValue *calcValue = [CalcValue calcValueWithDecimalNumber:[NSDecimalNumber decimalNumberWithString:@"0.000000000001"]];
-    STAssertEqualObjects(@"0", [self.formatter displayValueWithCalcValue:calcValue], nil);
+    STAssertEqualObjects(@"0.00000000000", [self.formatter displayValueWithCalcValue:calcValue], nil);
 }
 @end

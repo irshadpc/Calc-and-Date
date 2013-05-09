@@ -13,11 +13,13 @@
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
 #import "NSNumber+Predicate.h"
+#import "NSNumberFormatter+CalendarCalc.h"
 
 @interface CalcValue ()
 @property(strong, nonatomic) NSMutableString *number;
 @property(strong, nonatomic) NSMutableString *decimal;
 @property(strong, nonatomic) NSDate *date;
+@property(strong, nonatomic) NSNumberFormatter *numberFormatter;
 
 - (NSString *)stringDecimalNumberValue;
 @end
@@ -40,8 +42,9 @@
 
 + (CalcValue *)calcValueWithDecimalNumber:(NSDecimalNumber *)decimalNumber
 {
-    NSArray *components = [[decimalNumber stringValue] componentsSeparatedByString:[NSString decimalSeparator]];
- 
+    NSString *stringValue = [[NSNumberFormatter plainNumberFormatter] stringFromNumber:decimalNumber];
+    NSArray *components = [stringValue componentsSeparatedByString:[NSString decimalSeparator]];
+
     return [self calcValueWithNumberString:[components safeObjectAtIndex:0]
                              decimalString:[components safeObjectAtIndex:1]];
 }
@@ -52,6 +55,14 @@
     [result setDate:date];
     
     return result;
+}
+
+- (instancetype)init
+{
+    if ((self = [super init])) {
+        _numberFormatter = [NSNumberFormatter plainNumberFormatter];
+    }
+    return self;
 }
 
 - (BOOL)isNumber
@@ -75,7 +86,8 @@
         return nil;
     }
 
-    NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithString:stringNumber];
+    NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithString:stringNumber
+                                                                       locale:[NSLocale currentLocale]];
     if ([decimalNumber isNan]) {
         return [NSDecimalNumber zero];
     }
@@ -87,7 +99,8 @@
     if (!self.number || [self.number length] == 0) {
         return @"0";
     }
-    return self.number;
+    return [self.number stringByReplacingOccurrencesOfString:[NSString groupingSeparator]
+                                                  withString:@""];
 }
 
 - (NSString *)stringDecimalValue
@@ -151,6 +164,12 @@
 
     if (!self.decimal) {
         self.decimal = [NSMutableString string];
+        if (!self.number) {
+            self.number = [NSMutableString string];
+        }
+        if ([self.number length] == 0) {
+            [self.number appendString:@"0"];
+        }
     }
 }
 

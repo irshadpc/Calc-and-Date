@@ -50,7 +50,8 @@
 
 - (NSString *)displayNumberWithCalcValue:(CalcValue *)calcValue
 {
-    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:[calcValue stringNumberValue]];
+    NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:[calcValue stringNumberValue]
+                                                                locale:[NSLocale currentLocale]];
     if ([number isNan]) {
         number = [NSDecimalNumber zero];
     }
@@ -63,7 +64,8 @@
     if ([calcValue decimalNumberLength] > MaxDigits) {
         NSString *numberString = [self.plainNumberFormatter stringFromNumber:number];
         NSString *decimalNumberString = [NSString stringWithFormat:@"%@%@%@", sign, numberString, decimalString];
-        return [numberFormatter stringFromNumber:[NSDecimalNumber decimalNumberWithString:decimalNumberString]];
+        return [numberFormatter stringFromNumber:[NSDecimalNumber decimalNumberWithString:decimalNumberString
+                                                                                   locale:[NSLocale currentLocale]]];
     } else {
         return [NSString stringWithFormat:@"%@%@%@", sign, [numberFormatter stringFromNumber:number], decimalString];
     }

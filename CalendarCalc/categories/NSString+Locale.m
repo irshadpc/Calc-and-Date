@@ -11,7 +11,7 @@
 @implementation NSString (Locale)
 + (NSString *)decimalSeparator
 {
-    return [[NSLocale currentLocale] objectForKey: NSLocaleDecimalSeparator];
+    return [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];
 }
 
 + (NSString *)groupingSeparator

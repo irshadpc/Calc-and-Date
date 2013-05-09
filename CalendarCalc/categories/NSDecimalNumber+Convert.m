@@ -12,8 +12,9 @@
 @implementation NSDecimalNumber (Convert)
 + (NSDecimalNumber *)reverse:(NSDecimalNumber *)number
 {
-    return [NSDecimalNumber multiplyingByDecimalNumber: number
-                                              rOperand: [NSDecimalNumber decimalNumberWithString: @"-1"]];
+    return [NSDecimalNumber multiplyingByDecimalNumber:number
+                                              rOperand:[NSDecimalNumber decimalNumberWithString:@"-1"
+                                                                                         locale:[NSLocale currentLocale]]];
 }
 
 + (NSDecimalNumber *)abs:(NSDecimalNumber *)number

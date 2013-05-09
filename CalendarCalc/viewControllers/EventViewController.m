@@ -90,16 +90,23 @@
 
     [self.closeButton setTitle:NSLocalizedString(@"CLOSE", nil)];
     [self.titlebar.topItem setTitleView:[self topButton]];
-    [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
-                        forBarMetrics:UIBarMetricsDefault];
     [self.tableView setUserInteractionEnabled:NO];
     [self.view addSubview:self.indicatorView];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self.titlebar setHidden:YES];
-        [self.tableView setFrame:self.view.frame];
+        CGRect titlebarFrame = self.view.frame;
+        titlebarFrame.size.height = self.titlebar.bounds.size.height;
+        [self.titlebar setFrame:titlebarFrame];
+        
+        CGRect tableFrame = self.view.frame;
+        tableFrame.origin.y = self.titlebar.bounds.size.height;
+        tableFrame.size.height -= self.titlebar.bounds.size.height;
+        [self.tableView setFrame:tableFrame];
+        [self.titlebar.topItem setLeftBarButtonItem:nil];
         [self setContentSizeForViewInPopover:self.view.bounds.size];
     } else {
+        [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
+                            forBarMetrics:UIBarMetricsDefault];
         [self.view setFrame:[UIScreen mainScreen].bounds];
     }
 }
@@ -276,14 +283,12 @@
 
 - (UIButton *)topButton
 {
-    CGFloat x = self.titlebar.topItem.titleView.frame.origin.x;
-    CGFloat width = self.titlebar.bounds.size.width - x;
-    CGFloat height = self.titlebar.bounds.size.height;
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x,
-                                                                  0,
-                                                                  width,
-                                                                  height)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
+    [button setTitle:NSLocalizedString(@"EVENT", nil)
+            forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
     [button setBackgroundColor:[UIColor clearColor]];
+    [button sizeToFit];
     [button addTarget:self
                action:@selector(onTop:)
      forControlEvents:UIControlEventTouchUpInside];

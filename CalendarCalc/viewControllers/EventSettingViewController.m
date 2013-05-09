@@ -69,9 +69,6 @@ typedef enum {
         [self.tableView addSubview:self.indicatorView];
     }
 
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self.tableView setScrollEnabled:NO];
-    }
     self.contentSizeForViewInPopover = self.tableView.bounds.size;
 }
 

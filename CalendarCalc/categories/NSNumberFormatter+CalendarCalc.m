@@ -15,6 +15,7 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
     [numberFormatter setMaximumFractionDigits:MaxDigits];
+    [numberFormatter setLocale:[NSLocale currentLocale]];
     return numberFormatter;
 }
 
@@ -23,6 +24,7 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
     [numberFormatter setMaximumFractionDigits:MaxDigits];
+    [numberFormatter setLocale:[NSLocale currentLocale]];
     return numberFormatter;
 }
 
@@ -31,6 +33,7 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterNoStyle];
     [numberFormatter setMaximumFractionDigits:MaxDigits];
+    [numberFormatter setLocale:[NSLocale currentLocale]];
     return numberFormatter;
 }
 @end
