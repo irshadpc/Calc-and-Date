@@ -9,7 +9,6 @@
 #import "CalendarCalcViewController_iPad.h"
 
 @class CalendarViewController;
-@class EventViewController;
 
 @interface CalendarCalcViewController_iPad ()
 @property(weak, nonatomic) IBOutlet UIButton *clearButton;
@@ -21,5 +20,4 @@
 @property(weak, nonatomic) IBOutlet UIView *nextButtonContainer;
 
 @property(strong, nonatomic) CalendarViewController *calendarViewController;
-@property(strong, nonatomic) EventViewController *eventViewController;
 @end

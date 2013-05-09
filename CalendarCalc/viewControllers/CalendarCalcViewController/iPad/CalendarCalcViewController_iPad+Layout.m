@@ -33,6 +33,11 @@
 - (CGFloat)frameOriginYWithTag:(NSInteger)tag orientation:(UIInterfaceOrientation)orientation;
 @end
 
+static const CGFloat CalcButtonWidthPortrait = 192.0;
+static const CGFloat CalcButtonHeightPortrait = 80.0;
+static const CGFloat CalcButtonWidthLandscape = 135.0;
+static const CGFloat CalcButtonHeightLangscape = 99.0;
+
 @implementation CalendarCalcViewController_iPad (Layout)
 - (void)setupView
 {
@@ -100,9 +105,9 @@
 - (CGRect)calcContainerFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(0, 604.0, 768.0, 400.0);
+        return CGRectMake(0, 604.0, CalcButtonWidthPortrait * 4, CalcButtonHeightPortrait * 5);
     } else {
-        return CGRectMake(484.0, 120.0 + (66.0 * 2), 540.0, 99.0 * 5);
+        return CGRectMake(484.0, 120.0 + (66.0 * 2), CalcButtonWidthLandscape * 4, CalcButtonHeightLangscape * 5);
     }
 }
 
@@ -111,7 +116,7 @@
     if (UIInterfaceOrientationIsPortrait(orientation)) {
         return CGRectMake(484.0, 406.0, 284.0, 176.0);
     } else {
-        return CGRectMake(484.0, 120.0, 540.0, 66 * 2);
+        return CGRectMake(484.0, 120.0, 540.0, 66.0 * 2);
     }
 }
 
@@ -172,18 +177,14 @@
                                                   orientation:orientation]];
         [calcButton setFrameOriginY:[self frameOriginYWithTag:calcButton.tag
                                                   orientation:orientation]];
-        if (calcButton.tag != FunctionEqual) {
-            if (UIInterfaceOrientationIsPortrait(orientation)) {
-                [calcButton setFrameSize:CGSizeMake(192.0, 80.0)];
-            } else {
-                [calcButton setFrameSize:CGSizeMake(135.0, 99.0)];
-            }
+
+        CGFloat heightScale = calcButton.tag == FunctionEqual ? 2 : 1;
+        if (UIInterfaceOrientationIsPortrait(orientation)) {
+            [calcButton setFrameSize:CGSizeMake(CalcButtonWidthPortrait,
+                                                CalcButtonHeightPortrait * heightScale)];
         } else {
-            if (UIInterfaceOrientationIsPortrait(orientation)) {
-                [calcButton setFrameSize:CGSizeMake(192.0, 160.0)];
-            } else {
-                [calcButton setFrameSize:CGSizeMake(135.0, 198.0)];
-            }
+            [calcButton setFrameSize:CGSizeMake(CalcButtonWidthLandscape,
+                                                CalcButtonHeightLangscape * heightScale)];
         }
     };
 
@@ -197,9 +198,9 @@
 {
     CGFloat buttonWidth = 0;
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        buttonWidth = 192.0;
+        buttonWidth = CalcButtonWidthPortrait;
     } else {
-        buttonWidth = 135.0;
+        buttonWidth = CalcButtonWidthLandscape;
     }
 
     switch (tag) {
@@ -236,9 +237,9 @@
 {
     CGFloat buttonHeight = 0;
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        buttonHeight = 80.0;
+        buttonHeight = CalcButtonHeightPortrait;
     } else {
-        buttonHeight = 99.0;
+        buttonHeight = CalcButtonHeightLangscape;
     }
 
     switch (tag) {

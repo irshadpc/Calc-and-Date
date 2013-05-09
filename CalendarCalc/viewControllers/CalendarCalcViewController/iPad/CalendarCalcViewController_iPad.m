@@ -27,9 +27,9 @@
 
 @interface CalendarCalcViewController_iPad ()
 < SettingViewControllerDelegate,
-DateSelect,
-UIPopoverControllerDelegate,
-EventViewControllerDelegate
+  DateSelect,
+  UIPopoverControllerDelegate,
+  EventViewControllerDelegate
 >
 
 @property(weak, nonatomic) IBOutlet CopybleLabel *display;
@@ -39,6 +39,7 @@ EventViewControllerDelegate
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
 @property(strong, nonatomic) UIPopoverController *eventPopover;
 @property(strong, nonatomic) CalcController *calcController;
+@property(strong, nonatomic) EventViewController *eventViewController;
 @property(strong, nonatomic) CalcValue *result;
 @property(strong, nonatomic) CalcValueFormatter *formatter;
 @property(weak, nonatomic) AVAudioPlayer *player;

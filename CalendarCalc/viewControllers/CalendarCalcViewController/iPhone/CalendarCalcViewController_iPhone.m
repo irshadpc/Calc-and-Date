@@ -25,10 +25,10 @@
 
 @interface CalendarCalcViewController_iPhone ()
 < SettingViewControllerDelegate,
-DateSelect,
-CalendarViewControllerDelegate,
-UIPopoverControllerDelegate,
-EventViewControllerDelegate
+  DateSelect,
+  CalendarViewControllerDelegate,
+  UIPopoverControllerDelegate,
+  EventViewControllerDelegate
 >
 
 @property(weak, nonatomic) IBOutlet CopybleLabel *display;
