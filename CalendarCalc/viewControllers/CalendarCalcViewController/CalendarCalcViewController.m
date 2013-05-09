@@ -39,7 +39,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *decimalButton;
 @property(strong, nonatomic) UIPopoverController *settingPopover;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
-@property(strong, nonatomic) UIPopoverController *currentPopover;
+@property(strong, nonatomic) UIPopoverController *eventPopover;
 @property(strong, nonatomic) CalcController *calcController;
 @property(strong, nonatomic) CalcValue *result;
 @property(strong, nonatomic) CalcValueFormatter *formatter;
@@ -60,7 +60,11 @@
 @end
 
 
-@implementation CalendarCalcViewController
+@implementation CalendarCalcViewController {
+    BOOL _isDateSelectPopoverVisible;
+    BOOL _isEventPopoverVisible;
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
 {
@@ -109,6 +113,21 @@
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self setupLayoutWithOrientation:toInterfaceOrientation];
+        _isDateSelectPopoverVisible = [self.calendarViewController isPopoverVisible];
+        _isEventPopoverVisible = [self.eventPopover isPopoverVisible];
+    }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (_isDateSelectPopoverVisible) {
+        [self.calendarViewController presentPopoverAnimated:YES];
+    }
+    if (_isEventPopoverVisible) {
+        [self.eventPopover presentPopoverFromRect:self.eventButton.frame
+                                           inView:self.view
+                         permittedArrowDirections:UIPopoverArrowDirectionAny
+                                         animated:YES];
     }
 }
 
@@ -280,8 +299,8 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         self.currentViewSheet = [[ViewSheet alloc] initWithContentViewController:self.eventViewController];
     } else {
-        self.currentPopover = [[UIPopoverController alloc] initWithContentViewController:self.eventViewController];
-        self.currentPopover.delegate = self;
+        self.eventPopover = [[UIPopoverController alloc] initWithContentViewController:self.eventViewController];
+        self.eventPopover.delegate = self;
     }
     
     [self presentContentViewControllerAnimated:YES fromRect:sender.frame];
@@ -311,15 +330,15 @@
 - (void)presentContentViewControllerAnimated:(BOOL)animated fromRect:(CGRect)rect
 {
     [self.currentViewSheet showViewSheetAnimated:animated];
-    [self.currentPopover presentPopoverFromRect:rect
-                                         inView:self.view
-                       permittedArrowDirections:UIPopoverArrowDirectionAny
-                                       animated:animated];
+    [self.eventPopover presentPopoverFromRect:rect
+                                       inView:self.view
+                     permittedArrowDirections:UIPopoverArrowDirectionAny
+                                     animated:animated];
 }
 
 - (void)dismissContentViewControllerAnimated:(BOOL)animated
 {
     [self.currentViewSheet dismissViewSheetAnimated:animated shoot:NO];
-    [self.currentPopover dismissPopoverAnimated:animated];
+    [self.eventPopover dismissPopoverAnimated:animated];
 }
 @end
