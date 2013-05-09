@@ -74,6 +74,8 @@ EventViewControllerDelegate
 
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];
+    [self.eventButton setTitle:NSLocalizedString(@"EVENT", nil)
+                      forState:UIControlStateNormal];
     [self.calendarViewController showWeekView];
     [self.calendarViewController setDelegate:self];
     [self setupSettings];
