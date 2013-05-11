@@ -8,6 +8,7 @@
 
 #import "CalendarControlView.h"
 #import "CalendarView.h"
+#import "AppDelegate.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 #import "UIFont+Calendar.h"
@@ -18,10 +19,12 @@
 @property(strong, nonatomic, readwrite) UIButton *dateSelectButton;
 @property(strong, nonatomic, readwrite) UIButton *prevButton;
 @property(strong, nonatomic, readwrite) UIButton *nextButton;
+@property(weak, nonatomic) AVAudioPlayer *player;
 
 - (void)onPrev:(UIButton *)sender;
 - (void)onNext:(UIButton *)sender;
 - (void)onDateSelect:(UIButton *)sender;
+- (void)onClick:(UIButton *)sender;
 - (void)configurePrevNextButton;
 - (void)setDateSelectButtonTitle:(NSDate *)date;
 - (void)setupPrevButtonWithCalendarView:(CalendarView *)calendarView;
@@ -43,6 +46,9 @@
         [self addSubview:_prevButton];
         [self addSubview:_nextButton];
         [self addSubview:_dateSelectButton];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            _player = [(AppDelegate *)[[UIApplication sharedApplication] delegate] player];
+        }
     }
     return self;
 }
@@ -83,6 +89,12 @@
 - (void)onDateSelect:(UIButton *)sender
 {
     [self.delegate calendarControlView:self pressDateSelectButton:sender];
+}
+
+- (void)onClick:(UIButton *)sender
+{
+    [self.player setCurrentTime:0];
+    [self.player play];
 }
 
 
@@ -128,6 +140,9 @@
     [_prevButton.titleLabel setFont:[UIFont dateSelectFont]];
     [_prevButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
     [_prevButton addTarget:self action:@selector(onPrev:) forControlEvents:UIControlEventTouchUpInside];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [_prevButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchDown];
+    }
 }
 
 - (void)setupNextButtonWithCalendarView:(CalendarView *)calendarView
@@ -147,6 +162,9 @@
     [_nextButton.titleLabel setFont:[UIFont dateSelectFont]];
     [_nextButton.titleLabel setShadowOffset:CGSizeMake(1., 1.)];
     [_nextButton addTarget:self action:@selector(onNext:) forControlEvents:UIControlEventTouchUpInside];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [_nextButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchDown];
+    }
 }
 
 - (void)setupDateSelectButtonWithCalendarView:(CalendarView *)calendarView

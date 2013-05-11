@@ -194,11 +194,10 @@
 #pragma mark - SettingViewController
 
 - (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController
-                 calendarOptionChanged:(BOOL)calendarOptionChanged
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 
-    if (calendarOptionChanged) {
+    if (settingViewController.isEventSettingChanged) {
         [self.eventViewController reloadEvents];
     }
 

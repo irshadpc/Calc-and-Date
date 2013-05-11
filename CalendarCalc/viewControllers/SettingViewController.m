@@ -72,12 +72,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)isEventSettingChanged
+{
+    return self.eventSettingViewController.isChanged;
+}
+
 
 #pragma mark - Action
 
 - (void)onClose:(UIBarButtonItem *)sender {
-    [self.delegate settingViewControllerDidFinish:self 
-                            calendarOptionChanged:[self.eventSettingViewController isChanged]];
+    [self.delegate settingViewControllerDidFinish:self];
 }
 
 - (IBAction)onIncludeStartDateOptionChanged:(UISwitch *)sender

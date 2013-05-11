@@ -209,20 +209,6 @@
 }
 
 
-#pragma mark - SettingViewController
-
-- (void)settingViewControllerDidFinish:(SettingViewController *)settingViewController
-                 calendarOptionChanged:(BOOL)calendarOptionChanged
-{
-    [self.settingPopover dismissPopoverAnimated:YES];
-
-    if (calendarOptionChanged) {
-        [self.eventViewController reloadEvents];
-    }
-    [self setupSettings];
-}
-
-
 #pragma mark - EventViewController
 
 - (void)eventViewControllerDidCancel:(EventViewController *)eventViewController
@@ -245,6 +231,9 @@
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
     if (popoverController == self.settingPopover) {
+        if ([self.settingPopover.contentViewController.childViewControllers[0] isEventSettingChanged]) {
+            [self.eventViewController reloadEvents];
+        }
         [self setupSettings];
     }
     return YES;

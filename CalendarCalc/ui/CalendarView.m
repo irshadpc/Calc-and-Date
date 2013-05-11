@@ -8,6 +8,7 @@
 
 #import "CalendarView.h"
 #import "CalendarButton.h"
+#import "AppDelegate.h"
 #import "NSArray+Safe.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
@@ -21,11 +22,13 @@
 @property(nonatomic) NSInteger selectedYear;
 @property(nonatomic) NSInteger selectedMonth;
 @property(nonatomic) NSInteger selectedDay;
+@property(weak, nonatomic) AVAudioPlayer *player;
 
+- (void)onPressCalendarButton:(CalendarButton *)sender;
+- (void)onClick:(CalendarButton *)sender;
 - (void)reloadCalendarView;
 - (void)reloadEventDates;
 - (void)setupCalendarButtons;
-- (void)onPressCalendarButton:(CalendarButton *)sender;
 - (CGRect)calendarViewFrame;
 @end
 
@@ -42,6 +45,7 @@
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         _buttonSize = CGSizeMake(66.0, 66.0);
+        _player = [(AppDelegate *)[[UIApplication sharedApplication] delegate] player];
     } else {
         _buttonSize = CGSizeMake(44.0, 44.0);
     }
@@ -109,6 +113,28 @@
     self.year = [date year];
     self.month = [date month];
     [self reloadCalendarView];
+}
+
+
+#pragma mark - Action
+
+- (void)onPressCalendarButton:(CalendarButton *)sender
+{
+    [self.delegate calendarView:self didSelectDate:[NSDate dateWithYear:sender.year
+                                                                  month:sender.month
+                                                                    day:sender.dayOfCalendar]];
+    [self.selectedButton setOn:NO];
+    [sender setOn:YES];
+    self.selectedButton = sender;
+    self.selectedYear = sender.year;
+    self.selectedMonth = sender.month;
+    self.selectedDay = sender.dayOfCalendar;
+}
+
+- (void)onClick:(CalendarButton *)sender
+{
+    [self.player setCurrentTime:0];
+    [self.player play];
 }
 
 
@@ -180,19 +206,6 @@
     [self reloadEventDates];
 }
 
-- (void)onPressCalendarButton:(CalendarButton *)sender
-{
-    [self.delegate calendarView:self didSelectDate:[NSDate dateWithYear:sender.year
-                                                                  month:sender.month
-                                                                    day:sender.dayOfCalendar]];
-    [self.selectedButton setOn:NO];
-    [sender setOn:YES];
-    self.selectedButton = sender;
-    self.selectedYear = sender.year;
-    self.selectedMonth = sender.month;
-    self.selectedDay = sender.dayOfCalendar;
-}
-
 - (void)reloadEventDates
 {
     NSUInteger subViewIndex = 0;
@@ -235,6 +248,11 @@
             [calendarButton addTarget:self
                                action:@selector(onPressCalendarButton:)
                      forControlEvents:UIControlEventTouchUpInside];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                [calendarButton addTarget:self
+                                   action:@selector(onClick:)
+                         forControlEvents:UIControlEventTouchDown];
+            }
             
             [calendarButton setFrame:CGRectMake(self.margin + (self.buttonSize.width * (weekday - 1)),
                                                 self.buttonSize.height * (week - 1),
