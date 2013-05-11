@@ -536,10 +536,10 @@
 				626BB0E91691DF40004E9E63 /* SettingViewController.h */,
 				626BB0EA1691DF41004E9E63 /* SettingViewController.m */,
 				62C97A621698FB72008B0EFE /* SettingViewController.xib */,
-				62A144D81686CA5A001E2843 /* DateSelect.h */,
 				62ED0F8E172E9422000E887E /* EventSettingViewController.h */,
 				62ED0F8F172E9423000E887E /* EventSettingViewController.m */,
 				62ED0F91172EB826000E887E /* EventSettingViewController.xib */,
+				62A144D81686CA5A001E2843 /* DateSelect.h */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";

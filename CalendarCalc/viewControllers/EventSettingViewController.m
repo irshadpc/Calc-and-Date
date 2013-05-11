@@ -39,6 +39,7 @@ typedef enum {
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        _granted = YES;
         _eventStore = [[EKEventStore alloc] init];
         [_eventStore requestAccessToEventWithCompletion:^(BOOL granted, NSError *error) {
             _granted = granted;
@@ -70,14 +71,13 @@ typedef enum {
     }
     
     [self.eventColorSettingSwitch setOn:[appDelegate eventColorOption]];
-   
-    if (self.isGranted && self.calendars) {
-        [self.tableView reloadData];
-    } 
-    if (!self.calendars) {
+
+    if (!self.calendars && self.isGranted) {
         self.indicatorView.center = self.tableView.center;
         [self.indicatorView startAnimating];
         [self.tableView addSubview:self.indicatorView];
+    } else {
+        [self.tableView reloadData];
     }
 
     self.contentSizeForViewInPopover = self.tableView.bounds.size;
@@ -116,7 +116,7 @@ typedef enum {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == SectionEventColor) {
+    if (section == SectionEventColor || (!self.calendars || [self.calendars count] == 0)) {
         return nil;
     }
     return NSLocalizedString(@"ENABLED_CALNEDARS", nil);
@@ -128,6 +128,7 @@ typedef enum {
         return nil;
     }
 
+    const CGFloat Margin = 10.0;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     [label setText:[self tableView:tableView titleForHeaderInSection:section]];
     [label setTextColor:[UIColor whiteColor]];
@@ -135,10 +136,11 @@ typedef enum {
     [label setBackgroundColor:[UIColor clearColor]];
     [label setFont:[UIFont boldSystemFontOfSize:18.0]];
     [label sizeToFit];
-    [label setFrameOriginX:10.0];
+    [label setFrameSizeWidth:self.view.bounds.size.width - (Margin * 2)];
+    [label setFrameOriginX:Margin];
     [label setFrameOriginY:6.0];
     
-    UIView *view = [[UIView alloc] initWithFrame:[tableView rectForHeaderInSection:section]];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     [view addSubview:label];
 
     return view;
