@@ -7,14 +7,14 @@
 //
 
 #import "ViewControllerTests.h"
-#import "CalendarCalcViewController.h"
+#import "CalendarCalcViewController_iPhone.h"
 #import "CalendarCalcViewController+UnitTest.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "Function.h"
 
 @interface ViewControllerTests () {
   @private
-    CalendarCalcViewController *_viewController;
+    CalendarCalcViewController_iPhone *_viewController;
     UIView *_view;
 }
 
@@ -25,7 +25,8 @@ static const NSInteger DOUBLE_ZERO = 10;
 
 - (void)setUp
 {
-    _viewController = [[CalendarCalcViewController alloc] initWithNibName:@"CalendarCalcViewController_iPhone" bundle:nil];
+    _viewController = [[CalendarCalcViewController_iPhone alloc] initWithNibName:@"CalendarCalcViewController_iPhone"
+                                                                          bundle:nil];
     _view = _viewController.view;
 }
 

@@ -8,7 +8,7 @@
 
 #import "CalendarCalcViewController+UnitTest.h"
 
-@implementation CalendarCalcViewController (UnitTest)
+@implementation CalendarCalcViewController_iPhone (UnitTest)
 - (void)pressCalcKey:(UIButton *)sender
 {
     [self performSelector:@selector(onCalcKey:) withObject:sender];

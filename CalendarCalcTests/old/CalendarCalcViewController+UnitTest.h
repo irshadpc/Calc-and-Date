@@ -6,9 +6,9 @@
 //  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
 //
 
-#import "CalendarCalcViewController.h"
+#import "CalendarCalcViewController_iPhone.h"
 
-@interface CalendarCalcViewController (UnitTest)
+@interface CalendarCalcViewController_iPhone (UnitTest)
 - (void)pressCalcKey:(UIButton *)sender;
 - (void)inputOutDate:(NSDate *)date;
 - (NSString *)resultText;
