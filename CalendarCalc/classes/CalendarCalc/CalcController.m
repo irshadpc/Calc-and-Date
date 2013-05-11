@@ -12,6 +12,7 @@
 #import "CalcValue.h"
 #import "NSArray+safe.h"
 #import "NSDateFormatter+CalendarCalc.h"
+#import "NSNumber+Predicate.h"
 #import "NSString+Calculator.h"
 #import "NSString+Locale.h"
 
@@ -85,6 +86,11 @@ static const NSInteger KeyCodeDoubleZero = 10;
     if (date) {
         return [self inputDate:date];
     } else {
+        NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithString:stringValue
+                                                                           locale:[NSLocale currentLocale]];
+        if ([decimalNumber isNan]) {
+            return [self inputNumberString:@"0"];
+        }
         return [self inputNumberString:stringValue];
     }
 }
