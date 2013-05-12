@@ -172,6 +172,7 @@
 
 - (void)calendarViewControllerDidCancel:(CalendarViewController *)calendarViewController
 {
+    [self configureDateButtonWithDate:calendarViewController.date];
     [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
 }
 
