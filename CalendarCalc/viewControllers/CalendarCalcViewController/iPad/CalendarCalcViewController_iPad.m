@@ -99,10 +99,21 @@
     [super didReceiveMemoryWarning];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        return toInterfaceOrientation == UIInterfaceOrientationMaskPortrait;
+    } else {
+        return YES;
+    }
+}
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                 duration:(NSTimeInterval)duration
 {
-    [self setupLayoutWithOrientation:toInterfaceOrientation];
+    [UIView animateWithDuration:0.25 animations:^ {
+        [self setupLayoutWithOrientation:toInterfaceOrientation];
+    }];
     _isDateSelectPopoverVisible = [self.calendarViewController isPopoverVisible];
     _isEventPopoverVisible = [self.eventPopover isPopoverVisible];
 
