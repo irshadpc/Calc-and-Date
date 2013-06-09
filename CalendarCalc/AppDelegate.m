@@ -42,7 +42,8 @@ static const CGFloat Phone4InchHeight = 568.0;
     [userDefaults setValue:@"YES" forKey:EventColor];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaults];
-
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"key_click"
                                                           ofType:@"aif"];
     NSURL *soundUrl = [[NSURL alloc] initFileURLWithPath:soundPath];
