@@ -7,30 +7,37 @@
 //
 
 #import "CalcValueFormatter.h"
+#import "CalcController.h"
 #import "CalcValue.h"
+#import "Function.h"
 #import "NumberFormat.h"
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumber+Predicate.h"
 #import "NSNumberFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
+#import "NSString+Calculator.h"
 #import "NSString+Safe.h"
 
 @interface CalcValueFormatter ()
+@property(strong, nonatomic) CalcController *calcController;
 @property(strong, nonatomic) NSNumberFormatter *longNumberFormatter;
 @property(strong, nonatomic) NSNumberFormatter *shortNumberFormatter;
 @property(strong, nonatomic) NSNumberFormatter *plainNumberFormatter;
 @property(strong, nonatomic) NSDateFormatter *yyyymmddFormatter;
 
+- (NSString *)displayValueWithCalcValue:(CalcValue *)calcValue;
 - (NSString *)displayNumberWithCalcValue:(CalcValue *)calcValue;
 - (NSString *)displayDateWithCalcValue:(CalcValue *)calcValue;
+- (NSString *)displayIndicatorValueWithFunction:(Function)function calcValue:(CalcValue *)calcValue;
 - (NSNumberFormatter *)numberFormatterWithCalcValue:(CalcValue *)calcValue;
 @end
 
 @implementation CalcValueFormatter
-- (instancetype)init
+- (instancetype)initWithCalcController:(CalcController *)calcController
 {
     if ((self = [super init])) {
+        _calcController = calcController;
         _longNumberFormatter = [NSNumberFormatter longNumberFormatter];
         _shortNumberFormatter = [NSNumberFormatter shortNumberFormatter];
         _plainNumberFormatter = [NSNumberFormatter plainNumberFormatter];
@@ -38,6 +45,29 @@
     }
     return self;
 }
+
+- (NSString *)displayValue
+{
+    CalcValue *calcValue = [self.calcController result];
+    if (!calcValue) {
+        return @"0";
+    }
+    return [self displayValueWithCalcValue:calcValue];
+}
+
+- (NSString *)displayIndicatorValue
+{
+    return [self displayIndicatorValueWithFunction:[self.calcController function]
+                                         calcValue:[self.calcController operand]];
+}
+
+- (NSString *)displayClearTitle
+{
+    return [self.calcController isAllCleared] ? @"AC" : @"C";
+}
+
+
+#pragma mark - Private
 
 - (NSString *)displayValueWithCalcValue:(CalcValue *)calcValue
 {
@@ -74,6 +104,15 @@
 - (NSString *)displayDateWithCalcValue:(CalcValue *)calcValue
 {
     return [self.yyyymmddFormatter stringFromDate:[calcValue dateValue]];
+}
+
+- (NSString *)displayIndicatorValueWithFunction:(Function)function calcValue:(CalcValue *)calcValue
+{
+    if (!calcValue) {
+        return [NSString stringWithFunction:function];
+    }
+    return [NSString stringWithFormat:@"%@%@", [self displayValueWithCalcValue:calcValue],
+            [NSString stringWithFunction:function]];
 }
 
 - (NSNumberFormatter *)numberFormatterWithCalcValue:(CalcValue *)calcValue

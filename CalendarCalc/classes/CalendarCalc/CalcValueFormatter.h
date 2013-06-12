@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @class CalcValue;
+@class CalcController;
 
 @interface CalcValueFormatter : NSObject
-- (NSString *)displayValueWithCalcValue:(CalcValue *)calcValue;
+- (instancetype)initWithCalcController:(CalcController *)calcController;
+- (NSString *)displayValue;
+- (NSString *)displayIndicatorValue;
+- (NSString *)displayClearTitle;
 @end

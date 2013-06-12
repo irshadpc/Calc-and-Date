@@ -29,6 +29,7 @@
             return @"×";
         case FunctionDivide:
             return @"÷";
+        case FunctionNone:
         case FunctionEqual:
         case FunctionClear:
             return @"";

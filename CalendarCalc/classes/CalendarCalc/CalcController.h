@@ -12,12 +12,17 @@
 
 @class CalcValue;
 @interface CalcController : NSObject
-@property(nonatomic) Function currentFunction;
 @property(nonatomic, getter=isIncludeStartDay) BOOL includeStartDay;
 
-- (CalcValue *)inputInteger:(NSInteger)integer;
-- (CalcValue *)inputDate:(NSDate *)date;
-- (CalcValue *)setStringValue:(NSString *)stringValue;
+- (CalcController *)inputInteger:(NSInteger)integer;
+- (CalcController *)inputDate:(NSDate *)date;
+- (CalcController *)setStringValue:(NSString *)stringValue;
+
+- (Function)function;
+- (CalcValue *)result;
+- (CalcValue *)operand;
+- (Function)pendingFunction;
+- (CalcValue *)pendingValue;
 - (void)setWeek:(Week)week exclude:(BOOL)exclude;
 - (BOOL)isAllCleared;
 @end

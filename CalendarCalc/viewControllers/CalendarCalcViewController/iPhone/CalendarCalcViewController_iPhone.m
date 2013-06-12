@@ -14,17 +14,16 @@
 #import "CopybleLabel.h"
 #import "ViewSheet.h"
 #import "CalcController.h"
-#import "CalcValue.h"
 #import "CalcValueFormatter.h"
 #import "DateSelect.h"
 #import "CalendarViewController+Week.h"
 #import "NSDate+Component.h"
-#import "NSString+Calculator.h"
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 
 @interface CalendarCalcViewController_iPhone ()
-< SettingViewControllerDelegate,
+<
+  SettingViewControllerDelegate,
   DateSelect,
   CalendarViewControllerDelegate,
   UIPopoverControllerDelegate,
@@ -40,7 +39,6 @@
 @property(strong, nonatomic) EventViewController *eventViewController;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
 @property(strong, nonatomic) CalcController *calcController;
-@property(strong, nonatomic) CalcValue *result;
 @property(strong, nonatomic) CalcValueFormatter *formatter;
 @property(weak, nonatomic) AVAudioPlayer *player;
 
@@ -60,7 +58,7 @@
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         _calcController = [[CalcController alloc] init];
-        _formatter = [[CalcValueFormatter alloc] init];
+        _formatter = [[CalcValueFormatter alloc] initWithCalcController:_calcController];
         _calendarViewController = [[CalendarViewController alloc] init];
     }
     return self;
@@ -111,7 +109,7 @@
         return;
     }
 
-    self.result = [self.calcController setStringValue:string];
+    [self.calcController setStringValue:string];
     [self configureView];
 }
 
@@ -120,7 +118,7 @@
 
 - (IBAction)onCalcKey:(UIButton *)sender
 {
-    self.result = [self.calcController inputInteger:sender.tag];
+    [self.calcController inputInteger:sender.tag];
     [self configureView];
 }
 
@@ -156,7 +154,7 @@
 {
     [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
     
-    self.result = [self.calcController inputDate:date];
+    [self.calcController inputDate:date];
     [self configureView];
     [self configureDateButtonWithDate:date];
 }
@@ -218,7 +216,7 @@
     [self.currentViewSheet dismissViewSheetAnimated:YES shoot:NO];
 
     NSDate *date = [eventViewController selectedDate];
-    self.result = [self.calcController inputDate:date];
+    [self.calcController inputDate:date];
     [self configureView];
     [self configureDateButtonWithDate:date];
 }
@@ -236,9 +234,9 @@
 
 - (void)configureView
 {
-    self.display.text = self.result ? [self.formatter displayValueWithCalcValue:self.result] : @"0";
-    self.indicator.text = [NSString stringWithFunction:[self.calcController currentFunction]];
-    [self.clearButton setTitle:[self.calcController isAllCleared] ? @"AC" : @"C"
+    self.display.text = [self.formatter displayValue];
+    self.indicator.text = [self.formatter displayIndicatorValue];
+    [self.clearButton setTitle:[self.formatter displayClearTitle]
                       forState:UIControlStateNormal];
 }
 
