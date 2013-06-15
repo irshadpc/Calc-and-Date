@@ -9,19 +9,19 @@
 #import "NumberCalcTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 #import "Function.h"
 
 @interface NumberCalcTests ()
 @property(strong, nonatomic) CalcController *calcController;
-@property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcControllerFormatter *formatter;
 @end
 
 @implementation NumberCalcTests
 - (void)setUp
 {
     self.calcController = [[CalcController alloc] init];
-    self.formatter = [[CalcValueFormatter alloc] initWithCalcController:self.calcController];
+    self.formatter = [[CalcControllerFormatter alloc] initWithCalcController:self.calcController];
 }
 
 

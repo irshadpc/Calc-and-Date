@@ -9,10 +9,10 @@
 #import "CalcValueFormatterTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 
 @interface CalcValueFormatterTests ()
-@property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcControllerFormatter *formatter;
 @property(strong, nonatomic) CalcController *controller;
 @end
 
@@ -21,7 +21,7 @@
 - (void)setUp
 {
     self.controller = [[CalcController alloc] init];
-    self.formatter = [[CalcValueFormatter alloc] initWithCalcController:self.controller];
+    self.formatter = [[CalcControllerFormatter alloc] initWithCalcController:self.controller];
 }
 
 - (void)test123456789012_Should_123_456_789_012

@@ -7,7 +7,7 @@
 //
 
 #import "CalcValue.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 #import "NumberFormat.h"
 #import "NSArray+safe.h"
 #import "NSDateFormatter+CalendarCalc.h"

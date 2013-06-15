@@ -14,7 +14,7 @@
 #import "CopybleLabel.h"
 #import "ViewSheet.h"
 #import "CalcController.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 #import "DateSelect.h"
 #import "CalendarViewController+Week.h"
 #import "NSDate+Component.h"
@@ -39,7 +39,7 @@
 @property(strong, nonatomic) EventViewController *eventViewController;
 @property(strong, nonatomic) ViewSheet *currentViewSheet;
 @property(strong, nonatomic) CalcController *calcController;
-@property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcControllerFormatter *formatter;
 @property(weak, nonatomic) AVAudioPlayer *player;
 
 - (IBAction)onCalcKey:(UIButton *)sender;
@@ -58,7 +58,7 @@
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         _calcController = [[CalcController alloc] init];
-        _formatter = [[CalcValueFormatter alloc] initWithCalcController:_calcController];
+        _formatter = [[CalcControllerFormatter alloc] initWithCalcController:_calcController];
         _calendarViewController = [[CalendarViewController alloc] init];
     }
     return self;

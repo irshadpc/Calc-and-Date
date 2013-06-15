@@ -116,7 +116,7 @@
 		62A7CE13167CA1D70080B362 /* OldDateCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE12167CA1D70080B362 /* OldDateCalcTests.m */; };
 		62AB84B717170465008A0972 /* NumberCalcProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AB84B617170465008A0972 /* NumberCalcProcessor.m */; };
 		62AB84BA17170B5C008A0972 /* CalcValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AB84B917170B5C008A0972 /* CalcValue.m */; };
-		62B1E58D171E182000ECE5B6 /* CalcValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B1E58C171E182000ECE5B6 /* CalcValueFormatter.m */; };
+		62B1E58D171E182000ECE5B6 /* CalcControllerFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B1E58C171E182000ECE5B6 /* CalcControllerFormatter.m */; };
 		62B53ED8167C592E00394427 /* NSNumberFormatter+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */; };
 		62B599D31696C15100126000 /* calendar_day@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B599D21696C15100126000 /* calendar_day@2x~ipad.png */; };
 		62B599F31696D1DF00126000 /* switch_button_on@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B599F21696D1DF00126000 /* switch_button_on@2x~ipad.png */; };
@@ -339,8 +339,8 @@
 		62AB84B617170465008A0972 /* NumberCalcProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalcProcessor.m; sourceTree = "<group>"; };
 		62AB84B817170B5C008A0972 /* CalcValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcValue.h; sourceTree = "<group>"; };
 		62AB84B917170B5C008A0972 /* CalcValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcValue.m; sourceTree = "<group>"; };
-		62B1E58B171E182000ECE5B6 /* CalcValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcValueFormatter.h; sourceTree = "<group>"; };
-		62B1E58C171E182000ECE5B6 /* CalcValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcValueFormatter.m; sourceTree = "<group>"; };
+		62B1E58B171E182000ECE5B6 /* CalcControllerFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcControllerFormatter.h; sourceTree = "<group>"; };
+		62B1E58C171E182000ECE5B6 /* CalcControllerFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcControllerFormatter.m; sourceTree = "<group>"; };
 		62B53ED6167C592E00394427 /* NSNumberFormatter+CalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+CalendarCalc.h"; sourceTree = "<group>"; };
 		62B53ED7167C592E00394427 /* NSNumberFormatter+CalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+CalendarCalc.m"; sourceTree = "<group>"; };
 		62B599D21696C15100126000 /* calendar_day@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_day@2x~ipad.png"; sourceTree = "<group>"; };
@@ -610,8 +610,8 @@
 				62AB84B617170465008A0972 /* NumberCalcProcessor.m */,
 				62AB84B817170B5C008A0972 /* CalcValue.h */,
 				62AB84B917170B5C008A0972 /* CalcValue.m */,
-				62B1E58B171E182000ECE5B6 /* CalcValueFormatter.h */,
-				62B1E58C171E182000ECE5B6 /* CalcValueFormatter.m */,
+				62B1E58B171E182000ECE5B6 /* CalcControllerFormatter.h */,
+				62B1E58C171E182000ECE5B6 /* CalcControllerFormatter.m */,
 				621B0D2B168FE33D00DE2150 /* Function.h */,
 			);
 			path = CalendarCalc;
@@ -1116,7 +1116,7 @@
 				62AB84BA17170B5C008A0972 /* CalcValue.m in Sources */,
 				62D8860D1719546100EACAFA /* DateCalcProcessor.m in Sources */,
 				6267641F171A917A00D0A32C /* CalcController.m in Sources */,
-				62B1E58D171E182000ECE5B6 /* CalcValueFormatter.m in Sources */,
+				62B1E58D171E182000ECE5B6 /* CalcControllerFormatter.m in Sources */,
 				62ED0F88172E4769000E887E /* EventCell.m in Sources */,
 				62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */,
 				62ED0F90172E9424000E887E /* EventSettingViewController.m in Sources */,

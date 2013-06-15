@@ -9,20 +9,20 @@
 #import "CalcControllerTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 #import "Function.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 
 @interface CalcControllerTests ()
 @property(strong, nonatomic) CalcController *calcController;
-@property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcControllerFormatter *formatter;
 @end
 
 @implementation CalcControllerTests
 - (void)setUp
 {
     self.calcController = [[CalcController alloc] init];
-    self.formatter = [[CalcValueFormatter alloc] initWithCalcController:self.calcController];
+    self.formatter = [[CalcControllerFormatter alloc] initWithCalcController:self.calcController];
 }
 
 - (void)test_123_Clear

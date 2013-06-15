@@ -44,10 +44,11 @@ typedef enum {
 - (CalcValue *)calculateWithFunction:(Function)function;
 - (CalcValue *)numberCalculate;
 - (CalcValue *)dateCalculate;
-- (CalcValue *)dateCalculateCacheWithFunction:(Function)function;
+- (CalcValue *)pendingDateCalculateWithFunction:(Function)function;
 - (Mode)modeWithFunction:(Function)function;
 - (void)willInputMode;
 - (void)reset;
+- (void)clearPendingCalc;
 @end
 
 @implementation CalcController
@@ -80,7 +81,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
     [self.inputValue inputDate:date];
     self.lastValue = self.inputValue;
-    
+
     return self;
 }
 
@@ -280,10 +281,16 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
     if ([self.resultValue isNumber] && [self.inputValue isNumber]) {
         self.resultValue = [self numberCalculate];
+        [self clearPendingCalc];
     } else {
-        self.resultValue = [self dateCalculate];
+        BOOL isPendingCalc = self.functionForCalc == FunctionMultiply || self.functionForCalc == FunctionDivide;
+       if (!isPendingCalc) {
+           self.resultValue = [self dateCalculate];
+       } else {
+           self.resultValue = [self pendingDateCalculateWithFunction:self.functionForCalc];
+       }
     }
-    
+
     self.currentMode = [self modeWithFunction:function];
     if (self.currentMode == ModeFunction) {
         self.functionForCalc = function;
@@ -312,10 +319,6 @@ static const NSInteger KeyCodeDoubleZero = 10;
         return [self numberCalculate];
     }
     
-    if (self.functionForCalc == FunctionMultiply || self.functionForCalc == FunctionDivide) {
-        return [self dateCalculateCacheWithFunction:self.functionForCalc];
-    }
-    
     CalcValue *result = [self.dateCalcProcessor calculateWithFunction:self.functionForCalc
                                                              lOperand:self.resultValue
                                                              rOperand:self.inputValue];
@@ -323,24 +326,24 @@ static const NSInteger KeyCodeDoubleZero = 10;
         NSDecimalNumber *numberResult = [self.numberCalcProcessor calculateWithFunction:self.functionForPendingCalc
                                                                                lOperand:self.numberInputForPendingCalc
                                                                                rOperand:[result decimalNumberValue]];
-        self.numberInputForPendingCalc = nil;
-        self.functionForPendingCalc = FunctionNone;
+        [self clearPendingCalc];
         return [CalcValue calcValueWithDecimalNumber:numberResult];
     } else {
         return result;
     }
 }
 
-- (CalcValue *)dateCalculateCacheWithFunction:(Function)function
+- (CalcValue *)pendingDateCalculateWithFunction:(Function)function
 {
     if (![self.resultValue isNumber] || [[self.resultValue decimalNumberValue] isEqualToNumber:@0]) {
-        self.resultValue = nil;
+        self.functionForPendingCalc = FunctionNone;
         self.inputValue = [[CalcValue alloc] init];
+        [self clearPendingCalc];
         return self.inputValue;
     }
-    
-    self.numberInputForPendingCalc = [self.resultValue decimalNumberValue];
+
     self.functionForPendingCalc = function;
+    self.numberInputForPendingCalc = [self.resultValue decimalNumberValue];
     return self.inputValue;   
 }
 
@@ -363,7 +366,13 @@ static const NSInteger KeyCodeDoubleZero = 10;
     self.functionForCalc = FunctionNone;
     self.resultValue = nil;
     self.inputValue = [[CalcValue alloc] init];
-    self.numberInputForPendingCalc = nil;
     self.currentMode = ModeInput;
+    [self clearPendingCalc];
+}
+
+- (void)clearPendingCalc
+{
+    self.functionForPendingCalc = FunctionNone;
+    self.numberInputForPendingCalc = nil;
 }
 @end
