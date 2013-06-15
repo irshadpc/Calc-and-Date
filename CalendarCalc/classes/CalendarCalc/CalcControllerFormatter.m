@@ -57,13 +57,15 @@
 
 - (NSString *)displayIndicatorValue
 {
-    if ([self.calcController function] == FunctionEqual || [self.calcController function] == FunctionNone) {
+    Function mainFunction = [self.calcController function];
+    BOOL isCalcEnd = mainFunction == FunctionEqual || mainFunction == FunctionNone;
+    if (isCalcEnd) {
         return @"";
     }
-    
+
     NSString *pendingIndicator = [self displayIndicatorValueWithFunction:[self.calcController pendingFunction]
                                                                calcValue:[self.calcController pendingValue]];
-    NSString *mainIndicator = [self displayIndicatorValueWithFunction:[self.calcController function]
+    NSString *mainIndicator = [self displayIndicatorValueWithFunction:mainFunction
                                                             calcValue:[self.calcController operand]];
     if ([pendingIndicator length] > 0) {
         return [NSString stringWithFormat:@"%@(%@", pendingIndicator, mainIndicator];

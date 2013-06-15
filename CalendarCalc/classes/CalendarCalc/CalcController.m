@@ -363,6 +363,7 @@ static const NSInteger KeyCodeDoubleZero = 10;
 
 - (void)reset
 {
+    self.functionForDisplay = FunctionNone;
     self.functionForCalc = FunctionNone;
     self.resultValue = nil;
     self.inputValue = [[CalcValue alloc] init];
