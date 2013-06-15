@@ -20,9 +20,9 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 + (NSDecimalNumber *)addingByDecimalNumber:(NSDecimalNumber *)lOperand
                                   rOperand:(NSDecimalNumber *)rOperand
 {
-    return [self calculateByDecimalNumber: lOperand
-                                 rOperand: rOperand
-                                   method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
+    return [self calculateByDecimalNumber:lOperand
+                                 rOperand:rOperand
+                                   method:^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
                                        return NSDecimalAdd(result, l, r, roundingMode);
                                    }];
 }
@@ -30,9 +30,9 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 + (NSDecimalNumber *)subtractingByDecimalNumber:(NSDecimalNumber *)lOperand
                                        rOperand:(NSDecimalNumber *)rOperand
 {
-    return [self calculateByDecimalNumber: lOperand
-                                 rOperand: rOperand
-                                   method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
+    return [self calculateByDecimalNumber:lOperand
+                                 rOperand:rOperand
+                                   method:^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
                                        return NSDecimalSubtract(result, l, r, roundingMode);
                                    }];
 }
@@ -40,9 +40,9 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 + (NSDecimalNumber *)multiplyingByDecimalNumber:(NSDecimalNumber *)lOperand
                                        rOperand:(NSDecimalNumber *)rOperand
 {
-    return [self calculateByDecimalNumber: lOperand
-                                 rOperand: rOperand
-                                   method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
+    return [self calculateByDecimalNumber:lOperand
+                                 rOperand:rOperand
+                                   method:^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
                                        return NSDecimalMultiply(result, l, r, roundingMode);
                                    }];
 }
@@ -50,13 +50,12 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 + (NSDecimalNumber *)dividingByDecimalNumber:(NSDecimalNumber *)lOperand
                                     rOperand:(NSDecimalNumber *)rOperand
 {
-    return [self calculateByDecimalNumber: lOperand
-                                 rOperand: rOperand
-                                   method: ^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
+    return [self calculateByDecimalNumber:lOperand
+                                 rOperand:rOperand
+                                   method:^(NSDecimal *result, const NSDecimal *l, const NSDecimal *r, NSRoundingMode roundingMode) {
                                        return NSDecimalDivide(result, l, r, roundingMode);
                                    }];
 }
-
 @end
 
 
@@ -81,6 +80,6 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
         return [NSDecimalNumber zero];
     }
 
-    return [NSDecimalNumber decimalNumberWithDecimal: result];
+    return [NSDecimalNumber decimalNumberWithDecimal:result];
 }
 @end

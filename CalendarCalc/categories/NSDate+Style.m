@@ -12,8 +12,8 @@
 @implementation NSDate (Style)
 - (NSDate *)noTime
 {
-    return [[NSCalendar currentCalendar] dateFromComponents:
-            [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
-                                            fromDate: self]];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar dateFromComponents:[calendar components:[NSDateComponents componentsYMD]
+                                                    fromDate:self]];
 }
 @end

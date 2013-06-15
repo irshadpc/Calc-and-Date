@@ -27,33 +27,21 @@
 
 - (void)setFrameOriginX:(CGFloat)x
 {
-    self.frame = CGRectMake(x,
-                            self.frame.origin.y,
-                            self.frame.size.width,
-                            self.frame.size.height);
+    [self setFrameOrigin:CGPointMake(x, self.frame.origin.y)];
 }
 
 - (void)setFrameOriginY:(CGFloat)y
 {
-    self.frame = CGRectMake(self.frame.origin.x,
-                            y,
-                            self.frame.size.width,
-                            self.frame.size.height);
+    [self setFrameOrigin:CGPointMake(self.frame.origin.x, y)];
 }
 
 - (void)setFrameSizeWidth:(CGFloat)width
 {
-    self.frame = CGRectMake(self.frame.origin.x,
-                            self.frame.origin.y,
-                            width,
-                            self.frame.size.height);
+    [self setFrameSize:CGSizeMake(width, self.frame.size.height)];
 }
 
 - (void)setFrameSizeHeight:(CGFloat)height
 {
-    self.frame = CGRectMake(self.frame.origin.x,
-                            self.frame.origin.y,
-                            self.frame.size.width,
-                            height);
+    [self setFrameSize:CGSizeMake(self.frame.size.width, height)];
 }
 @end

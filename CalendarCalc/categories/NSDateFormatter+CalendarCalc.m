@@ -12,14 +12,13 @@
 @implementation NSDateFormatter (CalendarCalc)
 + (NSDateFormatter *)yyyymmddFormatter
 {
+    NSString *dateFormat = [NSString stringWithFormat:@"yyyy%@MM%@dd",
+                                                      [NSString dateSeparator],
+                                                      [NSString dateSeparator]];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:[NSString stringWithFormat:
-                                  @"yyyy%@MM%@dd",
-                                  [NSString dateSeparator],
-                                  [NSString dateSeparator]]];
-
-    [dateFormatter setCalendar:
-     [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
+    [dateFormatter setDateFormat:dateFormat];
+    [dateFormatter setCalendar:calendar];
 
     return dateFormatter;
 }

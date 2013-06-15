@@ -12,24 +12,26 @@
 @implementation NSDate (Calc)
 - (NSDate *)addingByYear:(NSInteger)year
 {
-    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
-                                                                       fromDate: self];
-    dateComponents.year += year;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *ymdComponents = [calendar components:[NSDateComponents componentsYMD]
+                                                  fromDate:self];
 
-    return [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
+    [ymdComponents setYear:[ymdComponents year] + year];
+    return [calendar dateFromComponents:ymdComponents];
 }
 
 - (NSDate *)addingByDay:(NSInteger)day
 {
-    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components: [NSDateComponents componentsYMD]
-                                                                       fromDate: self];
-    dateComponents.day += day;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *ymdComponents = [calendar components:[NSDateComponents componentsYMD]
+                                                  fromDate:self];
 
-    return [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
+    [ymdComponents setDay:[ymdComponents day] + day];
+    return [calendar dateFromComponents:ymdComponents];
 }
 
 - (NSInteger)dayIntervalWithDate:(NSDate *)date
 {
-    return (NSInteger) ([date timeIntervalSinceDate: self] / 60 / 60 / 24);
+    return [date timeIntervalSinceDate:self] / 60 / 60 / 24;
 }
 @end

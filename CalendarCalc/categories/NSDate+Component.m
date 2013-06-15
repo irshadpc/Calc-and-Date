@@ -11,29 +11,25 @@
 @implementation NSDate (Component)
 - (NSInteger)year
 {
-    return [[[NSCalendar currentCalendar] components: NSYearCalendarUnit
-                                           fromDate: self]
-            year];
+    return [[[NSCalendar currentCalendar] components:NSYearCalendarUnit
+                                            fromDate:self] year];
 }
 
 - (NSInteger)month
 {
-    return [[[NSCalendar currentCalendar] components: NSMonthCalendarUnit
-                                            fromDate: self]
-            month];
+    return [[[NSCalendar currentCalendar] components:NSMonthCalendarUnit
+                                            fromDate:self] month];
 }
 
 - (NSInteger)day
 {
-    return [[[NSCalendar currentCalendar] components: NSDayCalendarUnit
-                                            fromDate: self]
-            day];
+    return [[[NSCalendar currentCalendar] components:NSDayCalendarUnit
+                                            fromDate:self] day];
 }
 
 - (NSInteger)weekday
 {
-    return [[[NSCalendar currentCalendar] components: NSWeekdayCalendarUnit
-                                            fromDate: self]
-            weekday];
+    return [[[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit
+                                            fromDate:self] weekday];
 }
 @end

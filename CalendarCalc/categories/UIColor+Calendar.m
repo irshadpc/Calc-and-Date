@@ -16,18 +16,18 @@
 
 + (UIColor *)sundayColor
 {
-    return [UIColor colorWithRed: 0.8
-                           green: 0
-                            blue: 0
-                           alpha: 1];
+    return [UIColor colorWithRed:0.8
+                           green:0
+                            blue:0
+                           alpha:1];
 }
 
 + (UIColor *)saturdayColor
 {
-    return [UIColor colorWithRed: 0
-                           green: 0
-                            blue: 0.8
-                           alpha: 1];
+    return [UIColor colorWithRed:0
+                           green:0
+                            blue:0.8
+                           alpha:1];
 }
 
 + (UIColor *)usualdayColor
@@ -37,7 +37,7 @@
 
 + (UIColor *)otherMonthColor
 {
-    return [UIColor colorWithWhite: 0.6
-                             alpha: 1];
+    return [UIColor colorWithWhite:0.6
+                             alpha:1];
 }
 @end

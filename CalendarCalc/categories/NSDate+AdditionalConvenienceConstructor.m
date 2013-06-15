@@ -23,7 +23,6 @@
     components.hour = hour;
     components.minute = minute;
     components.second = second;
-
     return [[NSCalendar currentCalendar] dateFromComponents:components];
 }
 
@@ -31,22 +30,22 @@
                    month:(NSInteger)month
                      day:(NSInteger)day
 {
-    return [self dateWithYear: year
-                        month: month
-                          day: day
-                         hour: 0
-                       minute: 0
-                       second: 0];
+    return [self dateWithYear:year
+                        month:month
+                          day:day
+                         hour:0
+                       minute:0
+                       second:0];
 }
 
 + (NSDate *)endOfMonthWithYear:(NSInteger)year
                          month:(NSInteger)month
 {
-    return [self dateWithYear: year
-                        month: month + 1
-                          day: 0
-                         hour: 0
-                       minute: 0
-                       second: 0];
+    return [self dateWithYear:year
+                        month:month + 1
+                          day:0
+                         hour:0
+                       minute:0
+                       second:0];
 }
 @end

@@ -7,29 +7,32 @@
 //
 
 #import "CalcValueFormatterTests.h"
+#import "CalcController.h"
 #import "CalcValue.h"
 #import "CalcValueFormatter.h"
 
 @interface CalcValueFormatterTests ()
 @property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcController *controller;
 @end
 
 @implementation CalcValueFormatterTests
 
 - (void)setUp
 {
-    self.formatter = [[CalcValueFormatter alloc] init];
+    self.controller = [[CalcController alloc] init];
+    self.formatter = [[CalcValueFormatter alloc] initWithCalcController:self.controller];
 }
 
 - (void)test123456789012_Should_123_456_789_012
 {
-    CalcValue *calcValue = [CalcValue calcValueWithDecimalNumber:[NSDecimalNumber decimalNumberWithString:@"123456789012"]];
-    STAssertEqualObjects(@"123,456,789,012", [self.formatter displayValueWithCalcValue:calcValue], nil);
+    [self.controller setStringValue:@"123456789012"];
+    STAssertEqualObjects(@"123,456,789,012", [self.formatter displayValue], nil);
 }
 
 - (void)test_Decimal_000000000001_Should_0
 {
-    CalcValue *calcValue = [CalcValue calcValueWithDecimalNumber:[NSDecimalNumber decimalNumberWithString:@"0.000000000001"]];
-    STAssertEqualObjects(@"0.00000000000", [self.formatter displayValueWithCalcValue:calcValue], nil);
+    [self.controller setStringValue:@"0.000000000001"];
+    STAssertEqualObjects(@"0.00000000000", [self.formatter displayValue], nil);
 }
 @end
