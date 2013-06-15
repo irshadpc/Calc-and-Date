@@ -9,21 +9,21 @@
 #import "OldDateCalcTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 #import "NSDecimalNumber+Convert.h"
 
 @interface OldDateCalcTests ()
 @property(strong, nonatomic) CalcController *calcController;
-@property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcControllerFormatter *formatter;
 @end
 
 @implementation OldDateCalcTests
 - (void)setUp
 {
     self.calcController = [[CalcController alloc] init];
-    self.formatter = [[CalcValueFormatter alloc] initWithCalcController:self.calcController];
+    self.formatter = [[CalcControllerFormatter alloc] initWithCalcController:self.calcController];
 }
 
 - (void)testinputInteger_2012_1_1_Plus_2012_2_1_Equal

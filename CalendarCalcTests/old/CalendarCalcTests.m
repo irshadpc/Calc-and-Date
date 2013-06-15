@@ -9,21 +9,21 @@
 #import "CalendarCalcTests.h"
 #import "CalcController.h"
 #import "CalcValue.h"
-#import "CalcValueFormatter.h"
+#import "CalcControllerFormatter.h"
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 #import "NSDecimalNumber+Convert.h"
 
 @interface CalendarCalcTests ()
 @property(strong, nonatomic) CalcController *calcController;
-@property(strong, nonatomic) CalcValueFormatter *formatter;
+@property(strong, nonatomic) CalcControllerFormatter *formatter;
 @end
 
 @implementation CalendarCalcTests
 - (void)setUp
 {
     self.calcController = [[CalcController alloc] init];
-    self.formatter = [[CalcValueFormatter alloc] initWithCalcController:self.calcController];
+    self.formatter = [[CalcControllerFormatter alloc] initWithCalcController:self.calcController];
 }
 
 - (void)testCalendarCalc
