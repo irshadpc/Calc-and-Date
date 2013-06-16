@@ -13,8 +13,6 @@
 		6202133C167DB7CB00BFF836 /* UIColor+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */; };
 		62021347167DC7DE00BFF836 /* ViewSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 62021346167DC7DD00BFF836 /* ViewSheet.m */; };
 		620D789816A1328300018CD0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620D789716A1328300018CD0 /* Default-568h@2x.png */; };
-		620D78A916A138FC00018CD0 /* Default@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 620D78A816A138FC00018CD0 /* Default@2x~iphone.png */; };
-		620D78AB16A1392B00018CD0 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 620D78AA16A1392B00018CD0 /* Default~iphone.png */; };
 		621355DC16737DA100C93999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DB16737DA100C93999 /* UIKit.framework */; };
 		621355DE16737DA100C93999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DD16737DA100C93999 /* Foundation.framework */; };
 		621355E016737DA100C93999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621355DF16737DA100C93999 /* CoreGraphics.framework */; };
@@ -137,6 +135,8 @@
 		62C4797E176D5BEB00402784 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C4797D176D5BEA00402784 /* Icon@2x.png */; };
 		62C47980176D5D4700402784 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C4797F176D5D4700402784 /* Icon.png */; };
 		62C47986176D5F0200402784 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C47985176D5F0200402784 /* Icon-72.png */; };
+		62C47A1A176D9BC200402784 /* Default@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C47A19176D9BC200402784 /* Default@2x~iphone.png */; };
+		62C47A1C176D9BD000402784 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C47A1B176D9BD000402784 /* Default~iphone.png */; };
 		62C97A601698FB72008B0EFE /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62C97A621698FB72008B0EFE /* SettingViewController.xib */; };
 		62C97A68169901B8008B0EFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62C97A6A169901B8008B0EFE /* Localizable.strings */; };
 		62CAAF3A173BF87600819584 /* CalendarCalcViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CAAF39173BF87600819584 /* CalendarCalcViewController_iPhone.m */; };
@@ -185,8 +185,6 @@
 		62021345167DC7DD00BFF836 /* ViewSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSheet.h; sourceTree = "<group>"; };
 		62021346167DC7DD00BFF836 /* ViewSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSheet.m; sourceTree = "<group>"; };
 		620D789716A1328300018CD0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		620D78A816A138FC00018CD0 /* Default@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x~iphone.png"; sourceTree = "<group>"; };
-		620D78AA16A1392B00018CD0 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		621355D716737DA100C93999 /* CalendarCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		621355DB16737DA100C93999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		621355DD16737DA100C93999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -364,6 +362,8 @@
 		62C4797D176D5BEA00402784 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		62C4797F176D5D4700402784 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		62C47985176D5F0200402784 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		62C47A19176D9BC200402784 /* Default@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x~iphone.png"; sourceTree = "<group>"; };
+		62C47A1B176D9BD000402784 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		62C97A5E1698FB56008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62C97A5F1698FB56008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62C97A611698FB72008B0EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingViewController.xib; sourceTree = "<group>"; };
@@ -659,7 +659,7 @@
 			isa = PBXGroup;
 			children = (
 				62C4797F176D5D4700402784 /* Icon.png */,
-				620D78AA16A1392B00018CD0 /* Default~iphone.png */,
+				62C47A1B176D9BD000402784 /* Default~iphone.png */,
 			);
 			name = 1x;
 			path = iPhone/1x;
@@ -669,7 +669,7 @@
 			isa = PBXGroup;
 			children = (
 				62C4797D176D5BEA00402784 /* Icon@2x.png */,
-				620D78A816A138FC00018CD0 /* Default@2x~iphone.png */,
+				62C47A19176D9BC200402784 /* Default@2x~iphone.png */,
 				62A2D080167380BC001CC9AE /* display@2x~iphone.png */,
 				62A2D081167380BC001CC9AE /* background@2x~iphone.png */,
 				62A2D082167380BC001CC9AE /* date_key@2x~iphone.png */,
@@ -1016,8 +1016,6 @@
 				625B4E831698713D00D94A4E /* display~ipad.png in Resources */,
 				625B4E851698773C00D94A4E /* plus_minus@2x~ipad.png in Resources */,
 				620D789816A1328300018CD0 /* Default-568h@2x.png in Resources */,
-				620D78A916A138FC00018CD0 /* Default@2x~iphone.png in Resources */,
-				620D78AB16A1392B00018CD0 /* Default~iphone.png in Resources */,
 				6235AD6D16FF379400712A78 /* DatePickerController.xib in Resources */,
 				62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */,
 				62ED0F92172EB827000E887E /* EventSettingViewController.xib in Resources */,
@@ -1036,6 +1034,8 @@
 				62C4797E176D5BEB00402784 /* Icon@2x.png in Resources */,
 				62C47980176D5D4700402784 /* Icon.png in Resources */,
 				62C47986176D5F0200402784 /* Icon-72.png in Resources */,
+				62C47A1A176D9BC200402784 /* Default@2x~iphone.png in Resources */,
+				62C47A1C176D9BD000402784 /* Default~iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
