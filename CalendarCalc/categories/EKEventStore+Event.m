@@ -21,6 +21,7 @@
     }
 }
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (NSArray *)eventCalendars
 {
     if ([self respondsToSelector:@selector(calendarsForEntityType:)]) {
@@ -29,4 +30,5 @@
         return [self calendars];
     }
 }
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 @end

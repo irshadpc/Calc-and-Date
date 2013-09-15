@@ -9,6 +9,8 @@
 #import "UILabel+font.h"
 
 @implementation UILabel (font)
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (void)setMinimumScale:(CGFloat)scale
                  orSize:(CGFloat)size
 {
@@ -18,4 +20,6 @@
         [self setMinimumFontSize:size];
     }
 }
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
+
 @end
