@@ -13,6 +13,6 @@
 + (NSString *)stringWithYear:(NSInteger)year 
                        month:(NSInteger)month
 {
-    return [NSString stringWithFormat:@"%d%@%02d", year, [NSString dateSeparator], month];
+    return [NSString stringWithFormat:@"%ld%@%02ld", (long)year, [NSString dateSeparator], (long)month];
 }
 @end

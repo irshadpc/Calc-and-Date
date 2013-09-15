@@ -110,7 +110,7 @@ typedef enum {
     } else if (section == SectionEventColor) {
         return 1;
     } else {
-        NSLog(@"SECTION: %d", section);
+        NSLog(@"SECTION: %ld", (long)section);
         abort();
     }
 }
@@ -187,7 +187,7 @@ typedef enum {
     } else if (indexPath.section == SectionEventColor) {
         return [self eventColorSettingCellWithTableView:tableView];
     } else {
-        NSLog(@"SECTION: %d", indexPath.section);
+        NSLog(@"SECTION: %ld", (long)indexPath.section);
         abort();
     }
 }

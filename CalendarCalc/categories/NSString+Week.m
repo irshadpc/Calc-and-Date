@@ -21,7 +21,7 @@
         case Friday:    return NSLocalizedString(@"FRI", nil);
         case Saturday:  return NSLocalizedString(@"SAT", nil);
         default:
-            NSLog(@"WEEK: %d", week);
+            NSLog(@"WEEK: %ld", (long)week);
             abort();
     }
 }

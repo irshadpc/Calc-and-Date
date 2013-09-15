@@ -228,7 +228,7 @@ static const CGFloat CalcButtonHeightLangscape = 99.0;
         case FunctionEqual:
             return buttonWidth * 3;
         default:
-            NSLog(@"TAG: %d", tag);
+            NSLog(@"TAG: %ld", (long)tag);
             abort();
     }
 }
@@ -268,7 +268,7 @@ static const CGFloat CalcButtonHeightLangscape = 99.0;
         case FunctionDecimal:
             return buttonHeight * 4;
         default:
-            NSLog(@"TAG: %d", tag);
+            NSLog(@"TAG: %ld", (long)tag);
             abort();
     }
 }

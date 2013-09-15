@@ -70,7 +70,7 @@
 
 - (void)configureTitle
 {
-    [self setTitle:[NSString stringWithFormat:@"%d", self.dayOfMonth]
+    [self setTitle:[NSString stringWithFormat:@"%ld", (long)self.dayOfMonth]
           forState:UIControlStateNormal];
 }
 

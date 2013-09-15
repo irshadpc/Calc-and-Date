@@ -315,7 +315,7 @@
 
         if (year != oldYear) {
             if (events) {
-                [sectioningEvents setObject:events forKey:[NSString stringWithFormat:@"%d", oldYear]];
+                [sectioningEvents setObject:events forKey:[NSString stringWithFormat:@"%ld", (long)oldYear]];
             }
             oldYear = year;
             events = [NSMutableArray array];
@@ -323,7 +323,7 @@
         [events addObject:event];
     }
     if ([events count] > 0) {
-        [sectioningEvents setObject:events forKey:[NSString stringWithFormat:@"%d", oldYear]];
+        [sectioningEvents setObject:events forKey:[NSString stringWithFormat:@"%ld", (long)oldYear]];
     }
 
     self.filteredEvents = sectioningEvents;
@@ -335,12 +335,12 @@
     NSString *key = [self.filteredEvents sortedKeys][indexPath.section];
     EKEvent *event = [[self.filteredEvents objectForKey:key] objectAtIndex:indexPath.row];
     NSDate *date = [event.startDate noTime];
-    NSString *text = [NSString stringWithFormat:@"%d%@%02d%@%02d",
-                      [date year],
+    NSString *text = [NSString stringWithFormat:@"%ld%@%02ld%@%02ld",
+                      (long)[date year],
                       [NSString dateSeparator],
-                      [date month],
+                      (long)[date month],
                       [NSString dateSeparator],
-                      [date day]];
+                      (long)[date day]];
 
     [cell.dateLabel setText:text];
     [cell.titleLabel setText:[event title]];

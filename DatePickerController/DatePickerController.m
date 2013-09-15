@@ -112,7 +112,7 @@ numberOfRowsInComponent:(NSInteger)component
             self.day = [self.days[row] integerValue];
             break;
         default:
-            NSLog(@"COMPONENT: %d", component);
+            NSLog(@"COMPONENT: %ld", (long)component);
             abort();
     }
 
@@ -172,7 +172,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (void)setupYearComponent
 {
-    NSInteger yearIndex = [[self years] indexOfObject:[NSString stringWithFormat:@"%d", _year]];
+    NSInteger yearIndex = [[self years] indexOfObject:[NSString stringWithFormat:@"%ld", (long)_year]];
     if (yearIndex != NSNotFound) {
         [self.picker selectRow:yearIndex
                    inComponent:0
@@ -182,7 +182,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (void)setupMonthComponent
 {
-    NSInteger monthIndex = [[self months] indexOfObject:[NSString stringWithFormat:@"%02d", _month]];
+    NSInteger monthIndex = [[self months] indexOfObject:[NSString stringWithFormat:@"%02ld", (long)_month]];
     if (monthIndex != NSNotFound) {
         [self.picker selectRow:monthIndex
                    inComponent:1
@@ -196,7 +196,7 @@ numberOfRowsInComponent:(NSInteger)component
         return;
     }
     
-    NSInteger dayIndex = [[self days] indexOfObject:[NSString stringWithFormat:@"%02d", _day]];
+    NSInteger dayIndex = [[self days] indexOfObject:[NSString stringWithFormat:@"%02ld", (long)_day]];
     if (dayIndex != NSNotFound) {
         [self.picker selectRow:dayIndex
                    inComponent:2
@@ -212,7 +212,7 @@ numberOfRowsInComponent:(NSInteger)component
 
     NSMutableArray *years = [[NSMutableArray alloc] initWithCapacity:MAX_YEAR - MIN_YEAR];
     for (NSInteger year = MIN_YEAR; year <= MAX_YEAR; year++) {
-        [years addObject:[[NSString alloc] initWithFormat:@"%d", year]];
+        [years addObject:[[NSString alloc] initWithFormat:@"%ld", (long)year]];
     }
     _years = years;
 
@@ -227,7 +227,7 @@ numberOfRowsInComponent:(NSInteger)component
 
     NSMutableArray *months = [[NSMutableArray alloc] initWithCapacity:12];
     for (NSInteger month = 1; month <= 12; month++) {
-        [months addObject:[[NSString alloc] initWithFormat:@"%02d", month]];
+        [months addObject:[[NSString alloc] initWithFormat:@"%02ld", (long)month]];
     }
     _months = months;
    
@@ -246,7 +246,7 @@ numberOfRowsInComponent:(NSInteger)component
     NSInteger lastDay = [[NSDate dateWithYear:_year month:_month + 1 day:0] day];
     NSMutableArray *days = [[NSMutableArray alloc] initWithCapacity:lastDay];
     for (NSInteger day = 1; day <= lastDay; day++) {
-        [days addObject:[[NSString alloc] initWithFormat:@"%02d", day]];
+        [days addObject:[[NSString alloc] initWithFormat:@"%02ld", (long)day]];
     }
     _days = days;
 
