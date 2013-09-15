@@ -11,6 +11,7 @@
 #import "NSDate+AdditionalConvenienceConstructor.h"
 #import "NSDate+Component.h"
 #import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
+#import "UIViewController+PopoverSupport.h"
 
 @interface DatePickerController ()
 @property(weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -47,7 +48,7 @@ static const NSInteger MAX_YEAR = 2200;
         [self.toolbar setItems:@[[UIBarButtonItem flexibleSpaceItem],
                                  [UIBarButtonItem doneButtonItemWithTarget:self action:@selector(onDone:)]]];
     }
-    [self setContentSizeForViewInPopover:self.view.bounds.size];
+    [self setContentSizeForPopover:self.view.bounds.size];
 
     [self setupYearComponent];
     [self setupMonthComponent];

@@ -11,6 +11,7 @@
 #import "AppDelegate+Setting.h"
 #import "UIView+MutableFrame.h"
 #import "EKEventStore+Event.h"
+#import "UIViewController+PopoverSupport.h"
 
 @interface EventSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -80,7 +81,7 @@ typedef enum {
         [self.tableView reloadData];
     }
 
-    self.contentSizeForViewInPopover = self.tableView.bounds.size;
+    [self setContentSizeForPopover:self.tableView.bounds.size];
 }
 
 - (void)viewDidUnload
