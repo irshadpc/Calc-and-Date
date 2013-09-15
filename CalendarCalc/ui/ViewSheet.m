@@ -20,7 +20,9 @@
 - (id)initWithContentViewController:(UIViewController *)contentViewController
 {
     CGRect frame = [UIScreen mainScreen].bounds;
-    frame.size.height -= 20.0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        frame.size.height -= 20.0;
+    }
     if ((self = [super initWithFrame:frame])) {
         _contentViewController = contentViewController;
 

@@ -31,6 +31,7 @@
 - (void)reloadCalcButtonsWithOrientation:(UIInterfaceOrientation)orientation;
 - (CGFloat)frameOriginXWithTag:(NSInteger)tag orientation:(UIInterfaceOrientation)orientation;
 - (CGFloat)frameOriginYWithTag:(NSInteger)tag orientation:(UIInterfaceOrientation)orientation;
+- (CGFloat)systemVersionAdjustValue;
 @end
 
 static const CGFloat CalcButtonWidthPortrait = 192.0;
@@ -95,55 +96,68 @@ static const CGFloat CalcButtonHeightLangscape = 99.0;
 @implementation CalendarCalcViewController_iPad (LayoutOrientationPrivate)
 - (CGRect)calendarContainerFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
+    CGFloat baseY = 120.0 + [self systemVersionAdjustValue];
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(0, 120.0, 484.0, 462.0);
+        return CGRectMake(0, baseY, 484.0, 462.0);
     } else {
-        return CGRectMake(0, 120.0 + (66.0 * 2), 484.0, 462.0);
+        return CGRectMake(0, baseY + (66.0 * 2), 484.0, 462.0);
     }
 }
 
 - (CGRect)calcContainerFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(0, 604.0, CalcButtonWidthPortrait * 4, CalcButtonHeightPortrait * 5);
+        return CGRectMake(0,
+                          604.0 + [self systemVersionAdjustValue],
+                          CalcButtonWidthPortrait * 4,
+                          CalcButtonHeightPortrait * 5);
     } else {
-        return CGRectMake(484.0, 120.0 + (66.0 * 2), CalcButtonWidthLandscape * 4, CalcButtonHeightLangscape * 5);
+        return CGRectMake(484.0,
+                          120.0 + [self systemVersionAdjustValue] + (66.0 * 2),
+                          CalcButtonWidthLandscape * 4,
+                          CalcButtonHeightLangscape * 5);
     }
 }
 
 - (CGRect)clearButtonFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(484.0, 406.0, 284.0, 176.0);
+        return CGRectMake(484.0, 406.0 + [self systemVersionAdjustValue], 284.0, 176.0);
     } else {
-        return CGRectMake(484.0, 120.0, 540.0, 66.0 * 2);
+        return CGRectMake(484.0, 120.0 + [self systemVersionAdjustValue], 540.0, 66.0 * 2);
     }
 }
 
 - (CGRect)eventButtonFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(484.0, 318.0, 284.0, 66.0);
+        return CGRectMake(484.0, 318.0 + [self systemVersionAdjustValue], 284.0, 66.0);
     } else {
-        return CGRectMake(6.0, 120.0, 462.0, 66.0);
+        return CGRectMake(6.0, 120.0 + [self systemVersionAdjustValue], 462.0, 66.0);
     }
 }
 
 - (CGRect)dateSelectButtonContainerFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(484.0, 120.0, 284.0, 66.0);
+        return CGRectMake(484.0,
+                          120.0 + [self systemVersionAdjustValue],
+                          284.0,
+                          66.0);
     } else {
-        return CGRectMake(6.0 + (66.0 * 2), 120.0 + 66.0, 198.0, 66.0);
+        return CGRectMake(6.0 + (66.0 * 2),
+                          120.0 + [self systemVersionAdjustValue] + 66.0,
+                          198.0,
+                          66.0);
     }
 }
 
 - (CGRect)prevButtonContainerFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(484.0, 120.0 + 66.0, 284.0, 66.0);
+        return CGRectMake(484.0, 120.0 + [self systemVersionAdjustValue] + 66.0, 284.0, 66.0);
     } else {
-        return CGRectMake(6.0, 120.0 + 66.0, 132.0, 66.0);
+        return CGRectMake(6.0, 120.0 + [self systemVersionAdjustValue] + 66.0, 132.0, 66.0);
     }
 
 }
@@ -151,9 +165,15 @@ static const CGFloat CalcButtonHeightLangscape = 99.0;
 - (CGRect)nextButtonContainerFrameWithOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        return CGRectMake(484.0, 120.0 + (66.0 * 2), 284.0, 66.0);
+        return CGRectMake(484.0,
+                          120.0 + [self systemVersionAdjustValue] + (66.0 * 2),
+                          284.0,
+                          66.0);
     } else {
-        return CGRectMake(6.0 + (66.0 * 5), 120.0 + 66.0, 132.0, 66.0);
+        return CGRectMake(6.0 + (66.0 * 5),
+                          120.0 + [self systemVersionAdjustValue] + 66.0,
+                          132.0,
+                          66.0);
     }
 }
 
@@ -271,5 +291,10 @@ static const CGFloat CalcButtonHeightLangscape = 99.0;
             NSLog(@"TAG: %ld", (long)tag);
             abort();
     }
+}
+
+- (CGFloat)systemVersionAdjustValue
+{
+    return [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? 20.0 : 0;
 }
 @end
