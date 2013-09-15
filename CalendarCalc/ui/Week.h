@@ -9,7 +9,7 @@
 #ifndef CalendarCalc_Week_h
 #define CalendarCalc_Week_h
 
-typedef enum {
+typedef NS_ENUM(NSInteger, Week) {
     Sunday = 1,
     Monday,
     Tuesday,
@@ -17,7 +17,7 @@ typedef enum {
     Thursday,
     Friday,
     Saturday,
-} Week;
+};
 
 static const NSInteger WeekCount = 6;
 
