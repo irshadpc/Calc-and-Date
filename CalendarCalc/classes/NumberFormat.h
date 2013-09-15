@@ -9,6 +9,6 @@
 #ifndef CalendarCalc_NumberFormat_h
 #define CalendarCalc_NumberFormat_h
 
-const NSUInteger MaxDigits = 12;
-const NSUInteger MaxNumberDigits = 10;
+static const NSUInteger MaxDigits = 12;
+static const NSUInteger MaxNumberDigits = 10;
 #endif
