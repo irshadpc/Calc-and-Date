@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" image="display.png" id="17" userLabel="ディスプレイ">
+                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" image="display" id="17" userLabel="ディスプレイ">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="118"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-20"/>
@@ -73,7 +73,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
-                    <state key="normal" title="Events" backgroundImage="date_key.png">
+                    <state key="normal" title="Events" backgroundImage="date_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -92,7 +92,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="delete.png" backgroundImage="operator_key.png">
+                            <state key="normal" image="delete" backgroundImage="operator_key">
                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -108,7 +108,7 @@
                             <rect key="frame" x="384" y="80" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="9" backgroundImage="number_key.png">
+                            <state key="normal" title="9" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -124,7 +124,7 @@
                             <rect key="frame" x="192" y="80" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="8" backgroundImage="number_key.png">
+                            <state key="normal" title="8" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -140,7 +140,7 @@
                             <rect key="frame" x="0.0" y="80" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="7" backgroundImage="number_key.png">
+                            <state key="normal" title="7" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -156,7 +156,7 @@
                             <rect key="frame" x="384" y="160" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="6" backgroundImage="number_key.png">
+                            <state key="normal" title="6" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -172,7 +172,7 @@
                             <rect key="frame" x="192" y="160" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="5" backgroundImage="number_key.png">
+                            <state key="normal" title="5" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted">
@@ -187,7 +187,7 @@
                             <rect key="frame" x="0.0" y="160" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="4" backgroundImage="number_key.png">
+                            <state key="normal" title="4" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -203,7 +203,7 @@
                             <rect key="frame" x="384" y="240" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="3" backgroundImage="number_key.png">
+                            <state key="normal" title="3" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -219,7 +219,7 @@
                             <rect key="frame" x="192" y="240" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="2" backgroundImage="number_key.png">
+                            <state key="normal" title="2" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted">
@@ -234,7 +234,7 @@
                             <rect key="frame" x="0.0" y="240" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="1" backgroundImage="number_key.png">
+                            <state key="normal" title="1" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -250,7 +250,7 @@
                             <rect key="frame" x="0.0" y="320" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="53"/>
-                            <state key="normal" title="0" backgroundImage="number_key.png">
+                            <state key="normal" title="0" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -266,7 +266,7 @@
                             <rect key="frame" x="192" y="320" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="00" backgroundImage="number_key.png">
+                            <state key="normal" title="00" backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -282,7 +282,7 @@
                             <rect key="frame" x="384" y="320" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="54"/>
-                            <state key="normal" title="." backgroundImage="number_key.png">
+                            <state key="normal" title="." backgroundImage="number_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -298,7 +298,7 @@
                             <rect key="frame" x="192" y="0.0" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                            <state key="normal" image="plus_minus.png" backgroundImage="operator_key.png">
+                            <state key="normal" image="plus_minus" backgroundImage="operator_key">
                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -314,7 +314,7 @@
                             <rect key="frame" x="576" y="240" width="192" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="74"/>
-                            <state key="normal" title="=" backgroundImage="equal_key.png">
+                            <state key="normal" title="=" backgroundImage="equal_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -330,7 +330,7 @@
                             <rect key="frame" x="576" y="160" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="62"/>
-                            <state key="normal" title="+" backgroundImage="operator_key.png">
+                            <state key="normal" title="+" backgroundImage="operator_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -346,7 +346,7 @@
                             <rect key="frame" x="576" y="0.0" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="62"/>
-                            <state key="normal" title="−" backgroundImage="operator_key.png">
+                            <state key="normal" title="−" backgroundImage="operator_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -362,7 +362,7 @@
                             <rect key="frame" x="576" y="80" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="62"/>
-                            <state key="normal" title="×" backgroundImage="operator_key.png">
+                            <state key="normal" title="×" backgroundImage="operator_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -378,7 +378,7 @@
                             <rect key="frame" x="384" y="0.0" width="192" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="62"/>
-                            <state key="normal" title="÷" backgroundImage="operator_key.png">
+                            <state key="normal" title="÷" backgroundImage="operator_key">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -399,7 +399,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="62"/>
-                    <state key="normal" title="AC" backgroundImage="clear_key.png">
+                    <state key="normal" title="AC" backgroundImage="clear_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -433,13 +433,13 @@
         </view>
     </objects>
     <resources>
-        <image name="clear_key.png" width="284" height="176"/>
-        <image name="date_key.png" width="480" height="124"/>
-        <image name="delete.png" width="83" height="44"/>
-        <image name="display.png" width="768" height="98"/>
-        <image name="equal_key.png" width="192" height="160"/>
-        <image name="number_key.png" width="192" height="80"/>
-        <image name="operator_key.png" width="192" height="80"/>
-        <image name="plus_minus.png" width="62" height="52"/>
+        <image name="clear_key" width="284" height="176"/>
+        <image name="date_key" width="480" height="124"/>
+        <image name="delete" width="83" height="44"/>
+        <image name="display" width="768" height="98"/>
+        <image name="equal_key" width="192" height="160"/>
+        <image name="number_key" width="192" height="80"/>
+        <image name="operator_key" width="192" height="80"/>
+        <image name="plus_minus" width="62" height="52"/>
     </resources>
 </document>
