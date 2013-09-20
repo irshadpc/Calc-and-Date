@@ -231,7 +231,7 @@
 		62B65D8F1689F0B300C0055E /* ViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTests.m; sourceTree = "<group>"; };
 		62B65D961689F20A00C0055E /* CalendarCalcViewController+UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CalendarCalcViewController+UnitTest.h"; sourceTree = "<group>"; };
 		62B65D971689F20A00C0055E /* CalendarCalcViewController+UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CalendarCalcViewController+UnitTest.m"; sourceTree = "<group>"; };
-		62BA2EC817E9482800D5673F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		62BA2EC817E9482800D5673F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = resources/Images.xcassets; sourceTree = "<group>"; };
 		62C2F4B517E58823002591A9 /* UIViewController+PopoverSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PopoverSupport.h"; sourceTree = "<group>"; };
 		62C2F4B617E58823002591A9 /* UIViewController+PopoverSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PopoverSupport.m"; sourceTree = "<group>"; };
 		62C97A5E1698FB56008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
