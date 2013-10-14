@@ -10,7 +10,7 @@
 #import "CalcValue.h"
 #import "Function.h"
 #import "Week.h"
-#import "NSDate+Calc.h"
+#import "NSDate+Calculate.h"
 #import "NSDate+Component.h"
 #import "NSDecimalNumber+Safe.h"
 #import "NSDecimalNumber+Convert.h"
