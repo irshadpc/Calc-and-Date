@@ -13,7 +13,7 @@
 #import "AppDelegate+Setting.h"
 #import "EventViewController.h"
 #import "SettingViewController.h"
-#import "CopybleLabel.h"
+#import "CopyableLabel.h"
 #import "ViewSheet.h"
 #import "CalcController.h"
 #import "CalcControllerFormatter.h"
@@ -31,7 +31,7 @@
   EventViewControllerDelegate
 >
 
-@property(weak, nonatomic) IBOutlet CopybleLabel *display;
+@property(weak, nonatomic) IBOutlet CopyableLabel *display;
 @property(weak, nonatomic) IBOutlet UILabel *indicator;
 @property(weak, nonatomic) IBOutlet UIButton *decimalButton;
 @property(strong, nonatomic) UIPopoverController *settingPopover;

@@ -47,7 +47,6 @@
 		62A144CA16859BE3001E2843 /* key_click.aif in Resources */ = {isa = PBXBuildFile; fileRef = 62A144C916859BE3001E2843 /* key_click.aif */; };
 		62A144D11685F559001E2843 /* CalendarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D01685F559001E2843 /* CalendarButton.m */; };
 		62A144D71686CA32001E2843 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A144D61686CA32001E2843 /* CalendarViewController.m */; };
-		62A2D123167383A8001CC9AE /* CopybleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D122167383A8001CC9AE /* CopybleLabel.m */; };
 		62A2D14416738D31001CC9AE /* NSDecimalNumber+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D14316738D31001CC9AE /* NSDecimalNumber+Safe.m */; };
 		62A2D1531673A2E3001CC9AE /* NSDecimalNumber+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A2D1521673A2E2001CC9AE /* NSDecimalNumber+Convert.m */; };
 		62A7CE10167CA1240080B362 /* OldNumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A7CE0F167CA1240080B362 /* OldNumberCalcTests.m */; };
@@ -67,7 +66,6 @@
 		62CAAF40173BFBE200819584 /* CalendarCalcViewController_iPad+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CAAF3F173BFBE200819584 /* CalendarCalcViewController_iPad+Layout.m */; };
 		62D886061718DE0700EACAFA /* NumberCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D886051718DE0700EACAFA /* NumberCalcTests.m */; };
 		62D8860D1719546100EACAFA /* DateCalcProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D8860C1719546100EACAFA /* DateCalcProcessor.m */; };
-		62DAF6161680AF6F00A14D3C /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DAF6151680AF6F00A14D3C /* PageView.m */; };
 		62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6486F1738EAA60030DDFB /* SectionHeaderView.m */; };
 		62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F84172DFB6D000E887E /* EventViewController.xib */; };
 		62ED0F88172E4769000E887E /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F87172E4768000E887E /* EventCell.m */; };
@@ -81,6 +79,8 @@
 		62F1D008180BAE5500B6BAFE /* NSDate+Calculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F1D007180BAE5500B6BAFE /* NSDate+Calculate.m */; };
 		62F1D00B180BAE6100B6BAFE /* NSNumber+Predicate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F1D00A180BAE6100B6BAFE /* NSNumber+Predicate.m */; };
 		62F1D00E180BB3B400B6BAFE /* UIBarButtonItem+ConvenienceConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F1D00D180BB3B400B6BAFE /* UIBarButtonItem+ConvenienceConstructor.m */; };
+		62F1D014180BB68C00B6BAFE /* CopyableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F1D011180BB68C00B6BAFE /* CopyableLabel.m */; };
+		62F1D015180BB68C00B6BAFE /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F1D013180BB68C00B6BAFE /* PageView.m */; };
 		62F4D92E1681F382001FF7FA /* CalendarControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F4D92D1681F381001FF7FA /* CalendarControlView.m */; };
 /* End PBXBuildFile section */
 
@@ -170,8 +170,6 @@
 		62A144D61686CA32001E2843 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		62A144D81686CA5A001E2843 /* DateSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateSelect.h; sourceTree = "<group>"; };
 		62A144D91686D3E9001E2843 /* CalendarConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarConstant.h; sourceTree = "<group>"; };
-		62A2D121167383A8001CC9AE /* CopybleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopybleLabel.h; sourceTree = "<group>"; };
-		62A2D122167383A8001CC9AE /* CopybleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopybleLabel.m; sourceTree = "<group>"; };
 		62A2D14216738D31001CC9AE /* NSDecimalNumber+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Safe.h"; sourceTree = "<group>"; };
 		62A2D14316738D31001CC9AE /* NSDecimalNumber+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Safe.m"; sourceTree = "<group>"; };
 		62A2D1511673A2E2001CC9AE /* NSDecimalNumber+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Convert.h"; sourceTree = "<group>"; };
@@ -211,8 +209,6 @@
 		62D886051718DE0700EACAFA /* NumberCalcTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCalcTests.m; sourceTree = "<group>"; };
 		62D8860B1719546100EACAFA /* DateCalcProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCalcProcessor.h; sourceTree = "<group>"; };
 		62D8860C1719546100EACAFA /* DateCalcProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCalcProcessor.m; sourceTree = "<group>"; };
-		62DAF6141680AF6F00A14D3C /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
-		62DAF6151680AF6F00A14D3C /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
 		62E6486E1738EAA60030DDFB /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		62E6486F1738EAA60030DDFB /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
 		62ED0F84172DFB6D000E887E /* EventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventViewController.xib; sourceTree = "<group>"; };
@@ -237,6 +233,10 @@
 		62F1D00A180BAE6100B6BAFE /* NSNumber+Predicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Predicate.m"; sourceTree = "<group>"; };
 		62F1D00C180BB3B400B6BAFE /* UIBarButtonItem+ConvenienceConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ConvenienceConstructor.h"; sourceTree = "<group>"; };
 		62F1D00D180BB3B400B6BAFE /* UIBarButtonItem+ConvenienceConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ConvenienceConstructor.m"; sourceTree = "<group>"; };
+		62F1D010180BB68C00B6BAFE /* CopyableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyableLabel.h; sourceTree = "<group>"; };
+		62F1D011180BB68C00B6BAFE /* CopyableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyableLabel.m; sourceTree = "<group>"; };
+		62F1D012180BB68C00B6BAFE /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
+		62F1D013180BB68C00B6BAFE /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
 		62F4D92C1681F381001FF7FA /* CalendarControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarControlView.h; sourceTree = "<group>"; };
 		62F4D92D1681F381001FF7FA /* CalendarControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarControlView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -469,8 +469,6 @@
 				62A144D01685F559001E2843 /* CalendarButton.m */,
 				62F4D92C1681F381001FF7FA /* CalendarControlView.h */,
 				62F4D92D1681F381001FF7FA /* CalendarControlView.m */,
-				62DAF6141680AF6F00A14D3C /* PageView.h */,
-				62DAF6151680AF6F00A14D3C /* PageView.m */,
 				62E6486E1738EAA60030DDFB /* SectionHeaderView.h */,
 				62E6486F1738EAA60030DDFB /* SectionHeaderView.m */,
 				626BB0B116915D96004E9E63 /* SwitchButton.h */,
@@ -479,8 +477,6 @@
 				626BB0A9169158D9004E9E63 /* WeekView.m */,
 				62021345167DC7DD00BFF836 /* ViewSheet.h */,
 				62021346167DC7DD00BFF836 /* ViewSheet.m */,
-				62A2D121167383A8001CC9AE /* CopybleLabel.h */,
-				62A2D122167383A8001CC9AE /* CopybleLabel.m */,
 				62A144D91686D3E9001E2843 /* CalendarConstant.h */,
 				626BB0AC169159BE004E9E63 /* Week.h */,
 			);
@@ -555,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				62F1CFF6180B90F300B6BAFE /* categories */,
+				62F1D00F180BB68C00B6BAFE /* ui */,
 			);
 			name = Common;
 			path = Libs/Common;
@@ -581,6 +578,17 @@
 				62F1CFFE180B90F300B6BAFE /* UIView+Frame.m */,
 			);
 			path = categories;
+			sourceTree = "<group>";
+		};
+		62F1D00F180BB68C00B6BAFE /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				62F1D010180BB68C00B6BAFE /* CopyableLabel.h */,
+				62F1D011180BB68C00B6BAFE /* CopyableLabel.m */,
+				62F1D012180BB68C00B6BAFE /* PageView.h */,
+				62F1D013180BB68C00B6BAFE /* PageView.m */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -703,7 +711,6 @@
 			files = (
 				621355E816737DA100C93999 /* main.m in Sources */,
 				621355EC16737DA100C93999 /* AppDelegate.m in Sources */,
-				62A2D123167383A8001CC9AE /* CopybleLabel.m in Sources */,
 				62A2D14416738D31001CC9AE /* NSDecimalNumber+Safe.m in Sources */,
 				62A2D1531673A2E3001CC9AE /* NSDecimalNumber+Convert.m in Sources */,
 				62F1D008180BAE5500B6BAFE /* NSDate+Calculate.m in Sources */,
@@ -713,7 +720,6 @@
 				62021339167DB5EC00BFF836 /* NSDate+ConvenienceConstructor.m in Sources */,
 				6202133C167DB7CB00BFF836 /* UIColor+CalendarCalc.m in Sources */,
 				62021347167DC7DE00BFF836 /* ViewSheet.m in Sources */,
-				62DAF6161680AF6F00A14D3C /* PageView.m in Sources */,
 				62F4D92E1681F382001FF7FA /* CalendarControlView.m in Sources */,
 				62A144D11685F559001E2843 /* CalendarButton.m in Sources */,
 				62A144D71686CA32001E2843 /* CalendarViewController.m in Sources */,
@@ -725,8 +731,10 @@
 				62F1D00B180BAE6100B6BAFE /* NSNumber+Predicate.m in Sources */,
 				626BB0E416918723004E9E63 /* EventViewController.m in Sources */,
 				62F1D005180BA84500B6BAFE /* NSDate+Component.m in Sources */,
+				62F1D014180BB68C00B6BAFE /* CopyableLabel.m in Sources */,
 				62F1CFFF180B90F300B6BAFE /* NSArray+safe.m in Sources */,
 				626BB0EC1691DF41004E9E63 /* SettingViewController.m in Sources */,
+				62F1D015180BB68C00B6BAFE /* PageView.m in Sources */,
 				626BB0F01691E094004E9E63 /* AppDelegate+Setting.m in Sources */,
 				626BB0F41691E9A7004E9E63 /* NSString+CalelndarCalc.m in Sources */,
 				625B4E671698613600D94A4E /* UIImage+CalendarCalc.m in Sources */,
