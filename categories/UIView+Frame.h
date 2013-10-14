@@ -1,5 +1,5 @@
 //
-//  UIView+MutableFrame.h
+//  UIView+Frame.h
 //  DateNumber
 //
 //  Created by Ishida Junichi on 2013/01/08.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (MutableFrame)
+@interface UIView (Frame)
 - (void)setFrameOrigin:(CGPoint)origin;
 - (void)setFrameSize:(CGSize)size;
 - (void)setFrameOriginX:(CGFloat)x;
