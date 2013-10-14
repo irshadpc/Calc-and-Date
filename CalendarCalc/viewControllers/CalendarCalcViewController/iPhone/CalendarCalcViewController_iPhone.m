@@ -18,7 +18,7 @@
 #import "DateSelect.h"
 #import "CalendarViewController+Week.h"
 #import "NSDate+Component.h"
-#import "NSString+Date.h"
+#import "NSString+CalendarCalc.h"
 #import "NSString+Locale.h"
 #import "UIButton+Border.h"
 #import "UIImage+CalendarCalc.h"

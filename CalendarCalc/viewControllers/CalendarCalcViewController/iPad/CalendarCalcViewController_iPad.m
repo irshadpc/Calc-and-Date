@@ -21,7 +21,6 @@
 #import "CalendarViewController+Week.h"
 #import "NSDate+Component.h"
 #import "NSString+CalendarCalc.h"
-#import "NSString+Date.h"
 #import "NSString+Locale.h"
 
 @interface CalendarCalcViewController_iPad ()

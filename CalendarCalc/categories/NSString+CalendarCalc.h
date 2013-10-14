@@ -12,4 +12,6 @@
 @interface NSString (CalendarCalc)
 + (NSString *)stringWithKeyCode:(NSInteger)keyCode;
 + (NSString *)stringWithFunction:(Function)function;
++ (NSString *)stringWithWeek:(NSInteger)week;
++ (NSString *)stringWithYear:(NSInteger)year month:(NSInteger)month;
 @end

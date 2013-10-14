@@ -13,7 +13,7 @@
 #import "NSDate+Component.h"
 #import "UIFont+CalendarCalc.h"
 #import "UIImage+CalendarCalc.h"
-#import "NSString+Date.h"
+#import "NSString+CalendarCalc.h"
 
 @interface CalendarControlView ()
 @property(strong, nonatomic, readwrite) UIButton *dateSelectButton;
