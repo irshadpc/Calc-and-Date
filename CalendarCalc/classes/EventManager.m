@@ -11,7 +11,6 @@
 #import "AppDelegate+Setting.h"
 #import "NSDate+Calc.h"
 #import "NSDate+Component.h"
-#import "EKEvent+Today.h"
 #import "EKEventStore+Event.h"
 
 @interface EventManager ()
