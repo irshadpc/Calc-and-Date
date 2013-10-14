@@ -42,7 +42,6 @@
 		626BB0C01691698C004E9E63 /* UIFont+CalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0BF1691698C004E9E63 /* UIFont+CalendarCalc.m */; };
 		626BB0D216917E54004E9E63 /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0D116917E54004E9E63 /* EventManager.m */; };
 		626BB0D416917ECA004E9E63 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 626BB0D316917EC9004E9E63 /* EventKit.framework */; };
-		626BB0E116918541004E9E63 /* EKEvent+Today.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0E01691853C004E9E63 /* EKEvent+Today.m */; };
 		626BB0E416918723004E9E63 /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0E316918723004E9E63 /* EventViewController.m */; };
 		626BB0EC1691DF41004E9E63 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0EA1691DF41004E9E63 /* SettingViewController.m */; };
 		626BB0F01691E094004E9E63 /* AppDelegate+Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 626BB0EF1691E091004E9E63 /* AppDelegate+Setting.m */; };
@@ -164,8 +163,6 @@
 		626BB0D016917E54004E9E63 /* EventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		626BB0D116917E54004E9E63 /* EventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		626BB0D316917EC9004E9E63 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		626BB0DF1691853A004E9E63 /* EKEvent+Today.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EKEvent+Today.h"; sourceTree = "<group>"; };
-		626BB0E01691853C004E9E63 /* EKEvent+Today.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EKEvent+Today.m"; sourceTree = "<group>"; };
 		626BB0E216918723004E9E63 /* EventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewController.h; sourceTree = "<group>"; };
 		626BB0E316918723004E9E63 /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
 		626BB0E91691DF40004E9E63 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -551,8 +548,6 @@
 				62ED0F8C172E4DA0000E887E /* UILabel+font.m */,
 				625B4E651698613600D94A4E /* UIImage+CalendarCalc.h */,
 				625B4E661698613600D94A4E /* UIImage+CalendarCalc.m */,
-				626BB0DF1691853A004E9E63 /* EKEvent+Today.h */,
-				626BB0E01691853C004E9E63 /* EKEvent+Today.m */,
 				62E6488E173A115A0030DDFB /* EKEventStore+Event.h */,
 				62E6488F173A115A0030DDFB /* EKEventStore+Event.m */,
 				62C2F4B517E58823002591A9 /* UIViewController+PopoverSupport.h */,
@@ -755,7 +750,6 @@
 				626BB0BC16916471004E9E63 /* NSString+Week.m in Sources */,
 				626BB0C01691698C004E9E63 /* UIFont+CalendarCalc.m in Sources */,
 				626BB0D216917E54004E9E63 /* EventManager.m in Sources */,
-				626BB0E116918541004E9E63 /* EKEvent+Today.m in Sources */,
 				626BB0E416918723004E9E63 /* EventViewController.m in Sources */,
 				62F1D005180BA84500B6BAFE /* NSDate+Component.m in Sources */,
 				62F1CFFF180B90F300B6BAFE /* NSArray+safe.m in Sources */,

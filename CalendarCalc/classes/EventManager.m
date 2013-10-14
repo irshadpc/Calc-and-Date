@@ -29,9 +29,25 @@
 - (void)setupNotification;
 @end
 
-static const NSInteger EventIntervalYear = 2;
+
+// EKEvent (Today)
+@implementation EKEvent (Today)
++ (EKEvent *)todayEventWithEventStore:(EKEventStore *)eventStore
+{
+    EKEvent *event = [EKEvent eventWithEventStore:eventStore];
+    
+    NSDate *date = [[NSDate date] noTime];
+    [event setTitle:NSLocalizedString(@"TODAY", nil)];
+    [event setStartDate:date];
+    [event setEndDate:date];
+    return event;
+}
+@end
+
 
 @implementation EventManager
+static const NSInteger EventIntervalYear = 2;
+
 - (id)initWithDelegate:(id<EventManagerDelegate>)delegate {
     if ((self = [super init])) {
         _delegate = delegate;
