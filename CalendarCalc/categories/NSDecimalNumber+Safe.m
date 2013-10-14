@@ -1,22 +1,22 @@
 //
-//  NSDecimalNumber+Calc.m
+//  NSDecimalNumber+Safe.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/08.
 //  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
 //
 
-#import "NSDecimalNumber+Calc.h"
+#import "NSDecimalNumber+Safe.h"
 
 typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, const NSDecimal *, NSRoundingMode);
 
-@interface NSDecimalNumber (CalcPrivate)
+@interface NSDecimalNumber (SafePrivate)
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
                                        method:(DecimalCalculate)method;
 @end
 
-@implementation NSDecimalNumber (Calc)
+@implementation NSDecimalNumber (Safe)
 + (NSDecimalNumber *)addingByDecimalNumber:(NSDecimalNumber *)lOperand
                                   rOperand:(NSDecimalNumber *)rOperand
 {
@@ -59,7 +59,7 @@ typedef NSCalculationError (^DecimalCalculate)(NSDecimal *, const NSDecimal *, c
 @end
 
 
-@implementation NSDecimalNumber (CalcPrivate)
+@implementation NSDecimalNumber (SafePrivate)
 + (NSDecimalNumber *)calculateByDecimalNumber:(NSDecimalNumber *)lOperand
                                      rOperand:(NSDecimalNumber *)rOperand
                                        method:(DecimalCalculate)method

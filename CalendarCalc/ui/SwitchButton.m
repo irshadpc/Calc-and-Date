@@ -8,8 +8,8 @@
 //
 
 #import "SwitchButton.h"
-#import "UIColor+SwitchButton.h"
-#import "UIImage+SwitchButton.h"
+#import "UIColor+CalendarCalc.h"
+#import "UIImage+CalendarCalc.h"
 
 @implementation SwitchButton
 

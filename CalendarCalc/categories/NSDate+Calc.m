@@ -7,13 +7,14 @@
 //
 
 #import "NSDate+Calc.h"
-#import "NSDateComponents+Unit.h"
 
 @implementation NSDate (Calc)
+static const NSCalendarUnit CALENDAR_UNIT_YMD = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+
 - (NSDate *)addingByYear:(NSInteger)year
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *ymdComponents = [calendar components:[NSDateComponents componentsYMD]
+    NSDateComponents *ymdComponents = [calendar components:CALENDAR_UNIT_YMD
                                                   fromDate:self];
 
     [ymdComponents setYear:[ymdComponents year] + year];
@@ -23,7 +24,7 @@
 - (NSDate *)addingByDay:(NSInteger)day
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *ymdComponents = [calendar components:[NSDateComponents componentsYMD]
+    NSDateComponents *ymdComponents = [calendar components:CALENDAR_UNIT_YMD
                                                   fromDate:self];
 
     [ymdComponents setDay:[ymdComponents day] + day];

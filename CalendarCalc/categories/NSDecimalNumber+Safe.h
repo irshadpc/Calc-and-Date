@@ -1,5 +1,5 @@
 //
-//  NSDecimalNumber+Calc.h
+//  NSDecimalNumber+Safe.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/08.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDecimalNumber (Calc)
+@interface NSDecimalNumber (Safe)
 + (NSDecimalNumber *)addingByDecimalNumber:(NSDecimalNumber *)lOperand rOperand:(NSDecimalNumber *)rOperand;
 + (NSDecimalNumber *)subtractingByDecimalNumber:(NSDecimalNumber *)lOperand rOperand:(NSDecimalNumber *)rOperand;
 + (NSDecimalNumber *)multiplyingByDecimalNumber:(NSDecimalNumber *)lOperand rOperand:(NSDecimalNumber *)rOperand;

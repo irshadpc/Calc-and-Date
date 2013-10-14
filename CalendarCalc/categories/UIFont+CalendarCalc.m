@@ -1,14 +1,14 @@
 //
-//  UIFont+Calendar.m
+//  UIFont+CalendarCalc.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/31.
 //  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
 //
 
-#import "UIFont+Calendar.h"
+#import "UIFont+CalendarCalc.h"
 
-@implementation UIFont (Calendar)
+@implementation UIFont (CalendarCalc)
 + (UIFont *)calendarFont
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {

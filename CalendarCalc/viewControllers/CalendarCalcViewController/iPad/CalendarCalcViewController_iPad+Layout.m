@@ -11,8 +11,8 @@
 #import "CalendarViewController.h"
 #import "Function.h"
 #import "CalendarConstant.h"
-#import "UIImage+Calculator.h"
-#import "UIView+MutableFrame.h"
+#import "UIImage+CalendarCalc.h"
+#import "UIView+Frame.h"
 
 @interface CalendarCalcViewController_iPad (LayoutPrivate)
 - (CGRect)dateSelectButtonFrame;

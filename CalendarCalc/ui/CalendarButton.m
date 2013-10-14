@@ -7,9 +7,9 @@
 //
 
 #import "CalendarButton.h"
-#import "UIColor+Calendar.h"
-#import "UIFont+Calendar.h"
-#import "UIImage+Calendar.h"
+#import "UIColor+CalendarCalc.h"
+#import "UIFont+CalendarCalc.h"
+#import "UIImage+CalendarCalc.h"
 
 @interface CalendarButton ()
 - (void)configureTitle;

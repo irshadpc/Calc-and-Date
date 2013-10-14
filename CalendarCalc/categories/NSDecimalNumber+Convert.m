@@ -7,7 +7,7 @@
 //
 
 #import "NSDecimalNumber+Convert.h"
-#import "NSDecimalNumber+Calc.h"
+#import "NSDecimalNumber+Safe.h"
 
 @implementation NSDecimalNumber (Convert)
 + (NSDecimalNumber *)reverse:(NSDecimalNumber *)number

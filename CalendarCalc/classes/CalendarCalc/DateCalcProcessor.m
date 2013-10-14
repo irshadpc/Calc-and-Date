@@ -12,8 +12,7 @@
 #import "Week.h"
 #import "NSDate+Calc.h"
 #import "NSDate+Component.h"
-#import "NSDate+Style.h"
-#import "NSDecimalNumber+Calc.h"
+#import "NSDecimalNumber+Safe.h"
 #import "NSDecimalNumber+Convert.h"
 #import "NSNumber+Predicate.h"
 

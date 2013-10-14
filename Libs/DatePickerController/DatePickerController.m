@@ -8,9 +8,9 @@
 
 #import "DatePickerController.h"
 #import "NSArray+Safe.h"
-#import "NSDate+AdditionalConvenienceConstructor.h"
+#import "NSDate+ConvenienceConstructor.h"
 #import "NSDate+Component.h"
-#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
+#import "UIBarButtonItem+ConvenienceConstructor.h"
 #import "UIViewController+PopoverSupport.h"
 
 @interface DatePickerController ()

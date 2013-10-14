@@ -1,5 +1,5 @@
 //
-//  NSString+Calculator.h
+//  NSString+CalendarCalc.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2013/01/01.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Function.h"
 
-@interface NSString (Calculator)
+@interface NSString (CalendarCalc)
 + (NSString *)stringWithKeyCode:(NSInteger)keyCode;
 + (NSString *)stringWithFunction:(Function)function;
 @end

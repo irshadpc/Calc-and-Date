@@ -1,14 +1,17 @@
 //
-//  UIColor+Calendar.m
+//  UIColor+CalendarCalc.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/16.
 //  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
 //
 
-#import "UIColor+Calendar.h"
+#import "UIColor+CalendarCalc.h"
 
-@implementation UIColor (Calendar)
+@implementation UIColor (CalendarCalc)
+
+#pragma mark - Calendar
+
 + (UIColor *)todayColor
 {
     return [UIColor whiteColor];
@@ -39,5 +42,28 @@
 {
     return [UIColor colorWithWhite:0.6
                              alpha:1];
+}
+
+
+#pragma mark - SwitchButton
+
++ (UIColor *)titleColorForStateOn
+{
+    return [UIColor whiteColor];
+}
+
++ (UIColor *)titleColorForStateOff
+{
+    return [UIColor lightGrayColor];
+}
+
++ (UIColor *)titleShadowColorForStateOn
+{
+    return [UIColor lightGrayColor];
+}
+
++ (UIColor *)titleShadowColorForStateOff
+{
+    return [UIColor whiteColor];
 }
 @end

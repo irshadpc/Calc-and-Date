@@ -12,5 +12,6 @@
 - (NSInteger)year;
 - (NSInteger)month;
 - (NSInteger)day;
-- (NSInteger)weekday;
+- (NSInteger)weekday;        
+- (NSDate *)noTime;
 @end

@@ -12,10 +12,9 @@
 #import "SectionHeaderView.h"
 #import "NSArray+safe.h"
 #import "NSDate+Component.h"
-#import "NSDate+Style.h"
 #import "NSString+Locale.h"
-#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
-#import "UIView+MutableFrame.h"
+#import "UIBarButtonItem+ConvenienceConstructor.h"
+#import "UIView+Frame.h"
 #import "UIViewController+PopoverSupport.h"
 
 @interface NSDictionary (Sort)

@@ -1,14 +1,14 @@
 //
-//  NSDate+AdditionalConvenienceConstructor.m
+//  NSDate+ConvenienceConstructor.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/16.
 //  Copyright (c) 2012年 Ishida Junichi. All rights reserved.
 //
 
-#import "NSDate+AdditionalConvenienceConstructor.h"
+#import "NSDate+ConvenienceConstructor.h"
 
-@implementation NSDate (AdditionalConvenienceConstructor)
+@implementation NSDate (ConvenienceConstructor)
 + (NSDate *)dateWithYear:(NSInteger)year
                    month:(NSInteger)month
                      day:(NSInteger)day

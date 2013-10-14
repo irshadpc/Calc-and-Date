@@ -21,7 +21,7 @@
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 #import "UIButton+Border.h"
-#import "UIImage+Calculator.h"
+#import "UIImage+CalendarCalc.h"
 #import "Function.h"
 
 @interface CalendarCalcViewController_iPhone ()

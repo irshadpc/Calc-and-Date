@@ -1,5 +1,5 @@
 //
-//  UIFont+Calendar.h
+//  UIFont+CalendarCalc.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/31.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIFont (Calendar)
+@interface UIFont (CalendarCalc)
 + (UIFont *)calendarFont;
 + (UIFont *)dateSelectFont;
 @end

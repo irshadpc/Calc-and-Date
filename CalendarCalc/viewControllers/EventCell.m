@@ -8,7 +8,7 @@
 
 #import "EventCell.h"
 #import "UILabel+font.h"
-#import "UIView+MutableFrame.h"
+#import "UIView+Frame.h"
 
 @interface EventCell ()
 @property(strong, nonatomic, readwrite) UILabel *dateLabel;

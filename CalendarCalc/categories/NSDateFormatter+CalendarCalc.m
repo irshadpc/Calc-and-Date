@@ -22,16 +22,4 @@
 
     return dateFormatter;
 }
-
-- (BOOL)isDate:(NSString *)string
-{
-    if (!string || [string length] == 0) {
-        return NO;
-    }
-
-    NSDate *date = nil;
-    NSError *error = nil;
-    NSRange range = NSMakeRange(0, [string length]);
-    return [self getObjectValue:&date forString:string range:&range error:&error];
-}
 @end

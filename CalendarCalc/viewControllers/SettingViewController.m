@@ -10,7 +10,7 @@
 #import "EventSettingViewController.h"
 #import "ViewSheet.h"
 #import "AppDelegate+Setting.h"
-#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
+#import "UIBarButtonItem+ConvenienceConstructor.h"
 #import "UIViewController+PopoverSupport.h"
 
 @interface SettingViewController ()

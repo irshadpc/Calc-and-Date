@@ -10,7 +10,7 @@
 #import "CalendarView.h"
 #import "SwitchButton.h"
 #import "NSString+Week.h"
-#import "UIFont+Calendar.h"
+#import "UIFont+CalendarCalc.h"
 #import "CalendarConstant.h"
 #import "Week.h"
 

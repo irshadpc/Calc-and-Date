@@ -10,10 +10,10 @@
 #import "NumberCalcProcessor.h"
 #import "DateCalcProcessor.h"
 #import "CalcValue.h"
-#import "NSArray+safe.h"
+#import "NSArray+Safe.h"
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSNumber+Predicate.h"
-#import "NSString+Calculator.h"
+#import "NSString+CalendarCalc.h"
 #import "NSString+Locale.h"
 
 typedef enum {

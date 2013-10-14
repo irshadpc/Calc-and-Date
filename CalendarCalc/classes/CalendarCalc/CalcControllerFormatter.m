@@ -16,7 +16,7 @@
 #import "NSNumber+Predicate.h"
 #import "NSNumberFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
-#import "NSString+Calculator.h"
+#import "NSString+CalendarCalc.h"
 #import "NSString+Safe.h"
 
 @interface CalcControllerFormatter ()

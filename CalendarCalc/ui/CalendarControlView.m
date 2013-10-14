@@ -9,10 +9,10 @@
 #import "CalendarControlView.h"
 #import "CalendarView.h"
 #import "AppDelegate.h"
-#import "NSDate+AdditionalConvenienceConstructor.h"
+#import "NSDate+ConvenienceConstructor.h"
 #import "NSDate+Component.h"
-#import "UIFont+Calendar.h"
-#import "UIImage+Calendar.h"
+#import "UIFont+CalendarCalc.h"
+#import "UIImage+CalendarCalc.h"
 #import "NSString+Date.h"
 
 @interface CalendarControlView ()

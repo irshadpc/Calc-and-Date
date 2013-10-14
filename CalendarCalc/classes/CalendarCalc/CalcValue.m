@@ -9,7 +9,7 @@
 #import "CalcValue.h"
 #import "CalcControllerFormatter.h"
 #import "NumberFormat.h"
-#import "NSArray+safe.h"
+#import "NSArray+Safe.h"
 #import "NSDateFormatter+CalendarCalc.h"
 #import "NSString+Locale.h"
 #import "NSNumber+Predicate.h"

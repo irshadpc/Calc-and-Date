@@ -1,14 +1,14 @@
 //
-//  NSString+Calculator.m
+//  NSString+CalendarCalc.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2013/01/01.
 //  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
-#import "NSString+Calculator.h"
+#import "NSString+CalendarCalc.h"
 
-@implementation NSString (Calculator)
+@implementation NSString (CalendarCalc)
 + (NSString *)stringWithKeyCode:(NSInteger)keyCode
 {
     const NSInteger KeyCodeDoubleZero = 10;

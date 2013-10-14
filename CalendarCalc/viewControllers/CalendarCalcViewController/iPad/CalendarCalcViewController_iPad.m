@@ -20,7 +20,7 @@
 #import "DateSelect.h"
 #import "CalendarViewController+Week.h"
 #import "NSDate+Component.h"
-#import "NSString+Calculator.h"
+#import "NSString+CalendarCalc.h"
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
 

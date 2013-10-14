@@ -7,7 +7,7 @@
 //
 
 #import "EKEvent+Today.h"
-#import "NSDate+Style.h"
+#import "NSDate+Component.h"
 
 @implementation EKEvent (Today)
 + (EKEvent *)todayEventWithEventStore:(EKEventStore *)eventStore

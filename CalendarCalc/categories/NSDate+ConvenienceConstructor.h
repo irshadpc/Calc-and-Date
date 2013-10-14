@@ -1,5 +1,5 @@
 //
-//  NSDate+AdditionalConvenienceConstructor.h
+//  NSDate+ConvenienceConstructor.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2012/12/16.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (AdditionalConvenienceConstructor)
+@interface NSDate (ConvenienceConstructor)
 + (NSDate *)dateWithYear:(NSInteger)year
                    month:(NSInteger)month
                      day:(NSInteger)day

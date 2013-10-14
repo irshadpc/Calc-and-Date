@@ -1,14 +1,14 @@
 //
-//  UIBarButtonItem+AdditionalConvenienceConstructor.m
+//  UIBarButtonItem+ConvenienceConstructor.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2013/04/07.
 //  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
-#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
+#import "UIBarButtonItem+ConvenienceConstructor.h"
 
-@implementation UIBarButtonItem (AdditionalConvenienceConstructor)
+@implementation UIBarButtonItem (ConvenienceConstructor)
 + (UIBarButtonItem *)flexibleSpaceItem
 {
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace

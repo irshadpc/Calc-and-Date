@@ -1,5 +1,5 @@
 //
-//  UIBarButtonItem+AdditionalConvenienceConstructor.h
+//  UIBarButtonItem+ConvenienceConstructor.h
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2013/04/07.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIBarButtonItem (AdditionalConvenienceConstructor)
+@interface UIBarButtonItem (ConvenienceConstructor)
 + (UIBarButtonItem *)flexibleSpaceItem;
 + (UIBarButtonItem *)closeButtonItemWithTarget:(id)target action:(SEL)action;
 + (UIBarButtonItem *)cancelButtonItemWithTarget:(id)target action:(SEL)action;

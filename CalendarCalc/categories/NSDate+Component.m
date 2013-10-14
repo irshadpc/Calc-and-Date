@@ -32,4 +32,11 @@
     return [[[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit
                                             fromDate:self] weekday];
 }
+
+- (NSDate *)noTime
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar dateFromComponents:[calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay
+                                                    fromDate:self]];
+}
 @end

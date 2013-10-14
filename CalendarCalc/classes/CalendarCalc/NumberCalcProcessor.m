@@ -7,7 +7,7 @@
 //
 
 #import "NumberCalcProcessor.h"
-#import "NSDecimalNumber+Calc.h"
+#import "NSDecimalNumber+Safe.h"
 
 @implementation NumberCalcProcessor
 - (NSDecimalNumber *)calculateWithFunction:(Function)function

@@ -11,10 +11,10 @@
 #import "CalendarView.h"
 #import "DatePickerController.h"
 #import "DateSelect.h"
-#import "NSDate+AdditionalConvenienceConstructor.h"
+#import "NSDate+ConvenienceConstructor.h"
 #import "NSDate+Component.h"
-#import "UIBarButtonItem+AdditionalConvenienceConstructor.h"
-#import "UIView+MutableFrame.h"
+#import "UIBarButtonItem+ConvenienceConstructor.h"
+#import "UIView+Frame.h"
 
 @interface CalendarViewController ()
   <CalendarViewDelegate,

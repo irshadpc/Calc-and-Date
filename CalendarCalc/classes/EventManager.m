@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
 #import "NSDate+Calc.h"
-#import "NSDate+Style.h"
+#import "NSDate+Component.h"
 #import "EKEvent+Today.h"
 #import "EKEventStore+Event.h"
 

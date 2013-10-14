@@ -10,9 +10,9 @@
 #import "CalendarButton.h"
 #import "AppDelegate.h"
 #import "NSArray+Safe.h"
-#import "NSDate+AdditionalConvenienceConstructor.h"
+#import "NSDate+ConvenienceConstructor.h"
 #import "NSDate+Component.h"
-#import "UIImage+Calendar.h"
+#import "UIImage+CalendarCalc.h"
 
 @interface CalendarView ()
 @property(nonatomic, readwrite) NSInteger year;

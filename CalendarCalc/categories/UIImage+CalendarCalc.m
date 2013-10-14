@@ -1,20 +1,23 @@
 //
-//  UIImage+Calculator.m
+//  UIImage+CalendarCalc.m
 //  CalendarCalc
 //
 //  Created by Ishida Junichi on 2013/01/05.
 //  Copyright (c) 2013年 Ishida Junichi. All rights reserved.
 //
 
-#import "UIImage+Calculator.h"
+#import "UIImage+CalendarCalc.h"
 
-@interface UIImage (Caluculator_Private)
+@interface UIImage (CalendarCalcPrivate)
 + (UIImage *)imageWithOrientation:(UIInterfaceOrientation)orientation
                 portraitImageName:(NSString *)portraitImageName
                landscapeImageName:(NSString *)landscapeImageName;
 @end
 
-@implementation UIImage (Calculator)
+@implementation UIImage (CalendarCalc)
+
+#pragma mark - Calculator
+
 + (UIImage *)numberKeyImage
 {
     return [UIImage imageNamed:@"number_kay_flat"];
@@ -72,10 +75,66 @@
                        portraitImageName:@"equal_key"
                       landscapeImageName:@"equal_key-Landscape"];
 }
+
++ (UIImage *)calendarImageWithToday:(BOOL)isToday
+{
+    if (isToday) {
+        return [UIImage todayImage];
+    } else {
+        return [UIImage usualdayImage];
+    }
+}
+
+
+#pragma mark - Calenadr
+
++ (UIImage *)todayImage
+{
+    return [UIImage imageNamed:@"calendar_day_today"];
+}
+
++ (UIImage *)usualdayImage
+{
+    return [UIImage imageNamed:@"calendar_day"];
+}
+
++ (UIImage *)calendarControllImage
+{
+    return [UIImage imageNamed:@"calendar_controll_button"];
+}
+
++ (UIImage *)prevImage
+{
+    return [UIImage imageNamed:@"prev"];
+}
+
++ (UIImage *)nextImage
+{
+    return [UIImage imageNamed:@"next"];
+}
+
++ (UIImage *)dateSelectImage
+{
+    return [UIImage imageNamed:@"date_select_button"];
+}
+
+
+#pragma mark - SwitchButton
+
++ (UIImage *)stateOnImage
+{
+    return [UIImage imageNamed:@"switch_button_on"];
+}
+
++ (UIImage *)stateOffImage
+{
+    return [UIImage imageNamed:@"switch_button_off"];
+}
+
 @end
 
 
-@implementation UIImage (Caluculator_Private)
+@implementation UIImage (CalendarCalcPrivate)
 + (UIImage *)imageWithOrientation:(UIInterfaceOrientation)orientation
                 portraitImageName:(NSString *)portraitImageName
                landscapeImageName:(NSString *)landscapeImageName
