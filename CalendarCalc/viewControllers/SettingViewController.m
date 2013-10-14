@@ -11,7 +11,6 @@
 #import "ViewSheet.h"
 #import "AppDelegate+Setting.h"
 #import "UIBarButtonItem+ConvenienceConstructor.h"
-#import "UIViewController+PopoverSupport.h"
 
 @interface SettingViewController ()
 @property(weak, nonatomic) IBOutlet UISwitch *includeStartDayOption;
@@ -39,8 +38,8 @@
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         CGRect lastOptionItemFrame = self.lastOptionItem.frame;
-        [self setContentSizeForPopover:CGSizeMake(self.view.frame.size.width,
-                                                  lastOptionItemFrame.origin.y + lastOptionItemFrame.size.height + 44.0 - 20.0)];
+        [self setPreferredContentSize:CGSizeMake(self.view.frame.size.width,
+                                                 lastOptionItemFrame.origin.y + lastOptionItemFrame.size.height + 44.0 - 20.0)];
     } else {
         [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem closeButtonItemWithTarget:self
                                                                                       action:@selector(onClose:)]];
@@ -62,7 +61,7 @@
 {
     [super viewDidAppear:animated];
     if ([self.eventSettingViewController isViewLoaded]) {
-        [self.popover setPopoverContentSize:[self contentSizeForPopover] animated:NO];
+        [self.popover setPopoverContentSize:[self preferredContentSize] animated:NO];
     }
 }
 

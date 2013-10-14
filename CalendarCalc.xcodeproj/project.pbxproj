@@ -61,7 +61,6 @@
 		62B65D901689F0B300C0055E /* ViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B65D8F1689F0B300C0055E /* ViewControllerTests.m */; };
 		62B65D981689F20A00C0055E /* CalendarCalcViewController+UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B65D971689F20A00C0055E /* CalendarCalcViewController+UnitTest.m */; };
 		62BA2EC917E9482800D5673F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62BA2EC817E9482800D5673F /* Images.xcassets */; };
-		62C2F4B717E58823002591A9 /* UIViewController+PopoverSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 62C2F4B617E58823002591A9 /* UIViewController+PopoverSupport.m */; };
 		62C97A601698FB72008B0EFE /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62C97A621698FB72008B0EFE /* SettingViewController.xib */; };
 		62C97A68169901B8008B0EFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62C97A6A169901B8008B0EFE /* Localizable.strings */; };
 		62CAAF3A173BF87600819584 /* CalendarCalcViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CAAF39173BF87600819584 /* CalendarCalcViewController_iPhone.m */; };
@@ -71,10 +70,8 @@
 		62D8860D1719546100EACAFA /* DateCalcProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D8860C1719546100EACAFA /* DateCalcProcessor.m */; };
 		62DAF6161680AF6F00A14D3C /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DAF6151680AF6F00A14D3C /* PageView.m */; };
 		62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6486F1738EAA60030DDFB /* SectionHeaderView.m */; };
-		62E64890173A115A0030DDFB /* EKEventStore+Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E6488F173A115A0030DDFB /* EKEventStore+Event.m */; };
 		62ED0F85172DFB6D000E887E /* EventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F84172DFB6D000E887E /* EventViewController.xib */; };
 		62ED0F88172E4769000E887E /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F87172E4768000E887E /* EventCell.m */; };
-		62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8C172E4DA0000E887E /* UILabel+font.m */; };
 		62ED0F90172E9424000E887E /* EventSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62ED0F8F172E9423000E887E /* EventSettingViewController.m */; };
 		62ED0F92172EB827000E887E /* EventSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62ED0F91172EB826000E887E /* EventSettingViewController.xib */; };
 		62F1CFFF180B90F300B6BAFE /* NSArray+safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F1CFF8180B90F300B6BAFE /* NSArray+safe.m */; };
@@ -199,8 +196,6 @@
 		62B65D961689F20A00C0055E /* CalendarCalcViewController+UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CalendarCalcViewController+UnitTest.h"; sourceTree = "<group>"; };
 		62B65D971689F20A00C0055E /* CalendarCalcViewController+UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CalendarCalcViewController+UnitTest.m"; sourceTree = "<group>"; };
 		62BA2EC817E9482800D5673F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = resources/Images.xcassets; sourceTree = "<group>"; };
-		62C2F4B517E58823002591A9 /* UIViewController+PopoverSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PopoverSupport.h"; sourceTree = "<group>"; };
-		62C2F4B617E58823002591A9 /* UIViewController+PopoverSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PopoverSupport.m"; sourceTree = "<group>"; };
 		62C97A5E1698FB56008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62C97A5F1698FB56008B0EFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62C97A611698FB72008B0EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingViewController.xib; sourceTree = "<group>"; };
@@ -222,13 +217,9 @@
 		62DAF6151680AF6F00A14D3C /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
 		62E6486E1738EAA60030DDFB /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		62E6486F1738EAA60030DDFB /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
-		62E6488E173A115A0030DDFB /* EKEventStore+Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EKEventStore+Event.h"; sourceTree = "<group>"; };
-		62E6488F173A115A0030DDFB /* EKEventStore+Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EKEventStore+Event.m"; sourceTree = "<group>"; };
 		62ED0F84172DFB6D000E887E /* EventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventViewController.xib; sourceTree = "<group>"; };
 		62ED0F86172E4768000E887E /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		62ED0F87172E4768000E887E /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
-		62ED0F8B172E4DA0000E887E /* UILabel+font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+font.h"; sourceTree = "<group>"; };
-		62ED0F8C172E4DA0000E887E /* UILabel+font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+font.m"; sourceTree = "<group>"; };
 		62ED0F8E172E9422000E887E /* EventSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSettingViewController.h; sourceTree = "<group>"; };
 		62ED0F8F172E9423000E887E /* EventSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSettingViewController.m; sourceTree = "<group>"; };
 		62ED0F91172EB826000E887E /* EventSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventSettingViewController.xib; sourceTree = "<group>"; };
@@ -530,14 +521,8 @@
 				6202133B167DB7CB00BFF836 /* UIColor+CalendarCalc.m */,
 				626BB0BE1691698C004E9E63 /* UIFont+CalendarCalc.h */,
 				626BB0BF1691698C004E9E63 /* UIFont+CalendarCalc.m */,
-				62ED0F8B172E4DA0000E887E /* UILabel+font.h */,
-				62ED0F8C172E4DA0000E887E /* UILabel+font.m */,
 				625B4E651698613600D94A4E /* UIImage+CalendarCalc.h */,
 				625B4E661698613600D94A4E /* UIImage+CalendarCalc.m */,
-				62E6488E173A115A0030DDFB /* EKEventStore+Event.h */,
-				62E6488F173A115A0030DDFB /* EKEventStore+Event.m */,
-				62C2F4B517E58823002591A9 /* UIViewController+PopoverSupport.h */,
-				62C2F4B617E58823002591A9 /* UIViewController+PopoverSupport.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -751,17 +736,14 @@
 				62AB84B717170465008A0972 /* NumberCalcProcessor.m in Sources */,
 				62AB84BA17170B5C008A0972 /* CalcValue.m in Sources */,
 				62F1D001180B90F300B6BAFE /* NSString+Safe.m in Sources */,
-				62C2F4B717E58823002591A9 /* UIViewController+PopoverSupport.m in Sources */,
 				62D8860D1719546100EACAFA /* DateCalcProcessor.m in Sources */,
 				6267641F171A917A00D0A32C /* CalcController.m in Sources */,
 				62B1E58D171E182000ECE5B6 /* CalcControllerFormatter.m in Sources */,
 				62ED0F88172E4769000E887E /* EventCell.m in Sources */,
-				62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */,
 				62F1D002180B90F300B6BAFE /* UIView+Frame.m in Sources */,
 				62ED0F90172E9424000E887E /* EventSettingViewController.m in Sources */,
 				62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */,
 				6252E3BB17EC25BF00F2A045 /* UIButton+Border.m in Sources */,
-				62E64890173A115A0030DDFB /* EKEventStore+Event.m in Sources */,
 				62CAAF3A173BF87600819584 /* CalendarCalcViewController_iPhone.m in Sources */,
 				62CAAF3D173BFB8600819584 /* CalendarCalcViewController_iPad.m in Sources */,
 				62CAAF40173BFBE200819584 /* CalendarCalcViewController_iPad+Layout.m in Sources */,

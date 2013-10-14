@@ -11,7 +11,6 @@
 #import "AppDelegate+Setting.h"
 #import "NSDate+Calculate.h"
 #import "NSDate+Component.h"
-#import "EKEventStore+Event.h"
 
 @interface EventManager ()
 @property(strong, nonatomic) EKEventStore *eventStore;
@@ -52,7 +51,8 @@ static const NSInteger EventIntervalYear = 2;
         _delegate = delegate;
         
         _eventStore = [[EKEventStore alloc] init];
-        [_eventStore requestAccessToEventWithCompletion:^(BOOL granted, NSError *error) {
+        [_eventStore requestAccessToEntityType:EKEntityTypeEvent
+                                    completion:^(BOOL granted, NSError *error) {
             _granted = granted;
             [self reloadEvents];
             [self setupNotification];
@@ -93,7 +93,7 @@ static const NSInteger EventIntervalYear = 2;
 {
     NSMutableArray *calendars = [NSMutableArray array];
     NSArray *disabledCalendars = [(AppDelegate *)[[UIApplication sharedApplication] delegate] disabledCalendars];
-    for (EKCalendar *calendar in [self.eventStore eventCalendars]) {
+    for (EKCalendar *calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
         if (![disabledCalendars containsObject:[calendar calendarIdentifier]]) {
             [calendars addObject:calendar];
         }

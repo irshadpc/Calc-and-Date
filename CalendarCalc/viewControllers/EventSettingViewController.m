@@ -10,8 +10,6 @@
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
 #import "UIView+Frame.h"
-#import "EKEventStore+Event.h"
-#import "UIViewController+PopoverSupport.h"
 
 @interface EventSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -42,7 +40,8 @@ typedef enum {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         _granted = YES;
         _eventStore = [[EKEventStore alloc] init];
-        [_eventStore requestAccessToEventWithCompletion:^(BOOL granted, NSError *error) {
+        [_eventStore requestAccessToEntityType:EKEntityTypeEvent 
+                                    completion:^(BOOL granted, NSError *error) {
             _granted = granted;
             [self reloadTableData];
         }];
@@ -81,7 +80,7 @@ typedef enum {
         [self.tableView reloadData];
     }
 
-    [self setContentSizeForPopover:self.tableView.bounds.size];
+    [self setPreferredContentSize:self.tableView.bounds.size];
 }
 
 - (void)viewDidUnload
@@ -238,7 +237,7 @@ typedef enum {
         return;
     }
 
-    self.calendars = [self.eventStore eventCalendars];
+    self.calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
     [self.tableView reloadData];
 }
 

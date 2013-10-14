@@ -15,7 +15,6 @@
 #import "NSString+Locale.h"
 #import "UIBarButtonItem+ConvenienceConstructor.h"
 #import "UIView+Frame.h"
-#import "UIViewController+PopoverSupport.h"
 
 @interface NSDictionary (Sort)
 - (NSArray *)sortedKeys;
@@ -103,7 +102,7 @@
         tableFrame.size.height -= self.titlebar.bounds.size.height;
         [self.tableView setFrame:tableFrame];
         [self.titlebar.topItem setLeftBarButtonItem:nil];
-        [self setContentSizeForPopover:self.view.bounds.size];
+        [self setPreferredContentSize:self.view.bounds.size];
     } else {
         [self.titlebar setBackgroundImage:[UIImage imageNamed:@"event_header"]
                             forBarMetrics:UIBarMetricsDefault];

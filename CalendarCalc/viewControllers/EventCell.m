@@ -7,7 +7,6 @@
 //
 
 #import "EventCell.h"
-#import "UILabel+font.h"
 #import "UIView+Frame.h"
 
 @interface EventCell ()
@@ -47,7 +46,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     [label setBackgroundColor:[UIColor clearColor]];
     [label setFont:[UIFont boldSystemFontOfSize:14.0]];
-    [label setMinimumScale:0.8 orSize:14.0];
+    [label setMinimumScaleFactor:0.8];
     [label setTextColor:[UIColor darkTextColor]];
     [label setHighlightedTextColor:[UIColor whiteColor]];
     [label setAdjustsFontSizeToFitWidth:YES];
