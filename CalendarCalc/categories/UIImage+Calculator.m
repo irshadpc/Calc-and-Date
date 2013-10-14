@@ -15,6 +15,36 @@
 @end
 
 @implementation UIImage (Calculator)
++ (UIImage *)numberKeyImage
+{
+    return [UIImage imageNamed:@"number_kay_flat"];
+}
+
++ (UIImage *)operatorKeyImage
+{
+    return [UIImage imageNamed:@"operator_key_flat"];
+}
+
++ (UIImage *)deleteKeyImage
+{
+    return [UIImage imageNamed:@"delete_key_flat"];
+}
+
++ (UIImage *)plusMinusKeyImage
+{
+    return [UIImage imageNamed:@"plus_minus_key_flat"];
+}
+
++ (UIImage *)clearKeyImage
+{
+    return [UIImage imageNamed:@"clear_key_flat"];
+}
+
++ (UIImage *)dateKeyImage
+{
+    return [UIImage imageNamed:@"date_key_flat"];
+}
+
 + (UIImage *)numberKeyImageWithOrientation:(UIInterfaceOrientation)orientation
 {
     return [UIImage imageWithOrientation:orientation

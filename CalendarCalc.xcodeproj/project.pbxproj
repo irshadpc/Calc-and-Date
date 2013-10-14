@@ -32,6 +32,7 @@
 		6235AD7016FF3B1800712A78 /* UIView+MutableFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6235AD6F16FF3B1800712A78 /* UIView+MutableFrame.m */; };
 		6235AD7316FFB7DE00712A78 /* CalendarViewController+Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 6235AD7216FFB7DE00712A78 /* CalendarViewController+Week.m */; };
 		623E99701723FE1D0012404E /* CalcValueFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 623E996F1723FE1D0012404E /* CalcValueFormatterTests.m */; };
+		6252E3BB17EC25BF00F2A045 /* UIButton+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 6252E3BA17EC25BF00F2A045 /* UIButton+Border.m */; };
 		62553A1E1710AC05000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62553A1D1710ABFD000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m */; };
 		625B4E671698613600D94A4E /* UIImage+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 625B4E661698613600D94A4E /* UIImage+Calculator.m */; };
 		6267641C171A7D4E00D0A32C /* DateCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6267641B171A7D4E00D0A32C /* DateCalcTests.m */; };
@@ -148,6 +149,8 @@
 		6235AD7416FFBC5500712A78 /* CalendarViewController_Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController_Common.h; sourceTree = "<group>"; };
 		623E996E1723FE1C0012404E /* CalcValueFormatterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcValueFormatterTests.h; sourceTree = "<group>"; };
 		623E996F1723FE1D0012404E /* CalcValueFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcValueFormatterTests.m; sourceTree = "<group>"; };
+		6252E3B917EC25BF00F2A045 /* UIButton+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Border.h"; sourceTree = "<group>"; };
+		6252E3BA17EC25BF00F2A045 /* UIButton+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Border.m"; sourceTree = "<group>"; };
 		62553A1C1710ABF9000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+AdditionalConvenienceConstructor.h"; sourceTree = "<group>"; };
 		62553A1D1710ABFD000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+AdditionalConvenienceConstructor.m"; sourceTree = "<group>"; };
 		625B4E651698613600D94A4E /* UIImage+Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Calculator.h"; sourceTree = "<group>"; };
@@ -564,6 +567,8 @@
 				62021338167DB5EC00BFF836 /* NSDate+AdditionalConvenienceConstructor.m */,
 				62553A1C1710ABF9000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.h */,
 				62553A1D1710ABFD000A5884 /* UIBarButtonItem+AdditionalConvenienceConstructor.m */,
+				6252E3B917EC25BF00F2A045 /* UIButton+Border.h */,
+				6252E3BA17EC25BF00F2A045 /* UIButton+Border.m */,
 				6202133A167DB7CA00BFF836 /* UIColor+Calendar.h */,
 				6202133B167DB7CB00BFF836 /* UIColor+Calendar.m */,
 				626BB0B4169163DB004E9E63 /* UIColor+SwitchButton.h */,
@@ -777,6 +782,7 @@
 				62ED0F8D172E4DA0000E887E /* UILabel+font.m in Sources */,
 				62ED0F90172E9424000E887E /* EventSettingViewController.m in Sources */,
 				62E648701738EAA60030DDFB /* SectionHeaderView.m in Sources */,
+				6252E3BB17EC25BF00F2A045 /* UIButton+Border.m in Sources */,
 				62E64890173A115A0030DDFB /* EKEventStore+Event.m in Sources */,
 				62CAAF3A173BF87600819584 /* CalendarCalcViewController_iPhone.m in Sources */,
 				62CAAF3D173BFB8600819584 /* CalendarCalcViewController_iPad.m in Sources */,

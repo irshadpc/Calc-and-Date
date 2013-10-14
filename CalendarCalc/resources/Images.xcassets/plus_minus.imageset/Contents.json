@@ -1,6 +1,15 @@
 {
   "images" : [
     {
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "plus_minus@2x~iphone.png"
+    },
+    {
       "idiom" : "ipad",
       "scale" : "1x",
       "filename" : "plus_minus~ipad.png"

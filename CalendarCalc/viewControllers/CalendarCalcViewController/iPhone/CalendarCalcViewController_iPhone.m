@@ -20,6 +20,9 @@
 #import "NSDate+Component.h"
 #import "NSString+Date.h"
 #import "NSString+Locale.h"
+#import "UIButton+Border.h"
+#import "UIImage+Calculator.h"
+#import "Function.h"
 
 @interface CalendarCalcViewController_iPhone ()
 <
@@ -31,6 +34,7 @@
 >
 
 @property(weak, nonatomic) IBOutlet CopybleLabel *display;
+@property (weak, nonatomic) IBOutlet UIImageView *displayBackground;
 @property(weak, nonatomic) IBOutlet UILabel *indicator;
 @property(weak, nonatomic) IBOutlet UIButton *dateButton;
 @property(weak, nonatomic) IBOutlet UIButton *decimalButton;
@@ -67,6 +71,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    for (UIView *subview in self.view.subviews) {
+        if ([subview tag] >= 0) {
+            UIButton *calcButton = (UIButton *)subview;
+            [calcButton setBorderColor:[UIColor darkGrayColor]];
+            if ([calcButton tag] <= 10 || [calcButton tag] == FunctionDecimal) {
+                [calcButton setBackgroundImage:[UIImage numberKeyImage]
+                                      forState:UIControlStateNormal];
+                [calcButton setTitleColor:[UIColor darkTextColor] 
+                                 forState:UIControlStateNormal];
+            } else if ([calcButton tag] == FunctionClear) {
+                [calcButton setBackgroundImage:[UIImage clearKeyImage]
+                                      forState:UIControlStateNormal];
+            } else if ([calcButton tag] == FunctionPlusMinus) {
+                [calcButton setBackgroundImage:[UIImage plusMinusKeyImage]
+                                      forState:UIControlStateNormal];
+            } else if ([calcButton tag] == FunctionDelete) {
+                [calcButton setBackgroundImage:[UIImage deleteKeyImage]
+                                      forState:UIControlStateNormal];
+            } else if ([calcButton tag] < FunctionMax) {
+                [calcButton setBackgroundImage:[UIImage operatorKeyImage] 
+                                      forState:UIControlStateNormal];
+            } else {
+                [calcButton setBackgroundImage:[UIImage dateKeyImage]
+                                      forState:UIControlStateNormal];
+            }
+        }
+    }
+    [self.displayBackground setAlpha:0];
 
     [self.decimalButton setTitle:[NSString decimalSeparator]
                         forState:UIControlStateNormal];

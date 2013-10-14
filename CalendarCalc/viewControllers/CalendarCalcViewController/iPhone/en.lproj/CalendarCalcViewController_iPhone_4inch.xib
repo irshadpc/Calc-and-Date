@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -11,6 +11,7 @@
                 <outlet property="dateButton" destination="16" id="251"/>
                 <outlet property="decimalButton" destination="12" id="176"/>
                 <outlet property="display" destination="17" id="178"/>
+                <outlet property="displayBackground" destination="15" id="ryx-hx-fo0"/>
                 <outlet property="indicator" destination="32" id="224"/>
                 <outlet property="view" destination="6" id="7"/>
             </connections>
@@ -20,27 +21,42 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="display" id="15" userLabel="ディスプレイ">
+                <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" image="display" id="15" userLabel="ディスプレイ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-20"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" contentMode="left" text="123,456,789,012" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="17" userLabel="ディスプレイラベル" customClass="CopybleLabel">
+                <label opaque="NO" clipsSubviews="YES" tag="-1" contentMode="left" text="123,456,789,012" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="17" userLabel="ディスプレイラベル" customClass="CopybleLabel">
                     <rect key="frame" x="26" y="34" width="294" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="39"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" text="+" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="32" userLabel="インジケーター">
-                    <rect key="frame" x="4" y="24" width="296" height="18"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" tag="-1" contentMode="left" text="+" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="32" userLabel="インジケーター">
+                    <rect key="frame" x="4" y="20" width="296" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background" id="14" userLabel="区切り線">
+                <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="227" userLabel="インフォボタン">
+                    <rect key="frame" x="4" y="71" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onSetting:" destination="-1" eventType="touchUpInside" id="228"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" image="background" id="14" userLabel="区切り線">
                     <rect key="frame" x="0.0" y="94" width="320" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
@@ -49,7 +65,7 @@
                     <rect key="frame" x="0.0" y="114" width="240" height="74"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <state key="normal" title="2012/12" backgroundImage="date_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -61,28 +77,11 @@
                         <action selector="onDateKey:" destination="-1" eventType="touchUpInside" id="250"/>
                     </connections>
                 </button>
-                <button tag="309" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="29" userLabel="１文字削除">
-                    <rect key="frame" x="0.0" y="188" width="80" height="76"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                    <state key="normal" title="delelte" image="delete_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="245"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="218"/>
-                    </connections>
-                </button>
                 <button tag="307" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="21" userLabel="クリア">
                     <rect key="frame" x="240" y="114" width="80" height="74"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
                     <state key="normal" title="AC" backgroundImage="clear_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,11 +94,130 @@
                         <action selector="onClick:" destination="-1" eventType="touchDown" id="221"/>
                     </connections>
                 </button>
+                <button tag="309" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="29" userLabel="１文字削除">
+                    <rect key="frame" x="0.0" y="188" width="80" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                    <state key="normal" backgroundImage="delete_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="245"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="218"/>
+                    </connections>
+                </button>
+                <button tag="308" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="13" userLabel="プラスマイナス">
+                    <rect key="frame" x="80" y="188" width="80" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" backgroundImage="plus_minus_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="240"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="217"/>
+                    </connections>
+                </button>
+                <button tag="302" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="20" userLabel="＝">
+                    <rect key="frame" x="240" y="492" width="80" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                    <state key="normal" title="=" backgroundImage="operator_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="234"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="208"/>
+                    </connections>
+                </button>
+                <button tag="303" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="30" userLabel="＋">
+                    <rect key="frame" x="240" y="340" width="80" height="152"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                    <state key="normal" title="+" backgroundImage="plus_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="233"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="209"/>
+                    </connections>
+                </button>
+                <button tag="304" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="22" userLabel="ー">
+                    <rect key="frame" x="240" y="264" width="80" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                    <state key="normal" title="−" backgroundImage="operator_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="232"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="211"/>
+                    </connections>
+                </button>
+                <button tag="305" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="27" userLabel="×">
+                    <rect key="frame" x="240" y="188" width="80" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                    <state key="normal" title="×" backgroundImage="operator_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="231"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="212"/>
+                    </connections>
+                </button>
+                <button tag="306" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="23" userLabel="÷">
+                    <rect key="frame" x="160" y="188" width="80" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                    <state key="normal" title="÷" backgroundImage="operator_key">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="235"/>
+                        <action selector="onClick:" destination="-1" eventType="touchDown" id="215"/>
+                    </connections>
+                </button>
                 <button tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8" userLabel="９">
                     <rect key="frame" x="160" y="264" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="9" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -116,7 +234,7 @@
                     <rect key="frame" x="80" y="264" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="8" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,7 +251,7 @@
                     <rect key="frame" x="0.0" y="264" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="7" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -150,7 +268,7 @@
                     <rect key="frame" x="160" y="340" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="6" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,7 +285,7 @@
                     <rect key="frame" x="80" y="340" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="5" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,7 +302,7 @@
                     <rect key="frame" x="0.0" y="340" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="4" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,7 +319,7 @@
                     <rect key="frame" x="160" y="416" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="3" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,7 +336,7 @@
                     <rect key="frame" x="80" y="416" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="2" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -235,7 +353,7 @@
                     <rect key="frame" x="0.0" y="416" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="1" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -252,7 +370,7 @@
                     <rect key="frame" x="0.0" y="492" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="0" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -269,7 +387,7 @@
                     <rect key="frame" x="80" y="492" width="80" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" title="00" backgroundImage="number_key">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -299,125 +417,8 @@
                         <action selector="onClick:" destination="-1" eventType="touchDown" id="195"/>
                     </connections>
                 </button>
-                <button tag="308" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="13" userLabel="プラスマイナス">
-                    <rect key="frame" x="80" y="188" width="80" height="76"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                    <state key="normal" title="±" image="plus_minus_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="240"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="217"/>
-                    </connections>
-                </button>
-                <button tag="302" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="20" userLabel="＝">
-                    <rect key="frame" x="240" y="492" width="80" height="76"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                    <state key="normal" title="=" backgroundImage="operator_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="234"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="208"/>
-                    </connections>
-                </button>
-                <button tag="303" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="30" userLabel="＋">
-                    <rect key="frame" x="240" y="340" width="80" height="152"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                    <state key="normal" title="+" backgroundImage="plus_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="233"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="209"/>
-                    </connections>
-                </button>
-                <button tag="304" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="22" userLabel="ー">
-                    <rect key="frame" x="240" y="264" width="80" height="76"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                    <state key="normal" title="−" backgroundImage="operator_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="232"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="211"/>
-                    </connections>
-                </button>
-                <button tag="305" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="27" userLabel="×">
-                    <rect key="frame" x="240" y="188" width="80" height="76"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                    <state key="normal" title="×" backgroundImage="operator_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="231"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="212"/>
-                    </connections>
-                </button>
-                <button tag="306" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="23" userLabel="÷">
-                    <rect key="frame" x="160" y="188" width="80" height="76"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                    <state key="normal" title="÷" backgroundImage="operator_key">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onCalcKey:" destination="-1" eventType="touchUpInside" id="235"/>
-                        <action selector="onClick:" destination="-1" eventType="touchDown" id="215"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="227" userLabel="インフォボタン">
-                    <rect key="frame" x="4" y="71" width="22" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onSetting:" destination="-1" eventType="touchUpInside" id="228"/>
-                    </connections>
-                </button>
             </subviews>
-            <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
@@ -429,20 +430,6 @@
         <image name="delete_key" width="80" height="62"/>
         <image name="display" width="320" height="68"/>
         <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="number_key" width="80" height="62"/>
-        <image name="operator_key" width="80" height="62"/>
-        <image name="operator_key" width="80" height="62"/>
-        <image name="operator_key" width="80" height="62"/>
         <image name="operator_key" width="80" height="62"/>
         <image name="plus_key" width="80" height="124"/>
         <image name="plus_minus_key" width="80" height="62"/>

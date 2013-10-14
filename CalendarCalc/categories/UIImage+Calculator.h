@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (Calculator)
++ (UIImage *)numberKeyImage;
++ (UIImage *)operatorKeyImage;
++ (UIImage *)deleteKeyImage;
++ (UIImage *)plusMinusKeyImage;
++ (UIImage *)clearKeyImage;
++ (UIImage *)dateKeyImage;
 + (UIImage *)numberKeyImageWithOrientation:(UIInterfaceOrientation)orientation;
 + (UIImage *)operatorKeyImageWithOrientation:(UIInterfaceOrientation)orientation;
 + (UIImage *)clearKeyImageWithOrientation:(UIInterfaceOrientation)orientation;

@@ -1,6 +1,15 @@
 {
   "images" : [
     {
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "delete@2x~iphone.png"
+    },
+    {
       "idiom" : "ipad",
       "scale" : "1x",
       "filename" : "delete~ipad.png"
